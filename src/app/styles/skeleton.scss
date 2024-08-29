@@ -1,0 +1,33 @@
+.app-skeleton {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        270deg,
+        var(--tui-base-01),
+        var(--tui-elevation-03) 51%,
+        var(--tui-base-01)
+      );
+    background-size: 400% 400%;
+    animation: gradient 1s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}

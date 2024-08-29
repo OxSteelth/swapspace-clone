@@ -1,0 +1,59 @@
+<div class="app-card c-exchange-box">
+    <div class="c-exchange-box__header">
+        Exchange Crypto
+    </div>
+
+    <div class="c-exchange-box__content">
+        <div class="c-exchange-box__content">
+            <form [formGroup]="testForm">
+                <div class="c-exchange-box__form-group">
+                    <label to="valueToSend">Ýou send</label>
+                    <div tuiGroup class="c-exchange-box__form-group-input">
+                        <div>
+                            <tui-input-number formControlName="testValue" tuiHintContent="Write a number"
+                                class="tui-group__inherit-item">
+                                House
+                                <input placeholder="House" tuiTextfield id="valueToSend" />
+                            </tui-input-number>
+                        </div>
+                        <div class="c-exchange-box__currency-select">
+                            <tui-select tuiTextfieldSize="s" class="tui-group__inherit-item"
+                                formControlName="testValue2">
+                                Currency
+                                <input placeholder="Choose your hero" tuiTextfield />
+                                <tui-data-list-wrapper *tuiDataList [items]="items"></tui-data-list-wrapper>
+                            </tui-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-exchange-box__form-group">
+                    <label to="valueToSend">Ýou get</label>
+                    <div tuiGroup class="c-exchange-box__form-group-input">
+                        <div>
+                            <tui-input-number formControlName="testValue" tuiHintContent="Write a number"
+                                class="tui-group__inherit-item">
+                                House
+                                <input placeholder="House" tuiTextfield id="valueToSend" />
+                            </tui-input-number>
+                        </div>
+                        <div class="c-exchange-box__currency-select">
+                            <tui-select tuiTextfieldSize="s" class="tui-group__inherit-item"
+                                formControlName="testValue2">
+                                Currency
+                                <input placeholder="Choose your hero" tuiTextfield />
+                                <tui-data-list-wrapper *tuiDataList [items]="items"></tui-data-list-wrapper>
+                            </tui-select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-exchange-box__form-submit">
+                    <button tuiButton type="button" class="c-exchange-box__form-submit-btn app-glow-btn" type="submit">
+                        View offers
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.c-tabs {
+  font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  .c-tab {
+    flex: 1;
+    cursor: pointer;
+    display: flex;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+
+    white-space: nowrap;
+
+    justify-content: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    border-bottom-color: var(--tui-text-02);
+    color: var(--tui-text-02);
+
+    transition: color 0.3s, border-bottom-color 0.3s;
+
+    &.active {
+      color: var(--tui-primary-01);
+      border-bottom-color: var(--tui-primary-01);
+    }
+  }
+}

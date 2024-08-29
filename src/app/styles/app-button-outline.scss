@@ -1,0 +1,26 @@
+.app-button-outline {
+  color: var(--tui-link);
+  border: 1px solid var(--tui-link);
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    color: var(--tui-primary-hover);
+    border-color: var(--tui-primary-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    color: var(--tui-text-02);
+    border-color: var(--tui-text-02);
+    cursor: default;
+  }
+}
+
+.app-glow-btn {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 4px 50px rgba(227, 87, 96, 0.5),
+    0 60px 150px rgba(227, 87, 96, 0.62);
+}

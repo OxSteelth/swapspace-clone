@@ -1,0 +1,42 @@
+<div class="app-card c-exchange-box">
+    <div class="c-exchange-box__header">
+        <app-tabs [tabs]="[
+            'Exchange Crypto',
+            'Buy/Sell Crypto'
+        ]" (activeTabIndexChange)="onTabChange($event)"></app-tabs>
+    </div>
+
+    <div class="c-exchange-box__content">
+        <div class="c-exchange-box__content">
+            <form [formGroup]="homeExchangeViewModel.form" (submit)="onSubmit()">
+                <div class="c-exchange-box__form-group">
+                    <label to="valueToSend">You send</label>
+                    <app-cyrrency-amount-selector [currencyControl]="homeExchangeViewModel.currencyToSendFormControl"
+                        [control]="homeExchangeViewModel.valueToSendFormControl"
+                        [currencyList]="homeExchangeViewModel.currencyList$ | async"></app-cyrrency-amount-selector>
+                </div>
+
+                <div class="c-exchange-box__form-group">
+                    <label to="valueToSend">You get</label>
+                    <app-cyrrency-amount-selector [valueReadOnly]="true"
+                        [currencyControl]="homeExchangeViewModel.currencyToGetFormControl"
+                        [control]="homeExchangeViewModel.valueToGetFormControl"
+                        [currencyList]="homeExchangeViewModel.currencyList$ | async"></app-cyrrency-amount-selector>
+                </div>
+
+
+                <div class="c-exchange-box__form-submit">
+                    <button [disabled]="!(homeExchangeViewModel.valueToGetFormControl.valueChanges | async) || isEstimatingExchange()"
+                        type="button" class="c-exchange-box__form-submit-btn app-button-outline" type="submit">
+                        Quick exchange
+                    </button>
+
+                    <button tuiButton [disabled]="homeExchangeViewModel.form.invalid" type="button"
+                        class="c-exchange-box__form-submit-btn app-glow-btn" type="submit">
+                        View offers
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

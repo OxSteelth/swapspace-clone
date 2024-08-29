@@ -1,0 +1,90 @@
+<nav class="c-mobile-nav-bar">
+    <div class="c-mobile-nav-bar__logo">
+        <a routerLink="/">
+            <img src="assets/horizontal-logo.svg" alt="Logo" />
+        </a>
+    </div>
+
+    <div class="c-mobile-nav-bar__button-container">
+
+        <tui-hosted-dropdown [content]="dropdownContent" [(open)]="isDropdownOpen">
+            <button tuiButton appearance="flat" tuiHint="Some text" tuiHintDirection="top" type="button">
+                <tui-svg src="tuiIconAlignRight" class="c-mobile-nav-bar__button-icon"></tui-svg>
+            </button>
+
+            <ng-template #dropdownContent>
+                <div class="c-mobile-nav-bar__dropdown">
+                    <div class="c-mobile-nav-bar__dropdown-item">
+                        <a (click)="isDropdownOpen = false" class="c-nav-bar__item">Products
+                            <tui-svg src="tuiIconChevronDown"></tui-svg>
+                        </a>
+                    </div>
+
+                    <div class="c-mobile-nav-bar__dropdown-item">
+                        <a (click)="isDropdownOpen = false" class="c-nav-bar__item">Business
+                            <tui-svg src="tuiIconChevronDown"></tui-svg>
+                        </a>
+                    </div>
+
+                    <div class="c-mobile-nav-bar__dropdown-item">
+                        <a (click)="isDropdownOpen = false" class="c-nav-bar__item">Support
+                            <tui-svg src="tuiIconChevronDown"></tui-svg>
+                        </a>
+                    </div>
+
+                    <div class="c-mobile-nav-bar__dropdown-item">
+                        <a (click)="isDropdownOpen = false" class="c-nav-bar__item">About
+                            <tui-svg src="tuiIconChevronDown"></tui-svg>
+                        </a>
+                    </div>
+
+                    <div class="c-mobile-nav-bar__dropdown-item">
+                        <a (click)="isDropdownOpen = false" class="c-nav-bar__item">Explore
+                            <tui-svg src="tuiIconChevronDown"></tui-svg>
+                        </a>
+                    </div>
+                    <div class="c-mobile-nav-bar__account-container">
+                        <button appearance="outline" class="app-button-outline" tuiHint="Some text"
+                            tuiHintDirection="top" type="button">
+                            Account
+                        </button>
+                    </div>
+                </div>
+            </ng-template>
+        </tui-hosted-dropdown>
+
+
+    </div>
+</nav>
+
+
+
+<nav class="c-nav-bar">
+    <div class="c-nav-bar__logo">
+        <a routerLink="/">
+            <img src="assets/horizontal-logo.svg" alt="Logo" />
+        </a>
+    </div>
+
+    <div class="c-nav-bar__items">
+        <a (click)="isDropdownOpen = false" class="c-nav-bar__item">Products
+            <tui-svg src="tuiIconChevronDown"></tui-svg>
+        </a>
+        <a class="c-nav-bar__item">Business
+            <tui-svg src="tuiIconChevronDown"></tui-svg>
+        </a>
+        <a class="c-nav-bar__item">Support
+            <tui-svg src="tuiIconChevronDown"></tui-svg>
+        </a>
+        <a class="c-nav-bar__item">About
+            <tui-svg src="tuiIconChevronDown"></tui-svg>
+        </a>
+        <a class="c-nav-bar__item">Explore
+            <tui-svg src="tuiIconChevronDown"></tui-svg>
+        </a>
+        <button appearance="outline" class="app-button-outline" tuiHint="Some text" tuiHintDirection="top"
+            type="button">
+            Account
+        </button>
+    </div>
+</nav>

@@ -1,0 +1,52 @@
+@import "./app/styles/app-button-outline.scss";
+@import "./app/styles/card.scss";
+@import "./app/styles/skeleton.scss";
+@import "./app/styles/chip.scss";
+@import "./app/styles/group.scss";
+@import "./app/styles/input.scss";
+@import "./app/styles/hr.scss";
+@import "./app/styles/text.scss";
+
+:root {
+  --tui-base-01: rgb(39, 33, 43);
+  --tui-elevation-02: rgb(54, 41, 59);
+  --tui-elevation-03: rgb(69, 49, 75);
+  --tui-text-01: #fff;
+  --tui-text-02: #a0789c;
+  --tui-link: rgb(227, 87, 96);
+  --tui-primary-text: #fff;
+  --tui-font-text-s: normal 16px Roboto, Quicksand, "Source Sans Pro",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+    sans-serif;
+  --tui-primary: rgb(227, 87, 96);
+  --tui-primary-hover: rgb(227, 87, 96, 0.8);
+  --tui-radius-m: 0.5rem;
+
+  --app-linear-gradient: linear-gradient(
+    270deg,
+    rgba(160, 120, 156, 0),
+    #a0789c 51%,
+    rgba(160, 120, 156, 0)
+  );
+  --app-linear-gradient-bg: #27212b;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}	
+
+a {
+  text-decoration: none;
+  color: var(--tui-link);
+}
+
+
+h1 {
+  font-size: 2.2rem;
+}

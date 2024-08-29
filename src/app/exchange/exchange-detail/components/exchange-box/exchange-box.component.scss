@@ -1,0 +1,42 @@
+.c-exchange-box {
+  width: 350px;
+
+  @media screen and (max-width: 412px) {
+    width: 100%;
+  }
+
+  .c-exchange-box__header {
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: var(--tui-text-01);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+  }
+
+  .c-exchange-box__content {
+    padding-top: 1rem;
+  }
+}
+
+.c-exchange-box__form-group:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.c-exchange-box__form-group-input {
+  margin-top: 0.5rem;
+}
+
+.c-exchange-box__currency-select {
+  max-width: 7rem;
+}
+
+.c-exchange-box__form-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.4rem;
+  gap: 1rem;
+  .c-exchange-box__form-submit-btn {
+    width: 10rem;
+  }
+}

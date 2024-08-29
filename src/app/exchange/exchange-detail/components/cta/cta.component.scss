@@ -1,0 +1,37 @@
+.c-banner {
+  background-color: #722b7d;
+  background-image: url("/assets/bd-2-banner-xl.webp");
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  display: flex;
+  height: 90px;
+  padding-left: 2rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    width: 600px;
+  }
+
+  width: 100%;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
+
+  .c-banner__text-image {
+    width: 300px;
+  }
+}
+
+.c-header {
+  font-size: 3.125rem;
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+}
+.c-description {
+  font-size: 1.5rem;
+}

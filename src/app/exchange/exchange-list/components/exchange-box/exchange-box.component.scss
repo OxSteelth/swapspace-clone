@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.c-title {
+  padding-left: 1rem;
+}
+
+.c-exchange-box {
+  max-width: 350px;
+  width: 100%;
+  height: fit-content;
+
+  .c-exchange-box__header {
+    padding: 0.5rem;
+  }
+
+  .c-exchange-box__content {
+    padding-top: 0.5rem;
+  }
+}
+
+.c-exchange-box__form-group {
+  label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.c-exchange-box__form-group:not(:first-child) {
+  margin-top: 1.8rem;
+}
+
+.c-exchange-box__form-group-input {
+  margin-top: 0.5rem;
+}
+
+.c-exchange-box__currency-select {
+  max-width: 7rem;
+}
+
+.c-exchange-box__form-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.4rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .c-exchange-box__form-submit-btn {
+    font-weight: normal;
+    font-size: 0.9rem;
+    height: 3rem;
+
+    button {
+      border-image-width: 0;
+    }
+  }
+}

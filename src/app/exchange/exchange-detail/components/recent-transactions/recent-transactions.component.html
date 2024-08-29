@@ -1,0 +1,21 @@
+<div class="c-container">
+    <h1>Recent Transactions</h1>
+
+    <ul class="c-transaction-container">
+        <li *ngFor="let transaction of transactionService.allTransactions$ | async"
+            class="c-transaction-container__item app-card">
+            <div class="c-transaction-container__time">
+                {{ transaction.date | date: 'dd/MM/yyyy HH:mm' }}
+            </div>
+            <div class="c-transaction-container__ammount">
+                {{ transaction.amount | number: '1.2-2' }}
+
+                <div class="c-transaction-container__currency">
+                    {{ transaction.fromCurrency }}
+                    <tui-svg src="tuiIconArrowRight"></tui-svg>
+                    {{ transaction.toCurrency }}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,7 @@
+<div class="c-tabs">
+    <div *ngFor="let tab of tabs; index as i" class="c-tab" (click)="selectTab(i)" [ngClass]="{
+        'active': i == activeTabIndex
+    }">
+        {{ tab }}
+    </div>
+</div>

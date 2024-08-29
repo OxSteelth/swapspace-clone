@@ -1,0 +1,40 @@
+.c-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-transaction-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+
+
+  .c-transaction-container__item {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+
+    .c-transaction-container__ammount {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+
+      .c-transaction-container__currency {
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

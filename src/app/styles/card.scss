@@ -1,0 +1,12 @@
+.app-card {
+  background-color: var(--tui-elevation-02);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 var(--tui-elevation-03);
+  color: var(--tui-text-01);
+  padding: 16px;
+
+  &.app-card__outlined {
+    border: 1px solid var(--tui-elevation-03);
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.c-selection-wrapper {
+  display: none;
+  width: 100%;
+
+  .c-selection-wrapper__dropdown-wrapper {
+    width: 100%;
+    display: block;
+
+    .c-selection-container {
+      width: 100%;
+      display: flex;
+
+      .c-input-search {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-right: none;
+      }
+
+      .c-selection-container__icon {
+        flex: 0;
+        min-width: 3rem;
+        background-color: var(--tui-base-01);
+        min-height: 3.8rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+  }
+}
+
+.c-input {
+  background-color: var(--tui-base-01);
+  border: none;
+  color: var(--tui-text-01);
+  border-radius: 8px;
+
+  border-right: solid;
+  border-right-width: 1px;
+  border-color: var(--tui-elevation-02);
+
+  min-height: 3.8rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.c-input-ammount {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.c-input-currency {
+  flex: 0;
+  min-width: 7rem;
+  background-color: var(--tui-base-01);
+  min-height: 3.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.c-currency-icon {
+  filter: invert(1);
+  height: 1.2rem;
+}
+
+.c-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.c-input {
+  width: 100%;
+}
+
+.c-dropdown {
+  width: min(90vw, 360px);
+  .c-dropdown__item {
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--tui-elevation-03);
+    }
+
+    .c-nav-bar__item__button {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      gap: 1rem;
+      align-items: center;
+      color: var(--tui-text-01);
+
+      .c-dropdown__currency {
+        display: flex;
+        gap: 0.5rem;
+        .c-dropdown__currency-full-name {
+          color: var(--tui-text-02);
+        }
+      }
+    }
+  }
+}

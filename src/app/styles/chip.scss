@@ -1,0 +1,28 @@
+.app-chip {
+  color: var(--tui-link);
+  padding: 6px 12px;
+
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 0.625rem;
+  &.app-chip__green {
+    color: #27ae60;
+    background: rgba(39, 174, 96, 0.102);
+  }
+
+  &.app-chip__yellow {
+    color: #fbff2d;
+    background: rgba(251, 255, 45, 0.2);
+  }
+
+  &.app-chip__yellow-2 {
+    color: #fdffa0;
+    background: rgba(253, 255, 160, 0.102);
+  }
+
+  &.app-chip__blue {
+    color: #00abe9;
+    background: rgba(0, 171, 233, 0.102);
+  }
+}

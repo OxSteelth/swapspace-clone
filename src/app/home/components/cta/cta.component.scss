@@ -1,0 +1,66 @@
+:host {
+  display: block;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  flex: 1;
+  max-width: 650px;
+}
+
+.c-banner {
+  background-color: #722b7d;
+  background-image: url("/assets/bd-2-banner-xl.webp");
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  display: flex;
+  height: 90px;
+  align-items: center;
+  width: 100%;
+
+  .c-banner__text-image {
+    padding-left: 2rem;
+    max-width: 350px;
+    width: 100%;
+  }
+}
+
+.c-header {
+  font-size: 3.125rem;
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+}
+.c-description {
+  font-size: 1.5rem;
+}
+
+.c-trust-pilot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+
+  margin-bottom: 2rem;
+  tramsition: color 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--tui-link);
+  }
+
+  .c-trust-pilot__images {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.6rem;
+    .c-trust-pilot__logo {
+      filter: invert(1);
+      height: 32px;
+    }
+
+    .c-trust-pilot__rating {
+      height: 25px;
+    }
+  }
+}

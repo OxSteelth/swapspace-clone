@@ -1,0 +1,21 @@
+.c-container {
+  display: flex;
+  gap: 7.5rem;
+
+  padding-left: 4rem;
+  padding-right: 4rem;
+
+  @media screen and (max-width: 600px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media screen and (max-width: 1270px) {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+}

@@ -1,0 +1,31 @@
+.app-group {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+
+    app-cyrrency-amount-selector:first-child {
+      flex: 1;
+
+      .c-input-currency {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+      }
+    }
+
+    app-cyrrency-amount-selector:last-child {
+      flex: 1;
+      .c-input {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-left-style: solid;
+        border-left-width: 1px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

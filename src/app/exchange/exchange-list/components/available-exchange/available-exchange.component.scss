@@ -1,0 +1,152 @@
+:host {
+  display: block;
+  flex: 1;
+}
+
+.c-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 5rem;
+
+  .c-tabs {
+    width: 100%;
+  }
+}
+
+.c-exchange-container {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+
+  @media screen and (max-width: 1000px) {
+    align-items: center;
+  }
+
+  .c-exchange-container__item {
+    &.app-skeleton {
+      min-height: 116px;
+    }
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+
+    background: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--tui-text-02);
+
+    &.trusted-partner {
+      border-bottom-color: var(--tui-success-fill);
+    }
+
+    &.best-rate {
+      border-bottom-color: var(--tui-warning-fill);
+    }
+
+    &.fastest {
+      border-bottom-color: var(--tui-info-fill);
+    }
+
+    .c-exchange-container__content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .c-exchange__name {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        .c-exchange__icon {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+
+      .c-exchange__item {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .c-exchange__item-name {
+        color: var(--tui-text-02);
+        margin-right: 0.2rem;
+      }
+
+      .c-exchange__item-risk {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-transform: capitalize;
+      }
+
+      .c-exchange__item-group {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .c-status-disk {
+        &.low {
+          color: var(--tui-error-fill);
+        }
+
+        &.medium {
+          color: var(--tui-warning-fill);
+        }
+
+        &.high {
+          color: var(--tui-success-fill);
+        }
+      }
+    }
+
+    .c-exchange-container__actions {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+
+      .c-chips {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .app-button-outline {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  }
+}
+
+.c-currency-image {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+
+  filter: invert(1);
+}
+
+.c-loading {
+  width: 100%;
+  max-width: 732px;
+  height: 700px;
+}

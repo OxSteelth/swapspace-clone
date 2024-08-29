@@ -1,0 +1,26 @@
+.c-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 7rem;
+  margin-bottom: 3rem;
+
+  .c-container {
+    display: flex;
+    gap: 7.5rem;
+
+    padding-left: 4rem;
+    padding-right: 4rem;
+
+    @media screen and (max-width: 600px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      width: 100%;
+    }
+
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.c-transaction-wrapper {
+}
