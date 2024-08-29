@@ -86,7 +86,6 @@
     "eslint": "^8.39.0",
     "eslint-config-airbnb-typescript": "^16.0.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-angular-rubic": "file:angular-eslint-rubic",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jasmine": "^4.1.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
