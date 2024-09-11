@@ -1,0 +1,52 @@
+.index-how {
+    &__container {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+    }
+
+    &__text-container {
+        flex-basis: 50%;
+    }
+
+    &__title {
+        font-size: 3.125rem;
+        font-weight: 700;
+        line-height: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        color: #a0789c;
+        font-size: 1.25rem;
+        line-height: 1.875rem;
+        margin-bottom: 0;
+        max-width: 445px;
+    }
+
+    &__image-container {
+        align-items: flex-start;
+        display: flex;
+        flex-basis: 50%;
+        justify-content: flex-end;
+    }
+
+    @media screen and (min-width: 768px) {
+        &__image-mobile {
+            display: none;
+        }
+    }
+
+    &__link {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    &__button {
+        box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62);
+        margin-top: 120px;
+        max-width: 358px;
+        width: 100%;
+    }
+}

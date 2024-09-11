@@ -1,0 +1,106 @@
+.index {
+    &__margin-rates {
+        margin-top: 104px;
+    }
+}
+
+.index-rates {
+    display: flex;
+    justify-content: space-between;
+
+    &__title {
+        font-size: 3.125rem;
+        font-weight: 700;
+        line-height: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    &__slogan {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        max-width: 640px;
+        width: 100%;
+    }
+
+    &__banner {
+        margin-top: auto;
+    }
+
+    @media screen and (min-width: 992px) {
+        &__info-mobile {
+            display: none;
+        }
+    }
+
+    &-trustpilot {
+        align-items: center;
+        display: flex;
+        gap: 8px;
+
+        &__stars {
+            height: auto;
+            width: 125px;
+        }
+
+        &__icon-container {
+            display: flex;
+            gap: 0.3rem;
+        }
+    }
+}
+
+.icon-trustpilot {
+    height: 32px;
+    width: 120px;
+
+    &__original_text {
+        transition: fill .2s ease;
+        fill: #fff;
+    }
+
+    &__original_star {
+        transition: fill .2s ease;
+        fill: #00b67a;
+    }
+}
+
+.index-banner {
+    height: 90px;
+    width: 100%;
+}
+
+.invaders-banner {
+    background-image: url(/assets/banners/invaders-bg.png), linear-gradient(90deg, #2e2532, #14111f 34.9%, #1d101a 63.02%, #2a111a 99.48%);
+    background-position: 100%, 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 90px;
+    padding: 18px 1.5rem;
+    width: 100%;
+
+    &__title {
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.25rem;
+        margin: 0;
+    }
+
+    &__text {
+        color: #a0789c;
+        font-size: .75rem;
+        line-height: .875rem;
+        max-width: 243px;
+    }
+}

@@ -1,0 +1,47 @@
+.index {
+    &__margin {
+        margin-top: 120px;
+    }
+
+    &__margin:last-child {
+        margin-bottom: 50px;
+    }
+}
+
+.index-pair-widget {
+    background-color: #36293b;
+    border-radius: 1rem;
+    padding: 40px;
+
+    &__title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.875rem;
+        margin-bottom: 2.5rem;
+    }
+}
+
+.pair {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+}
+
+.pair-widget {
+    &__pair {
+        display: flex;
+        flex-grow: 0;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    &__button-partner {
+        flex-shrink: 0;
+        text-transform: uppercase;
+        width: 25%;
+        z-index: 1;
+    }
+}

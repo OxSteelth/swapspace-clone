@@ -1,0 +1,40 @@
+:host {
+    z-index: 9999;
+}
+
+.pair {
+    &__swap_wrapper {
+        height: 40px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+.pair-swap {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-left: 0;
+    padding-right: 0;
+
+    &__icon {
+        fill: none;
+        transition: fill .2s ease;
+
+        &_dark {
+            fill: #e3e3e3;
+            transition: fill .2s ease;
+        }
+
+        &_sm {
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    &:hover {
+        .pair-swap__icon {
+            fill: #e35760;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+<div class="index-rates__widget">
+    <div>
+        <div class="exchange-pair__switch">
+            <div class="tab exchange-pair__switch-option">
+                <input id="2sh3jB" type="radio" name="tab" class="tab__radio" />
+                <label for="2sh3jB" class="tab__label tab__label_active"> Exchange Crypto </label>
+            </div>
+
+            <div class="tab exchange-pair__switch-option">
+                <input id="Z16O_I" type="radio" name="tab" class="tab__radio" />
+                <label for="Z16O_I" class="tab__label"> Buy/Sell Crypto </label>
+            </div>
+        </div>
+
+        <div class="pair exchange-pair__pair">
+            <ng-container *ngLet="fromAsset$ | async as fromAsset">
+                <app-asset-selector label="You send" [asset]="fromAsset" [amountValue]="fromAmount$ | async" (amountUpdated)="updateInputValue($event)"></app-asset-selector>
+            </ng-container>
+
+            <app-form-switcher (switcherClick)="revert()"></app-form-switcher>
+
+            <ng-container *ngLet="toAsset$ | async as toAsset">
+                <app-asset-selector label="You get" [asset]="toAsset" [amountValue]="toAmount$ | async" (amountUpdated)="updateInputValue($event)" inputMode="output"></app-asset-selector>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="index-rates__button-container">
+        <a href="/exchange/step2" class="index-rates__button-wrapper">
+            <button type="button" class="button index-rates__button button_m button_outline button_none button_">Quick exchange</button>
+        </a>
+        <a href="/exchange/step1" class="index-rates__button-wrapper">
+            <button type="button" class="button index-rates__button index-rates__next button_m button_primary button_none button_" id="widget_upper">View offers</button>
+        </a>
+    </div>
+</div>
