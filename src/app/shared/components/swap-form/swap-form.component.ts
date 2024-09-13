@@ -32,7 +32,8 @@ export class SwapFormComponent implements OnInit {
   public swapDirection = '';
   public label: string = '';
   public searching = signal(false);
-  selectedAction = 'all';
+  public selectedAction = 'all';
+  public selectedMode = 'exchange';
   public currencyList$: Observable<Currency[]>;
   public resultList$: Observable<Currency[]>;
   public inputControl: FormControl;
@@ -236,6 +237,16 @@ export class SwapFormComponent implements OnInit {
       this.currencyList$ = this.allCurrencyList$;
     } else if (tabIndex === 1) {
       this.currencyList$ = this.popularCurrencyList$;
+    }
+  }
+
+  selectModes(tabIndex: number) {
+    this.selectedMode = tabIndex === 0 ? 'exchange' : 'buysell';
+
+    if (tabIndex === 0) {
+      // this.currencyList$ = this.allCurrencyList$;
+    } else if (tabIndex === 1) {
+      // this.currencyList$ = this.popularCurrencyList$;
     }
   }
 }

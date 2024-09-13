@@ -1,17 +1,11 @@
 <div class="index-rates__widget">
   <div>
-    <div class="exchange-pair__switch">
-      <div class="tab exchange-pair__switch-option">
-        <input id="2sh3jB" type="radio" name="tab" class="tab__radio" />
-        <label for="2sh3jB" class="tab__label tab__label_active"> Exchange Crypto </label>
-      </div>
-
-      <div class="tab exchange-pair__switch-option">
-        <input id="Z16O_I" type="radio" name="tab" class="tab__radio" />
-        <label for="Z16O_I" class="tab__label"> Buy/Sell Crypto </label>
-      </div>
-    </div>
-
+    <app-tabs
+      [tabs]="['Exchange crypto', 'Buy/Sell crypto']"
+      [activeTabIndex]="selectedMode === 'exchange' ? 0 : 1"
+      (activeTabIndexChange)="selectModes($event)"
+      class="fund-mode"
+    ></app-tabs>
     <div class="pair exchange-pair__pair">
       <ng-container *ngLet="fromAsset$ | async as fromAsset">
         <app-asset-selector
