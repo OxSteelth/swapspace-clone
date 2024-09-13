@@ -1,79 +1,337 @@
 .index-rates {
+  &__widget {
+    background: #36293b;
+    border-radius: 1rem;
+    width: 359px;
+    padding: 1.5rem;
+    // width: 100%;
+    position: relative;
+  }
+
+  @media screen and (max-width: 1199px) {
     &__widget {
-        background: #36293b;
-        border-radius: 1rem;
-        max-width: 359px;
-        padding: 1.5rem;
-        width: 100%;
+      width: 377px;
     }
+  }
 
-    &__button-container {
-        display: flex;
-        gap: 8px;
-        justify-content: space-between;
-        margin-top: 1.5rem;
-    }
+  &__button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
 
-    &__button-wrapper {
-        flex: 1;
-    }
+  &__button-wrapper {
+    flex: 1;
+  }
 
-    &__button {
-        width: 100%;
-    }
+  &__button {
+    width: 100%;
+    text-transform: uppercase;
+  }
 
-    &__next {
-        box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62);
-    }
+  &__next {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 4px 50px rgba(227, 87, 96, 0.5), 0 60px 150px rgba(227, 87, 96, 0.62);
+  }
 }
 
 .pair {
-    align-items: center;
-    display: flex;
-    gap: 6px;
-    justify-content: flex-end;
-    position: relative;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
 }
 
 .exchange-pair {
-    &__switch {
-        display: flex;
-        margin-bottom: 46px;
-    }
+  &__switch {
+    display: flex;
+    margin-bottom: 46px;
+    border: 1px solid #673e60;
+    border-radius: 1rem;
+    padding: 4px;
+    width: 100%;
+  }
 
-    &__switch-option {
-        margin: 0;
-        width: 50%;
-        z-index: 0;
-    }
+  &__switch-option {
+    margin: 0;
+    width: 50%;
+    z-index: 0;
+  }
 
-    &__pair {
-        flex-wrap: wrap;
-    }
+  &__pair {
+    flex-wrap: wrap;
+  }
 }
 
 .tab {
-    &__radio {
-        display: none;
-    }
+  &__radio {
+    display: none;
+  }
 
-    &__label {
-        border-bottom: 1px solid #a0789c;
-        color: #a0789c;
-        display: inline-block;
-        font-size: 0.875rem;
-        line-height: 1.125rem;
-        padding: 0 0.75rem 4px;
-        text-align: center;
-        transition: color 0.2s ease, border-bottom-color 0.2s ease;
-        white-space: nowrap;
-        width: 100%;
-    }
+  &__label {
+    color: #fff;
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    padding: 10px 1rem;
+    text-align: center;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+    white-space: nowrap;
+    width: 100%;
+  }
 
-    &__label_active,
-    &__label_active:hover {
-        border-bottom: 1px solid #fff;
-        color: #fff;
+  &__label_active,
+  &__label_active:hover {
+    color: #fff;
+    background-color: #e35760;
+    border-radius: 12px;
+    flex: 1;
+    padding: 10px 1rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+.search-form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.search-token {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #36293b;
+  border-radius: 1rem;
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem 1rem 0;
+  width: 100%;
+  z-index: 2;
+
+  &__header {
+    color: #a0789c;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  &__input_wrapper {
+    margin-bottom: 0.5rem;
+    position: relative;
+    width: 100%;
+
+    .search-token__icon {
+      position: absolute;
+      top: 16px;
+      overflow: visible;
+      color: #e35760;
+      right: 7%;
+      width: 1em;
     }
+  }
+
+  .button-close {
+    background-color: transparent;
+    border: none;
+    stroke: #a0789c;
+    height: 16px;
+    padding: 0;
+    transition: stroke 0.2s ease;
+    width: 16px;
+
+    &:hover {
+      cursor: pointer;
+      stroke: #e35760;
+    }
+  }
+
+  &__input {
+    background-color: #27212b;
+    border: 1px solid #dbdbdb;
+    border-color: #27212b;
+    font-weight: 400;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1.25rem;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-sizing: border-box;
+    height: 48px;
+    border-radius: 8px;
+  }
+}
+
+.coin-icon {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  position: relative;
+
+  &__sm {
+    height: 24px;
+    width: 24px;
+  }
+
+  &__sm &__image {
+    height: 24px;
+    width: 24px;
+  }
+
+  &__xs {
+    height: 20px;
+    width: 20px;
+  }
+
+  &__xs &__image {
+    height: 20px;
+    width: 20px;
+  }
+
+  &__white {
+    filter: invert(1);
+  }
+}
+
+.tokens-list {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+
+  &__label {
+    color: #a0789c;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-bottom: 4px;
+  }
+}
+
+.tokens-list__tokens {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s ease;
+
+  &_token {
+    display: flex;
+    padding: 8px 12px;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 0.5rem;
+    align-items: center;
+  }
+
+  &_token:hover {
+    background-color: #51354f;
+    cursor: pointer;
+  }
+
+  &-dark {
+    overflow: hidden;
+  }
+
+  &__icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  &__ticker-black,
+  &__ticker-dark {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  &__code {
+    color: #7f7f7f;
+    text-transform: uppercase;
+  }
+
+  &__code-black,
+  &__code-dark {
+    color: #fff;
+  }
+
+  &__name {
+    color: #b6b6b6;
+    margin-left: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__name-dark {
+    color: #a0789c;
+  }
+
+  &__network {
+    color: #e35760;
+    font-size: 0.625rem;
+    // line-height: 0.75rem;
+
+    &_code {
+      text-transform: uppercase;
+    }
+  }
+}
+::-webkit-scrollbar {
+  width: 3px; /* For vertical scrollbars */
+  height: 3px; /* For horizontal scrollbars */
+}
+
+/* Track (background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #36293b;
+}
+
+/* Thumb (the moving part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background-color: #e35760; /* Scrollbar color */
+  border-radius: 3px; /* Rounded scrollbar edges */
+}
+
+/* Thumb on hover (changes color when hovered) */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #e35760; /* Darker on hover */
+}
+
+::ng-deep {
+  .c-tabs {
+    display: flex !important;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .c-tab {
+    padding: 2px !important;
+    border: none !important;
+    background-color: #6b4d68;
+    color: white !important;
+    border-radius: 4px;
+    background-color: #6b4d68;
+    flex: 1;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-align: center;
+    text-transform: capitalize;
+    transition: background-color 0.2s ease;
+  }
+  .c-tab.active {
+    background-color: #e35760;
+  }
+}
+
+.example-viewport {
+  height: 100%; /* Adjust the height based on your needs */
+  width: 100%; /* Full width of the container */
+  overflow-x: hidden;
 }

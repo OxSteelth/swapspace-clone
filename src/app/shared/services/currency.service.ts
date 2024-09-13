@@ -92,19 +92,16 @@ export class CurrencyService {
       shareReplay(1),
       map(tokens => {
         const popularCurrencyList: Currency[] = [];
-        const allCurrencyList: Currency[] = [];
 
         for (const currency of tokens) {
           if (currency.popular) {
             popularCurrencyList.push(currency);
-          } else {
-            allCurrencyList.push(currency);
           }
         }
 
         this._tokenList$.next(tokens);
         this._popularCurrencyList$.next(popularCurrencyList);
-        this._allCurrencyList$.next(allCurrencyList);
+        this._allCurrencyList$.next(tokens);
 
         return tokens.length ? tokens : [];
       })

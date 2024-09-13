@@ -1,34 +1,32 @@
 <div class="index__margin">
-    <h1 class="c-title">Recent Transactions</h1>
-    
-    <div class="c-container">
-        <ng-container *ngIf="transactionService.allTransactions$ | async as allTransactions; else loadingSkeleton">
-            <ul class="c-transaction-container">
-                <li *ngFor="let transaction of allTransactions"
-                    class="c-transaction-container__item app-card">
-                    <div class="c-transaction-container__time">
-                        {{ transaction.date | appDateDiff}}
-                    </div>
-                    <div class="c-transaction-container__ammount">
-                        {{ transaction.amount | number: '1.2-2' }}
-    
-                        <div class="c-transaction-container__currency">
-                            {{ transaction.fromCurrency }} <img [src]="getCurrencyIcon(transaction.fromCurrency)"
-                                class="c-currency-image">
-                            <tui-svg src="tuiIconArrowRight"></tui-svg>
-                            {{ transaction.toCurrency }} <img [src]="getCurrencyIcon(transaction.toCurrency)"
-                                class="c-currency-image">
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </ng-container>
-    </div>
-    
-    <ng-template #loadingSkeleton>
-        <ul class="c-transaction-container">
-            <li *ngFor="let transaction of skeletonArray" class="c-transaction-container__item app-card app-skeleton">
-            </li>
-        </ul>
-    </ng-template>
+  <h1 class="c-title">Recent Transactions</h1>
+
+  <div class="c-container">
+    <ng-container *ngIf="transactionService.allTransactions$ | async as allTransactions; else loadingSkeleton">
+      <ul class="c-transaction-container">
+        <li *ngFor="let transaction of allTransactions" class="c-transaction-container__item app-card">
+          <div class="c-transaction-container__time">
+            {{ transaction.date | appDateDiff }}
+          </div>
+          <div class="c-transaction-container__ammount">
+            {{ transaction.amount | number : '1.2-2' }}
+
+            <div class="c-transaction-container__currency">
+              {{ transaction.fromCurrency }}
+              <img [src]="getCurrencyIcon(transaction.fromCurrency)" class="c-currency-image" />
+              <tui-svg src="tuiIconArrowRight"></tui-svg>
+              {{ transaction.toCurrency }}
+              <img [src]="getCurrencyIcon(transaction.toCurrency)" class="c-currency-image" />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+
+  <ng-template #loadingSkeleton>
+    <ul class="c-transaction-container">
+      <li *ngFor="let transaction of skeletonArray" class="c-transaction-container__item app-card app-skeleton"></li>
+    </ul>
+  </ng-template>
 </div>

@@ -1,36 +1,149 @@
 <div class="index-rates__widget">
-    <div>
-        <div class="exchange-pair__switch">
-            <div class="tab exchange-pair__switch-option">
-                <input id="2sh3jB" type="radio" name="tab" class="tab__radio" />
-                <label for="2sh3jB" class="tab__label tab__label_active"> Exchange Crypto </label>
-            </div>
+  <div>
+    <div class="exchange-pair__switch">
+      <div class="tab exchange-pair__switch-option">
+        <input id="2sh3jB" type="radio" name="tab" class="tab__radio" />
+        <label for="2sh3jB" class="tab__label tab__label_active"> Exchange Crypto </label>
+      </div>
 
-            <div class="tab exchange-pair__switch-option">
-                <input id="Z16O_I" type="radio" name="tab" class="tab__radio" />
-                <label for="Z16O_I" class="tab__label"> Buy/Sell Crypto </label>
-            </div>
-        </div>
-
-        <div class="pair exchange-pair__pair">
-            <ng-container *ngLet="fromAsset$ | async as fromAsset">
-                <app-asset-selector label="You send" [asset]="fromAsset" [amountValue]="fromAmount$ | async" (amountUpdated)="updateInputValue($event)"></app-asset-selector>
-            </ng-container>
-
-            <app-form-switcher (switcherClick)="revert()"></app-form-switcher>
-
-            <ng-container *ngLet="toAsset$ | async as toAsset">
-                <app-asset-selector label="You get" [asset]="toAsset" [amountValue]="toAmount$ | async" (amountUpdated)="updateInputValue($event)" inputMode="output"></app-asset-selector>
-            </ng-container>
-        </div>
+      <div class="tab exchange-pair__switch-option">
+        <input id="Z16O_I" type="radio" name="tab" class="tab__radio" />
+        <label for="Z16O_I" class="tab__label"> Buy/Sell Crypto </label>
+      </div>
     </div>
 
-    <div class="index-rates__button-container">
-        <a href="/exchange/step2" class="index-rates__button-wrapper">
-            <button type="button" class="button index-rates__button button_m button_outline button_none button_">Quick exchange</button>
-        </a>
-        <a href="/exchange/step1" class="index-rates__button-wrapper">
-            <button type="button" class="button index-rates__button index-rates__next button_m button_primary button_none button_" id="widget_upper">View offers</button>
-        </a>
+    <div class="pair exchange-pair__pair">
+      <ng-container *ngLet="fromAsset$ | async as fromAsset">
+        <app-asset-selector
+          label="You send"
+          label2="From"
+          [asset]="fromAsset"
+          [amountValue]="fromAmount$ | async"
+          (amountUpdated)="updateInputValue($event)"
+          (tokenClickedEvent)="tokenClicked($event, 'from')"
+        ></app-asset-selector>
+      </ng-container>
+
+      <app-form-switcher (switcherClick)="revert()"></app-form-switcher>
+
+      <ng-container *ngLet="{ toAsset: toAsset$ | async, isLoading: isLoading$ | async } as input">
+        <app-asset-selector
+          label="You get"
+          label2="To"
+          [isLoading]="input.isLoading"
+          [asset]="input.toAsset"
+          [amountValue]="toAmount$ | async"
+          (amountUpdated)="updateInputValue($event)"
+          (tokenClickedEvent)="tokenClicked($event, 'to')"
+          inputMode="output"
+        ></app-asset-selector>
+      </ng-container>
     </div>
+  </div>
+
+  <div class="index-rates__button-container">
+    <a href="/exchange/step1" class="index-rates__button-wrapper">
+      <button
+        type="button"
+        class="button index-rates__button index-rates__next button_m button_primary button_none button_"
+        id="widget_upper"
+      >
+        View offers
+      </button>
+    </a>
+    <a href="/exchange/step2" class="index-rates__button-wrapper">
+      <button type="button" class="button index-rates__button button_m button_outline button_none button_">
+        Quick exchange
+      </button>
+    </a>
+  </div>
+
+  <div class="search-token" #assetSearchWrapper>
+    <div class="search-token__header">
+      <div class="search-token__label">
+        {{ label }}
+      </div>
+      <button class="button-close" (click)="closeSearch()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="icon-close">
+          <path d="M14 14L8 8M8 8L14 2M8 8L2 2M8 8L2 14" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="search-token__input_wrapper">
+      <input
+        id="searchInput"
+        spellcheck="false"
+        max="Infinity"
+        min="-Infinity"
+        maxlength="Infinity"
+        placeholder="Search"
+        step="any"
+        trim="true"
+        type="text"
+        autocomplete="off"
+        lang="en"
+        inputmode="text"
+        class="search-token__input"
+        [formControl]="inputControl"
+      />
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="magnifying-glass"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        class="search-token__icon"
+      >
+        <path
+          fill="currentColor"
+          d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+    <app-tabs
+      [tabs]="['All', 'Popular']"
+      [activeTabIndex]="selectedAction === 'all' ? 0 : 1"
+      (activeTabIndexChange)="selectCategories($event)"
+    ></app-tabs>
+    <div class="tokens-list">
+      <div class="tokens-list__label">select a token:</div>
+      <cdk-virtual-scroll-viewport itemSize="10" class="example-viewport">
+        <div class="tokens-list__tokens">
+          <div
+            class="tokens-list__tokens_token"
+            *cdkVirtualFor="let currency of resultList$ | async"
+            (click)="selectToken(currency)"
+          >
+            <div class="tokens-list__tokens__icon">
+              <div class="coin-icon coin-icon__sm coin-icon__bg_">
+                <img
+                  loading="lazy"
+                  [src]="
+                    'https://storage.swapspace.co' +
+                    (currency.icon !== '' ? currency.icon : '/static/default-coin-icon.svg')
+                  "
+                  [alt]="currency.icon"
+                  class="coin-icon__image coin-icon__white"
+                />
+              </div>
+            </div>
+            <div class="d-f-c">
+              <div class="d-f-r tokens-list__tokens__ticker-dark">
+                <div class="tokens-list__tokens__code tokens-list__tokens__code-dark">{{ currency.code }}</div>
+                <div class="tokens-list__tokens__name tokens-list__tokens__name-dark">{{ currency.name }}</div>
+              </div>
+              <div class="tokens-list__tokens__network">
+                <span class="tokens-list__tokens__network_code">{{ currency.networkName }}</span>
+                ({{ currency.network }})
+              </div>
+            </div>
+          </div>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
 </div>

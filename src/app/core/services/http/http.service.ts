@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, retry } from 'rxjs';
+import { Observable, retry, of } from 'rxjs';
 import { ENVIRONMENT } from 'src/environments/environment';
-import { timeout } from 'rxjs/operators';
+import { catchError, map, shareReplay, tap, timeout } from 'rxjs/operators';
 
 export const SERVER_REST_URL = `${ENVIRONMENT.apiBaseUrl}/`;
 
@@ -10,14 +10,31 @@ export const SERVER_REST_URL = `${ENVIRONMENT.apiBaseUrl}/`;
   providedIn: 'root'
 })
 export class HttpService {
+  private cache: Map<string, Observable<any>> = new Map();
+
   constructor(private http: HttpClient) {}
 
   public get<T>(url: string, data?: {}, path?: string): Observable<T> {
-    const request$ = this.http.get<T>((path || SERVER_REST_URL) + (url || ''), {
-      params: data || {}
-    });
+    if (!this.cache.has(url)) {
+      const response$ = this.http
+        .get<T>((path || SERVER_REST_URL) + (url || ''), {
+          params: data || {}
+        })
+        .pipe(
+          shareReplay(1), // Cache the response
+          catchError(error => {
+            console.error('Error fetching data:', error);
+            // Remove the cached entry on error
+            this.cache.delete(url);
+            
+            return of(null); // Handle error gracefully
+          })
+        );
 
-    return path ? request$ : request$.pipe(timeout(5_000), retry(1));
+      this.cache.set(url, path ? response$ : response$.pipe(timeout(5_000), retry(1)));
+    }
+
+    return this.cache.get(url);
   }
 
   public patch<T>(url: string, data?: {}, params?: {}, path?: string): Observable<T> {

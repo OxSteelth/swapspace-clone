@@ -9,7 +9,6 @@
   margin-bottom: 3rem;
   width: 100%;
 
-
   .c-container {
     display: flex;
     gap: 7.5rem;
@@ -24,7 +23,7 @@
 ::ng-deep {
   .index {
     &__margin {
-        margin-top: 120px;
+      margin-top: 120px;
     }
   }
 }

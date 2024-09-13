@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HomeComponent } from './home.component';
 import { ExchangeBoxComponent } from './components/exchange-box/exchange-box.component';
 import { CtaComponent } from './components/cta/cta.component';
@@ -16,29 +17,30 @@ import { NewsComponent } from './components/news/news.component';
 import { PairWidgetComponent } from './components/pair-widget/pair-widget.component';
 
 @NgModule({
-    declarations: [
-        HomeComponent,
-        ExchangeBoxComponent,
-        CtaComponent,
-        RecentTransactionsComponent,
-        RatesComponent,
-        CarouselComponent,
-        ProductsComponent,
-        AdvantagesComponent,
-        FeaturesComponent,
-        HowComponent,
-        TrustUsComponent,
-        NewsComponent,
-        PairWidgetComponent
-    ],
-    imports: [
-        SharedModule,
-        RouterModule.forChild([
-            {
-                path: '',
-                component: HomeComponent
-            }
-        ])
-    ]
+  declarations: [
+    HomeComponent,
+    ExchangeBoxComponent,
+    CtaComponent,
+    RecentTransactionsComponent,
+    RatesComponent,
+    CarouselComponent,
+    ProductsComponent,
+    AdvantagesComponent,
+    FeaturesComponent,
+    HowComponent,
+    TrustUsComponent,
+    NewsComponent,
+    PairWidgetComponent,
+  ],
+  imports: [
+    SharedModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: HomeComponent
+      }
+    ]),
+    ScrollingModule
+  ]
 })
 export class HomeModule {}

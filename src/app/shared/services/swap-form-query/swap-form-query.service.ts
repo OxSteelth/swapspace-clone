@@ -167,7 +167,6 @@ export class SwapFormQueryService {
     if (similarTokens.length === 0) {
       return this.currencyService.fetchCurrencyList().pipe(
         map(tokens => {
-          console.log('fetchCurrencyList', tokens);
           if (tokens.length > 0) {
             const token =
               tokens.length > 1 ? tokens.find(el => el.code.toLowerCase() === symbol.toLowerCase()) : tokens[0];

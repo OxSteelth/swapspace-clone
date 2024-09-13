@@ -1,14 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
+import {
+  map,
+  Observable,
+  debounceTime,
+  distinctUntilChanged,
+  startWith,
+  combineLatest,
+  switchMap,
+  timeout,
+  BehaviorSubject,
+  of
+} from 'rxjs';
 import { SwapFormService } from '@shared/services/swap-form.service';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { CurrencyService } from '../../services/currency.service';
+import { Currency } from '../../models/currency';
+import { ExchangeService } from '@app/shared/services/exchange.service';
+import { Exchange } from '@app/shared/models/exchange';
 
 @Component({
   selector: 'app-swap-form',
   templateUrl: './swap-form.component.html',
   styleUrls: ['./swap-form.component.scss']
 })
-export class SwapFormComponent {
-  public loading: boolean = false;
+export class SwapFormComponent implements OnInit {
+  private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
+  public readonly isLoading$ = this._isLoading$.asObservable();
+
+  public swapDirection = '';
+  public label: string = '';
+  public searching = signal(false);
+  selectedAction = 'all';
+  public currencyList$: Observable<Currency[]>;
+  public resultList$: Observable<Currency[]>;
+  public inputControl: FormControl;
+  public estimatedExchangeAmount$: Observable<Exchange[]>;
+
+  @ViewChild(CdkVirtualScrollViewport) viewport!: CdkVirtualScrollViewport;
+
+  @ViewChild('assetSearchWrapper')
+  assetSearchWrapper!: ElementRef<HTMLDivElement>;
 
   public readonly fromChain$ = this.swapFormService.fromBlockchain$;
 
@@ -22,18 +55,159 @@ export class SwapFormComponent {
 
   public readonly toAmount$ = this.swapFormService.toAmount$;
 
+  public readonly popularCurrencyList$: Observable<Currency[]>;
+
+  public readonly allCurrencyList$: Observable<Currency[]>;
+
   constructor(
     private readonly swapFormService: SwapFormService,
-    private readonly swapFormQueryService: SwapFormQueryService
-  ) {}
+    private readonly swapFormQueryService: SwapFormQueryService,
+    private readonly currencyService: CurrencyService,
+    public exchangeService: ExchangeService
+  ) {
+    this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
+    this.allCurrencyList$ = this.currencyService.allCurrencyList$;
+    this.currencyList$ = this.currencyService.allCurrencyList$;
+    this.resultList$ = this.currencyService.allCurrencyList$;
+    this.inputControl = new FormControl('');
+  }
+
+  ngOnInit() {
+    // this.resultList$ = combineLatest([
+    //   this.currencyList$,
+    //   this.inputControl.valueChanges.pipe(
+    //     debounceTime(300),
+    //     distinctUntilChanged(),
+    //     startWith('') // Emit initial value to trigger filtering on load
+    //   )
+    // ]).pipe(
+    //   map(([currencyList, searchValue]) => {
+    //     console.log('Filtering with search value:', searchValue); // Debugging
+    //     return currencyList.filter(
+    //       item =>
+    //         item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
+    //         item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+    //         item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
+    //         item.networkName.toLowerCase().includes(searchValue.toLowerCase())
+    //     );
+    //   })
+    // );
+
+    // // Debugging subscription to resultList$
+    // this.resultList$.subscribe(result => {
+    //   console.log('Filtered results:', result);
+    // });
+
+    this.resultList$ = this.inputControl.valueChanges.pipe(
+      debounceTime(300), // Wait for the user to stop typing for 300ms
+      distinctUntilChanged(), // Only emit if the value has changed
+      switchMap(searchValue =>
+        this.currencyList$.pipe(
+          map(items =>
+            items.filter(
+              item =>
+                item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
+                item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
+                item.networkName.toLowerCase().includes(searchValue.toLowerCase())
+            )
+          )
+        )
+      )
+    );
+
+    this.estimatedExchangeAmount$ = this.swapFormService.inputControl.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(value => {
+        this._isLoading$.next(true);
+        if (
+          value.fromBlockchain !== '' &&
+          value.toBlockchain !== '' &&
+          value.fromToken &&
+          value.toToken &&
+          value.fromAmount
+        ) {
+          return this.exchangeService.estimatedExchangeAmount(
+            value.fromToken.code,
+            value.fromBlockchain,
+            value.toBlockchain,
+            value.toToken.code,
+            Number(value.fromAmount)
+          );
+        } else {
+          return of([]);
+        }
+      })
+    );
+
+    this.estimatedExchangeAmount$.subscribe(value => {
+      if (Array.isArray(value) && value.length > 0) {
+        this.swapFormService.outputControl.patchValue({
+          toAmount: value[0].toAmount.toString()
+        });
+      } else {
+        this.swapFormService.outputControl.patchValue({
+          toAmount: '0'
+        });
+      }
+      this._isLoading$.next(false);
+    });
+  }
+
+  scrollToIndex(index: number) {
+    if (this.viewport) {
+      this.viewport.scrollToIndex(index, 'smooth'); // Scrolls to the specified index
+    }
+  }
 
   public updateInputValue(value: string): void {
     const oldValue = this.swapFormService.inputValue?.fromAmount;
+
     if (!oldValue || oldValue !== value) {
       this.swapFormService.inputControl.patchValue({
         fromAmount: value ? value : null
       });
     }
+  }
+
+  public tokenClicked(value: string, direction: string): void {
+    this.swapDirection = direction;
+    this.searching.set(!this.searching());
+
+    if (!this.assetSearchWrapper) return;
+
+    const input = this.assetSearchWrapper.nativeElement.querySelector('input') as HTMLInputElement;
+
+    this.assetSearchWrapper.nativeElement.style.display = this.searching() ? 'flex' : 'none';
+
+    input.focus();
+
+    this.label = value;
+  }
+
+  public selectToken(currency: Currency) {
+    if (this.swapDirection === 'from') {
+      this.swapFormService.inputControl.patchValue({
+        fromBlockchain: currency.network,
+        fromToken: currency
+      });
+    } else {
+      this.swapFormService.inputControl.patchValue({
+        toToken: currency,
+        toBlockchain: currency.network
+      });
+    }
+
+    this.closeSearch();
+  }
+
+  public closeSearch(): void {
+    this.searching.set(!this.searching());
+
+    if (!this.assetSearchWrapper) return;
+
+    this.assetSearchWrapper.nativeElement.style.display = 'none';
   }
 
   public async revert(): Promise<void> {
@@ -52,5 +226,16 @@ export class SwapFormComponent {
     this.swapFormService.outputControl.patchValue({
       toAmount: null
     });
+  }
+
+  selectCategories(tabIndex: number) {
+    this.selectedAction = tabIndex === 0 ? 'all' : 'popular';
+    this.inputControl.setValue('');
+
+    if (tabIndex === 0) {
+      this.currencyList$ = this.allCurrencyList$;
+    } else if (tabIndex === 1) {
+      this.currencyList$ = this.popularCurrencyList$;
+    }
   }
 }

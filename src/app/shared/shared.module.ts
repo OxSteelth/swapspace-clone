@@ -35,6 +35,7 @@ import { FormSwitcherComponent } from './components/form-switcher/form-switcher.
 import { SwapFormComponent } from './components/swap-form/swap-form.component';
 import { SwapFormService } from './services/swap-form.service';
 import { SwapFormQueryService } from './services/swap-form-query/swap-form-query.service';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { SwapFormQueryService } from './services/swap-form-query/swap-form-query
     TuiTableModule,
     TuiLetModule,
     TuiLoaderModule,
-    TuiCheckboxModule
+    TuiCheckboxModule,
+    ScrollingModule 
   ],
   providers: [AsyncPipe, TuiDestroyService, SwapFormService, SwapFormQueryService],
   exports: [
