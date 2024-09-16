@@ -199,6 +199,10 @@
     opacity: 1;
     fill-opacity: 1;
   }
+
+  &_dark &__input[readonly] {
+    color: #a0789c;
+  }
 }
 
 .search-input {

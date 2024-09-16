@@ -8,7 +8,6 @@ import { QueryParams } from './models/query-params';
 })
 export class QueryParamsService {
   private readonly _queryParams$ = new BehaviorSubject<QueryParams>({});
-
   public readonly queryParams$ = this._queryParams$.asObservable();
 
   public testMode: boolean = false;

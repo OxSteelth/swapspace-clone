@@ -11,7 +11,9 @@ import {
   switchMap,
   timeout,
   BehaviorSubject,
-  of
+  of,
+  forkJoin,
+  withLatestFrom
 } from 'rxjs';
 import { SwapFormService } from '@shared/services/swap-form.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
@@ -29,13 +31,18 @@ export class SwapFormComponent implements OnInit {
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly isLoading$ = this._isLoading$.asObservable();
 
+  private readonly _currencyList$ = new BehaviorSubject<Currency[]>([]);
+  public readonly currencyList$ = this._currencyList$.asObservable();
+
+  private readonly _filteredList$ = new BehaviorSubject<Currency[]>([]);
+  public readonly filteredList$ = this._filteredList$.asObservable();
+  
   public swapDirection = '';
   public label: string = '';
   public searching = signal(false);
   public selectedAction = 'all';
   public selectedMode = 'exchange';
-  public currencyList$: Observable<Currency[]>;
-  public resultList$: Observable<Currency[]>;
+  
   public inputControl: FormControl;
   public estimatedExchangeAmount$: Observable<Exchange[]>;
 
@@ -68,54 +75,33 @@ export class SwapFormComponent implements OnInit {
   ) {
     this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
     this.allCurrencyList$ = this.currencyService.allCurrencyList$;
-    this.currencyList$ = this.currencyService.allCurrencyList$;
-    this.resultList$ = this.currencyService.allCurrencyList$;
+    this.allCurrencyList$.subscribe(value => {
+      this._currencyList$.next(value)
+      this._filteredList$.next(value)
+    })
+
     this.inputControl = new FormControl('');
   }
 
   ngOnInit() {
-    // this.resultList$ = combineLatest([
-    //   this.currencyList$,
-    //   this.inputControl.valueChanges.pipe(
-    //     debounceTime(300),
-    //     distinctUntilChanged(),
-    //     startWith('') // Emit initial value to trigger filtering on load
-    //   )
-    // ]).pipe(
-    //   map(([currencyList, searchValue]) => {
-    //     console.log('Filtering with search value:', searchValue); // Debugging
-    //     return currencyList.filter(
-    //       item =>
-    //         item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
-    //         item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-    //         item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
-    //         item.networkName.toLowerCase().includes(searchValue.toLowerCase())
-    //     );
-    //   })
-    // );
-
-    // // Debugging subscription to resultList$
-    // this.resultList$.subscribe(result => {
-    //   console.log('Filtered results:', result);
-    // });
-
-    this.resultList$ = this.inputControl.valueChanges.pipe(
-      debounceTime(300), // Wait for the user to stop typing for 300ms
-      distinctUntilChanged(), // Only emit if the value has changed
-      switchMap(searchValue =>
-        this.currencyList$.pipe(
-          map(items =>
-            items.filter(
-              item =>
-                item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
-                item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-                item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
-                item.networkName.toLowerCase().includes(searchValue.toLowerCase())
-            )
-          )
-        )
+    combineLatest([
+      this.currencyList$,
+      this.inputControl.valueChanges.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        startWith('')
       )
-    );
+    ]).pipe(
+      map(([currencyList, searchValue]) => {
+        return currencyList.filter(
+          item =>
+            item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
+            item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+            item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
+            item.networkName.toLowerCase().includes(searchValue.toLowerCase())
+        );
+      })
+    ).subscribe(value => this._filteredList$.next(value));
 
     this.estimatedExchangeAmount$ = this.swapFormService.inputControl.valueChanges.pipe(
       debounceTime(300),
@@ -156,7 +142,7 @@ export class SwapFormComponent implements OnInit {
     });
   }
 
-  scrollToIndex(index: number) {
+  public scrollToIndex(index: number): void {
     if (this.viewport) {
       this.viewport.scrollToIndex(index, 'smooth'); // Scrolls to the specified index
     }
@@ -234,9 +220,9 @@ export class SwapFormComponent implements OnInit {
     this.inputControl.setValue('');
 
     if (tabIndex === 0) {
-      this.currencyList$ = this.allCurrencyList$;
+      this.allCurrencyList$.subscribe(value => this._currencyList$.next(value));
     } else if (tabIndex === 1) {
-      this.currencyList$ = this.popularCurrencyList$;
+      this.popularCurrencyList$.subscribe(value => this._currencyList$.next(value));
     }
   }
 
@@ -244,6 +230,9 @@ export class SwapFormComponent implements OnInit {
     this.selectedMode = tabIndex === 0 ? 'exchange' : 'buysell';
 
     if (tabIndex === 0) {
+      // this.swapFormService.inputControl.patchValue({
+      //   from
+      // })
       // this.currencyList$ = this.allCurrencyList$;
     } else if (tabIndex === 1) {
       // this.currencyList$ = this.popularCurrencyList$;

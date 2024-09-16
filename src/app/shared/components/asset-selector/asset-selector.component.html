@@ -1,4 +1,6 @@
-<ng-container *ngLet="{ popular: popularCurrencyList$ | async, all: allCurrencyList$ | async } as currencyList">
+<ng-container
+  *ngLet="{ popular: popularCurrencyList$ | async, all: allCurrencyList$ | async } as currencyList"
+>
   <div class="pair-input pair-input_dark pair__input">
     <ng-container *ngIf="!searching()">
       <label

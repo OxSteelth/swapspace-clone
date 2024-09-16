@@ -64,8 +64,6 @@ export class AssetSelectorComponent implements OnChanges {
   ) {
     this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
     this.allCurrencyList$ = this.currencyService.allCurrencyList$;
-
-    console.log(this.asset);
   }
 
   ngOnChanges(changes: SimpleChanges) {

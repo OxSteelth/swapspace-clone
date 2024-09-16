@@ -91,7 +91,6 @@ export class SwapFormQueryService {
       .pipe(first(tuiIsPresent))
       .pipe(
         switchMap(tokens => {
-          console.log('tokens:', tokens);
           const queryParams = this.queryParamsService.queryParams;
           const protectedParams = this.getProtectedSwapParams(queryParams);
 
@@ -158,7 +157,7 @@ export class SwapFormQueryService {
     return this.searchTokenBySymbol(tokens, token, chain);
   }
 
-  private searchTokenBySymbol(tokens: Currency[], symbol: string, chain: string): Observable<Currency | null> {console.log(symbol, chain)
+  private searchTokenBySymbol(tokens: Currency[], symbol: string, chain: string): Observable<Currency | null> {
     const similarTokens = tokens.filter(
       token => token.code.toLowerCase() === symbol.toLowerCase() && token.network === chain
     );

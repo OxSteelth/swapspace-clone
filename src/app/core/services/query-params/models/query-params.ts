@@ -1,4 +1,3 @@
-
 interface AllQueryParams {
   from: string;
   to: string;
