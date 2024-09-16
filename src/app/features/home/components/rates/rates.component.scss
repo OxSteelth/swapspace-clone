@@ -53,6 +53,35 @@
       gap: 0.3rem;
     }
   }
+
+  &__wrapper {
+    background-color: #36293b;
+    border-radius: 1rem;
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+    padding: 1rem;
+    padding-top: 2rem;
+    margin-top: -1.5rem;
+  }
+
+  &__button-wrapper {
+    flex: 1;
+  }
+
+  &__button {
+    width: 100%;
+    text-transform: uppercase;
+  }
+
+  &__next {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(227, 87, 96, 0.5),
+      0 60px 150px rgba(227, 87, 96, 0.62);
+  }
 }
 
 .icon-trustpilot {

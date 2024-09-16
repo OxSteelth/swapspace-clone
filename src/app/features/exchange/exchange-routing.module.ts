@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'step1',
     loadChildren: () =>
       import('./exchange-list/exchange-list.module').then(
         (m) => m.ExchangeListModule

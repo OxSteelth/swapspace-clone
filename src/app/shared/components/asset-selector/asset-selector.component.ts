@@ -70,6 +70,7 @@ export class AssetSelectorComponent implements OnChanges {
     if (changes['isLoading']) {
       if (!this.spinner) return;
 
+      // this.swapFormService.outputControl.patchValue({ toAmount: null });
       this.spinner.nativeElement.style.display = changes['isLoading'].currentValue ? 'flex' : 'none';
     }
   }

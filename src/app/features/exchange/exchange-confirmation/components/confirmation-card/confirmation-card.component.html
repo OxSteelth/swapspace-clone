@@ -1,55 +1,58 @@
 <div class="c-title">
-    <h1>Enter the recipient address</h1>
+  <h1>Enter the recipient address</h1>
 </div>
 
 <form (submit)="onSubmit()" [formGroup]="exchangeConfirmation.form">
-    <div class="app-card c-echange-selector">
-        <div class="app-group">
-            <app-cyrrency-amount-selector [disabled]="exchangeConfirmation.confirmed()"
-                [currencyControl]="exchangeConfirmation.currencyToSendFormControl"
-                [control]="exchangeConfirmation.valueToSendFormControl"
-                [currencyList]="exchangeConfirmation.currencyList$ | async"></app-cyrrency-amount-selector>
-            <app-cyrrency-amount-selector [disabled]="exchangeConfirmation.confirmed()" [valueReadOnly]="true"
-                [currencyControl]="exchangeConfirmation.currencyToGetFormControl"
-                [control]="exchangeConfirmation.valueToGetFormControl"
-                [currencyList]="exchangeConfirmation.currencyList$ | async"></app-cyrrency-amount-selector>
-        </div>
-        <div class="c-exchange-rate">
-            <div class="c-exchange-rate__label">
-                Exchange rate:
-            </div>
-            <div>
-                1 {{ exchangeConfirmation.currencyToSendFormControl | appFormValue }} <span>
-                    &nbsp;
-                    =
-                    &nbsp;
-                </span> {{
-                exchangeConfirmation.exchangeRate$ | async
-                }} {{ exchangeConfirmation.currencyToGetFormControl | appFormValue }}
-            </div>
-        </div>
+  <div class="app-card c-echange-selector">
+    <div class="app-group">
+      <app-cyrrency-amount-selector
+        [disabled]="exchangeConfirmation.confirmed()"
+        [currencyControl]="exchangeConfirmation.currencyToSendFormControl"
+        [control]="exchangeConfirmation.valueToSendFormControl"
+        [currencyList]="exchangeConfirmation.currencyList$ | async"
+      ></app-cyrrency-amount-selector>
+      <app-cyrrency-amount-selector
+        [disabled]="exchangeConfirmation.confirmed()"
+        [valueReadOnly]="true"
+        [currencyControl]="exchangeConfirmation.currencyToGetFormControl"
+        [control]="exchangeConfirmation.valueToGetFormControl"
+        [currencyList]="exchangeConfirmation.currencyList$ | async"
+      ></app-cyrrency-amount-selector>
+    </div>
+    <div class="c-exchange-rate">
+      <div class="c-exchange-rate__label">Exchange rate:</div>
+      <div>
+        1 {{ exchangeConfirmation.currencyToSendFormControl | appFormValue }}
+        <span> &nbsp; = &nbsp; </span> {{ exchangeConfirmation.exchangeRate$ | async }}
+        {{ exchangeConfirmation.currencyToGetFormControl | appFormValue }}
+      </div>
+    </div>
+  </div>
+
+  <div class="app-card c-address-card" *ngIf="!exchangeConfirmation.confirmed()">
+    <label for="address" class="app-input-label">Provide the ETH address:</label>
+    <input
+      placeholder="Recipient address"
+      type="text"
+      formControlName="address"
+      class="app-input"
+      id="address"
+    />
+    <hr />
+    <div class="c-terms-of-use">
+      <tui-checkbox formControlName="acceptTerms" class="tui-space_right-3"></tui-checkbox>
+      <div>
+        I accept the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>
+        Next
+      </div>
     </div>
 
-    <div class="app-card c-address-card" *ngIf="!exchangeConfirmation.confirmed()">
-        <label for="address" class="app-input-label">Provide the ETH address:</label>
-        <input placeholder="Recipient address" type="text" formControlName="address" class="app-input" id="address">
-        <hr>
-        <div class="c-terms-of-use">
-            <tui-checkbox formControlName="acceptTerms" class="tui-space_right-3"></tui-checkbox>
-            <div>
-                I accept the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>
-                Next
-            </div>
-        </div>
+    <button type="submit" tuiButton [disabled]="exchangeConfirmation.form.invalid" class="c-btn">
+      Next
+    </button>
+  </div>
 
-        <button type="submit" tuiButton [disabled]="exchangeConfirmation.form.invalid" class="c-btn">
-            Next
-        </button>
-    </div>
-
-    <div class="app-card c-confirmation-card" *ngIf="exchangeConfirmation.confirmed()">
-        <p>
-            Await confirmation
-        </p>
-    </div>
+  <div class="app-card c-confirmation-card" *ngIf="exchangeConfirmation.confirmed()">
+    <p>Await confirmation</p>
+  </div>
 </form>

@@ -1,34 +1,10 @@
 <div class="c-title">
-    <h1>Select a amout to offer</h1>
+  <h1>Select a amout to offer</h1>
 </div>
-
-<div class="app-card c-exchange-box">
-    <div class="c-exchange-box__header">
-        <app-tabs [tabs]="[
-            'Exchange Crypto',
-            'Buy/Sell Crypto'
-        ]" [activeTabIndex]="selectedAction === 'exchange' ? 0 : 1"
-            (activeTabIndexChange)="selectDefaultCurrencies($event)"></app-tabs>
-    </div>
-
-    <div class="c-exchange-box__content">
-        <div class="c-exchange-box__content">
-            <form [formGroup]="exchangeListViewModel.form" (submit)="onSubmit()">
-                <div class="c-exchange-box__form-group">
-                    <label to="valueToSend">You send</label>
-                    <app-cyrrency-amount-selector [currencyControl]="exchangeListViewModel.currencyToSendFormControl"
-                        [control]="exchangeListViewModel.valueToSendFormControl"
-                        [currencyList]="exchangeListViewModel.currencyList$ | async"></app-cyrrency-amount-selector>
-                </div>
-
-                <div class="c-exchange-box__form-group">
-                    <label to="valueToSend">You get</label>
-                    <app-cyrrency-amount-selector [valueReadOnly]="true"
-                        [currencyControl]="exchangeListViewModel.currencyToGetFormControl"
-                        [control]="exchangeListViewModel.valueToGetFormControl"
-                        [currencyList]="exchangeListViewModel.currencyList$ | async"></app-cyrrency-amount-selector>
-                </div>
-            </form>
-        </div>
-    </div>
+<app-swap-form></app-swap-form>
+<div>
+  <div class="c-terms-of-use">
+    <tui-checkbox formControlName="acceptTerms" class="tui-space_right-3"></tui-checkbox>
+    <div>Fixed rate</div>
+  </div>
 </div>
