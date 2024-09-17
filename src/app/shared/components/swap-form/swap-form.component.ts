@@ -36,15 +36,14 @@ export class SwapFormComponent implements OnInit {
 
   private readonly _filteredList$ = new BehaviorSubject<Currency[]>([]);
   public readonly filteredList$ = this._filteredList$.asObservable();
-  
+
   public swapDirection = '';
   public label: string = '';
   public searching = signal(false);
   public selectedAction = 'all';
   public selectedMode = 'exchange';
-  
+
   public inputControl: FormControl;
-  public estimatedExchangeAmount$: Observable<Exchange[]>;
 
   @ViewChild(CdkVirtualScrollViewport) viewport!: CdkVirtualScrollViewport;
 
@@ -76,9 +75,9 @@ export class SwapFormComponent implements OnInit {
     this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
     this.allCurrencyList$ = this.currencyService.allCurrencyList$;
     this.allCurrencyList$.subscribe(value => {
-      this._currencyList$.next(value)
-      this._filteredList$.next(value)
-    })
+      this._currencyList$.next(value);
+      this._filteredList$.next(value);
+    });
 
     this.inputControl = new FormControl('');
   }
@@ -86,60 +85,60 @@ export class SwapFormComponent implements OnInit {
   ngOnInit() {
     combineLatest([
       this.currencyList$,
-      this.inputControl.valueChanges.pipe(
+      this.inputControl.valueChanges.pipe(debounceTime(300), distinctUntilChanged(), startWith(''))
+    ])
+      .pipe(
+        map(([currencyList, searchValue]) => {
+          return currencyList.filter(
+            item =>
+              item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
+              item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+              item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
+              item.networkName.toLowerCase().includes(searchValue.toLowerCase())
+          );
+        })
+      )
+      .subscribe(value => this._filteredList$.next(value));
+
+    this.swapFormService.inputControl.valueChanges
+      .pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        startWith('')
+        switchMap(value => {
+          this._isLoading$.next(true);
+          if (
+            value.fromBlockchain !== '' &&
+            value.toBlockchain !== '' &&
+            value.fromToken &&
+            value.toToken &&
+            value.fromAmount
+          ) {
+            return this.exchangeService.estimatedExchangeAmount(
+              value.fromToken.code,
+              value.fromBlockchain,
+              value.toBlockchain,
+              value.toToken.code,
+              Number(value.fromAmount)
+            );
+          } else {
+            return of([]);
+          }
+        })
       )
-    ]).pipe(
-      map(([currencyList, searchValue]) => {
-        return currencyList.filter(
-          item =>
-            item.code.toLowerCase().includes(searchValue.toLowerCase()) ||
-            item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-            item.network.toLowerCase().includes(searchValue.toLowerCase()) ||
-            item.networkName.toLowerCase().includes(searchValue.toLowerCase())
-        );
-      })
-    ).subscribe(value => this._filteredList$.next(value));
-
-    this.estimatedExchangeAmount$ = this.swapFormService.inputControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap(value => {
-        this._isLoading$.next(true);
-        if (
-          value.fromBlockchain !== '' &&
-          value.toBlockchain !== '' &&
-          value.fromToken &&
-          value.toToken &&
-          value.fromAmount
-        ) {
-          return this.exchangeService.estimatedExchangeAmount(
-            value.fromToken.code,
-            value.fromBlockchain,
-            value.toBlockchain,
-            value.toToken.code,
-            Number(value.fromAmount)
-          );
+      .subscribe((value: Exchange[]) => {
+        if (Array.isArray(value) && value.length > 0) {
+          this.exchangeService.updatedEstimatedExchange(value);
+          this.swapFormService.outputControl.patchValue({
+            toAmount: value[0].toAmount.toString()
+          });
         } else {
-          return of([]);
+          this.exchangeService.updatedEstimatedExchange([]);
+          this.swapFormService.outputControl.patchValue({
+            toAmount: '0'
+          });
         }
-      })
-    );
-
-    this.estimatedExchangeAmount$.subscribe(value => {
-      if (Array.isArray(value) && value.length > 0) {
-        this.swapFormService.outputControl.patchValue({
-          toAmount: value[0].toAmount.toString()
-        });
-      } else {
-        this.swapFormService.outputControl.patchValue({
-          toAmount: '0'
-        });
-      }
-      this._isLoading$.next(false);
-    });
+        this._isLoading$.next(false);
+      });
   }
 
   public scrollToIndex(index: number): void {

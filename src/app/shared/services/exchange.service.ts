@@ -1,5 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, delay, firstValueFrom, map, of, switchMap, take, timer } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  delay,
+  firstValueFrom,
+  map,
+  of,
+  switchMap,
+  take,
+  timer
+} from 'rxjs';
 import { AvailableExchange } from '../types';
 import { HttpService } from '@app/core/services/http/http.service';
 import { Exchange } from '../models/exchange';
@@ -27,7 +37,6 @@ const EXCHANGE_RATES: Record<string, Record<string, number>> = {
 })
 export class ExchangeService {
   private readonly _estimatedExchange$ = new BehaviorSubject<Exchange[]>([]);
-
   public readonly estimatedExchange$ = this._estimatedExchange$.asObservable();
 
   constructor(private readonly httpService: HttpService) {}
@@ -49,6 +58,10 @@ export class ExchangeService {
           return of([]);
         })
       );
+  }
+
+  updatedEstimatedExchange(value: Exchange[]) {
+    this._estimatedExchange$.next(value);
   }
 
   getAvailableExchanges() {

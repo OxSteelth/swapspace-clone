@@ -60,3 +60,19 @@
     }
   }
 }
+
+.rate-options {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  padding-inline: 0.5rem;
+  padding-block: 1.5rem;
+  gap: 1.5rem;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
+  }
+}

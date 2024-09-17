@@ -8,35 +8,44 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-available-exchange',
   templateUrl: './available-exchange.component.html',
-  styleUrls: ['./available-exchange.component.scss'],
+  styleUrls: ['./available-exchange.component.scss']
 })
 export class AvailableExchangeComponent {
   sortOptions = ['Sort by relevance', 'Sort by rate', 'Sort by ETA'];
 
-  constructor(
-    public exchangeListViewModel: ExchangeListViewModel,
-    private router: Router
-  ) {}
+  constructor(public exchangeListViewModel: ExchangeListViewModel, private router: Router) {}
 
   skeletonArray = new Array(3);
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.exchangeListViewModel.exchangeService.estimatedExchange$.subscribe(value =>
+      console.log(value)
+    );
+  }
 
   getCurrencyIcon(currency: string): string {
     return currencyIconMap[currency as keyof typeof currencyIconMap];
   }
 
-  onTabChange(event: any) {}
+  onTabChange(event: any) {
+    if(event === 0) {
+      this.exchangeListViewModel.sortBy('relevance')
+    } else if(event === 1) {
+      this.exchangeListViewModel.sortBy('rate')
+    } else {
+      this.exchangeListViewModel.sortBy('eta')
+    }
+  }
 
   exchangeCurrency(exchange: string) {
     console.log(this.exchangeListViewModel.valueToSendFormControl.value);
-    this.router.navigate(['/exchange/confirmation'], {
+    this.router.navigate(['/exchange/step2'], {
       queryParams: {
         from: this.exchangeListViewModel.currencyToGetFormControl.value,
         to: this.exchangeListViewModel.currencyToSendFormControl.value,
         amount: this.exchangeListViewModel.valueToSendFormControl.value,
-        exchange,
-      },
+        exchange
+      }
     });
   }
 }

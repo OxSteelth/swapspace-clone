@@ -15,6 +15,11 @@ export class ExchangeBoxComponent {
   isEstimatingExchange = signal(false);
   selectedAction = 'exchange';
 
+  public rateOptionsForm = new FormGroup({
+    fixedRate: new FormControl(true),
+    floatingRate: new FormControl(true)
+  });
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,

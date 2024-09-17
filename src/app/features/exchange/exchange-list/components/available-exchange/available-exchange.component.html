@@ -1,60 +1,73 @@
 <div class="c-container">
-    <div class="c-tabs">
-        <app-tabs [tabs]="sortOptions" (activeTabIndexChange)="onTabChange($event)"></app-tabs>
-    </div>
-    <ng-container *ngIf="exchangeListViewModel.availableExchanges$| async as allExchange; else loadingSkeleton">
-        <ul class="c-exchange-container">
-            <li *ngFor="let exchange of allExchange" class="c-exchange-container__item app-card" [ngClass]="{
-                    'trusted-partner': exchange.trustedPartner,
-                    'best-rate': false,
-                    'fastest': false
-                }">
-                <div class="c-exchange-container__content">
-                    <div class="c-exchange__name">
-                        <img [src]="exchange.exchangeIconSrc" class="c-exchange__icon">
-                        {{ exchange.exchangeName}}
-                    </div>
-                    <div>
-                        <span class="c-exchange__item-name">Rate</span> ~
-                        {{ exchange.rate }} {{exchangeListViewModel.currencyToGetFormControl | appFormValue}}
-                    </div>
-                    <div class="c-exchange__item-group">
-                        <div>
-                            <span class="c-exchange__item-name">Eta: </span>
-                            {{ exchange.eta.min }}-{{ exchange.eta.max }} min
-                        </div>
-                        <div class="c-exchange__item">
-                            <span class="c-exchange__item-name">KYC Risk: </span>
-                            <div class="c-exchange__item-risk">
-                                <tui-svg src="tuiIconDisc" class="c-status-disk" [ngClass]="{
-                                    'low': exchange.kycRisks === 'low',
-                                    'medium': exchange.kycRisks === 'medium',
-                                    'high': exchange.kycRisks === 'high'
-                                }"></tui-svg>
-                                {{ exchange.kycRisks }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="c-exchange-container__actions">
-                    <div class="c-chips">
-                        <div *ngIf="exchange.trustedPartner" class="app-chip app-chip__green">
-                            Trusted Partner
-                        </div>
-                        <div *ngIf="exchange.giveaway" class="app-chip app-chip__yellow-2">
-                            Giveaway
-                        </div>
-                    </div>
-                    <button class="app-button-outline" (click)="exchangeCurrency(exchange.id)">Exchange</button>
-                </div>
-            </li>
-        </ul>
-    </ng-container>
+  <div class="c-tabs">
+    <app-tabs [tabs]="sortOptions" (activeTabIndexChange)="onTabChange($event)"></app-tabs>
+  </div>
+  <ng-container
+    *ngIf="exchangeListViewModel.availableExchanges$ | async as allExchange; else loadingSkeleton"
+  >
+    <ul class="c-exchange-container">
+      <li
+        *ngFor="let exchange of allExchange"
+        class="c-exchange-container__item app-card"
+        [ngClass]="{
+          'trusted-partner': true,
+          'best-rate': false,
+          fastest: false
+        }"
+      >
+        <div class="c-exchange-container__content">
+          <div class="c-exchange__name">
+            <img
+              [src]="'assets/exchange-icons/' + exchange.partner + '.svg'"
+              class="c-exchange__icon"
+            />
+            {{ exchange.partner }}
+          </div>
+          <div>
+            <span class="c-exchange__item-name">Rate</span> ~ {{ exchange.toAmount }}
+            <span class="c-exchange__item-currency">{{ exchange.toCurrency }}</span>
+          </div>
+          <div class="c-exchange__item-group">
+            <div>
+              <span class="c-exchange__item-name">ETA: </span>
+              {{ exchange.duration.split('-')[0] }}-{{ exchange.duration.split('-')[1] }} min
+            </div>
+            <div class="c-exchange__item">
+              <span class="c-exchange__item-name">KYC Risk: </span>
+              <div class="c-exchange__item-risk">
+                <tui-svg
+                  src="tuiIconDisc"
+                  class="c-status-disk"
+                  [ngClass]="{
+                    low: true,
+                    medium: false,
+                    high: false
+                  }"
+                ></tui-svg>
+                Low
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="c-exchange-container__actions">
+          <div class="c-chips">
+            <div *ngIf="true" class="app-chip app-chip__green">Trusted Partner</div>
+            <div *ngIf="false" class="app-chip app-chip__yellow-2">Giveaway</div>
+          </div>
+          <button class="app-button-outline" (click)="exchangeCurrency(exchange.id)">
+            Exchange
+          </button>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
 </div>
 
 <ng-template #loadingSkeleton>
-    <ul class="c-exchange-container">
-        <li *ngFor="let exchange of skeletonArray" class="c-exchange-container__item app-card app-skeleton">
-        </li>
-    </ul>
+  <ul class="c-exchange-container">
+    <li
+      *ngFor="let exchange of skeletonArray"
+      class="c-exchange-container__item app-card app-skeleton"
+    ></li>
+  </ul>
 </ng-template>
