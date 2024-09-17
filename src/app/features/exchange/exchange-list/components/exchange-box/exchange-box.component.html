@@ -4,7 +4,14 @@
 <app-swap-form></app-swap-form>
 <div class="rate-options" [formGroup]="rateOptionsForm">
   <div class="rate-options__item">
-    <tui-checkbox formControlName="fixedRate" class="tui-space_right-3"> Fixed rate </tui-checkbox>
+    <tui-checkbox
+      formControlName="fixedRateControl"
+      class="tui-space_right-3"
+      [(ngModel)]="fixedRate"
+      (change)="filterAmounts()"
+    >
+      Fixed rate
+    </tui-checkbox>
     <svg
       data-v-48eb64e5=""
       width="10"
@@ -23,7 +30,12 @@
     <div>Fixed rate</div>
   </div>
   <div class="rate-options__item">
-    <tui-checkbox formControlName="floatingRate" class="tui-space_right-3"></tui-checkbox>
+    <tui-checkbox
+      formControlName="floatingRateControl"
+      class="tui-space_right-3"
+      [(ngModel)]="floatingRate"
+      (change)="filterAmounts()"
+    ></tui-checkbox>
     <svg
       data-v-68b0206a=""
       width="20"

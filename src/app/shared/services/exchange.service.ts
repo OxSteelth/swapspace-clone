@@ -39,6 +39,12 @@ export class ExchangeService {
   private readonly _estimatedExchange$ = new BehaviorSubject<Exchange[]>([]);
   public readonly estimatedExchange$ = this._estimatedExchange$.asObservable();
 
+  private readonly _fixedRate$ = new BehaviorSubject<boolean>(true);
+  public readonly fixedRate$ = this._fixedRate$.asObservable();
+
+  private readonly _floatingRate$ = new BehaviorSubject<boolean>(true);
+  public readonly floatingRate$ = this._floatingRate$.asObservable();
+
   constructor(private readonly httpService: HttpService) {}
 
   getEstimatedExchangeAmounts(
@@ -55,7 +61,7 @@ export class ExchangeService {
       .pipe(
         catchError(error => {
           console.error('Error fetching data', error);
-          return of([]);
+          return of([] as Exchange[]);
         })
       );
   }
@@ -143,6 +149,14 @@ export class ExchangeService {
     const exchanges = await firstValueFrom(this.getAvailableExchanges());
 
     return exchanges.find(exchange => exchange.id === exchangeId);
+  }
+
+  updateFixedRate(value: boolean) {
+    this._fixedRate$.next(value);
+  }
+
+  updateFloatingRate(value: boolean) {
+    this._floatingRate$.next(value);
   }
 
   confirmExchange(valueToSend: number, from: string, to: string, exchangeId: string) {

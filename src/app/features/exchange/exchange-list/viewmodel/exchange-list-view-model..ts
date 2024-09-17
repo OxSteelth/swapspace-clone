@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Exchange } from '@app/shared/models/exchange';
 import { SwapFormService } from '@app/shared/services/swap-form.service';
+import { compareObjects } from '@app/shared/utils/utils';
 import {
   BehaviorSubject,
+  combineLatest,
   debounceTime,
   distinctUntilChanged,
+  filter,
   map,
   Observable,
   of,
@@ -50,11 +53,23 @@ export class ExchangeListViewModel {
       this._availableExchanges$.next(value)
     );
 
-    this.swapFormService.inputControl.valueChanges
+    combineLatest([
+      this.swapFormService.inputControl.valueChanges,
+      this.exchangeService.fixedRate$,
+      this.exchangeService.floatingRate$
+    ])
       .pipe(
         debounceTime(300),
-        distinctUntilChanged(),
-        switchMap(value => {
+        distinctUntilChanged(
+          (
+            [prevInput, prevFixedRate, prevFloatingRate],
+            [currInput, currFixedRate, currFloatingRate]
+          ) =>
+            compareObjects(prevInput, currInput) &&
+            prevFixedRate === currFixedRate &&
+            prevFloatingRate === currFloatingRate
+        ),
+        switchMap(([value, fixedRate, floatingRate]) => {
           if (
             value.fromBlockchain !== '' &&
             value.toBlockchain !== '' &&
@@ -62,13 +77,17 @@ export class ExchangeListViewModel {
             value.toToken &&
             value.fromAmount
           ) {
-            return this.exchangeService.getEstimatedExchangeAmounts(
-              value.fromToken.code,
-              value.fromBlockchain,
-              value.toBlockchain,
-              value.toToken.code,
-              Number(value.fromAmount)
-            );
+            const res = this.exchangeService
+              .getEstimatedExchangeAmounts(
+                value.fromToken.code,
+                value.fromBlockchain,
+                value.toBlockchain,
+                value.toToken.code,
+                Number(value.fromAmount)
+              )
+              .pipe(map(val => val?.filter(v => v.fixed === fixedRate || v.fixed !== floatingRate)));
+
+            return res;
           } else {
             return of([]);
           }

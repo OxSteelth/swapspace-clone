@@ -14,10 +14,12 @@ export class ExchangeBoxComponent {
   sub!: Subscription;
   isEstimatingExchange = signal(false);
   selectedAction = 'exchange';
+  fixedRate = true;
+  floatingRate = true;
 
   public rateOptionsForm = new FormGroup({
-    fixedRate: new FormControl(true),
-    floatingRate: new FormControl(true)
+    fixedRateControl: new FormControl(true),
+    floatingRateControl: new FormControl(true)
   });
 
   constructor(
@@ -53,4 +55,9 @@ export class ExchangeBoxComponent {
   }
 
   onSubmit(): void {}
+
+  filterAmounts() {
+    this.exchangeListViewModel.exchangeService.updateFixedRate(this.fixedRate);
+    this.exchangeListViewModel.exchangeService.updateFloatingRate(this.floatingRate);
+  }
 }
