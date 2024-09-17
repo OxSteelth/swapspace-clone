@@ -113,7 +113,7 @@ export class SwapFormComponent implements OnInit {
             value.toToken &&
             value.fromAmount
           ) {
-            return this.exchangeService.estimatedExchangeAmount(
+            return this.exchangeService.getBestExchangeAmount(
               value.fromToken.code,
               value.fromBlockchain,
               value.toBlockchain,
@@ -121,18 +121,16 @@ export class SwapFormComponent implements OnInit {
               Number(value.fromAmount)
             );
           } else {
-            return of([]);
+            return of(null);
           }
         })
       )
-      .subscribe((value: Exchange[]) => {
-        if (Array.isArray(value) && value.length > 0) {
-          this.exchangeService.updatedEstimatedExchange(value);
+      .subscribe((value: Exchange) => {
+        if (value) {
           this.swapFormService.outputControl.patchValue({
-            toAmount: value[0].toAmount.toString()
+            toAmount: value.toAmount.toString()
           });
         } else {
-          this.exchangeService.updatedEstimatedExchange([]);
           this.swapFormService.outputControl.patchValue({
             toAmount: '0'
           });

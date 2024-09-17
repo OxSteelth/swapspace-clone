@@ -41,7 +41,7 @@ export class ExchangeService {
 
   constructor(private readonly httpService: HttpService) {}
 
-  estimatedExchangeAmount(
+  getEstimatedExchangeAmounts(
     fromCurrency: string,
     fromNetwork: string,
     toNetwork: string,
@@ -56,6 +56,25 @@ export class ExchangeService {
         catchError(error => {
           console.error('Error fetching data', error);
           return of([]);
+        })
+      );
+  }
+
+  getBestExchangeAmount(
+    fromCurrency: string,
+    fromNetwork: string,
+    toNetwork: string,
+    toCurrency: string,
+    fromAmount: number
+  ) {
+    return this.httpService
+      .get<Exchange>(
+        `amounts/best?fromCurrency=${fromCurrency}&fromNetwork=${fromNetwork}&toNetwork=${toNetwork}&toCurrency=${toCurrency}&amount=${fromAmount}`
+      )
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching data', error);
+          return of(null);
         })
       );
   }
