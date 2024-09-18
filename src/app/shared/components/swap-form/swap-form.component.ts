@@ -21,6 +21,7 @@ import { CurrencyService } from '../../services/currency.service';
 import { Currency } from '../../models/currency';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { Exchange } from '@app/shared/models/exchange';
+import { compareObjects } from '@app/shared/utils/utils';
 
 @Component({
   selector: 'app-swap-form',
@@ -100,11 +101,14 @@ export class SwapFormComponent implements OnInit {
       )
       .subscribe(value => this._filteredList$.next(value));
 
-    this.swapFormService.inputControl.valueChanges
+    combineLatest([this.swapFormService.inputControl.valueChanges, this.exchangeService.interval$])
       .pipe(
         debounceTime(300),
-        distinctUntilChanged(),
-        switchMap(value => {
+        distinctUntilChanged(
+          ([prevInput, prevInterval], [currInput, currInterval]) =>
+            compareObjects(prevInput, currInput) && prevInterval === currInterval
+        ),
+        switchMap(([value, num]) => {
           this._isLoading$.next(true);
           if (
             value.fromBlockchain !== '' &&

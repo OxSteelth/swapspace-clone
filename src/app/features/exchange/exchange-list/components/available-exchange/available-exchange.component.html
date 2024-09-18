@@ -1,5 +1,11 @@
 <div class="c-container">
-  <div class="c-tabs">
+  <div class="progress-wrapper" *ngIf="exchangeListViewModel.isLoading$ | async">
+    <div class="progress-text">Searching for the best offers...</div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
+  <div class="c-tabs" *ngIf="!(exchangeListViewModel.isLoading$ | async)">
     <app-tabs [tabs]="sortOptions" (activeTabIndexChange)="onTabChange($event)"></app-tabs>
   </div>
   <ng-container

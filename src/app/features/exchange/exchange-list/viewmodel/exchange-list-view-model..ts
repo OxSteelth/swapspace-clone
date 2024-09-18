@@ -9,6 +9,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
+  interval,
   map,
   Observable,
   of,
@@ -44,11 +45,17 @@ export class ExchangeListViewModel {
   private readonly _availableExchanges$ = new BehaviorSubject<Exchange[]>([]);
   public readonly availableExchanges$ = this._availableExchanges$.asObservable();
 
+
+
+  private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
+  public isLoading$ = this._isLoading$.asObservable();
+
   constructor(
     public currencyService: CurrencyService,
     public exchangeService: ExchangeService,
     public swapFormService: SwapFormService
   ) {
+
     this.exchangeService.estimatedExchange$.subscribe(value =>
       this._availableExchanges$.next(value)
     );
@@ -56,18 +63,20 @@ export class ExchangeListViewModel {
     combineLatest([
       this.swapFormService.inputControl.valueChanges,
       this.exchangeService.fixedRate$,
-      this.exchangeService.floatingRate$
+      this.exchangeService.floatingRate$,
+      this.exchangeService.interval$
     ])
       .pipe(
         debounceTime(300),
         distinctUntilChanged(
           (
-            [prevInput, prevFixedRate, prevFloatingRate],
-            [currInput, currFixedRate, currFloatingRate]
+            [prevInput, prevFixedRate, prevFloatingRate, prevInterval],
+            [currInput, currFixedRate, currFloatingRate, currInterval]
           ) =>
             compareObjects(prevInput, currInput) &&
             prevFixedRate === currFixedRate &&
-            prevFloatingRate === currFloatingRate
+            prevFloatingRate === currFloatingRate &&
+            prevInterval === currInterval
         ),
         switchMap(([value, fixedRate, floatingRate]) => {
           if (
@@ -77,6 +86,8 @@ export class ExchangeListViewModel {
             value.toToken &&
             value.fromAmount
           ) {
+            this._isLoading$.next(true);
+
             const res = this.exchangeService
               .getEstimatedExchangeAmounts(
                 value.fromToken.code,
@@ -85,7 +96,9 @@ export class ExchangeListViewModel {
                 value.toToken.code,
                 Number(value.fromAmount)
               )
-              .pipe(map(val => val?.filter(v => v.fixed === fixedRate || v.fixed !== floatingRate)));
+              .pipe(
+                map(val => val?.filter(v => v.fixed === fixedRate || v.fixed !== floatingRate))
+              );
 
             return res;
           } else {
@@ -99,6 +112,8 @@ export class ExchangeListViewModel {
         } else {
           this.exchangeService.updatedEstimatedExchange([]);
         }
+
+        this._isLoading$.next(false);
       });
   }
 

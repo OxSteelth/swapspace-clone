@@ -17,6 +17,55 @@
   }
 }
 
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-text {
+  height: 32px;
+  align-content: center;
+}
+
+.progress-bar {
+  width: 100%; /* Full width of the container */
+  height: 2px; /* Height of the progress bar */
+  background-color: #e0e0e0; /* Light gray background for the bar */
+  border-radius: 4px; /* Rounded corners for the bar */
+  overflow: hidden; /* Ensure progress doesn't overflow */
+}
+
+/* Actual progress indicator styling */
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(
+    to right,
+    #ed3734,
+    #f5ed0b
+  ); /* Gradient from blue to green to yellow */
+  background-size: 200% 100%; /* Allow gradient to shift */
+  animation: progressWidth 3s linear forwards, progressGradient 3s ease-in-out infinite; /* Animations */
+}
+
+@keyframes progressWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Animation for gradient color change */
+@keyframes progressGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
 .c-exchange-container {
   display: flex;
   width: 100%;

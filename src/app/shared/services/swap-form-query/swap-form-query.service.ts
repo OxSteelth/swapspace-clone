@@ -8,7 +8,11 @@ import { List } from 'immutable';
 import { compareAddresses, compareObjects, switchIif } from '@shared/utils/utils';
 import { CurrencyService } from '../currency.service';
 import { SwapFormService } from '../swap-form.service';
-import { defaultFormParameters, DefaultParametersFrom, DefaultParametersTo } from './constants/default-tokens-params';
+import {
+  defaultFormParameters,
+  DefaultParametersFrom,
+  DefaultParametersTo
+} from './constants/default-tokens-params';
 import { tuiIsPresent } from '@taiga-ui/cdk';
 import { Currency } from '@app/shared/models/currency';
 
@@ -97,7 +101,11 @@ export class SwapFormQueryService {
           const fromBlockchain = protectedParams.fromChain;
           const toBlockchain = protectedParams.toChain;
 
-          const findFromToken$ = this.getTokenBySymbol(tokens, protectedParams.from, fromBlockchain);
+          const findFromToken$ = this.getTokenBySymbol(
+            tokens,
+            protectedParams.from,
+            fromBlockchain
+          );
           const findToToken$ = this.getTokenBySymbol(tokens, protectedParams.to, toBlockchain);
 
           return forkJoin([findFromToken$, findToToken$]).pipe(
@@ -157,18 +165,23 @@ export class SwapFormQueryService {
     return this.searchTokenBySymbol(tokens, token, chain);
   }
 
-  private searchTokenBySymbol(tokens: Currency[], symbol: string, chain: string): Observable<Currency | null> {
+  private searchTokenBySymbol(
+    tokens: Currency[],
+    symbol: string,
+    chain: string
+  ): Observable<Currency | null> {
     const similarTokens = tokens.filter(
       token => token.code.toLowerCase() === symbol.toLowerCase() && token.network === chain
     );
-    console.log('similarTokens:', similarTokens);
 
     if (similarTokens.length === 0) {
       return this.currencyService.fetchCurrencyList().pipe(
         map(tokens => {
           if (tokens.length > 0) {
             const token =
-              tokens.length > 1 ? tokens.find(el => el.code.toLowerCase() === symbol.toLowerCase()) : tokens[0];
+              tokens.length > 1
+                ? tokens.find(el => el.code.toLowerCase() === symbol.toLowerCase())
+                : tokens[0];
             if (!token) {
               return null;
             }

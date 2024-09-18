@@ -15,7 +15,7 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   public get<T>(url: string, data?: {}, path?: string): Observable<T> {
-    if (!this.cache.has(url)) {
+    if (!this.cache.has(url) || url.includes('amounts')) {
       const response$ = this.http
         .get<T>((path || SERVER_REST_URL) + (url || ''), {
           params: data || {}

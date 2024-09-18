@@ -97,7 +97,10 @@ export class SwapFormService {
 
   public readonly outputValue$ = this._outputValue$.asObservable();
 
-  public readonly outputValueDistinct$ = this.outputValue$.pipe(distinctUntilChanged(), shareReplay(shareReplayConfig));
+  public readonly outputValueDistinct$ = this.outputValue$.pipe(
+    distinctUntilChanged(),
+    shareReplay(shareReplayConfig)
+  );
 
   public readonly toAmount$: Observable<string> = this.outputValue$.pipe(
     map(value => value.toAmount),
@@ -109,7 +112,11 @@ export class SwapFormService {
     this.inputValue$.pipe(
       map(form =>
         Boolean(
-          form.fromBlockchain && form.fromToken && form.toBlockchain && form.toToken && Number(form.fromAmount) > 0
+          form.fromBlockchain &&
+            form.fromToken &&
+            form.toBlockchain &&
+            form.toToken &&
+            Number(form.fromAmount) > 0
         )
       )
     ),
@@ -128,7 +135,6 @@ export class SwapFormService {
 
   private subscribeOnFormValueChange(): void {
     this.form.get('input').valueChanges.subscribe(inputValue => {
-      console.log('inputValue:', inputValue);
       this._inputValue$.next(inputValue);
     });
 

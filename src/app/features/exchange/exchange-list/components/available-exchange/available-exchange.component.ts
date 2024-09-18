@@ -17,28 +17,23 @@ export class AvailableExchangeComponent {
 
   skeletonArray = new Array(3);
 
-  ngOnInit() {
-    this.exchangeListViewModel.exchangeService.estimatedExchange$.subscribe(value =>
-      console.log(value)
-    );
-  }
+  ngOnInit() {}
 
   getCurrencyIcon(currency: string): string {
     return currencyIconMap[currency as keyof typeof currencyIconMap];
   }
 
   onTabChange(event: any) {
-    if(event === 0) {
-      this.exchangeListViewModel.sortBy('relevance')
-    } else if(event === 1) {
-      this.exchangeListViewModel.sortBy('rate')
+    if (event === 0) {
+      this.exchangeListViewModel.sortBy('relevance');
+    } else if (event === 1) {
+      this.exchangeListViewModel.sortBy('rate');
     } else {
-      this.exchangeListViewModel.sortBy('eta')
+      this.exchangeListViewModel.sortBy('eta');
     }
   }
 
   exchangeCurrency(exchange: string) {
-    console.log(this.exchangeListViewModel.valueToSendFormControl.value);
     this.router.navigate(['/exchange/step2'], {
       queryParams: {
         from: this.exchangeListViewModel.currencyToGetFormControl.value,
