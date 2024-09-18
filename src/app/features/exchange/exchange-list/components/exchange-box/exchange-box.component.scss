@@ -1,8 +1,19 @@
 :host {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
+
+  @media screen and (max-width: 992px) {
+    align-items: center;
+  }
 }
+
+::ng-deep {
+  .index-rates__widget {
+    margin-left: 1rem;
+  }
+}
+
 .c-title {
   padding-left: 1rem;
   margin-bottom: 1.5rem;
@@ -64,9 +75,8 @@
 .rate-options {
   display: flex;
   flex-direction: row;
-  align-self: flex-start;
-  padding-inline: 0.5rem;
-  padding-block: 1.5rem;
+  margin-left: 1rem;
+  margin-top: 1.5rem;
   gap: 1.5rem;
 
   &__item {
