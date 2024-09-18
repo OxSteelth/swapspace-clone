@@ -1,80 +1,81 @@
 <div class="app-card app-card__outlined c-card">
-    <div class="c-status__container">
-        <div class="c-status" [ngClass]="{
+  <div class="c-status__container">
+    <div
+      class="c-status"
+      [ngClass]="{
             active: exchangeConfirmationViewModel.confirmationStep() >= 0,
-        }">
-            <div class="c-status__icon">
-                <app-status-icon [status]="calculateStatus(0)"></app-status-icon>
-            </div>
-            Creating exchange
-        </div>
-        <div class="c-status" [ngClass]="{
+        }"
+    >
+      <div class="c-status__icon">
+        <app-status-icon [status]="calculateStatus(0)"></app-status-icon>
+      </div>
+      Creating exchange
+    </div>
+    <div
+      class="c-status"
+      [ngClass]="{
             active: exchangeConfirmationViewModel.confirmationStep() >= 1,
-        }">
-            <div class="c-status__icon">
-                <app-status-icon [status]="calculateStatus(1)"></app-status-icon>
-
-            </div>
-            Awaiting payment
-        </div>
-        <div class="c-status" [ngClass]="{
+        }"
+    >
+      <div class="c-status__icon">
+        <app-status-icon [status]="calculateStatus(1)"></app-status-icon>
+      </div>
+      Awaiting payment
+    </div>
+    <div
+      class="c-status"
+      [ngClass]="{
             active: exchangeConfirmationViewModel.confirmationStep() >= 2,
-        }">
-            <div class="c-status__icon">
-                <app-status-icon [status]="calculateStatus(2)"></app-status-icon>
-
-            </div>
-            Processing
-        </div>
+        }"
+    >
+      <div class="c-status__icon">
+        <app-status-icon [status]="calculateStatus(2)"></app-status-icon>
+      </div>
+      Processing
     </div>
+  </div>
 
-    <div class="app-card app-card__outlined" *ngIf="exchangeConfirmationViewModel.echangeInfo() as echangeInfo; else infoLoading">
-        <div>Exchange info</div>
-        <div class="c-exchange__info">
-            <div class="c-exchange__info-item">
-                <div class="c-item-name">
-                    Exchange partner:
-                </div>
-                <div class="c-item-value">
-                    <img [src]="echangeInfo.exchangeIconSrc" class="c-item-image">
-                    {{ echangeInfo.exchangeName }}
-                </div>
-            </div>
+  <div
+    class="app-card app-card__outlined"
+    *ngIf="exchangeConfirmationViewModel.echangeInfo() as echangeInfo; else infoLoading"
+  >
+    <div>Exchange info</div>
+    <div class="c-exchange__info">
+      <div class="c-exchange__info-item">
+        <div class="c-item-name">Exchange partner:</div>
+        <div class="c-item-value">
+          <img [src]="echangeInfo.exchangeIconSrc" class="c-item-image" />
+          {{ echangeInfo.exchangeName }}
         </div>
-        <div class="c-exchange__info">
-            <div class="c-exchange__info-item">
-                <div class="c-item-name">
-                    Rate ~
-                </div>
-                <div class="c-item-value">
-                    {{ echangeInfo.rate }}
-                </div>
-            </div>
-        </div>
-        <div class="c-exchange__info">
-            <div class="c-exchange__info-item">
-                <div class="c-item-name">
-                    ETA:
-                </div>
-                <div class="c-item-value">
-                    {{ echangeInfo.eta.min }} - {{ echangeInfo.eta.max }} min
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="c-exchange__info">
+      <div class="c-exchange__info-item">
+        <div class="c-item-name">Rate ~</div>
+        <div class="c-item-value">
+          {{ echangeInfo.rate }}
+        </div>
+      </div>
+    </div>
+    <div class="c-exchange__info">
+      <div class="c-exchange__info-item">
+        <div class="c-item-name">ETA:</div>
+        <div class="c-item-value">{{ echangeInfo.eta.min }} - {{ echangeInfo.eta.max }} min</div>
+      </div>
+    </div>
+  </div>
 
-    <ng-template #infoLoading>
-        <div class="c-info-loading app-skeleton"></div>
-    </ng-template>
+  <ng-template #infoLoading>
+    <div class="c-info-loading app-skeleton"></div>
+  </ng-template>
 
-    <p class="app-text-secondary app-text-small">
-        Please note that the exchange time depends on the speed of work of our partners and a total load of blockchain
-        networks.
-    </p>
+  <p class="app-text-secondary app-text-small">
+    Please note that the exchange time depends on the speed of work of our partners and a total load
+    of blockchain networks.
+  </p>
 
-    <p class="app-text-small">
-        If you have any questions, please contact our support team: <a href="">
-            support&#64;swapspace.co
-        </a>
-    </p>
+  <p class="app-text-small">
+    If you have any questions, please contact our support team:
+    <a href=""> support&#64;swapspace.co </a>
+  </p>
 </div>

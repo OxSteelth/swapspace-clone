@@ -19,7 +19,6 @@ import { Currency } from '@app/shared/models/currency';
 @Injectable()
 export class SwapFormQueryService {
   private readonly _initialLoading$ = new BehaviorSubject<boolean>(true);
-
   public readonly initialLoading$ = this._initialLoading$.asObservable();
 
   public get initialLoading(): boolean {

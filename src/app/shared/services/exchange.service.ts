@@ -40,8 +40,23 @@ export class ExchangeService {
   private readonly _estimatedExchange$ = new BehaviorSubject<Exchange[]>([]);
   public readonly estimatedExchange$ = this._estimatedExchange$.asObservable();
 
+  public get estimatedExchange(): Exchange[] {
+    return this._estimatedExchange$.getValue();
+  }
+
+  private readonly _selectedOffer$ = new BehaviorSubject<Exchange>(null);
+  public readonly selectedOffer$ = this._selectedOffer$.asObservable();
+
+  public get selectedOffer(): Exchange {
+    return this._selectedOffer$.getValue();
+  }
+
   private readonly _fixedRate$ = new BehaviorSubject<boolean>(true);
   public readonly fixedRate$ = this._fixedRate$.asObservable();
+
+  public get fixedRate(): boolean {
+    return this._fixedRate$.getValue();
+  }
 
   private readonly _floatingRate$ = new BehaviorSubject<boolean>(true);
   public readonly floatingRate$ = this._floatingRate$.asObservable();
@@ -168,6 +183,10 @@ export class ExchangeService {
     this._floatingRate$.next(value);
   }
 
+  updateSelectedOffer(offer: Exchange) {
+    this._selectedOffer$.next(offer);
+  }
+
   confirmExchange(valueToSend: number, from: string, to: string, exchangeId: string) {
     return Promise.resolve({
       confirmationId: '123'
@@ -185,6 +204,24 @@ export class ExchangeService {
             return 'payment received';
           default:
             return 'exchange completed';
+        }
+      })
+    );
+  }
+
+  sortExchanges(field: string) {
+    this._estimatedExchange$.next(
+      this.estimatedExchange.sort((a, b) => {
+        if (field === 'relevance') {
+          return b.toAmount - a.toAmount;
+        } else if (field === 'rate') {
+          return b.toAmount - a.toAmount;
+        } else if (field === 'eta') {
+          const aEta = a.duration.split('-').reduce((result, v) => Number(result) + Number(v), 0);
+          const bEta = b.duration.split('-').reduce((result, v) => Number(result) + Number(v), 0);
+          return aEta - bEta;
+        } else {
+          return 1;
         }
       })
     );

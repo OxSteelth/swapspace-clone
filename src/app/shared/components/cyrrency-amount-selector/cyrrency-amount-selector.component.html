@@ -1,28 +1,34 @@
 <div class="c-container">
   <ng-container *ngIf="!isSelectingCurrency()">
-    <input type="number" class="c-input c-input-ammount" [readonly]="valueReadOnly"
-      [formControl]="control" />
+    <input
+      type="number"
+      class="c-input c-input-ammount"
+      [readonly]="valueReadOnly"
+      [formControl]="control"
+    />
 
-    <ng-container *ngIf="currencyList else loadingCurrency">
+    <ng-container *ngIf="currencyList; else loadingCurrency">
       <div class="c-input-currency" (click)="toggleCurrencySelection()">
-        {{(currentCurrency$ | async)?.label}}
+        {{ (currentCurrency$ | async)?.label }}
         <tui-svg src="tuiIconChevronDown"></tui-svg>
       </div>
     </ng-container>
 
     <ng-template #loadingCurrency>
       <div class="c-input-currency">
-        <tui-loader style="min-height: 2rem; min-width: 2rem;">
-        </tui-loader>
+        <tui-loader style="min-height: 2rem; min-width: 2rem"> </tui-loader>
       </div>
     </ng-template>
-
   </ng-container>
 </div>
 
 <div class="c-selection-wrapper" #currencyInputWrapper>
-  <tui-hosted-dropdown [content]="dropdownContent" class="c-selection-wrapper__dropdown-wrapper"
-    (openChange)="toggleCurrencySelection($event)" [open]="isSelectingCurrency()">
+  <tui-hosted-dropdown
+    [content]="dropdownContent"
+    class="c-selection-wrapper__dropdown-wrapper"
+    (openChange)="toggleCurrencySelection($event)"
+    [open]="isSelectingCurrency()"
+  >
     <div class="c-selection-container">
       <input class="c-input c-input-search" [formControl]="searchControl" />
       <div class="c-selection-container__icon">
@@ -32,16 +38,15 @@
   </tui-hosted-dropdown>
 </div>
 
-
 <ng-template #dropdownContent let-close="close">
   <div class="c-dropdown" tabindex="-1">
     <div class="c-dropdown__item" *ngFor="let currency of currencyList">
       <a class="c-nav-bar__item__button" (click)="selectCurrency(currency)" tabindex="-1">
         <img src="/assets/currency-icons/usd.svg" class="c-currency-icon" />
         <div class="c-dropdown__currency">
-          {{currency.label}}
+          {{ currency.label }}
           <div class="c-dropdown__currency-full-name">
-            {{currency.fullLabel}}
+            {{ currency.fullLabel }}
           </div>
         </div>
       </a>

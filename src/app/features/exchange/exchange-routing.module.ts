@@ -10,7 +10,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'confirmation',
+    path: 'step2',
     loadChildren: () =>
       import('./exchange-confirmation/exchange-confirmation.module').then(
         (m) => m.ExchangeConfirmationModule

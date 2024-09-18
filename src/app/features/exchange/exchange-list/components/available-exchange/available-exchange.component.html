@@ -1,16 +1,14 @@
 <div class="c-container">
-  <div class="progress-wrapper" *ngIf="exchangeListViewModel.isLoading$ | async">
+  <div class="progress-wrapper" *ngIf="isLoading$ | async">
     <div class="progress-text">Searching for the best offers...</div>
     <div class="progress-bar">
       <div class="progress"></div>
     </div>
   </div>
-  <div class="c-tabs" *ngIf="!(exchangeListViewModel.isLoading$ | async)">
+  <div class="c-tabs" *ngIf="!(isLoading$ | async)">
     <app-tabs [tabs]="sortOptions" (activeTabIndexChange)="onTabChange($event)"></app-tabs>
   </div>
-  <ng-container
-    *ngIf="exchangeListViewModel.availableExchanges$ | async as allExchange; else loadingSkeleton"
-  >
+  <ng-container *ngIf="availableExchanges$ | async as allExchange; else loadingSkeleton">
     <ul class="c-exchange-container">
       <li
         *ngFor="let exchange of allExchange"
@@ -95,9 +93,7 @@
             <div *ngIf="true" class="app-chip app-chip__green">Trusted Partner</div>
             <div *ngIf="false" class="app-chip app-chip__yellow-2">Giveaway</div>
           </div>
-          <button class="app-button-outline" (click)="exchangeCurrency(exchange.id)">
-            Exchange
-          </button>
+          <button class="app-button-outline" (click)="exchangeCurrency(exchange)">Exchange</button>
         </div>
       </li>
     </ul>
