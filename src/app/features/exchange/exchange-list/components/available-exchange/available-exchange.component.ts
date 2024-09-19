@@ -1,5 +1,5 @@
 import { ExchangeService } from 'src/app/shared/services/exchange.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { currencyIconMap } from 'src/app/shared/currency-icon-map';
 import { Router } from '@angular/router';
 import { Exchange } from '@app/shared/models/exchange';
@@ -9,8 +9,10 @@ import {
   combineLatest,
   debounceTime,
   distinctUntilChanged,
+  interval,
   map,
   of,
+  startWith,
   switchMap
 } from 'rxjs';
 import { compareObjects } from '@app/shared/utils/utils';
@@ -20,7 +22,7 @@ import { compareObjects } from '@app/shared/utils/utils';
   templateUrl: './available-exchange.component.html',
   styleUrls: ['./available-exchange.component.scss']
 })
-export class AvailableExchangeComponent {
+export class AvailableExchangeComponent implements OnInit {
   sortOptions = ['Sort by relevance', 'Sort by rate', 'Sort by ETA'];
   skeletonArray = new Array(3);
 
@@ -30,34 +32,37 @@ export class AvailableExchangeComponent {
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public isLoading$ = this._isLoading$.asObservable();
 
+  public interval$ = interval(30000).pipe(startWith(0));
+
   constructor(
     public swapFormService: SwapFormService,
     public exchangeService: ExchangeService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.exchangeService.estimatedExchange$.subscribe(value =>
       this._availableExchanges$.next(value)
     );
 
+    combineLatest([this.exchangeService.fixedRate$, this.exchangeService.floatingRate$])
+      .pipe(distinctUntilChanged())
+      .subscribe(([fixedRate, floatingRate]) => {
+        const value = this.exchangeService.estimatedExchange.filter(
+          v => v.fixed === fixedRate || v.fixed !== floatingRate
+        );
+        this.exchangeService.updatedEstimatedExchange(value);
+      });
+
     combineLatest([
-      this.swapFormService.inputControl.valueChanges,
-      this.exchangeService.fixedRate$,
-      this.exchangeService.floatingRate$,
-      this.exchangeService.interval$
+      this.swapFormService.inputControl.valueChanges.pipe(
+        debounceTime(300),
+        distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
+      ),
+      this.interval$
     ])
       .pipe(
-        debounceTime(300),
-        distinctUntilChanged(
-          (
-            [prevInput, prevFixedRate, prevFloatingRate, prevInterval],
-            [currInput, currFixedRate, currFloatingRate, currInterval]
-          ) =>
-            compareObjects(prevInput, currInput) &&
-            prevFixedRate === currFixedRate &&
-            prevFloatingRate === currFloatingRate &&
-            prevInterval === currInterval
-        ),
-        switchMap(([value, fixedRate, floatingRate]) => {
+        switchMap(([value]) => {
           if (
             value.fromBlockchain !== '' &&
             value.toBlockchain !== '' &&
@@ -67,17 +72,13 @@ export class AvailableExchangeComponent {
           ) {
             this._isLoading$.next(true);
 
-            const res = this.exchangeService
-              .getEstimatedExchangeAmounts(
-                value.fromToken.code,
-                value.fromBlockchain,
-                value.toBlockchain,
-                value.toToken.code,
-                Number(value.fromAmount)
-              )
-              .pipe(
-                map(val => val?.filter(v => v.fixed === fixedRate || v.fixed !== floatingRate))
-              );
+            const res = this.exchangeService.getEstimatedExchangeAmounts(
+              value.fromToken.code,
+              value.fromBlockchain,
+              value.toBlockchain,
+              value.toToken.code,
+              Number(value.fromAmount)
+            );
 
             return res;
           } else {
@@ -95,8 +96,6 @@ export class AvailableExchangeComponent {
         this._isLoading$.next(false);
       });
   }
-
-  ngOnInit() {}
 
   getCurrencyIcon(currency: string): string {
     return currencyIconMap[currency as keyof typeof currencyIconMap];

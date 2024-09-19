@@ -32,39 +32,12 @@ export class SwapFormQueryService {
   ) {}
 
   public subscribeOnSwapForm(): void {
-    console.log("subscribeOnSwapForm")
     this.swapFormService.inputValue$
       .pipe(
         distinctUntilChanged((prev, curr) => compareObjects(prev, curr)),
         pairwise()
       )
-      .subscribe(([prev, curr]) => {
-        let isEqual = compareObjects(prev, curr);
-        if (prev?.fromToken && curr?.fromToken) {
-          const pricelessPrev = {
-            ...prev,
-            fromToken: {
-              ...(prev.fromToken as Currency)
-            },
-            toToken: {
-              ...prev.toToken
-            }
-          };
-
-          const pricelessCurr = {
-            ...curr,
-            fromToken: {
-              ...(curr.fromToken as Currency)
-            },
-            toToken: {
-              ...curr.toToken
-            }
-          };
-
-          isEqual = compareObjects(pricelessPrev, pricelessCurr);
-        }
-
-        console.log(curr)
+      .subscribe(([, curr]) => {
         if (curr.fromToken && curr.toToken) {
           this.queryParamsService.patchQueryParams({
             ...(curr.fromToken?.code && { from: curr.fromToken.code }),

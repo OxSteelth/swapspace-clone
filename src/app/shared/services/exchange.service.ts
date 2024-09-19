@@ -61,15 +61,7 @@ export class ExchangeService {
   private readonly _floatingRate$ = new BehaviorSubject<boolean>(true);
   public readonly floatingRate$ = this._floatingRate$.asObservable();
 
-  private readonly _interval$ = new BehaviorSubject<number>(0);
-  public readonly interval$ = this._interval$.asObservable();
-
-  constructor(private readonly httpService: HttpService) {
-    //refresh estimated exchanges every 30 secs
-    interval(30000)
-      .pipe()
-      .subscribe(value => this._interval$.next(value));
-  }
+  constructor(private readonly httpService: HttpService) {}
 
   getEstimatedExchangeAmounts(
     fromCurrency: string,

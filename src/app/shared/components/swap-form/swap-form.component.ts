@@ -13,7 +13,8 @@ import {
   BehaviorSubject,
   of,
   forkJoin,
-  withLatestFrom
+  withLatestFrom,
+  interval
 } from 'rxjs';
 import { SwapFormService } from '@shared/services/swap-form.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
@@ -66,6 +67,7 @@ export class SwapFormComponent implements OnInit {
   public readonly popularCurrencyList$: Observable<Currency[]>;
 
   public readonly allCurrencyList$: Observable<Currency[]>;
+  public interval$ = interval(30000).pipe(startWith(0));
 
   constructor(
     private readonly swapFormService: SwapFormService,
@@ -86,7 +88,7 @@ export class SwapFormComponent implements OnInit {
   ngOnInit() {
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
-    
+
     combineLatest([
       this.currencyList$,
       this.inputControl.valueChanges.pipe(debounceTime(300), distinctUntilChanged(), startWith(''))
@@ -104,14 +106,15 @@ export class SwapFormComponent implements OnInit {
       )
       .subscribe(value => this._filteredList$.next(value));
 
-    combineLatest([this.swapFormService.inputControl.valueChanges, this.exchangeService.interval$])
-      .pipe(
+    combineLatest([
+      this.swapFormService.inputControl.valueChanges.pipe(
         debounceTime(300),
-        distinctUntilChanged(
-          ([prevInput, prevInterval], [currInput, currInterval]) =>
-            compareObjects(prevInput, currInput) && prevInterval === currInterval
-        ),
-        switchMap(([value, num]) => {
+        distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
+      ),
+      this.interval$
+    ])
+      .pipe(
+        switchMap(([value]) => {
           this._isLoading$.next(true);
           if (
             value.fromBlockchain !== '' &&
