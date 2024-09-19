@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, Observable, of, shareReplay } from 'rxjs';
-import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { CurrencyOption } from '../types';
 import { Currency } from '../models/currency';
@@ -37,104 +37,36 @@ export class CurrencyService {
     }
   ]).pipe(delay(200), shareReplay(1));
 
-  private readonly _tokenList$ = new BehaviorSubject<Currency[]>([]);
-
-  public readonly tokenList$ = this._tokenList$.asObservable();
-
   private readonly _popularCurrencyList$ = new BehaviorSubject<Currency[]>([]);
-
   public readonly popularCurrencyList$ = this._popularCurrencyList$.asObservable();
 
   private readonly _allCurrencyList$ = new BehaviorSubject<Currency[]>([]);
-
   public readonly allCurrencyList$ = this._allCurrencyList$.asObservable();
 
-  get tokenList(): Currency[] {
-    return this._tokenList$.getValue();
+  public get allCurrencyList() {
+    return this._allCurrencyList$.getValue();
   }
 
-  constructor(private readonly httpService: HttpService, private readonly destroy$: TuiDestroyService) {
-    this.popularCurrencyList$ = this._popularCurrencyList$.pipe(
-      switchMap(data => {
-        if (data) {
-          return of(data);
-        } else {
-          return this.httpService.get<Currency[]>(`currencies`).pipe(
-            catchError(error => {
-              console.error('Error fetching data', error);
-              return of([]);
-            })
-          );
-        }
-      })
-    );
-
-    this.allCurrencyList$ = this._allCurrencyList$.pipe(
-      switchMap(data => {
-        if (data) {
-          return of(data);
-        } else {
-          return this.httpService.get<Currency[]>(`currencies`).pipe(
-            catchError(error => {
-              console.error('Error fetching data', error);
-              return of([]);
-            })
-          );
-        }
-      })
-    );
-
-    // this.getCurrencyList();
+  public get popularCurrencyList() {
+    return this._popularCurrencyList$.getValue();
   }
 
-  public fetchCurrencyList(): Observable<Currency[]> {
-    return this.httpService.get<Currency[]>(`currencies`).pipe(
-      shareReplay(1),
-      map(tokens => {
-        const popularCurrencyList: Currency[] = [];
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly destroy$: TuiDestroyService
+  ) {}
 
-        for (const currency of tokens) {
-          if (currency.popular) {
-            popularCurrencyList.push(currency);
-          }
-        }
-
-        this._tokenList$.next(tokens);
-        this._popularCurrencyList$.next(popularCurrencyList);
-        this._allCurrencyList$.next(tokens);
-
-        return tokens.length ? tokens : [];
-      })
-    );
-  }
-
-  public getCurrencyList(): void {
-    this.fetchCurrencyList().subscribe((currencyList: Currency[]) => {
-      const popularCurrencyList: Currency[] = [];
-      const allCurrencyList: Currency[] = [];
-
-      for (const currency of currencyList) {
-        if (currency.popular) {
-          popularCurrencyList.push(currency);
-        } else {
-          allCurrencyList.push(currency);
-        }
-      }
-
-      this._tokenList$.next(currencyList);
-      this._popularCurrencyList$.next(popularCurrencyList);
-      this._allCurrencyList$.next(allCurrencyList);
-    });
-  }
-
-  public fetchQueryTokens(query: string, blockchain: string): Observable<Currency[]> {
-    return of(
-      this.tokenList.filter(
-        token =>
-          token.network === blockchain &&
-          (token.name.toLowerCase().includes(query.toLowerCase()) ||
-            token.code.toLowerCase().includes(query.toLowerCase()))
-      )
-    );
+  public fetchCurrencyList(): void {
+    if (!this._allCurrencyList$.getValue().length) {
+      this.httpService
+        .get<Currency[]>(`currencies`)
+        .pipe(
+          tap(tokens => {
+            this._allCurrencyList$.next(tokens);
+            this._popularCurrencyList$.next(tokens.filter(token => token.popular));
+          })
+        )
+        .subscribe();
+    }
   }
 }

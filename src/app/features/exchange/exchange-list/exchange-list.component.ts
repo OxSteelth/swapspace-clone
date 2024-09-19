@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Exchange } from '@app/shared/models/exchange';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { ExchangeService } from '@app/shared/services/exchange.service';
+import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
 import { SwapFormService } from '@app/shared/services/swap-form.service';
 import { compareObjects } from '@app/shared/utils/utils';
 import {
@@ -20,4 +21,15 @@ import {
   styleUrls: ['./exchange-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExchangeListComponent {}
+export class ExchangeListComponent implements OnInit {
+  constructor(
+    private swapFormQueryService: SwapFormQueryService,
+    private currencyService: CurrencyService
+  ) {}
+
+  ngOnInit(): void {
+    this.swapFormQueryService.subscribeOnSwapForm();
+    this.swapFormQueryService.subscribeOnQueryParams();
+    this.currencyService.fetchCurrencyList();
+  }
+}

@@ -84,6 +84,9 @@ export class SwapFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.swapFormQueryService.subscribeOnSwapForm();
+    this.swapFormQueryService.subscribeOnQueryParams();
+    
     combineLatest([
       this.currencyList$,
       this.inputControl.valueChanges.pipe(debounceTime(300), distinctUntilChanged(), startWith(''))

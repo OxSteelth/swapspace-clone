@@ -29,12 +29,10 @@ export class SwapFormQueryService {
     private readonly queryParamsService: QueryParamsService,
     private readonly swapFormService: SwapFormService,
     private readonly currencyService: CurrencyService
-  ) {
-    this.subscribeOnSwapForm();
-    this.subscribeOnQueryParams();
-  }
+  ) {}
 
-  private subscribeOnSwapForm(): void {
+  public subscribeOnSwapForm(): void {
+    console.log("subscribeOnSwapForm")
     this.swapFormService.inputValue$
       .pipe(
         distinctUntilChanged((prev, curr) => compareObjects(prev, curr)),
@@ -66,6 +64,7 @@ export class SwapFormQueryService {
           isEqual = compareObjects(pricelessPrev, pricelessCurr);
         }
 
+        console.log(curr)
         if (curr.fromToken && curr.toToken) {
           this.queryParamsService.patchQueryParams({
             ...(curr.fromToken?.code && { from: curr.fromToken.code }),
@@ -84,22 +83,21 @@ export class SwapFormQueryService {
             ...{ toChain: 'eth' },
             ...{ amount: '0.1' }
           });
-          this.subscribeOnQueryParams();
         }
       });
   }
 
-  private subscribeOnQueryParams(): void {
-    this.currencyService.tokenList$
-      .pipe(first(tuiIsPresent))
+  public subscribeOnQueryParams(): void {
+    this.currencyService.allCurrencyList$.subscribe(v => console.log(v))
+    this.currencyService.allCurrencyList$
       .pipe(
         switchMap(tokens => {
+          console.log({tokens})
           const queryParams = this.queryParamsService.queryParams;
           const protectedParams = this.getProtectedSwapParams(queryParams);
 
           const fromBlockchain = protectedParams.fromChain;
           const toBlockchain = protectedParams.toChain;
-
           const findFromToken$ = this.getTokenBySymbol(
             tokens,
             protectedParams.from,
@@ -174,7 +172,7 @@ export class SwapFormQueryService {
     );
 
     if (similarTokens.length === 0) {
-      return this.currencyService.fetchCurrencyList().pipe(
+      return this.currencyService.allCurrencyList$.pipe(
         map(tokens => {
           if (tokens.length > 0) {
             const token =

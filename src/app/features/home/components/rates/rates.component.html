@@ -7,23 +7,21 @@
   <div class="index-rates__wrapper">
     <app-swap-form></app-swap-form>
     <div class="index-rates__button-container">
-      <a href="/exchange/step1" class="index-rates__button-wrapper">
-        <button
-          type="button"
-          class="button index-rates__button index-rates__next button_m button_primary button_none button_"
-          id="widget_upper"
-        >
-          View offers
-        </button>
-      </a>
-      <a href="/exchange/step2" class="index-rates__button-wrapper">
-        <button
-          type="button"
-          class="button index-rates__button button_m button_outline button_none button_"
-        >
-          Quick exchange
-        </button>
-      </a>
+      <button
+        type="button"
+        class="button index-rates__button index-rates__next button_m button_primary button_none button_"
+        id="widget_upper"
+        (click)="navigateToUrl('/exchange/step1')"
+      >
+        View offers
+      </button>
+      <button
+        type="button"
+        class="button index-rates__button button_m button_outline button_none button_"
+        (click)="navigateToUrl('/exchange/step2')"
+      >
+        Quick exchange
+      </button>
     </div>
   </div>
 

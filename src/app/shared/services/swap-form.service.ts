@@ -8,7 +8,7 @@ import {
   SwapFormOutputControl
 } from '../models/swap-form-controls';
 import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
-import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { compareTokens } from '../utils/utils';
 import { shareReplayConfig } from '../constants/common/share-replay-config';
 import { observableToBehaviorSubject } from '../utils/observableToBehaviorSubject';
@@ -39,7 +39,6 @@ export class SwapFormService {
   }
 
   private readonly _inputValue$ = new BehaviorSubject<SwapFormInput>(this.inputValue);
-
   public readonly inputValue$ = this._inputValue$.asObservable();
 
   public readonly inputValueDistinct$ = this.inputValue$.pipe(
