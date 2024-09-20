@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiButtonModule,
   TuiDataListModule,
@@ -71,7 +71,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     TuiLetModule,
     TuiLoaderModule,
     TuiCheckboxModule,
-    ScrollingModule 
+    ScrollingModule,
+    FormsModule
   ],
   providers: [AsyncPipe, TuiDestroyService, SwapFormService, SwapFormQueryService],
   exports: [

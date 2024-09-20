@@ -64,9 +64,9 @@ export class SwapFormComponent implements OnInit {
 
   public readonly toAmount$ = this.swapFormService.toAmount$;
 
-  public readonly popularCurrencyList$: Observable<Currency[]>;
+  public popularCurrencyList$: Observable<Currency[]>;
 
-  public readonly allCurrencyList$: Observable<Currency[]>;
+  public allCurrencyList$: Observable<Currency[]>;
   public interval$ = interval(30000).pipe(startWith(0));
 
   constructor(
@@ -75,19 +75,19 @@ export class SwapFormComponent implements OnInit {
     private readonly currencyService: CurrencyService,
     public exchangeService: ExchangeService
   ) {
-    this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
-    this.allCurrencyList$ = this.currencyService.allCurrencyList$;
-    this.allCurrencyList$.subscribe(value => {
-      this._currencyList$.next(value);
-      this._filteredList$.next(value);
-    });
-
     this.inputControl = new FormControl('');
   }
 
   ngOnInit() {
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
+
+    this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
+    this.allCurrencyList$ = this.currencyService.allCurrencyList$;
+    this.allCurrencyList$.subscribe(value => {
+      this._currencyList$.next(value);
+      this._filteredList$.next(value);
+    });
 
     combineLatest([
       this.currencyList$,

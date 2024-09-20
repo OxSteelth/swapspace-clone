@@ -38,6 +38,7 @@ export class SwapFormQueryService {
         pairwise()
       )
       .subscribe(([, curr]) => {
+        console.log({curr})
         if (curr.fromToken && curr.toToken) {
           this.queryParamsService.patchQueryParams({
             ...(curr.fromToken?.code && { from: curr.fromToken.code }),
@@ -61,11 +62,9 @@ export class SwapFormQueryService {
   }
 
   public subscribeOnQueryParams(): void {
-    this.currencyService.allCurrencyList$.subscribe(v => console.log(v))
     this.currencyService.allCurrencyList$
       .pipe(
         switchMap(tokens => {
-          console.log({tokens})
           const queryParams = this.queryParamsService.queryParams;
           const protectedParams = this.getProtectedSwapParams(queryParams);
 
@@ -77,7 +76,6 @@ export class SwapFormQueryService {
             fromBlockchain
           );
           const findToToken$ = this.getTokenBySymbol(tokens, protectedParams.to, toBlockchain);
-
           return forkJoin([findFromToken$, findToToken$]).pipe(
             map(([fromToken, toToken]) => ({
               fromToken,

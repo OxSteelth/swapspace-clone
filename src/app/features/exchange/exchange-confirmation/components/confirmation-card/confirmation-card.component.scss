@@ -2,6 +2,10 @@
   display: block;
 }
 
+.c-title {
+  margin-bottom: 2rem;
+}
+
 .c-echange-selector {
   padding: 2rem;
 }
@@ -34,4 +38,34 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 2rem;
+}
+
+.collapse {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.collapse-show {
+  height: auto;
+}
+
+.refundTxt {
+  color: #a0789c;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+
+  :hover {
+    color: #e35760;
+  }
+}
+
+.app-input-refund,
+.app-input-email {
+  margin-bottom: 20px;
 }

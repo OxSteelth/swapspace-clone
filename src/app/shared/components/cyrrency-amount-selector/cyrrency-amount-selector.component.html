@@ -1,55 +1,176 @@
-<div class="c-container">
-  <ng-container *ngIf="!isSelectingCurrency()">
-    <input
-      type="number"
-      class="c-input c-input-ammount"
-      [readonly]="valueReadOnly"
-      [formControl]="control"
-    />
+<ng-container>
+  <div class="pair-input pair-input_dark pair__input">
+    <ng-container>
+      <label
+        for="amountInput"
+        class="form-input pair-input__input form-input_max-width form-input_disabled form-input_dark form-input_rounded form-input_lg"
+      >
+        <span class="form-input__label">
+          <span class="form-input__label_text">{{ label }}</span>
+        </span>
+        <span class="form-input__wrapper">
+          <input
+            id="amountInput"
+            spellcheck="false"
+            max="Infinity"
+            min="0"
+            maxlength="Infinity"
+            placeholder=""
+            step="any"
+            trim="true"
+            type="string"
+            autocomplete="off"
+            class="form-input__input form-input__input_rounded form-input__input_transparent-border"
+            [formControl]="amount"
+            [readonly]="inputMode === 'output'"
+            (input)="handleAmountChange($event)"
+          />
+        </span>
+      </label>
 
-    <ng-container *ngIf="currencyList; else loadingCurrency">
-      <div class="c-input-currency" (click)="toggleCurrencySelection()">
-        {{ (currentCurrency$ | async)?.label }}
-        <tui-svg src="tuiIconChevronDown"></tui-svg>
+      <div
+        class="spinner pair-input__spinner"
+        style="--border: 3px solid #e35760; --width: 24px; --height: 24px; display: none"
+        #spinner
+      ></div>
+
+      <div class="pair-search">
+        <span class="pair-search__label">
+          <span class="pair-search__label_text">
+            {{ label2 }}
+            <span class="pair-search__button-dark-label-network">
+              {{ asset?.network }}
+            </span>
+          </span>
+        </span>
+        <button
+          type="button"
+          class="pair-search__button-dark pair-search__button-no-bottom-round"
+          (click)="tokenClicked(label2)"
+        >
+          <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
+            <img
+              loading="lazy"
+              [src]="
+                'https://storage.swapspace.co' +
+                (asset?.icon && asset?.icon !== '' ? asset?.icon : '/static/default-coin-icon.svg')
+              "
+              [alt]="asset?.icon"
+              class="coin-icon__image coin-icon__white"
+            />
+          </div>
+
+          <span class="pair-search__button-dark-label d-f-c">
+            <span> {{ asset?.code }} </span>
+          </span>
+          <div
+            class="spinner pair-search__spinner"
+            style="--border: 3px solid #e35760; --width: 24px; --height: 24px; display: none"
+          ></div>
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fa"
+            data-icon="caret-down"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 320 512"
+            class="svg-inline--fa fa-caret-down fa-w-10 pair-search__button-dark-caret"
+          >
+            <path
+              fill="currentColor"
+              d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+              class=""
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div class="search-token" #assetSearchWrapper>
+        <div class="search-token__input_wrapper">
+          <input
+            id="searchInput"
+            spellcheck="false"
+            max="Infinity"
+            min="-Infinity"
+            maxlength="Infinity"
+            placeholder="Search"
+            step="any"
+            trim="true"
+            type="text"
+            autocomplete="off"
+            lang="en"
+            inputmode="text"
+            class="search-token__input"
+            [formControl]="searchInputControl"
+          />
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="magnifying-glass"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            class="search-token__icon"
+          >
+            <path
+              fill="currentColor"
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              class=""
+            ></path>
+          </svg>
+        </div>
+        <div class="tokens-list">
+          <cdk-virtual-scroll-viewport
+            itemSize="10"
+            class="example-viewport"
+            (scrolledIndexChange)="onScroll()"
+          >
+            <div *cdkVirtualFor="let group of groupedTokens$ | async" class="tokens-list__tokens">
+              <div class="group-name">
+                {{ group.group }}
+              </div>
+              <div
+                *ngFor="let token of group.tokens"
+                class="tokens-list__tokens_token"
+                (click)="selectToken(token.token)"
+              >
+                <div class="tokens-list__tokens__icon">
+                  <div class="coin-icon coin-icon__sm coin-icon__bg_">
+                    <img
+                      loading="lazy"
+                      [src]="
+                        'https://storage.swapspace.co' +
+                        (token.token.icon !== ''
+                          ? token.token.icon
+                          : '/static/default-coin-icon.svg')
+                      "
+                      [alt]="token.token.icon"
+                      class="coin-icon__image coin-icon__white"
+                    />
+                  </div>
+                </div>
+                <div class="d-f-c">
+                  <div class="d-f-r tokens-list__tokens__ticker-dark">
+                    <div class="tokens-list__tokens__code tokens-list__tokens__code-dark">
+                      {{ token.token.code }}
+                    </div>
+                    <div class="tokens-list__tokens__name tokens-list__tokens__name-dark">
+                      {{ token.token.name }}
+                    </div>
+                  </div>
+                  <div class="tokens-list__tokens__network">
+                    <span class="tokens-list__tokens__network_code">{{
+                      token.token.networkName
+                    }}</span>
+                    ({{ token.token.network }})
+                  </div>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
       </div>
     </ng-container>
-
-    <ng-template #loadingCurrency>
-      <div class="c-input-currency">
-        <tui-loader style="min-height: 2rem; min-width: 2rem"> </tui-loader>
-      </div>
-    </ng-template>
-  </ng-container>
-</div>
-
-<div class="c-selection-wrapper" #currencyInputWrapper>
-  <tui-hosted-dropdown
-    [content]="dropdownContent"
-    class="c-selection-wrapper__dropdown-wrapper"
-    (openChange)="toggleCurrencySelection($event)"
-    [open]="isSelectingCurrency()"
-  >
-    <div class="c-selection-container">
-      <input class="c-input c-input-search" [formControl]="searchControl" />
-      <div class="c-selection-container__icon">
-        <tui-svg src="tuiIconSearch" style="color: var(--tui-primary)"></tui-svg>
-      </div>
-    </div>
-  </tui-hosted-dropdown>
-</div>
-
-<ng-template #dropdownContent let-close="close">
-  <div class="c-dropdown" tabindex="-1">
-    <div class="c-dropdown__item" *ngFor="let currency of currencyList">
-      <a class="c-nav-bar__item__button" (click)="selectCurrency(currency)" tabindex="-1">
-        <img src="/assets/currency-icons/usd.svg" class="c-currency-icon" />
-        <div class="c-dropdown__currency">
-          {{ currency.label }}
-          <div class="c-dropdown__currency-full-name">
-            {{ currency.fullLabel }}
-          </div>
-        </div>
-      </a>
-    </div>
   </div>
-</ng-template>
+</ng-container>

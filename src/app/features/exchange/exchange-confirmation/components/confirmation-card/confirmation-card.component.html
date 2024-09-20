@@ -5,19 +5,25 @@
 <form (submit)="onSubmit()" [formGroup]="exchangeConfirmation.form">
   <div class="app-card c-echange-selector">
     <div class="app-group">
-      <app-cyrrency-amount-selector
-        [disabled]="exchangeConfirmation.confirmed()"
-        [currencyControl]="exchangeConfirmation.currencyToSendFormControl"
-        [control]="exchangeConfirmation.valueToSendFormControl"
-        [currencyList]="exchangeConfirmation.currencyList$ | async"
-      ></app-cyrrency-amount-selector>
-      <app-cyrrency-amount-selector
-        [disabled]="exchangeConfirmation.confirmed()"
-        [valueReadOnly]="true"
-        [currencyControl]="exchangeConfirmation.currencyToGetFormControl"
-        [control]="exchangeConfirmation.valueToGetFormControl"
-        [currencyList]="exchangeConfirmation.currencyList$ | async"
-      ></app-cyrrency-amount-selector>
+      <ng-container *ngLet="fromAsset$ | async as fromAsset">
+        <app-cyrrency-amount-selector
+          label="You send"
+          label2="From"
+          [asset]="fromAsset"
+          [amountValue]="fromAmount$ | async"
+          (amountUpdated)="updateInputValue($event)"
+        ></app-cyrrency-amount-selector>
+      </ng-container>
+      <ng-container *ngLet="{ toAsset: toAsset$ | async } as input">
+        <app-cyrrency-amount-selector
+          label="You get"
+          label2="To"
+          [asset]="input.toAsset"
+          [amountValue]="toAmount$ | async"
+          (amountUpdated)="updateInputValue($event)"
+          inputMode="output"
+        ></app-cyrrency-amount-selector>
+      </ng-container>
     </div>
     <div class="c-exchange-rate">
       <div class="c-exchange-rate__label">Exchange rate:</div>
@@ -39,6 +45,52 @@
       id="address"
     />
     <hr />
+    <div>
+      <!-- Toggle Button -->
+      <div class="refundTxt" (click)="isCollapsed = !isCollapsed">
+        <span>Refund address and notifications</span>
+        <div #arrow>
+          <svg
+            data-v-0028010f=""
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fa"
+            data-icon="chevron-up"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            class="svg-inline--fa fa-chevron-up fa-w-16 arrow-up"
+          >
+            <path
+              data-v-0028010f=""
+              fill="currentColor"
+              d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+              class=""
+            ></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Collapsible Content -->
+      <div [ngClass]="{ collapse: isCollapsed, 'collapse-show': !isCollapsed }">
+        <label for="refund" class="app-input-label">Provide the BTC refund address:</label>
+        <input
+          placeholder="Refund address"
+          type="text"
+          formControlName="address"
+          class="app-input app-input-refund"
+          id="address"
+        />
+        <label for="email" class="app-input-label">Provide your e-mail address: </label>
+        <input
+          placeholder="swapspace@mail.com"
+          type="text"
+          formControlName="address"
+          class="app-input app-input-email"
+          id="address"
+        />
+      </div>
+    </div>
     <div class="c-terms-of-use">
       <tui-checkbox formControlName="acceptTerms" class="tui-space_right-3"></tui-checkbox>
       <div>

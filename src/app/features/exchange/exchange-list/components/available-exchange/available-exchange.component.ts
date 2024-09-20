@@ -115,14 +115,15 @@ export class AvailableExchangeComponent implements OnInit {
     this.exchangeService.updateSelectedOffer(exchange);
     this.router.navigate(['/exchange/step2'], {
       queryParams: {
-        fromCurrency: this.swapFormService.inputValue.fromToken.code,
-        fromNetwork: this.swapFormService.inputValue.fromBlockchain,
-        toCurrency: this.swapFormService.inputValue.toToken.code,
-        toNetwork: this.swapFormService.inputValue.toBlockchain,
+        from: this.swapFormService.inputValue.fromToken.code,
+        fromChain: this.swapFormService.inputValue.fromBlockchain,
+        to: this.swapFormService.inputValue.toToken.code,
+        toChain: this.swapFormService.inputValue.toBlockchain,
         amount: this.swapFormService.inputValue.fromAmount,
         partner: this.exchangeService.selectedOffer.partner,
         fixed: this.exchangeService.fixedRate
-      }
+      },
+      queryParamsHandling: 'merge'
     });
   }
 }

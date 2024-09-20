@@ -1,14 +1,13 @@
 :host {
   display: flex;
   justify-content: center;
-
-  flex: 1;
+  // flex: 1;
 }
 
 .c-card {
   width: 100%;
   max-width: 450px;
-  margin-top: 6rem;
+  margin-top: 5rem;
 }
 
 .c-status__container {
