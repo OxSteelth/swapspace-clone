@@ -56,6 +56,9 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
 
   @Input() public inputMode: 'input' | 'output' | 'combined';
 
+  @Input() tokenControl = new FormControl<string | null>(null);
+  @Input() amountControl = new FormControl<number | null>(null);
+  
   @Input({ required: true }) label!: string;
 
   @Input() label2: string;

@@ -2,7 +2,7 @@
   <h1>Enter the recipient address</h1>
 </div>
 
-<form (submit)="onSubmit()" [formGroup]="exchangeConfirmation.form">
+<form (submit)="onSubmit()" [formGroup]="form">
   <div class="app-card c-echange-selector">
     <div class="app-group">
       <ng-container *ngLet="fromAsset$ | async as fromAsset">
@@ -28,14 +28,14 @@
     <div class="c-exchange-rate">
       <div class="c-exchange-rate__label">Exchange rate:</div>
       <div>
-        1 {{ exchangeConfirmation.currencyToSendFormControl | appFormValue }}
-        <span> &nbsp; = &nbsp; </span> {{ exchangeConfirmation.exchangeRate$ | async }}
-        {{ exchangeConfirmation.currencyToGetFormControl | appFormValue }}
+        1 {{ this.fromTokenFormControl | appFormValue }} <span> &nbsp; = &nbsp; </span>
+        {{ this.exchangeRate$ | async }}
+        {{ this.toTokenFormControl | appFormValue }}
       </div>
     </div>
   </div>
 
-  <div class="app-card c-address-card" *ngIf="!exchangeConfirmation.confirmed()">
+  <div class="app-card c-address-card" *ngIf="!this.confirmed()">
     <label for="address" class="app-input-label">Provide the ETH address:</label>
     <input
       placeholder="Recipient address"
@@ -77,17 +77,17 @@
         <input
           placeholder="Refund address"
           type="text"
-          formControlName="address"
+          formControlName="refundAddress"
           class="app-input app-input-refund"
-          id="address"
+          id="refundAddress"
         />
         <label for="email" class="app-input-label">Provide your e-mail address: </label>
         <input
           placeholder="swapspace@mail.com"
-          type="text"
-          formControlName="address"
+          type="email"
+          formControlName="email"
           class="app-input app-input-email"
-          id="address"
+          id="email"
         />
       </div>
     </div>
@@ -99,12 +99,10 @@
       </div>
     </div>
 
-    <button type="submit" tuiButton [disabled]="exchangeConfirmation.form.invalid" class="c-btn">
-      Next
-    </button>
+    <button type="submit" tuiButton [disabled]="this.form.invalid" class="c-btn">Next</button>
   </div>
 
-  <div class="app-card c-confirmation-card" *ngIf="exchangeConfirmation.confirmed()">
+  <div class="app-card c-confirmation-card" *ngIf="this.confirmed()">
     <p>Await confirmation</p>
   </div>
 </form>
