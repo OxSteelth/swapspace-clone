@@ -22,7 +22,7 @@
             autocomplete="off"
             class="form-input__input form-input__input_rounded form-input__input_transparent-border"
             [formControl]="amount"
-            [readonly]="inputMode === 'output'"
+            [readonly]="inputMode === 'output' || isDisabled()"
             (input)="handleAmountChange($event)"
           />
         </span>
@@ -47,6 +47,7 @@
           type="button"
           class="pair-search__button-dark pair-search__button-no-bottom-round"
           (click)="tokenClicked(label2)"
+          [disabled]="isDisabled()"
         >
           <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
             <img
@@ -76,6 +77,7 @@
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 320 512"
             class="svg-inline--fa fa-caret-down fa-w-10 pair-search__button-dark-caret"
+            [hidden]="isDisabled()"
           >
             <path
               fill="currentColor"

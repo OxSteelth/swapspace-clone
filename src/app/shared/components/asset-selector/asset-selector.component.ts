@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   signal,
   SimpleChanges,
@@ -23,7 +24,7 @@ import { SwapFormService } from '@app/shared/services/swap-form.service';
   styleUrls: ['./asset-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AssetSelectorComponent implements OnChanges {
+export class AssetSelectorComponent implements OnChanges, OnInit {
   public readonly amount = new FormControl<string>('');
 
   @Input() public inputMode: 'input' | 'output' | 'combined';
@@ -71,9 +72,13 @@ export class AssetSelectorComponent implements OnChanges {
       if (!this.spinner) return;
 
       // this.swapFormService.outputControl.patchValue({ toAmount: null });
-      this.spinner.nativeElement.style.display = changes['isLoading'].currentValue ? 'flex' : 'none';
+      this.spinner.nativeElement.style.display = changes['isLoading'].currentValue
+        ? 'flex'
+        : 'none';
     }
   }
+
+  ngOnInit(): void {}
 
   public tokenClicked(label: string): void {
     this.tokenClickedEvent.emit(label);
@@ -95,7 +100,9 @@ export class AssetSelectorComponent implements OnChanges {
 
   public handleAmountChange(event: any): void {
     if (this.inputMode !== 'output') {
-      this.amount.setValue(event.target.value.replace(/[^0-9.]/g, ''), { emitViewToModelChange: false });
+      this.amount.setValue(event.target.value.replace(/[^0-9.]/g, ''), {
+        emitViewToModelChange: false
+      });
       this.amountUpdated.emit(event.target.value);
     }
   }

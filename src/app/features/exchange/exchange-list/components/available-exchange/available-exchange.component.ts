@@ -16,6 +16,7 @@ import {
   switchMap
 } from 'rxjs';
 import { compareObjects } from '@app/shared/utils/utils';
+import { StoreService } from '@app/shared/services/store/store.service';
 
 @Component({
   selector: 'app-available-exchange',
@@ -32,13 +33,14 @@ export class AvailableExchangeComponent implements OnInit {
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public isLoading$ = this._isLoading$.asObservable();
 
-  public interval$ = interval(30000).pipe(startWith(0));
-
   constructor(
     public swapFormService: SwapFormService,
     public exchangeService: ExchangeService,
+    private storeService: StoreService,
     private router: Router
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     this.exchangeService.estimatedExchange$.subscribe(value =>
@@ -59,7 +61,7 @@ export class AvailableExchangeComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
       ),
-      this.interval$
+      this.exchangeService.interval$
     ])
       .pipe(
         switchMap(([value]) => {
@@ -113,6 +115,8 @@ export class AvailableExchangeComponent implements OnInit {
 
   exchangeCurrency(exchange: Exchange) {
     this.exchangeService.updateSelectedOffer(exchange);
+    this.storeService.setItem('SELECTED_OFFER', exchange);
+
     this.router.navigate(['/exchange/step2'], {
       queryParams: {
         from: this.swapFormService.inputValue.fromToken.code,

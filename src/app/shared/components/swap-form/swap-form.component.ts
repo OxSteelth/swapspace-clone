@@ -67,7 +67,6 @@ export class SwapFormComponent implements OnInit {
   public popularCurrencyList$: Observable<Currency[]>;
 
   public allCurrencyList$: Observable<Currency[]>;
-  public interval$ = interval(30000).pipe(startWith(0));
 
   constructor(
     private readonly swapFormService: SwapFormService,
@@ -79,6 +78,14 @@ export class SwapFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.exchangeService.status$.subscribe(v => {
+      if(v === 'CONFIRM') {
+        this.exchangeService.startInterval();
+      } else if(v === 'INSERT') {
+        this.exchangeService.stopInterval();
+      }
+    })
+
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
 
@@ -111,7 +118,7 @@ export class SwapFormComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
       ),
-      this.interval$
+      this.exchangeService.interval$
     ])
       .pipe(
         switchMap(([value]) => {

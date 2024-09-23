@@ -58,7 +58,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
 
   @Input() tokenControl = new FormControl<string | null>(null);
   @Input() amountControl = new FormControl<number | null>(null);
-  
+
   @Input({ required: true }) label!: string;
 
   @Input() label2: string;
@@ -126,7 +126,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   itemsPerPage = 10;
   currentPage = 0;
 
-  public interval$ = interval(30000).pipe(startWith(0));
+  public isDisabled = signal(false);
 
   constructor(
     private readonly currencyService: CurrencyService,
@@ -200,7 +200,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
         debounceTime(300),
         distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
       ),
-      this.interval$
+      this.exchangeService.interval$
     ])
       .pipe(
         switchMap(([value]) => {
@@ -239,6 +239,12 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
       });
 
     this.loadMoreData();
+
+    this.swapFormService.inputControl.statusChanges.subscribe(_status => {
+      if (_status === 'DISABLED') {
+        this.isDisabled.set(true);
+      }
+    });
   }
 
   initializeData(): void {

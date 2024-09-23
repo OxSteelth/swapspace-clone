@@ -141,4 +141,9 @@ export class SwapFormService {
       this._outputValue$.next(outputValue);
     });
   }
+
+  public disableInput(): void {
+    this.form.controls.input.disable();
+    this.form.controls.output.disable();
+  }
 }

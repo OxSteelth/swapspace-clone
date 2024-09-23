@@ -60,14 +60,14 @@ export class ExchangeConfirmationViewModel {
       throw new Error('Invalid form values');
     }
 
-    const { confirmationId } = await this.exchangeService.confirmExchange(
-      valueToSend,
-      currencyToSend,
-      currencyToGet,
-      id
-    );
+    // const { confirmationId } = await this.exchangeService.confirmExchange(
+    //   valueToSend,
+    //   currencyToSend,
+    //   currencyToGet,
+    //   id
+    // );
 
-    this.watchConfirmation(confirmationId);
+    // this.watchConfirmation(confirmationId);
   }
 
   watchConfirmation(confirmationId: string) {

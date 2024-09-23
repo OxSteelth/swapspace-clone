@@ -26,7 +26,7 @@ export class HttpService {
             console.error('Error fetching data:', error);
             // Remove the cached entry on error
             this.cache.delete(url);
-            
+
             return of(null); // Handle error gracefully
           })
         );

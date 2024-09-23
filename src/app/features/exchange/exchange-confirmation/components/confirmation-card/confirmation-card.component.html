@@ -40,7 +40,7 @@
     <input
       placeholder="Recipient address"
       type="text"
-      formControlName="address"
+      formControlName="recipientAddress"
       class="app-input"
       id="address"
     />
@@ -51,7 +51,6 @@
         <span>Refund address and notifications</span>
         <div #arrow>
           <svg
-            data-v-0028010f=""
             aria-hidden="true"
             focusable="false"
             data-prefix="fa"
@@ -62,7 +61,6 @@
             class="svg-inline--fa fa-chevron-up fa-w-16 arrow-up"
           >
             <path
-              data-v-0028010f=""
               fill="currentColor"
               d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
               class=""
@@ -102,7 +100,205 @@
     <button type="submit" tuiButton [disabled]="this.form.invalid" class="c-btn">Next</button>
   </div>
 
-  <div class="app-card c-confirmation-card" *ngIf="this.confirmed()">
-    <p>Await confirmation</p>
+  <div class="panel step3-panel mt-3" id="step3-panel" *ngIf="this.confirmed()">
+    <div class="step3-panel__container">
+      <div class="w-100">
+        <div class="step3-panel__container_title">
+          <div class="field d-f mb-3" id="step3-panel-deposit-address">
+            <div class="d-f d-f-c">
+              <span class="field__label field__label_standard"
+                >Send 0.1 BTC to the deposit address:</span
+              >
+              <div class="field__wrapper">
+                <p class="field__value field__value_lead">
+                  <span class="field__value_link field__value_link_white">{{
+                    depositAddress$ | async
+                  }}</span>
+                  <button
+                    type="button"
+                    class="button field__button button_lg button_transparent button_uppercase button_"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="clone"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      class="field__small-button svg-inline--fa fa-clone fa-w-16 field__small-button_light-violet"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"
+                        class=""
+                      ></path>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="button field__button button_lg button_transparent button_uppercase button_"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="qrcode"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      class="field__small-button svg-inline--fa fa-qrcode fa-w-14 field__small-button_light-violet"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M0 80C0 53.5 21.5 32 48 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM64 96v64h64V96H64zM0 336c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V336zm64 16v64h64V352H64zM304 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H304c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48zm80 64H320v64h64V96zM256 304c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s7.2-16 16-16s16 7.2 16 16v96c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s-7.2-16-16-16s-16 7.2-16 16v64c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V304zM368 480a16 16 0 1 1 0-32 16 16 0 1 1 0 32zm64 0a16 16 0 1 1 0-32 16 16 0 1 1 0 32z"
+                        class=""
+                      ></path>
+                    </svg>
+                  </button>
+                  <!---->
+                </p>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <div class="step3-panel__dropdown-wallet-container">
+          <div class="dropdown step3-panel__dropdownWithLinks">
+            <button class="dropdown__toggle dropdown__toggle-bottom">
+              Got questions?
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fa"
+                data-icon="caret-down"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                class="dropdown__caret svg-inline--fa fa-caret-down fa-w-10 dropdown__caret_collapse"
+              >
+                <path
+                  fill="currentColor"
+                  d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+                  class=""
+                ></path>
+              </svg>
+            </button>
+            <ul class="dropdown__menu">
+              <li>
+                <a href="https://swapspace.co/blog/understanding-web3-wallets" target="_blank">
+                  Wallets
+                </a>
+              </li>
+              <li>
+                <a href="/faq" target="_blank"> FAQ </a>
+              </li>
+              <li>
+                <a href="/how-it-works" target="_blank"> How it works? </a>
+              </li>
+            </ul>
+          </div>
+          <div class="step3-panel-wallet" id="step3-panel-wallet">
+            <button
+              type="button"
+              class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
+            >
+              Connect Wallet
+              <!---->
+            </button>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-f-c step3-panel__collapse">
+      <div class="step-panel-info">
+        <div class="row step-panel-info__row">
+          <div class="column col-12 col-md-12">
+            <div class="field d-f">
+              <div class="d-f d-f-c">
+                <span class="field__label field__label_light-violet">Recipient address:</span>
+                <div class="field__wrapper">
+                  <p class="field__value field__value_small">
+                    <span class="field__value_link field__value_link_light-violet">{{
+                      recipientAddress$ | async
+                    }}</span>
+                    <button
+                      type="button"
+                      class="button field__button button_lg button_transparent button_uppercase button_"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="clone"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-clone fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"
+                          class=""
+                        ></path>
+                      </svg>
+                    </button>
+                    <!---->
+                    <a
+                      href="https://blockchair.com/ethereum/address/0x51dB050e31e1a7A55546F5214cbbb5ACd8055099?from=swapspace"
+                      target="_blank"
+                      class="field__button field__button_last"
+                      ><svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="arrow-up-right-from-square"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-arrow-up-right-from-square fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"
+                          class=""
+                        ></path></svg
+                    ></a>
+                  </p>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <!---->
+          </div>
+        </div>
+        <!---->
+      </div>
+      <div class="d-fc step3-panel__hide-button step3-panel__hide-button_hidden">
+        <p class="step3-panel__details">show details</p>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fa"
+          data-icon="caret-down"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          class="step3-panel__caret svg-inline--fa fa-caret-down fa-w-10"
+        >
+          <path
+            fill="currentColor"
+            d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+            class=""
+          ></path>
+        </svg>
+      </div>
+    </div>
   </div>
 </form>

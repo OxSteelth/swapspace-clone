@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
@@ -7,13 +7,15 @@ import {
   interval,
   map,
   of,
+  startWith,
+  Subscription,
   switchMap,
   take,
   timer
 } from 'rxjs';
-import { AvailableExchange } from '../types';
+import { AvailableExchange, CreateExchange } from '../types';
 import { HttpService } from '@app/core/services/http/http.service';
-import { Exchange } from '../models/exchange';
+import { Exchange, EXCHANGE_STATUS } from '../models/exchange';
 
 const EXCHANGE_RATES: Record<string, Record<string, number>> = {
   BTC: {
@@ -37,6 +39,13 @@ const EXCHANGE_RATES: Record<string, Record<string, number>> = {
   providedIn: 'root'
 })
 export class ExchangeService {
+  private readonly _status$ = new BehaviorSubject<EXCHANGE_STATUS>('CONFIRM');
+  public status$ = this._status$.asObservable();
+
+  public get status() {
+    return this._status$.getValue();
+  }
+
   private readonly _estimatedExchange$ = new BehaviorSubject<Exchange[]>([]);
   public readonly estimatedExchange$ = this._estimatedExchange$.asObservable();
 
@@ -51,6 +60,9 @@ export class ExchangeService {
     return this._selectedOffer$.getValue();
   }
 
+  private readonly _recipientAddress$ = new BehaviorSubject<string>('');
+  public readonly recipientAddress$ = this._recipientAddress$.asObservable();
+
   private readonly _fixedRate$ = new BehaviorSubject<boolean>(true);
   public readonly fixedRate$ = this._fixedRate$.asObservable();
 
@@ -61,7 +73,29 @@ export class ExchangeService {
   private readonly _floatingRate$ = new BehaviorSubject<boolean>(true);
   public readonly floatingRate$ = this._floatingRate$.asObservable();
 
+  private intervalSubscription: Subscription | null = null;
+  private _interval$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public interval$ = this._interval$.asObservable();
+
   constructor(private readonly httpService: HttpService) {}
+
+  startInterval() {
+    if (!this.intervalSubscription) {
+      this.intervalSubscription = interval(30000)
+        .pipe(startWith(0))
+        .subscribe(val => {
+          this._interval$.next(val);
+        });
+    }
+  }
+
+  // Stop the interval by unsubscribing
+  stopInterval() {
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+      this.intervalSubscription = null;
+    }
+  }
 
   getEstimatedExchangeAmounts(
     fromCurrency: string,
@@ -103,6 +137,35 @@ export class ExchangeService {
 
   updatedEstimatedExchange(value: Exchange[]) {
     this._estimatedExchange$.next(value);
+  }
+
+  confirmExchange(
+    fromAmount: number,
+    fromToken: string,
+    fromChain: string,
+    toToken: string,
+    toChain: string,
+    address: string,
+    refundAddress: string
+  ) {
+    return this.httpService
+      .post<CreateExchange>('exchange', {
+        partner: this.selectedOffer.partner,
+        fromCurrency: fromToken,
+        fromNetwork: fromChain,
+        toCurrency: toToken,
+        toNetwork: toChain,
+        address,
+        amount: fromAmount,
+        fixed: this.selectedOffer.fixed,
+        refund: refundAddress
+      })
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching data', error);
+          return of(null);
+        })
+      );
   }
 
   getAvailableExchanges() {
@@ -179,12 +242,6 @@ export class ExchangeService {
     this._selectedOffer$.next(offer);
   }
 
-  confirmExchange(valueToSend: number, from: string, to: string, exchangeId: string) {
-    return Promise.resolve({
-      confirmationId: '123'
-    });
-  }
-
   watchConfirmation(confirmationId: string) {
     return timer(1000, 1000).pipe(
       take(3),
@@ -217,5 +274,9 @@ export class ExchangeService {
         }
       })
     );
+  }
+
+  updateRecipientAddress(addr: string) {
+    this._recipientAddress$.next(addr);
   }
 }

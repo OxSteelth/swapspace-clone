@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/core/services/http/http.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CurrencyService {
   currencyList$: Observable<CurrencyOption[]> = of([
     {

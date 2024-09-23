@@ -14,3 +14,5 @@ export interface Exchange {
   toCurrency: string;
   toNetwork: string;
 }
+
+export type EXCHANGE_STATUS = 'CONFIRM' | 'INSERT' | 'PERFORM'

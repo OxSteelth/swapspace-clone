@@ -6,8 +6,9 @@ import { BehaviorSubject, debounceTime, Observable, startWith, Subscription, tap
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
 import { SwapFormService } from '@app/shared/services/swap-form.service';
-import { AvailableExchange, CurrencyOption } from '@app/shared/types';
+import { AvailableExchange, CreateExchange, CurrencyOption } from '@app/shared/types';
 import { CurrencyService } from '@app/shared/services/currency.service';
+import { StoreService } from '@app/shared/services/store/store.service';
 
 @Component({
   selector: 'app-confirmation-card',
@@ -23,12 +24,16 @@ export class ConfirmationCardComponent {
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly isLoading$ = this._isLoading$.asObservable();
 
+  private readonly _depositAddress$ = new BehaviorSubject<string>('');
+  public readonly depositAddress$ = this._depositAddress$.asObservable();
+
   public readonly fromAsset$ = this.swapFormService.fromToken$;
   public readonly fromAmount$ = this.swapFormService.fromAmount$;
   public readonly toAsset$ = this.swapFormService.toToken$;
   public readonly toAmount$ = this.swapFormService.toAmount$;
 
   public fromTokenFormControl = new FormControl<string>('BTC', [Validators.required]);
+  public fromChainFormControl = new FormControl<string>('BTC', [Validators.required]);
   public fromAmountFormControl = new FormControl<number | null>(null, [
     Validators.required,
     Validators.min(0)
@@ -37,19 +42,22 @@ export class ConfirmationCardComponent {
   public toAmountFormControl = new FormControl<number | null>(null, [Validators.min(0)]);
 
   public toTokenFormControl = new FormControl<string>('ETH', [Validators.required]);
-
-  public addressFormControl = new FormControl<string>('', [Validators.required]);
+  public toChainFormControl = new FormControl<string>('ETH', [Validators.required]);
+  public recipientAddressFormControl = new FormControl<string>('', [Validators.required]);
   public refundAddressFormControl = new FormControl<string>('');
   public emailFormControl = new FormControl<string>('');
   public acceptTermsFormControl = new FormControl<boolean>(true, [Validators.requiredTrue]);
   public swapDirection = '';
+  public recipientAddress$ = this.exchangeService.recipientAddress$;
 
   form = new FormGroup({
     fromToken: this.fromTokenFormControl,
+    fromChain: this.fromChainFormControl,
     fromAmount: this.fromAmountFormControl,
     toToken: this.toTokenFormControl,
+    toChain: this.toChainFormControl,
     toAmount: this.toAmountFormControl,
-    address: this.addressFormControl,
+    recipientAddress: this.recipientAddressFormControl,
     acceptTerms: this.acceptTermsFormControl,
     refundAddress: this.refundAddressFormControl,
     email: this.emailFormControl
@@ -72,7 +80,8 @@ export class ConfirmationCardComponent {
     private route: ActivatedRoute,
     private exchangeService: ExchangeService,
     private swapFormService: SwapFormService,
-    private currencyService: CurrencyService
+    private currencyService: CurrencyService,
+    private storeService: StoreService,
   ) {}
 
   ngOnInit() {
@@ -85,12 +94,22 @@ export class ConfirmationCardComponent {
     this.swapFormService.inputControl.valueChanges.subscribe(v => {
       this.form.controls.fromAmount.setValue(Number(v.fromAmount));
       this.form.controls.fromToken.setValue(v.fromToken?.code);
+      this.form.controls.fromChain.setValue(v.fromBlockchain);
+      this.form.controls.toChain.setValue(v.toBlockchain);
       this.form.controls.toToken.setValue(v.toToken?.code);
     });
 
     this.swapFormService.outputControl.valueChanges.subscribe(v => {
       this.form.controls.toAmount.setValue(Number(v));
     });
+
+    if(!this.exchangeService.selectedOffer) {
+      this.exchangeService.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'))
+    }
+
+    this.form.controls.recipientAddress.valueChanges.subscribe(value => {
+      this.exchangeService.updateRecipientAddress(value);
+    })
   }
 
   public updateInputValue(value: string): void {
@@ -104,7 +123,40 @@ export class ConfirmationCardComponent {
   }
 
   onSubmit() {
-    this.confirm();
+    const { toToken, fromAmount, fromToken, fromChain, toChain, recipientAddress, refundAddress } = this.form.value;
+    const { id } = this.exchangeService.selectedOffer;
+    console.log(this.exchangeService.selectedOffer)
+
+    if (!toToken || !fromAmount || !fromToken || !fromChain || !toChain || !recipientAddress) {
+      throw new Error('Invalid form values');
+    }
+
+    try {
+      const res = this.exchangeService.confirmExchange(
+        fromAmount,
+        fromToken,
+        fromChain,
+        toToken,
+        toChain,
+        recipientAddress,
+        refundAddress
+      );
+
+      res.subscribe(v => {
+        console.log(v)
+        if(v.id) {
+          this.exchangeService.stopInterval();
+          this.swapFormService.disableInput();
+          this.confirmed.set(true);
+          this._depositAddress$.next(v.from.address)
+        }
+      })
+    }catch(e) {
+      console.error(e);
+    }
+
+
+    // this.watchConfirmation(confirmationId);
   }
 
   ngOnDestroy() {
@@ -115,24 +167,6 @@ export class ConfirmationCardComponent {
   async setExchange(exchangeId: string) {
     const exchange = await this.exchangeService.getExchangeInfo(exchangeId);
     this.echangeInfo.set(exchange);
-  }
-
-  async confirm() {
-    const { toToken, fromAmount, fromToken } = this.form.value;
-    const { id } = this.echangeInfo()!;
-
-    if (!toToken || !fromAmount || !fromToken || !id) {
-      throw new Error('Invalid form values');
-    }
-
-    const { confirmationId } = await this.exchangeService.confirmExchange(
-      fromAmount,
-      fromToken,
-      toToken,
-      id
-    );
-
-    this.watchConfirmation(confirmationId);
   }
 
   watchConfirmation(confirmationId: string) {
