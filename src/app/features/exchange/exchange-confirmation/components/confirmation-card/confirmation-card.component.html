@@ -203,41 +203,20 @@
             </ul>
           </div>
           <div class="step3-panel-wallet" id="step3-panel-wallet">
-            <div
-              class="flex justify-around items-center h-[100vh] w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-            >
-              <div class="flex justify-around flex-col items-center">
-                <h1 class="text-[3em] font-bold" *ngIf="!walletConnected">
-                  Connect Ethereum Wallet
-                </h1>
-                <h1 class="text-[3em] font-bold" *ngIf="walletConnected">
-                  Connected Ethereum Wallet
-                </h1>
-                <button
-                  type="button"
-                  *ngIf="!walletConnected"
-                  class="bg-gradient-to-r from-green-500 to-blue-500 text-white w-[200px] p-4 rounded-full mt-4"
-                  (click)="connectToWallet()"
-                >
-                  Connect Wallet
-                </button>
-                <div
-                  *ngIf="walletConnected"
-                  class="bg-gradient-to-r from-green-500 to-blue-500 p-[2em] rounded-xl"
-                >
-                  <label class="text-white">{{ walletId }}</label>
-                </div>
-              </div>
-            </div>
             <button
               type="button"
               class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
+              (click)="connectToWallet()"
+              *ngIf="!walletConnected"
             >
               Connect Wallet
-              <!---->
             </button>
-            <!---->
-            <!---->
+            <div
+              *ngIf="walletConnected"
+              class="bg-gradient-to-r from-green-500 to-blue-500 p-[2em] rounded-xl"
+            >
+              <label class="text-white">{{ walletId }}</label>
+            </div>
           </div>
         </div>
       </div>
