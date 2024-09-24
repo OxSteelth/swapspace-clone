@@ -9,6 +9,7 @@ import { SwapFormService } from '@app/shared/services/swap-form.service';
 import { AvailableExchange, CreateExchange, CurrencyOption } from '@app/shared/types';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { StoreService } from '@app/shared/services/store/store.service';
+import { WalletService } from '@app/shared/services/wallet.service';
 
 @Component({
   selector: 'app-confirmation-card',
@@ -75,6 +76,9 @@ export class ConfirmationCardComponent {
   confirmationStep = signal(0);
   confirmed = signal(false);
 
+  public walletConnected: boolean = false;
+  public walletId: string = '';
+
   constructor(
     // public exchangeConfirmation: ExchangeConfirmationViewModel,
     private route: ActivatedRoute,
@@ -82,9 +86,12 @@ export class ConfirmationCardComponent {
     private swapFormService: SwapFormService,
     private currencyService: CurrencyService,
     private storeService: StoreService,
+    private walletService: WalletService
   ) {}
 
   ngOnInit() {
+    this.checkWalletConnected();
+
     if (this.arrow) {
       this.arrow.nativeElement.style.transform = this.isCollapsed
         ? 'rotate(180deg)'
@@ -103,13 +110,25 @@ export class ConfirmationCardComponent {
       this.form.controls.toAmount.setValue(Number(v));
     });
 
-    if(!this.exchangeService.selectedOffer) {
-      this.exchangeService.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'))
+    if (!this.exchangeService.selectedOffer) {
+      this.exchangeService.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'));
     }
 
     this.form.controls.recipientAddress.valueChanges.subscribe(value => {
       this.exchangeService.updateRecipientAddress(value);
-    })
+    });
+  }
+
+  connectToWallet  = () => {
+    this.walletService.connectWallet();
+  }
+
+  checkWalletConnected = async () => {
+    const accounts = await this.walletService.checkWalletConnected();
+    if(accounts.length > 0){
+      this.walletConnected = true;
+      this.walletId = accounts[0];
+    }
   }
 
   public updateInputValue(value: string): void {
@@ -123,9 +142,10 @@ export class ConfirmationCardComponent {
   }
 
   onSubmit() {
-    const { toToken, fromAmount, fromToken, fromChain, toChain, recipientAddress, refundAddress } = this.form.value;
+    const { toToken, fromAmount, fromToken, fromChain, toChain, recipientAddress, refundAddress } =
+      this.form.value;
     const { id } = this.exchangeService.selectedOffer;
-    console.log(this.exchangeService.selectedOffer)
+    console.log(this.exchangeService.selectedOffer);
 
     if (!toToken || !fromAmount || !fromToken || !fromChain || !toChain || !recipientAddress) {
       throw new Error('Invalid form values');
@@ -143,18 +163,17 @@ export class ConfirmationCardComponent {
       );
 
       res.subscribe(v => {
-        console.log(v)
-        if(v.id) {
+        console.log(v);
+        if (v.id) {
           this.exchangeService.stopInterval();
           this.swapFormService.disableInput();
           this.confirmed.set(true);
-          this._depositAddress$.next(v.from.address)
+          this._depositAddress$.next(v.from.address);
         }
-      })
-    }catch(e) {
+      });
+    } catch (e) {
       console.error(e);
     }
-
 
     // this.watchConfirmation(confirmationId);
   }

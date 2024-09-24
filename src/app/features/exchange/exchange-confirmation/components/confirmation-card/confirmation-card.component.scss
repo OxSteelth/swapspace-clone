@@ -449,3 +449,147 @@ svg:not(:root).svg-inline--fa {
   text-decoration: none;
   width: 100%;
 }
+
+.invaders-game-tile {
+  background-color: rgba(54, 41, 59, 0.6);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 225px;
+  margin-top: 2rem;
+  overflow: hidden;
+  padding: 2.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.invaders-game-tile__gradient:before {
+  background-image: url('../../../../../../assets/img/game-tile-bg.webp');
+  background-position-x: right;
+  background-position-y: top;
+  background-repeat: no-repeat;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.invaders-game-tile__disabled:before {
+  filter: grayscale(60%);
+}
+
+.invaders-game-tile__image {
+  bottom: 0;
+  position: absolute;
+  right: 50px;
+}
+
+.invaders-game-tile__image_disabled {
+  filter: grayscale(100%);
+}
+
+.invaders-game-tile__title {
+  font-family: Audiowide, sans-serif;
+  font-size: 1.688rem;
+  line-height: 1.125rem;
+  margin-bottom: 1rem;
+  z-index: 1;
+}
+
+.invaders-game-tile__animation {
+  animation: pulse-4a951bc4 1s infinite;
+}
+
+@keyframes pulse-4a951bc4 {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.invaders-game-tile__animation:after {
+  animation: dots-4a951bc4 2.5s infinite;
+  content: '.';
+  margin-left: -10px;
+}
+
+@keyframes dots-4a951bc4 {
+  0%,
+  20% {
+    color: transparent;
+    text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
+  }
+  40% {
+    color: #fff;
+    text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
+  }
+  60% {
+    text-shadow: 0.25em 0 0 #fff, 0.5em 0 0 transparent;
+  }
+  80% {
+    opacity: 1;
+    text-shadow: 0.25em 0 0 #fff, 0.5em 0 0 #fff;
+  }
+  90%,
+  100% {
+    opacity: 0;
+    text-shadow: 0.25em 0 0 #fff, 0.5em 0 0 #fff;
+  }
+}
+
+.invaders-game-tile__text {
+  color: #a0789c;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  margin: 0;
+  width: 240px;
+  z-index: 1;
+}
+
+.button_sm {
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: 40px;
+}
+
+.invaders-game-tile__button {
+  margin-top: auto;
+  max-height: 35px;
+  max-width: 150px;
+  opacity: 1;
+  z-index: 1;
+}
+
+.button_primary:disabled {
+  background-color: #6b4d68;
+  border-color: #6b4d68;
+  color: #a0789c;
+  cursor: default;
+}
+
+.invaders-game-tile__gradient:after {
+  background-image: linear-gradient(
+    90deg,
+    rgba(54, 41, 59, 0),
+    #2a202e 30%,
+    hsla(0, 0%, 100%, 0) 59%
+  );
+  background-position-x: left;
+  background-position-y: top;
+  background-repeat: no-repeat;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

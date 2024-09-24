@@ -35,17 +35,17 @@
     </div>
   </div>
 
-  <div
-    class="app-card app-card__outlined"
-    *ngIf="exchangeConfirmationViewModel.echangeInfo() as echangeInfo; else infoLoading"
-  >
+  <div class="app-card app-card__outlined" *ngIf="exchangeInfo$ | async; else infoLoading">
     <div>Exchange info</div>
     <div class="c-exchange__info">
       <div class="c-exchange__info-item">
         <div class="c-item-name">Exchange partner:</div>
         <div class="c-item-value">
-          <img [src]="echangeInfo.exchangeIconSrc" class="c-item-image" />
-          {{ echangeInfo.exchangeName }}
+          <img
+            [src]="'assets/exchange-icons/' + (exchangeInfo$ | async).partner + '.svg'"
+            class="c-item-image"
+          />
+          {{ (exchangeInfo$ | async).partner }}
         </div>
       </div>
     </div>
@@ -53,14 +53,14 @@
       <div class="c-exchange__info-item">
         <div class="c-item-name">Rate ~</div>
         <div class="c-item-value">
-          {{ echangeInfo.rate }}
+          {{ (exchangeInfo$ | async).supportRate }}
         </div>
       </div>
     </div>
     <div class="c-exchange__info">
       <div class="c-exchange__info-item">
         <div class="c-item-name">ETA:</div>
-        <div class="c-item-value">{{ echangeInfo.eta.min }} - {{ echangeInfo.eta.max }} min</div>
+        <div class="c-item-value">{{ (exchangeInfo$ | async).duration }} min</div>
       </div>
     </div>
   </div>
