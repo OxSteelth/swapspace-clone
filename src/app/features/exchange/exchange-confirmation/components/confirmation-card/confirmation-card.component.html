@@ -222,7 +222,7 @@
       </div>
     </div>
     <div class="d-f-c step3-panel__collapse">
-      <div class="step-panel-info">
+      <div class="step-panel-info" #recipientPanel>
         <div class="row step-panel-info__row">
           <div class="column col-12 col-md-12">
             <div class="field d-f">
@@ -285,7 +285,10 @@
         </div>
         <!---->
       </div>
-      <div class="d-fc step3-panel__hide-button step3-panel__hide-button_hidden">
+      <div
+        class="d-fc step3-panel__hide-button step3-panel__hide-button_hidden"
+        (click)="showDetails()"
+      >
         <p class="step3-panel__details">show details</p>
         <svg
           aria-hidden="true"

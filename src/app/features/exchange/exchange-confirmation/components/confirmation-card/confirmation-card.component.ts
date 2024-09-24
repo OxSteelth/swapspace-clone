@@ -75,9 +75,13 @@ export class ConfirmationCardComponent {
   echangeInfo = signal<AvailableExchange | undefined>(undefined);
   confirmationStep = signal(0);
   confirmed = signal(false);
+  isShowingPanel = signal(false);
 
   public walletConnected: boolean = false;
   public walletId: string = '';
+
+  @ViewChild('recipientPanel')
+  recipientPanel!: ElementRef<HTMLDivElement>;
 
   constructor(
     // public exchangeConfirmation: ExchangeConfirmationViewModel,
@@ -229,5 +233,13 @@ export class ConfirmationCardComponent {
     );
 
     this.toAmountFormControl.setValue(valueToGet);
+  }
+
+  showDetails() {
+    this.isShowingPanel.set(!this.isShowingPanel());
+
+    if (!this.recipientPanel) return;
+
+    this.recipientPanel.nativeElement.style.maxHeight = this.isShowingPanel() ? '100px' : '0px';
   }
 }
