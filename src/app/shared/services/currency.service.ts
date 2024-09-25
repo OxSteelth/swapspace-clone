@@ -5,11 +5,11 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
 import { CurrencyOption } from '../types';
 import { Currency } from '../models/currency';
 import { HttpService } from 'src/app/core/services/http/http.service';
+import { StoreService } from './store/store.service';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class CurrencyService {
   currencyList$: Observable<CurrencyOption[]> = of([
     {
@@ -54,8 +54,16 @@ export class CurrencyService {
 
   constructor(
     private readonly httpService: HttpService,
-    private readonly destroy$: TuiDestroyService
-  ) {}
+    private readonly destroy$: TuiDestroyService,
+    private storeService: StoreService
+  ) {
+    if (this.storeService.getItem('CURRENCY_LIST')) {
+      this._allCurrencyList$.next(this.storeService.getItem('CURRENCY_LIST'));
+      this._popularCurrencyList$.next(
+        this.storeService.getItem('CURRENCY_LIST').filter(token => token.popular)
+      );
+    }
+  }
 
   public fetchCurrencyList(): void {
     if (!this._allCurrencyList$.getValue().length) {
@@ -63,6 +71,7 @@ export class CurrencyService {
         .get<Currency[]>(`currencies`)
         .pipe(
           tap(tokens => {
+            this.storeService.setItem('CURRENCY_LIST', tokens);
             this._allCurrencyList$.next(tokens);
             this._popularCurrencyList$.next(tokens.filter(token => token.popular));
           })

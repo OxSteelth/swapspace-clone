@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Exchange } from '@app/shared/models/exchange';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { ExchangeService } from '@app/shared/services/exchange.service';
@@ -21,15 +21,21 @@ import {
   styleUrls: ['./exchange-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExchangeListComponent implements OnInit {
+export class ExchangeListComponent implements OnInit, OnDestroy {
   constructor(
     private swapFormQueryService: SwapFormQueryService,
-    private currencyService: CurrencyService
+    private currencyService: CurrencyService,
+    private exchangeService: ExchangeService
   ) {}
 
   ngOnInit(): void {
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
     this.currencyService.fetchCurrencyList();
+    this.exchangeService.startInterval();
+  }
+
+  ngOnDestroy(): void {
+    this.exchangeService.stopInterval()
   }
 }

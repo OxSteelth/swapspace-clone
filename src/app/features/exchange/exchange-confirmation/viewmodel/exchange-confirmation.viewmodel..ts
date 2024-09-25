@@ -7,21 +7,15 @@ import { AvailableExchange, CurrencyOption } from 'src/app/shared/types';
 
 @Injectable()
 export class ExchangeConfirmationViewModel {
-  currencyToSendFormControl = new FormControl<string>('BTC', [
-    Validators.required,
-  ]);
+  currencyToSendFormControl = new FormControl<string>('BTC', [Validators.required]);
   valueToSendFormControl = new FormControl<number | null>(null, [
     Validators.required,
-    Validators.min(0),
+    Validators.min(0)
   ]);
 
-  valueToGetFormControl = new FormControl<number | null>(null, [
-    Validators.min(0),
-  ]);
+  valueToGetFormControl = new FormControl<number | null>(null, [Validators.min(0)]);
 
-  currencyToGetFormControl = new FormControl<string>('ETH', [
-    Validators.required,
-  ]);
+  currencyToGetFormControl = new FormControl<string>('ETH', [Validators.required]);
 
   addressFormControl = new FormControl<string>('', [Validators.required]);
 
@@ -31,21 +25,17 @@ export class ExchangeConfirmationViewModel {
     valueToGet: this.valueToGetFormControl,
     currencyToGet: this.currencyToGetFormControl,
     address: this.addressFormControl,
-    acceptTerms: new FormControl<boolean>(true, [Validators.requiredTrue]),
+    acceptTerms: new FormControl<boolean>(true, [Validators.requiredTrue])
   });
 
-  currencyList$: Observable<CurrencyOption[]> =
-    this.currencyService.currencyList$;
+  currencyList$: Observable<CurrencyOption[]> = this.currencyService.currencyList$;
 
   exchangeRate$ = new BehaviorSubject<number | null>(22.6511428);
   echangeInfo = signal<AvailableExchange | undefined>(undefined);
   confirmationStep = signal(0);
   confirmed = signal(false);
 
-  constructor(
-    public currencyService: CurrencyService,
-    public exchangeService: ExchangeService
-  ) {}
+  constructor(public currencyService: CurrencyService, public exchangeService: ExchangeService) {}
 
   async setExchange(exchangeId: string) {
     const exchange = await this.exchangeService.getExchangeInfo(exchangeId);
@@ -73,9 +63,7 @@ export class ExchangeConfirmationViewModel {
   watchConfirmation(confirmationId: string) {
     this.confirmed.set(true);
 
-    this.exchangeService.watchConfirmation(confirmationId).subscribe((data) => {
-      console.log(data);
-
+    this.exchangeService.watchConfirmation(confirmationId).subscribe(data => {
       switch (data) {
         case 'awaiting payment':
           this.confirmationStep.set(1);

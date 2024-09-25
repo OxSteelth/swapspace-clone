@@ -215,7 +215,14 @@
               *ngIf="walletConnected"
               class="bg-gradient-to-r from-green-500 to-blue-500 p-[2em] rounded-xl"
             >
-              <label class="text-white">{{ walletId }}</label>
+              <button
+                type="button"
+                class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
+                (click)="send()"
+                *ngIf="walletConnected"
+              >
+                Send
+              </button>
             </div>
           </div>
         </div>

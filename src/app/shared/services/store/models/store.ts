@@ -10,13 +10,16 @@
 // } from '@features/trade/services/settings-service/models/settings-form-controls';
 // import { SWAP_PROVIDER_TYPE } from '@features/trade/models/swap-provider-type';
 // import { ChangenowPostTrade } from '@features/trade/models/cn-trade';
+import { Currency } from '@app/shared/models/currency';
 import { Exchange } from '@app/shared/models/exchange';
 import BigNumber from 'bignumber.js';
 
 export type Store = {
-  SELECTED_OFFER: Exchange
+  SELECTED_OFFER: Exchange;
+  CURRENCY_LIST: Currency[];
 };
 
 export const storeRecord: Record<keyof Store, null> = {
-  SELECTED_OFFER: null
+  SELECTED_OFFER: null,
+  CURRENCY_LIST: null
 };

@@ -1,4 +1,4 @@
-import { Component, ElementRef, signal, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
 import {
@@ -29,7 +29,7 @@ import { compareObjects } from '@app/shared/utils/utils';
   templateUrl: './swap-form.component.html',
   styleUrls: ['./swap-form.component.scss']
 })
-export class SwapFormComponent implements OnInit {
+export class SwapFormComponent implements OnInit, OnDestroy {
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly isLoading$ = this._isLoading$.asObservable();
 
@@ -78,13 +78,7 @@ export class SwapFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.exchangeService.status$.subscribe(v => {
-      if(v === 'CONFIRM') {
-        this.exchangeService.startInterval();
-      } else if(v === 'INSERT') {
-        this.exchangeService.stopInterval();
-      }
-    })
+    this.exchangeService.startInterval();
 
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
@@ -113,15 +107,17 @@ export class SwapFormComponent implements OnInit {
       )
       .subscribe(value => this._filteredList$.next(value));
 
+    this.swapFormService.inputControl.valueChanges.pipe(startWith(null));
     combineLatest([
+      this.exchangeService.interval$,
       this.swapFormService.inputControl.valueChanges.pipe(
+        startWith(this.swapFormService.inputValue),
         debounceTime(300),
         distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
-      ),
-      this.exchangeService.interval$
+      )
     ])
       .pipe(
-        switchMap(([value]) => {
+        switchMap(([, value]) => {
           this._isLoading$.next(true);
           if (
             value.fromBlockchain !== '' &&
@@ -154,6 +150,10 @@ export class SwapFormComponent implements OnInit {
         }
         this._isLoading$.next(false);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.exchangeService.stopInterval();
   }
 
   public scrollToIndex(index: number): void {

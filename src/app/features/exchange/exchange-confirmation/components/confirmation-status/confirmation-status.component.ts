@@ -7,24 +7,20 @@ import { ExchangeService } from '@app/shared/services/exchange.service';
   selector: 'app-confirmation-status',
   templateUrl: './confirmation-status.component.html',
   styleUrls: ['./confirmation-status.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationStatusComponent {
   public exchangeInfo$ = this.exchangeService.selectedOffer$;
+  public confirmationStep$ = this.exchangeService.confirmationStep$;
 
-  constructor(
-    public exchangeConfirmationViewModel: ExchangeConfirmationViewModel,
-    private exchangeService: ExchangeService
-  ) {
-    this.exchangeInfo$.subscribe(v => console.log(v))
-  }
+  constructor(private exchangeService: ExchangeService) {}
 
   calculateStatus(index: number): IconStatus {
-    if (this.exchangeConfirmationViewModel.confirmationStep() === index) {
+    if (this.exchangeService.confirmationStep === index) {
       return 'loading';
     }
 
-    if (this.exchangeConfirmationViewModel.confirmationStep() > index) {
+    if (this.exchangeService.confirmationStep > index) {
       return 'success';
     }
 

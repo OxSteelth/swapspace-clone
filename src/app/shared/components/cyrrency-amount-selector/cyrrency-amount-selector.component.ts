@@ -225,7 +225,6 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
         })
       )
       .subscribe((value: Exchange) => {
-        console.log({ value });
         if (value) {
           this.swapFormService.outputControl.patchValue({
             toAmount: value.toAmount.toString()

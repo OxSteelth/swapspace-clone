@@ -1,33 +1,18 @@
 <div class="app-card app-card__outlined c-card">
   <div class="c-status__container">
-    <div
-      class="c-status"
-      [ngClass]="{
-            active: exchangeConfirmationViewModel.confirmationStep() >= 0,
-        }"
-    >
+    <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 0 }">
       <div class="c-status__icon">
         <app-status-icon [status]="calculateStatus(0)"></app-status-icon>
       </div>
       Creating exchange
     </div>
-    <div
-      class="c-status"
-      [ngClass]="{
-            active: exchangeConfirmationViewModel.confirmationStep() >= 1,
-        }"
-    >
+    <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 1 }">
       <div class="c-status__icon">
         <app-status-icon [status]="calculateStatus(1)"></app-status-icon>
       </div>
       Awaiting payment
     </div>
-    <div
-      class="c-status"
-      [ngClass]="{
-            active: exchangeConfirmationViewModel.confirmationStep() >= 2,
-        }"
-    >
+    <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 2 }">
       <div class="c-status__icon">
         <app-status-icon [status]="calculateStatus(2)"></app-status-icon>
       </div>
@@ -35,17 +20,20 @@
     </div>
   </div>
 
-  <div class="app-card app-card__outlined" *ngIf="exchangeInfo$ | async; else infoLoading">
+  <div
+    class="app-card app-card__outlined"
+    *ngIf="exchangeInfo$ | async as exchangeInfo; else infoLoading"
+  >
     <div>Exchange info</div>
     <div class="c-exchange__info">
       <div class="c-exchange__info-item">
         <div class="c-item-name">Exchange partner:</div>
         <div class="c-item-value">
           <img
-            [src]="'assets/exchange-icons/' + (exchangeInfo$ | async).partner + '.svg'"
+            [src]="'assets/exchange-icons/' + exchangeInfo.partner + '.svg'"
             class="c-item-image"
           />
-          {{ (exchangeInfo$ | async).partner }}
+          {{ exchangeInfo.partner }}
         </div>
       </div>
     </div>
@@ -53,14 +41,14 @@
       <div class="c-exchange__info-item">
         <div class="c-item-name">Rate ~</div>
         <div class="c-item-value">
-          {{ (exchangeInfo$ | async).supportRate }}
+          {{ exchangeInfo.supportRate }}
         </div>
       </div>
     </div>
     <div class="c-exchange__info">
       <div class="c-exchange__info-item">
         <div class="c-item-name">ETA:</div>
-        <div class="c-item-value">{{ (exchangeInfo$ | async).duration }} min</div>
+        <div class="c-item-value">{{ exchangeInfo.duration }} min</div>
       </div>
     </div>
   </div>

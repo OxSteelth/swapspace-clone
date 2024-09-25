@@ -38,7 +38,6 @@ export class SwapFormQueryService {
         pairwise()
       )
       .subscribe(([, curr]) => {
-        console.log({curr})
         if (curr.fromToken && curr.toToken) {
           this.queryParamsService.patchQueryParams({
             ...(curr.fromToken?.code && { from: curr.fromToken.code }),

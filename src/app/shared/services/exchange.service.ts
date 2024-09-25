@@ -46,6 +46,17 @@ export class ExchangeService {
     return this._status$.getValue();
   }
 
+  private readonly _confirmationStep$ = new BehaviorSubject<number>(0);
+  public confirmationStep$ = this._confirmationStep$.asObservable();
+
+  public setConfirmationStep(value: number) {
+    this._confirmationStep$.next(value);
+  }
+
+  public get confirmationStep() {
+    return this._confirmationStep$.getValue()
+  }
+
   private readonly _estimatedExchange$ = new BehaviorSubject<Exchange[]>([]);
   public readonly estimatedExchange$ = this._estimatedExchange$.asObservable();
 

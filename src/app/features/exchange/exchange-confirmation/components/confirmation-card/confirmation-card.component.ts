@@ -149,7 +149,6 @@ export class ConfirmationCardComponent {
     const { toToken, fromAmount, fromToken, fromChain, toChain, recipientAddress, refundAddress } =
       this.form.value;
     const { id } = this.exchangeService.selectedOffer;
-    console.log(this.exchangeService.selectedOffer);
 
     if (!toToken || !fromAmount || !fromToken || !fromChain || !toChain || !recipientAddress) {
       throw new Error('Invalid form values');
@@ -167,8 +166,8 @@ export class ConfirmationCardComponent {
       );
 
       res.subscribe(v => {
-        console.log(v);
         if (v.id) {
+          this.exchangeService.setConfirmationStep(1);
           this.exchangeService.stopInterval();
           this.swapFormService.disableInput();
           this.confirmed.set(true);
@@ -180,6 +179,10 @@ export class ConfirmationCardComponent {
     }
 
     // this.watchConfirmation(confirmationId);
+  }
+
+  send(){
+
   }
 
   ngOnDestroy() {
@@ -196,8 +199,6 @@ export class ConfirmationCardComponent {
     this.confirmed.set(true);
 
     this.exchangeService.watchConfirmation(confirmationId).subscribe(data => {
-      console.log(data);
-
       switch (data) {
         case 'awaiting payment':
           this.confirmationStep.set(1);
