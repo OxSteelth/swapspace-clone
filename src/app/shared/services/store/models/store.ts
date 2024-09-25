@@ -12,14 +12,17 @@
 // import { ChangenowPostTrade } from '@features/trade/models/cn-trade';
 import { Currency } from '@app/shared/models/currency';
 import { Exchange } from '@app/shared/models/exchange';
+import { CreateExchange } from '@app/shared/types';
 import BigNumber from 'bignumber.js';
 
 export type Store = {
   SELECTED_OFFER: Exchange;
   CURRENCY_LIST: Currency[];
+  CREATED_EXCHANGE: CreateExchange;
 };
 
 export const storeRecord: Record<keyof Store, null> = {
   SELECTED_OFFER: null,
-  CURRENCY_LIST: null
+  CURRENCY_LIST: null,
+  CREATED_EXCHANGE: null
 };

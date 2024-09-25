@@ -126,7 +126,8 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   itemsPerPage = 10;
   currentPage = 0;
 
-  public isDisabled = signal(false);
+  private readonly _isDisabled$ = new BehaviorSubject<boolean>(false);
+  public isDisabled$ = this._isDisabled$.asObservable();
 
   constructor(
     private readonly currencyService: CurrencyService,
@@ -153,6 +154,11 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
+    this.exchangeService.confirmationStep$.subscribe(step => {
+      if(step >= 1) {
+        this._isDisabled$.next(true);
+      }
+    })
 
     this.isLoading$.subscribe(isLoading => {
       if (this.spinner) {
@@ -241,7 +247,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
 
     this.swapFormService.inputControl.statusChanges.subscribe(_status => {
       if (_status === 'DISABLED') {
-        this.isDisabled.set(true);
+        this._isDisabled$.next(true)
       }
     });
   }

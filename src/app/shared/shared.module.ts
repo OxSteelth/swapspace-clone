@@ -36,6 +36,8 @@ import { SwapFormComponent } from './components/swap-form/swap-form.component';
 import { SwapFormService } from './services/swap-form.service';
 import { SwapFormQueryService } from './services/swap-form-query/swap-form-query.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ConfirmationStatusComponent } from '@app/features/exchange/exchange-confirmation/components/confirmation-status/confirmation-status.component';
+import { StatusIconComponent } from '@app/features/exchange/exchange-confirmation/components/status-icon/status-icon.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     FormValuePipe,
     AssetSelectorComponent,
     FormSwitcherComponent,
-    SwapFormComponent
+    SwapFormComponent,
+    ConfirmationStatusComponent,
+    StatusIconComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +76,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     TuiLoaderModule,
     TuiCheckboxModule,
     ScrollingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AsyncPipe, TuiDestroyService, SwapFormService, SwapFormQueryService],
   exports: [
@@ -106,7 +110,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     TuiCarouselModule,
     TuiPaginationModule,
     AssetSelectorComponent,
-    FormSwitcherComponent
+    FormSwitcherComponent,
+    ConfirmationStatusComponent,
+    StatusIconComponent
   ]
 })
 export class SharedModule {}

@@ -16,6 +16,13 @@ const routes: Routes = [
         (m) => m.ExchangeConfirmationModule
       ),
   },
+  {
+    path: 'step3',
+    loadChildren: () =>
+      import('./payment/exchange-payment.module').then(
+        (m) => m.ExchangePaymentModule
+      ),
+  },
 ];
 
 @NgModule({

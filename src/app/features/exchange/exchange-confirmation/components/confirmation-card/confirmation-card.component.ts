@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { ExchangeConfirmationViewModel } from '../../viewmodel/exchange-confirmation.viewmodel.';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, debounceTime, Observable, startWith, Subscription, tap } from 'rxjs';
 import { ExchangeService } from '@app/shared/services/exchange.service';
@@ -20,8 +20,6 @@ import { WalletService } from '@app/shared/services/wallet.service';
 export class ConfirmationCardComponent {
   termsOfUseControl = new FormControl<boolean>(true);
   isEstimatingExchange = signal(false);
-  sub!: Subscription;
-  sub2!: Subscription;
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly isLoading$ = this._isLoading$.asObservable();
 
@@ -86,6 +84,7 @@ export class ConfirmationCardComponent {
   constructor(
     // public exchangeConfirmation: ExchangeConfirmationViewModel,
     private route: ActivatedRoute,
+    private router: Router,
     private exchangeService: ExchangeService,
     private swapFormService: SwapFormService,
     private currencyService: CurrencyService,
@@ -114,7 +113,7 @@ export class ConfirmationCardComponent {
       this.form.controls.toAmount.setValue(Number(v));
     });
 
-    if (!this.exchangeService.selectedOffer) {
+    if (!this.exchangeService.selectedOffer ) {
       this.exchangeService.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'));
     }
 
@@ -123,17 +122,17 @@ export class ConfirmationCardComponent {
     });
   }
 
-  connectToWallet  = () => {
+  connectToWallet = () => {
     this.walletService.connectWallet();
-  }
+  };
 
   checkWalletConnected = async () => {
     const accounts = await this.walletService.checkWalletConnected();
-    if(accounts.length > 0){
+    if (accounts.length > 0) {
       this.walletConnected = true;
       this.walletId = accounts[0];
     }
-  }
+  };
 
   public updateInputValue(value: string): void {
     const oldValue = this.swapFormService.inputValue?.fromAmount;
@@ -165,30 +164,29 @@ export class ConfirmationCardComponent {
         refundAddress
       );
 
-      res.subscribe(v => {
-        if (v.id) {
+      res.subscribe(ce => {
+        console.log(ce);
+        if (ce.id) {
           this.exchangeService.setConfirmationStep(1);
           this.exchangeService.stopInterval();
           this.swapFormService.disableInput();
           this.confirmed.set(true);
-          this._depositAddress$.next(v.from.address);
+          this._depositAddress$.next(ce.from.address);
+          this.storeService.setItem('CREATED_EXCHANGE', ce)
+
+          this.router.navigate(['/exchange/step3'], {
+            queryParams: {
+              id: ce.id
+            }
+          });
         }
       });
     } catch (e) {
       console.error(e);
     }
-
-    // this.watchConfirmation(confirmationId);
   }
 
-  send(){
-
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-    this.sub2.unsubscribe();
-  }
+  ngOnDestroy() {}
 
   async setExchange(exchangeId: string) {
     const exchange = await this.exchangeService.getExchangeInfo(exchangeId);

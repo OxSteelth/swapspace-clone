@@ -74,6 +74,10 @@ export class ExchangeService {
   private readonly _recipientAddress$ = new BehaviorSubject<string>('');
   public readonly recipientAddress$ = this._recipientAddress$.asObservable();
 
+  public updateRecipientAddress(address: string) {
+    this._recipientAddress$.next(address);
+  }
+
   private readonly _fixedRate$ = new BehaviorSubject<boolean>(true);
   public readonly fixedRate$ = this._fixedRate$.asObservable();
 
@@ -285,9 +289,5 @@ export class ExchangeService {
         }
       })
     );
-  }
-
-  updateRecipientAddress(addr: string) {
-    this._recipientAddress$.next(addr);
   }
 }

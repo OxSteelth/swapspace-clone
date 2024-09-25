@@ -124,7 +124,7 @@ export class SwapFormQueryService {
     return newParams;
   }
 
-  private getTokenBySymbol(tokens: Currency[], token: string, chain: string): Observable<Currency> {
+  public getTokenBySymbol(tokens: Currency[], token: string, chain: string): Observable<Currency> {
     if (!token) {
       return of(null);
     }
