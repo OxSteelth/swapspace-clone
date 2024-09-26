@@ -66,7 +66,6 @@ export class SwapFormQueryService {
         switchMap(tokens => {
           const queryParams = this.queryParamsService.queryParams;
           const protectedParams = this.getProtectedSwapParams(queryParams);
-
           const fromBlockchain = protectedParams.fromChain;
           const toBlockchain = protectedParams.toChain;
           const findFromToken$ = this.getTokenBySymbol(
@@ -75,6 +74,7 @@ export class SwapFormQueryService {
             fromBlockchain
           );
           const findToToken$ = this.getTokenBySymbol(tokens, protectedParams.to, toBlockchain);
+
           return forkJoin([findFromToken$, findToToken$]).pipe(
             map(([fromToken, toToken]) => ({
               fromToken,

@@ -24,7 +24,6 @@
             [formControl]="amount"
             [readonly]="inputMode === 'output'"
             (input)="handleAmountChange($event)"
-            [disabled]="isDisabled$ | async"
           />
         </span>
       </label>
@@ -48,7 +47,6 @@
           type="button"
           class="pair-search__button-dark pair-search__button-no-bottom-round"
           (click)="tokenClicked(label2)"
-          [disabled]="isDisabled$ | async"
         >
           <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
             <img

@@ -21,6 +21,7 @@ import { CurrencyService } from '@app/shared/services/currency.service';
 import { StoreService } from '@app/shared/services/store/store.service';
 import { WalletService } from '@app/shared/services/wallet.service';
 import { Exchange } from '@app/shared/models/exchange';
+import { Web3Service } from '@app/shared/services/web3.service';
 
 @Component({
   selector: 'app-payment-card',
@@ -82,7 +83,9 @@ export class PaymentCardComponent {
   confirmed = signal(false);
   isShowingPanel = signal(false);
 
-  public walletConnected: boolean = false;
+  public isWalletConnected: boolean = false;
+  public isNetworkSelected: boolean = false;
+  public networkId: string = '';
   public walletId: string = '';
 
   public assetsExist$: Observable<boolean>;
@@ -90,14 +93,20 @@ export class PaymentCardComponent {
   @ViewChild('recipientPanel')
   recipientPanel!: ElementRef<HTMLDivElement>;
 
+  accounts$: Observable<string[]>;
+  balance$: Observable<string> | undefined;
+
   constructor(
     private exchangeService: ExchangeService,
     private swapFormService: SwapFormService,
     private currencyService: CurrencyService,
     private walletService: WalletService,
     private storeService: StoreService,
-    private swapFormQueryService: SwapFormQueryService
-  ) {}
+    private swapFormQueryService: SwapFormQueryService,
+    private web3Service: Web3Service
+  ) {
+    this.accounts$ = this.web3Service.getAccountsObservable();
+  }
 
   ngOnInit() {
     this.swapFormService.disableInput();
@@ -139,10 +148,17 @@ export class PaymentCardComponent {
             })
           )
           .subscribe();
+
+        const chainId = this.web3Service.getChainIdFromNetwork(ce.from.network);
+
+        if (chainId) {
+          this.networkId = chainId;
+        }
       }
     });
 
     this.checkWalletConnected();
+    this.checkNetworkConnected();
 
     if (this.arrow) {
       this.arrow.nativeElement.style.transform = this.isCollapsed
@@ -164,6 +180,16 @@ export class PaymentCardComponent {
     this.assetsExist$ = combineLatest([this.fromAsset$, this.toAsset$]).pipe(
       map(([from, to]) => !!from && !!to)
     );
+
+    this.accounts$.subscribe(accounts => {
+      if (accounts.length > 0) {
+        this.getBalance(accounts[0]);
+      }
+    });
+  }
+
+  getBalance(account: string): void {
+    this.balance$ = this.web3Service.getBalance(account);
   }
 
   connectToWallet = () => {
@@ -173,12 +199,43 @@ export class PaymentCardComponent {
   checkWalletConnected = async () => {
     const accounts = await this.walletService.checkWalletConnected();
     if (accounts.length > 0) {
-      this.walletConnected = true;
+      this.isWalletConnected = true;
       this.walletId = accounts[0];
     }
   };
 
-  send() {}
+  checkNetworkConnected() {
+    this.web3Service.currentNetwork$.subscribe(chainId => {
+      if (chainId === this.networkId) {
+        this.isNetworkSelected = true;
+      } else {
+        this.isNetworkSelected = false;
+      }
+    });
+  }
+
+  switchNetwork() {
+    this.web3Service.switchNetwork(this.networkId).subscribe(() => {
+      this.isNetworkSelected = true;
+    })
+  }
+
+  send(): void {
+    this.web3Service
+      .sendTransaction(
+        this.walletId,
+        this._depositAddress$.getValue(),
+        this._exchangeInfo$.getValue().fromAmount.toString()
+      )
+      .subscribe({
+        next: data => {
+          console.log(data);
+        },
+        error: err => {
+          console.error('Error occurred:', err);
+        }
+      });
+  }
 
   ngOnDestroy() {}
 

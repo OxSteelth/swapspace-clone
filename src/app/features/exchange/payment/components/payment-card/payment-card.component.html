@@ -134,19 +134,24 @@
             type="button"
             class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
             (click)="connectToWallet()"
-            *ngIf="!walletConnected"
+            *ngIf="!isWalletConnected"
           >
             Connect Wallet
           </button>
-          <div
-            *ngIf="walletConnected"
-            class="bg-gradient-to-r from-green-500 to-blue-500 p-[2em] rounded-xl"
+          <button
+            type="button"
+            class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
+            (click)="switchNetwork()"
+            *ngIf="isWalletConnected && !isNetworkSelected"
           >
+            Wrong network
+          </button>
+          <div class="bg-gradient-to-r from-green-500 to-blue-500 p-[2em] rounded-xl">
             <button
               type="button"
               class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
               (click)="send()"
-              *ngIf="walletConnected"
+              *ngIf="isWalletConnected && isNetworkSelected"
             >
               Send
             </button>

@@ -9,7 +9,6 @@ import { SwapFormService } from '@app/shared/services/swap-form.service';
 import { AvailableExchange, CreateExchange, CurrencyOption } from '@app/shared/types';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { StoreService } from '@app/shared/services/store/store.service';
-import { WalletService } from '@app/shared/services/wallet.service';
 
 @Component({
   selector: 'app-confirmation-card',
@@ -75,9 +74,6 @@ export class ConfirmationCardComponent {
   confirmed = signal(false);
   isShowingPanel = signal(false);
 
-  public walletConnected: boolean = false;
-  public walletId: string = '';
-
   @ViewChild('recipientPanel')
   recipientPanel!: ElementRef<HTMLDivElement>;
 
@@ -88,13 +84,11 @@ export class ConfirmationCardComponent {
     private exchangeService: ExchangeService,
     private swapFormService: SwapFormService,
     private currencyService: CurrencyService,
-    private storeService: StoreService,
-    private walletService: WalletService
+    private storeService: StoreService
   ) {}
 
   ngOnInit() {
-    this.checkWalletConnected();
-
+    this.swapFormService.fromToken$.subscribe(asset => console.log(asset))
     if (this.arrow) {
       this.arrow.nativeElement.style.transform = this.isCollapsed
         ? 'rotate(180deg)'
@@ -113,7 +107,7 @@ export class ConfirmationCardComponent {
       this.form.controls.toAmount.setValue(Number(v));
     });
 
-    if (!this.exchangeService.selectedOffer ) {
+    if (!this.exchangeService.selectedOffer) {
       this.exchangeService.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'));
     }
 
@@ -121,18 +115,6 @@ export class ConfirmationCardComponent {
       this.exchangeService.updateRecipientAddress(value);
     });
   }
-
-  connectToWallet = () => {
-    this.walletService.connectWallet();
-  };
-
-  checkWalletConnected = async () => {
-    const accounts = await this.walletService.checkWalletConnected();
-    if (accounts.length > 0) {
-      this.walletConnected = true;
-      this.walletId = accounts[0];
-    }
-  };
 
   public updateInputValue(value: string): void {
     const oldValue = this.swapFormService.inputValue?.fromAmount;
@@ -172,7 +154,7 @@ export class ConfirmationCardComponent {
           this.swapFormService.disableInput();
           this.confirmed.set(true);
           this._depositAddress$.next(ce.from.address);
-          this.storeService.setItem('CREATED_EXCHANGE', ce)
+          this.storeService.setItem('CREATED_EXCHANGE', ce);
 
           this.router.navigate(['/exchange/step3'], {
             queryParams: {

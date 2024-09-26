@@ -56,7 +56,6 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
 
   @Input() public inputMode: 'input' | 'output' | 'combined';
 
-  @Input() tokenControl = new FormControl<string | null>(null);
   @Input() amountControl = new FormControl<number | null>(null);
 
   @Input({ required: true }) label!: string;
@@ -155,10 +154,10 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
     this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
     this.exchangeService.confirmationStep$.subscribe(step => {
-      if(step >= 1) {
+      if (step >= 1) {
         this._isDisabled$.next(true);
       }
-    })
+    });
 
     this.isLoading$.subscribe(isLoading => {
       if (this.spinner) {
@@ -247,7 +246,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
 
     this.swapFormService.inputControl.statusChanges.subscribe(_status => {
       if (_status === 'DISABLED') {
-        this._isDisabled$.next(true)
+        this._isDisabled$.next(true);
       }
     });
   }
