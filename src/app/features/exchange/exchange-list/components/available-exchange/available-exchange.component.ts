@@ -17,6 +17,7 @@ import {
 } from 'rxjs';
 import { compareObjects } from '@app/shared/utils/utils';
 import { StoreService } from '@app/shared/services/store/store.service';
+import { CacheService } from '@app/shared/services/cache.service';
 
 @Component({
   selector: 'app-available-exchange',
@@ -37,10 +38,9 @@ export class AvailableExchangeComponent implements OnInit {
     public swapFormService: SwapFormService,
     public exchangeService: ExchangeService,
     private storeService: StoreService,
-    private router: Router
-  ) {
-
-  }
+    private router: Router,
+    private cacheService: CacheService
+  ) {}
 
   ngOnInit() {
     this.exchangeService.estimatedExchange$.subscribe(value =>
@@ -114,20 +114,28 @@ export class AvailableExchangeComponent implements OnInit {
   }
 
   exchangeCurrency(exchange: Exchange) {
-    this.exchangeService.updateSelectedOffer(exchange);
-    this.storeService.setItem('SELECTED_OFFER', exchange);
+    this.cacheService.updateSelectedOffer(exchange);
 
-    this.router.navigate(['/exchange/step2'], {
-      queryParams: {
-        from: this.swapFormService.inputValue.fromToken.code,
-        fromChain: this.swapFormService.inputValue.fromBlockchain,
-        to: this.swapFormService.inputValue.toToken.code,
-        toChain: this.swapFormService.inputValue.toBlockchain,
-        amount: this.swapFormService.inputValue.fromAmount,
-        partner: this.exchangeService.selectedOffer.partner,
-        fixed: this.exchangeService.fixedRate
-      },
-      queryParamsHandling: 'merge'
+    combineLatest([
+      this.cacheService.fromToken$,
+      this.cacheService.fromChain$,
+      this.cacheService.fromAmount$,
+      this.cacheService.toToken$,
+      this.cacheService.toChain$,
+      this.cacheService.selectedOffer$
+    ]).subscribe(([fromToken, fromChain, fromAmount, toToken, toChain, selectedOffer]) => {
+      this.router.navigate(['/exchange/step2'], {
+        queryParams: {
+          from: fromToken,
+          fromChain,
+          to: toToken,
+          toChain,
+          amount: fromAmount,
+          partner: selectedOffer.partner,
+          fixed: selectedOffer.fixed
+        },
+        queryParamsHandling: 'merge'
+      });
     });
   }
 }

@@ -11,9 +11,7 @@ import { ExchangeService } from '@app/shared/services/exchange.service';
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(private currencyService: CurrencyService, private exchangeService: ExchangeService) {}
 
-  ngOnInit(): void {
-    this.currencyService.fetchCurrencyList();
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.exchangeService.stopInterval();

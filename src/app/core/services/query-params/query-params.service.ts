@@ -57,4 +57,13 @@ export class QueryParamsService {
       queryParamsHandling: 'merge'
     });
   }
+
+  public FreshQueryParams(params: Partial<QueryParams>): void {
+    this.queryParams = params;
+
+    this.router.navigate([], {
+      queryParams: this.queryParams,
+      queryParamsHandling: ''
+    });
+  }
 }

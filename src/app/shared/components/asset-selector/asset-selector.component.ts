@@ -17,6 +17,7 @@ import { FormControl } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
 import { Currency } from '../../models/currency';
 import { SwapFormService } from '@app/shared/services/swap-form.service';
+import { CacheService } from '@app/shared/services/cache.service';
 
 @Component({
   selector: 'app-asset-selector',
@@ -61,10 +62,11 @@ export class AssetSelectorComponent implements OnChanges, OnInit {
   constructor(
     private readonly cdr: ChangeDetectorRef,
     private readonly currencyService: CurrencyService,
-    private readonly swapFormService: SwapFormService
+    private readonly swapFormService: SwapFormService,
+    private cacheService: CacheService
   ) {
-    this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
-    this.allCurrencyList$ = this.currencyService.allCurrencyList$;
+    this.popularCurrencyList$ = this.cacheService.popularCurrencyList$;
+    this.allCurrencyList$ = this.cacheService.allCurrencyList$;
   }
 
   ngOnChanges(changes: SimpleChanges) {

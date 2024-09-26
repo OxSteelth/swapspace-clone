@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { QueryParamsService } from '@core/services/query-params/query-params.service';
 import { catchError, distinctUntilChanged, first, map, pairwise, switchMap } from 'rxjs/operators';
-import { BehaviorSubject, forkJoin, from, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, from, Observable, of, scheduled } from 'rxjs';
 import BigNumber from 'bignumber.js';
 import { QueryParams } from '@core/services/query-params/models/query-params';
 import { List } from 'immutable';
@@ -15,6 +15,7 @@ import {
 } from './constants/default-tokens-params';
 import { tuiIsPresent } from '@taiga-ui/cdk';
 import { Currency } from '@app/shared/models/currency';
+import { CacheService } from '../cache.service';
 
 @Injectable()
 export class SwapFormQueryService {
@@ -28,42 +29,12 @@ export class SwapFormQueryService {
   constructor(
     private readonly queryParamsService: QueryParamsService,
     private readonly swapFormService: SwapFormService,
-    private readonly currencyService: CurrencyService
+    private readonly currencyService: CurrencyService,
+    private cacheService: CacheService
   ) {}
 
-  public subscribeOnSwapForm(): void {
-    this.swapFormService.inputValue$
-      .pipe(
-        distinctUntilChanged((prev, curr) => compareObjects(prev, curr)),
-        pairwise()
-      )
-      .subscribe(([, curr]) => {
-        if (curr.fromToken && curr.toToken) {
-          this.queryParamsService.patchQueryParams({
-            ...(curr.fromToken?.code && { from: curr.fromToken.code }),
-            ...(curr.toToken?.code && { to: curr.toToken.code }),
-            ...(curr.fromBlockchain && { fromChain: curr.fromBlockchain }),
-            ...(curr.toBlockchain && { toChain: curr.toBlockchain }),
-            ...(Number(curr.fromAmount) > 0 && {
-              amount: curr.fromAmount
-            })
-          });
-        } else {
-          this.queryParamsService.patchQueryParams({
-            ...{ from: 'btc' },
-            ...{ to: 'eth' },
-            ...{ fromChain: 'btc' },
-            ...{ toChain: 'eth' },
-            ...{ amount: '0.1' }
-          });
-        }
-
-        this.subscribeOnQueryParams();
-      });
-  }
-
   public subscribeOnQueryParams(): void {
-    this.currencyService.allCurrencyList$
+    this.cacheService.allCurrencyList$
       .pipe(
         switchMap(tokens => {
           const queryParams = this.queryParamsService.queryParams;
@@ -104,18 +75,48 @@ export class SwapFormQueryService {
       });
   }
 
+  public subscribeOnStep2QueryParams() {
+    this.subscribeOnQueryParams();
+    this.cacheService.selectedOffer$.subscribe(offer => {
+      if (offer) {
+        this.queryParamsService.patchQueryParams({
+          partner: offer.partner,
+          fixed: offer.fixed
+        });
+      }
+    });
+  }
+
   private getProtectedSwapParams(queryParams: QueryParams): QueryParams {
-    let fromChain: string = defaultFormParameters.swap.fromChain;
-
-    const toChain = defaultFormParameters.swap.toChain;
-
-    const newParams = {
-      ...queryParams,
-      fromChain,
-      toChain
+    let newParams = {
+      fromChain: '',
+      toChain: '',
+      from: '',
+      to: '',
+      amount: ''
     };
 
-    if (fromChain === toChain && newParams.from && newParams.from === newParams.to) {
+    combineLatest([
+      this.cacheService.fromToken$,
+      this.cacheService.fromChain$,
+      this.cacheService.fromAmount$,
+      this.cacheService.toChain$,
+      this.cacheService.toToken$
+    ]).subscribe(([fromToken, fromChain, fromAmount, toChain, toToken]) => {
+      newParams.fromChain = fromChain || defaultFormParameters.swap.fromChain;
+      newParams.toChain = toChain || defaultFormParameters.swap.toChain;
+      newParams.from = fromToken || defaultFormParameters.swap.from;
+      newParams.to = toToken || defaultFormParameters.swap.to;
+      newParams.amount = fromAmount || defaultFormParameters.swap.amount;
+    });
+
+    newParams = { ...newParams, ...queryParams };
+
+    if (
+      newParams.fromChain === newParams.toChain &&
+      newParams.from &&
+      newParams.from === newParams.to
+    ) {
       if (newParams.from === defaultFormParameters.swap.from) {
         newParams.from = defaultFormParameters.swap.to;
       } else {
@@ -144,7 +145,7 @@ export class SwapFormQueryService {
     );
 
     if (similarTokens.length === 0) {
-      return this.currencyService.allCurrencyList$.pipe(
+      return this.cacheService.allCurrencyList$.pipe(
         map(tokens => {
           if (tokens.length > 0) {
             const token =

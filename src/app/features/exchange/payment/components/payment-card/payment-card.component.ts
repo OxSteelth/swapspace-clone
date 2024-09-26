@@ -22,6 +22,8 @@ import { StoreService } from '@app/shared/services/store/store.service';
 import { WalletService } from '@app/shared/services/wallet.service';
 import { Exchange } from '@app/shared/models/exchange';
 import { Web3Service } from '@app/shared/services/web3.service';
+import { CacheService } from '@app/shared/services/cache.service';
+import { Currency } from '@app/shared/models/currency';
 
 @Component({
   selector: 'app-payment-card',
@@ -103,7 +105,8 @@ export class PaymentCardComponent {
     private walletService: WalletService,
     private storeService: StoreService,
     private swapFormQueryService: SwapFormQueryService,
-    private web3Service: Web3Service
+    private web3Service: Web3Service,
+    private cacheService: CacheService
   ) {
     this.accounts$ = this.web3Service.getAccountsObservable();
   }
@@ -124,16 +127,21 @@ export class PaymentCardComponent {
         this.updateDepositAddress(ce.from.address);
         this.exchangeService.updateRecipientAddress(ce.to.address);
 
-        const findFromToken$ = this.swapFormQueryService.getTokenBySymbol(
-          this.currencyService.allCurrencyList,
-          ce.from.code,
-          ce.from.network
-        );
-        const findToToken$ = this.swapFormQueryService.getTokenBySymbol(
-          this.currencyService.allCurrencyList,
-          ce.to.code,
-          ce.to.network
-        );
+        let findFromToken$: Observable<Currency>;
+        let findToToken$: Observable<Currency>;
+
+        this.cacheService.allCurrencyList$.subscribe(list => {
+          findFromToken$ = this.swapFormQueryService.getTokenBySymbol(
+            list,
+            ce.from.code,
+            ce.from.network
+          );
+          findToToken$ = this.swapFormQueryService.getTokenBySymbol(
+            list,
+            ce.to.code,
+            ce.to.network
+          );
+        });
 
         forkJoin([findFromToken$, findToToken$])
           .pipe(
@@ -167,7 +175,6 @@ export class PaymentCardComponent {
     }
 
     this.exchangeService.selectedOffer$.pipe(distinctUntilChanged()).subscribe(offer => {
-      console.log(offer);
       this.updateExchangeInfo(offer);
     });
 
@@ -221,13 +228,11 @@ export class PaymentCardComponent {
   }
 
   send(): void {
-    console.log(this.walletId)
     if (
       this.walletId &&
       this._depositAddress$.getValue() &&
       this._exchangeInfo$.getValue().fromAmount.toString()
     ) {
-
       this.web3Service
         .sendTransaction(
           this.walletId,
@@ -235,9 +240,7 @@ export class PaymentCardComponent {
           this._exchangeInfo$.getValue().fromAmount.toString()
         )
         .subscribe({
-          next: data => {
-            console.log(data);
-          },
+          next: data => {},
           error: err => {
             console.error('Error occurred:', err);
           }

@@ -5,6 +5,9 @@ interface AllQueryParams {
   toChain: string;
   amount: string;
   amountTo: string;
+  direction: string;
+  partner: string;
+  fixed: boolean;
 }
 
 export type QueryParams = {

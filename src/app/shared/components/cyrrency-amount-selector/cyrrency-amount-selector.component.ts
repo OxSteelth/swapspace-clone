@@ -34,6 +34,7 @@ import { compareObjects } from '@app/shared/utils/utils';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { Exchange } from '@app/shared/models/exchange';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
+import { CacheService } from '@app/shared/services/cache.service';
 
 interface Token {
   token: Currency;
@@ -63,6 +64,8 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   @Input() label2: string;
 
   @Input() asset: Currency;
+
+  @Input() isLoading: boolean;
 
   @Input() set amountValue(value: string | null) {
     if (this.inputMode !== 'input') {
@@ -132,11 +135,9 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
     private readonly currencyService: CurrencyService,
     private readonly swapFormService: SwapFormService,
     private readonly swapFormQueryService: SwapFormQueryService,
-    private readonly exchangeService: ExchangeService
+    private readonly exchangeService: ExchangeService,
+    private readonly cacheService: CacheService
   ) {
-    this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
-    this.allCurrencyList$ = this.currencyService.allCurrencyList$;
-
     this.initializeData();
   }
 
@@ -151,7 +152,6 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
     this.exchangeService.confirmationStep$.subscribe(step => {
       if (step >= 1) {
@@ -166,18 +166,19 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
       }
     });
 
-    combineLatest([this.allCurrencyList$, this.popularCurrencyList$]).subscribe(
-      ([all, popular]) => {
-        this._tokens$.next([
-          ...popular.slice(0, 10).map(v => ({ group: 'Popular Currencies', token: v })),
-          ...all.slice(0, 10).map(v => ({ group: 'All Currencies', token: v }))
-        ]);
-        this._filteredTokens$.next([
-          ...popular.slice(0, 10).map(v => ({ group: 'Popular Currencies', token: v })),
-          ...all.slice(0, 10).map(v => ({ group: 'All Currencies', token: v }))
-        ]);
-      }
-    );
+    combineLatest([
+      this.cacheService.allCurrencyList$,
+      this.cacheService.popularCurrencyList$
+    ]).subscribe(([all, popular]) => {
+      this._tokens$.next([
+        ...popular.slice(0, 10).map(v => ({ group: 'Popular Currencies', token: v })),
+        ...all.slice(0, 10).map(v => ({ group: 'All Currencies', token: v }))
+      ]);
+      this._filteredTokens$.next([
+        ...popular.slice(0, 10).map(v => ({ group: 'Popular Currencies', token: v })),
+        ...all.slice(0, 10).map(v => ({ group: 'All Currencies', token: v }))
+      ]);
+    });
 
     combineLatest([
       this.tokens$,
@@ -200,39 +201,46 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
       )
       .subscribe(value => this._filteredTokens$.next(value));
 
+    this.swapFormService.inputControl.valueChanges.pipe(startWith(null));
+
     combineLatest([
+      this.exchangeService.interval$,
       this.swapFormService.inputControl.valueChanges.pipe(
+        startWith(this.swapFormService.inputValue),
         debounceTime(300),
         distinctUntilChanged((prevInput, currInput) => compareObjects(prevInput, currInput))
       ),
-      this.exchangeService.interval$
+      this.cacheService.selectedOffer$
     ])
       .pipe(
-        switchMap(([value]) => {
+        switchMap(([, value, selectedOffer]) => {
           this._isLoading$.next(true);
           if (
             value.fromBlockchain !== '' &&
             value.toBlockchain !== '' &&
             value.fromToken &&
             value.toToken &&
-            value.fromAmount
+            value.fromAmount &&
+            selectedOffer
           ) {
-            return this.exchangeService.getBestExchangeAmount(
+            return this.exchangeService.getEstimatedExchangeAmounts(
               value.fromToken.code,
               value.fromBlockchain,
               value.toBlockchain,
               value.toToken.code,
-              Number(value.fromAmount)
+              Number(value.fromAmount),
+              selectedOffer.partner,
+              selectedOffer.fixed
             );
           } else {
-            return of(null);
+            return of([]);
           }
         })
       )
-      .subscribe((value: Exchange) => {
-        if (value) {
+      .subscribe((value: Exchange[]) => {
+        if (value.length > 0) {
           this.swapFormService.outputControl.patchValue({
-            toAmount: value.toAmount.toString()
+            toAmount: value[0].toAmount.toString()
           });
         } else {
           this.swapFormService.outputControl.patchValue({

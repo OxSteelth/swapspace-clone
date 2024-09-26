@@ -15,8 +15,6 @@ export class ExchangePaymentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currencyService.fetchCurrencyList();
     this.swapFormQueryService.subscribeOnQueryParams();
-    this.swapFormQueryService.subscribeOnSwapForm();
   }
 }

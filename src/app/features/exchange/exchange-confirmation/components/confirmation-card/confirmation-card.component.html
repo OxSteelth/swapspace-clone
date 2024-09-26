@@ -14,11 +14,12 @@
           (amountUpdated)="updateInputValue($event)"
         ></app-cyrrency-amount-selector>
       </ng-container>
-      <ng-container *ngLet="{ toAsset: toAsset$ | async } as input">
+      <ng-container *ngLet="{ toAsset: toAsset$ | async, isLoading: isLoading$ | async } as input">
         <app-cyrrency-amount-selector
           label="You get"
           label2="To"
           [asset]="input.toAsset"
+          [isLoading]="input.isLoading"
           [amountValue]="toAmount$ | async"
           (amountUpdated)="updateInputValue($event)"
           inputMode="output"

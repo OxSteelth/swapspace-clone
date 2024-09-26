@@ -29,9 +29,7 @@ export class ExchangeListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
-    this.currencyService.fetchCurrencyList();
     this.exchangeService.startInterval();
   }
 

@@ -5,28 +5,24 @@ const routes: Routes = [
   {
     path: 'step1',
     loadChildren: () =>
-      import('./exchange-list/exchange-list.module').then(
-        (m) => m.ExchangeListModule
-      ),
+      import('./exchange-list/exchange-list.module').then(m => m.ExchangeListModule)
   },
   {
     path: 'step2',
     loadChildren: () =>
       import('./exchange-confirmation/exchange-confirmation.module').then(
-        (m) => m.ExchangeConfirmationModule
-      ),
+        m => m.ExchangeConfirmationModule
+      )
   },
   {
     path: 'step3',
     loadChildren: () =>
-      import('./payment/exchange-payment.module').then(
-        (m) => m.ExchangePaymentModule
-      ),
-  },
+      import('./payment/exchange-payment.module').then(m => m.ExchangePaymentModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class ExchangeRoutingModule {}

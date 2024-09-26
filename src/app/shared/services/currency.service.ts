@@ -6,6 +6,7 @@ import { CurrencyOption } from '../types';
 import { Currency } from '../models/currency';
 import { HttpService } from 'src/app/core/services/http/http.service';
 import { StoreService } from './store/store.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,45 +39,24 @@ export class CurrencyService {
     }
   ]).pipe(delay(200), shareReplay(1));
 
-  private readonly _popularCurrencyList$ = new BehaviorSubject<Currency[]>([]);
-  public readonly popularCurrencyList$ = this._popularCurrencyList$.asObservable();
-
-  private readonly _allCurrencyList$ = new BehaviorSubject<Currency[]>([]);
-  public readonly allCurrencyList$ = this._allCurrencyList$.asObservable();
-
-  public get allCurrencyList() {
-    return this._allCurrencyList$.getValue();
-  }
-
-  public get popularCurrencyList() {
-    return this._popularCurrencyList$.getValue();
-  }
-
   constructor(
     private readonly httpService: HttpService,
-    private readonly destroy$: TuiDestroyService,
-    private storeService: StoreService
-  ) {
-    if (this.storeService.getItem('CURRENCY_LIST')) {
-      this._allCurrencyList$.next(this.storeService.getItem('CURRENCY_LIST'));
-      this._popularCurrencyList$.next(
-        this.storeService.getItem('CURRENCY_LIST').filter(token => token.popular)
-      );
-    }
-  }
+    private cacheService: CacheService
+  ) {}
 
   public fetchCurrencyList(): void {
-    if (!this._allCurrencyList$.getValue().length) {
-      this.httpService
-        .get<Currency[]>(`currencies`)
-        .pipe(
-          tap(tokens => {
-            this.storeService.setItem('CURRENCY_LIST', tokens);
-            this._allCurrencyList$.next(tokens);
-            this._popularCurrencyList$.next(tokens.filter(token => token.popular));
-          })
-        )
-        .subscribe();
-    }
+    this.cacheService.allCurrencyList$.subscribe(list => {
+      if (list.length === 0) {
+        this.httpService
+          .get<Currency[]>(`currencies`)
+          .pipe(
+            tap(tokens => {
+              this.cacheService.updateAllCurrencyList(tokens);
+              this.cacheService.updatePopularCurrencyList(tokens.filter(token => token.popular));
+            })
+          )
+          .subscribe();
+      }
+    });
   }
 }

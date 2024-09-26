@@ -23,6 +23,7 @@ import { Currency } from '../../models/currency';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { Exchange } from '@app/shared/models/exchange';
 import { compareObjects } from '@app/shared/utils/utils';
+import { CacheService } from '@app/shared/services/cache.service';
 
 @Component({
   selector: 'app-swap-form',
@@ -72,7 +73,8 @@ export class SwapFormComponent implements OnInit, OnDestroy {
     private readonly swapFormService: SwapFormService,
     private readonly swapFormQueryService: SwapFormQueryService,
     private readonly currencyService: CurrencyService,
-    public exchangeService: ExchangeService
+    public exchangeService: ExchangeService,
+    private cacheService: CacheService
   ) {
     this.inputControl = new FormControl('');
   }
@@ -80,11 +82,10 @@ export class SwapFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.exchangeService.startInterval();
 
-    this.swapFormQueryService.subscribeOnSwapForm();
     this.swapFormQueryService.subscribeOnQueryParams();
 
-    this.popularCurrencyList$ = this.currencyService.popularCurrencyList$;
-    this.allCurrencyList$ = this.currencyService.allCurrencyList$;
+    this.popularCurrencyList$ = this.cacheService.popularCurrencyList$;
+    this.allCurrencyList$ = this.cacheService.allCurrencyList$;
     this.allCurrencyList$.subscribe(value => {
       this._currencyList$.next(value);
       this._filteredList$.next(value);
@@ -108,6 +109,7 @@ export class SwapFormComponent implements OnInit, OnDestroy {
       .subscribe(value => this._filteredList$.next(value));
 
     this.swapFormService.inputControl.valueChanges.pipe(startWith(null));
+
     combineLatest([
       this.exchangeService.interval$,
       this.swapFormService.inputControl.valueChanges.pipe(

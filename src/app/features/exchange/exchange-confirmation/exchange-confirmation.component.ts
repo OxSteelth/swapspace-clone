@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CurrencyService } from '@app/shared/services/currency.service';
+import { ExchangeService } from '@app/shared/services/exchange.service';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
 
 @Component({
@@ -8,15 +9,18 @@ import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-
   styleUrls: ['./exchange-confirmation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExchangeConfirmationComponent implements OnInit {
+export class ExchangeConfirmationComponent implements OnInit, OnDestroy {
   constructor(
     private swapFormQueryService: SwapFormQueryService,
-    private currencyService: CurrencyService
+    private exchangeService: ExchangeService
   ) {}
 
   ngOnInit(): void {
-    this.currencyService.fetchCurrencyList();
-    this.swapFormQueryService.subscribeOnQueryParams();
-    this.swapFormQueryService.subscribeOnSwapForm();
+    this.exchangeService.startInterval();
+    this.swapFormQueryService.subscribeOnStep2QueryParams();
+  }
+
+  ngOnDestroy(): void {
+    this.exchangeService.stopInterval();
   }
 }

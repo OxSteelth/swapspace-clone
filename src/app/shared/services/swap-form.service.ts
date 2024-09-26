@@ -13,6 +13,8 @@ import { compareTokens } from '../utils/utils';
 import { shareReplayConfig } from '../constants/common/share-replay-config';
 import { observableToBehaviorSubject } from '../utils/observableToBehaviorSubject';
 import { Currency } from '../models/currency';
+import { CacheService } from './cache.service';
+import { QueryParamsService } from '@app/core/services/query-params/query-params.service';
 
 @Injectable()
 export class SwapFormService {
@@ -128,17 +130,30 @@ export class SwapFormService {
     return this._isFilled$.getValue();
   }
 
-  constructor() {
+  constructor(private cacheService: CacheService, private queryParamsService: QueryParamsService) {
     this.subscribeOnFormValueChange();
   }
 
   private subscribeOnFormValueChange(): void {
     this.form.get('input').valueChanges.subscribe(inputValue => {
       this._inputValue$.next(inputValue);
+      this.cacheService.updateFromToken(inputValue.fromToken.code);
+      this.cacheService.updateFromChain(inputValue.fromBlockchain);
+      this.cacheService.updateFromAmount(inputValue.fromAmount);
+      this.cacheService.updateToChain(inputValue.toBlockchain);
+      this.cacheService.updateToToken(inputValue.toToken.code);
+      this.queryParamsService.patchQueryParams({
+        from: inputValue.fromToken.code,
+        fromChain: inputValue.fromBlockchain,
+        to: inputValue.toToken.code,
+        toChain: inputValue.toBlockchain,
+        amount: inputValue.fromAmount
+      })
     });
 
     this.form.get('output').valueChanges.subscribe(outputValue => {
       this._outputValue$.next(outputValue);
+      this.cacheService.updateToAmount(outputValue.toAmount);
     });
   }
 

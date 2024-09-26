@@ -2,13 +2,27 @@ import { ChangeDetectionStrategy, Component, ElementRef, signal, ViewChild } fro
 import { ExchangeConfirmationViewModel } from '../../viewmodel/exchange-confirmation.viewmodel.';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, debounceTime, Observable, startWith, Subscription, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  Observable,
+  of,
+  startWith,
+  Subscription,
+  switchMap,
+  tap
+} from 'rxjs';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
 import { SwapFormService } from '@app/shared/services/swap-form.service';
 import { AvailableExchange, CreateExchange, CurrencyOption } from '@app/shared/types';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { StoreService } from '@app/shared/services/store/store.service';
+import { compareObjects } from '@app/shared/utils/utils';
+import { Exchange } from '@app/shared/models/exchange';
+import { CacheService } from '@app/shared/services/cache.service';
 
 @Component({
   selector: 'app-confirmation-card',
@@ -87,16 +101,18 @@ export class ConfirmationCardComponent {
     private exchangeService: ExchangeService,
     private swapFormService: SwapFormService,
     private currencyService: CurrencyService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private cacheService: CacheService
   ) {}
 
   ngOnInit() {
-    this.swapFormService.fromToken$.subscribe(asset => console.log(asset));
     if (this.arrow) {
       this.arrow.nativeElement.style.transform = this.isCollapsed
         ? 'rotate(180deg)'
         : 'rotate(0deg)';
     }
+
+
 
     this.swapFormService.inputControl.valueChanges.subscribe(v => {
       this.form.controls.fromAmount.setValue(Number(v.fromAmount));
@@ -142,14 +158,7 @@ export class ConfirmationCardComponent {
     } = this.form.value;
     const { id } = this.exchangeService.selectedOffer;
 
-    if (
-      !toToken ||
-      !fromAmount ||
-      !fromToken ||
-      !fromChain ||
-      !toChain ||
-      !recipientAddress
-    ) {
+    if (!toToken || !fromAmount || !fromToken || !fromChain || !toChain || !recipientAddress) {
       throw new Error('Invalid form values');
     }
 
@@ -166,7 +175,6 @@ export class ConfirmationCardComponent {
       );
 
       res.subscribe(ce => {
-        console.log(ce);
         if (ce.id) {
           this.exchangeService.setConfirmationStep(1);
           this.exchangeService.stopInterval();

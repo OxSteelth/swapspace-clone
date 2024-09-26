@@ -124,7 +124,6 @@ export class Web3Service {
       catchError(error => {
         // If the network is not available, prompt the user to add it
         if (error.code === 4902) {
-          console.log('Network not found, trying to add it');
           return this.addNetwork(chainId); // Call addNetwork method to add the chain
         }
 
