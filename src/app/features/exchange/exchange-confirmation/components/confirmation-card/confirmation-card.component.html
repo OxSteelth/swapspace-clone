@@ -38,13 +38,19 @@
 
   <div class="app-card c-address-card" *ngIf="!this.confirmed()">
     <label for="address" class="app-input-label">Provide the ETH address:</label>
-    <input
-      placeholder="Recipient address"
-      type="text"
-      formControlName="recipientAddress"
-      class="app-input"
-      id="address"
-    />
+    <div class="form-textarea__container">
+      <input
+        placeholder="Recipient address"
+        type="text"
+        formControlName="recipientAddress"
+        class="app-input"
+        id="address"
+      />
+      <div class="form-textarea__paste">
+        <div (click)="onPaste()">Paste</div>
+      </div>
+    </div>
+
     <hr />
     <div>
       <!-- Toggle Button -->

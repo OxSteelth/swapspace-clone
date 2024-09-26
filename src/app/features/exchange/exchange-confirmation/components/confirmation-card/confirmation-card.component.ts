@@ -250,4 +250,12 @@ export class ConfirmationCardComponent {
 
     this.recipientPanel.nativeElement.style.maxHeight = this.isShowingPanel() ? '100px' : '0px';
   }
+
+  onPaste() {
+    navigator.clipboard.readText().then((text) => {
+      this.form.controls.recipientAddress.setValue(text);
+    }).catch(err => {
+      console.error('Failed to read clipboard contents: ', err);
+    });
+  }
 }
