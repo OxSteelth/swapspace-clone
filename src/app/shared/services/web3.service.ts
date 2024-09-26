@@ -61,7 +61,6 @@ export class Web3Service {
     );
   }
 
-  // Send transaction as an observable
   public sendTransaction(fromAddr: string, to: string, amount: string): Observable<any> {
     if (!this.web3) {
       return new Observable(observer => {
@@ -70,7 +69,7 @@ export class Web3Service {
     }
 
     const transactionParams = {
-      fromAddr,
+      from: fromAddr,
       to,
       value: this.web3.utils.toWei(amount, 'ether')
     };

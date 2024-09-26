@@ -37,7 +37,10 @@ export class ConfirmationCardComponent {
     Validators.min(0)
   ]);
 
-  public toAmountFormControl = new FormControl<number | null>(null, [Validators.min(0)]);
+  public toAmountFormControl = new FormControl<number | null>(null, [
+    Validators.required,
+    Validators.min(0),
+  ]);
 
   public toTokenFormControl = new FormControl<string>('ETH', [Validators.required]);
   public toChainFormControl = new FormControl<string>('ETH', [Validators.required]);
@@ -88,7 +91,7 @@ export class ConfirmationCardComponent {
   ) {}
 
   ngOnInit() {
-    this.swapFormService.fromToken$.subscribe(asset => console.log(asset))
+    this.swapFormService.fromToken$.subscribe(asset => console.log(asset));
     if (this.arrow) {
       this.arrow.nativeElement.style.transform = this.isCollapsed
         ? 'rotate(180deg)'

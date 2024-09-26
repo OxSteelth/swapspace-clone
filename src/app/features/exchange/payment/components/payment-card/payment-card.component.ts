@@ -217,24 +217,32 @@ export class PaymentCardComponent {
   switchNetwork() {
     this.web3Service.switchNetwork(this.networkId).subscribe(() => {
       this.isNetworkSelected = true;
-    })
+    });
   }
 
   send(): void {
-    this.web3Service
-      .sendTransaction(
-        this.walletId,
-        this._depositAddress$.getValue(),
-        this._exchangeInfo$.getValue().fromAmount.toString()
-      )
-      .subscribe({
-        next: data => {
-          console.log(data);
-        },
-        error: err => {
-          console.error('Error occurred:', err);
-        }
-      });
+    console.log(this.walletId)
+    if (
+      this.walletId &&
+      this._depositAddress$.getValue() &&
+      this._exchangeInfo$.getValue().fromAmount.toString()
+    ) {
+
+      this.web3Service
+        .sendTransaction(
+          this.walletId,
+          this._depositAddress$.getValue(),
+          this._exchangeInfo$.getValue().fromAmount.toString()
+        )
+        .subscribe({
+          next: data => {
+            console.log(data);
+          },
+          error: err => {
+            console.error('Error occurred:', err);
+          }
+        });
+    }
   }
 
   ngOnDestroy() {}
