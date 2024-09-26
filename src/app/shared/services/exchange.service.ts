@@ -54,7 +54,7 @@ export class ExchangeService {
   }
 
   public get confirmationStep() {
-    return this._confirmationStep$.getValue()
+    return this._confirmationStep$.getValue();
   }
 
   private readonly _estimatedExchange$ = new BehaviorSubject<Exchange[]>([]);
@@ -161,19 +161,31 @@ export class ExchangeService {
     toToken: string,
     toChain: string,
     address: string,
-    refundAddress: string
+    refundAddress: string,
+    toAmount: string
   ) {
     return this.httpService
       .post<CreateExchange>('exchange', {
-        partner: this.selectedOffer.partner,
-        fromCurrency: fromToken,
-        fromNetwork: fromChain,
-        toCurrency: toToken,
-        toNetwork: toChain,
         address,
         amount: fromAmount,
+        analyticsClientId: '',
+        direction: 'direct',
+        duration: this.selectedOffer.duration,
+        email: '',
+        extraId: '',
         fixed: this.selectedOffer.fixed,
-        refund: refundAddress
+        fromCurrency: fromToken,
+        fromNetwork: fromChain,
+        languages: ['en-US'],
+        partner: this.selectedOffer.partner,
+        preExchangeAmount: toAmount,
+        rateId: '',
+        refund: refundAddress,
+        refundExtraId: '',
+        status: 'pre',
+        timezone: '',
+        toCurrency: toToken,
+        toNetwork: toChain
       })
       .pipe(
         catchError(error => {

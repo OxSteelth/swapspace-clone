@@ -57,6 +57,8 @@ export class SwapFormQueryService {
             ...{ amount: '0.1' }
           });
         }
+
+        this.subscribeOnQueryParams();
       });
   }
 

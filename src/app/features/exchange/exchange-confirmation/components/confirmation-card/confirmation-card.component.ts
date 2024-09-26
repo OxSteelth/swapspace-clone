@@ -39,7 +39,7 @@ export class ConfirmationCardComponent {
 
   public toAmountFormControl = new FormControl<number | null>(null, [
     Validators.required,
-    Validators.min(0),
+    Validators.min(0)
   ]);
 
   public toTokenFormControl = new FormControl<string>('ETH', [Validators.required]);
@@ -130,11 +130,26 @@ export class ConfirmationCardComponent {
   }
 
   onSubmit() {
-    const { toToken, fromAmount, fromToken, fromChain, toChain, recipientAddress, refundAddress } =
-      this.form.value;
+    const {
+      toToken,
+      fromAmount,
+      fromToken,
+      fromChain,
+      toChain,
+      recipientAddress,
+      refundAddress,
+      toAmount
+    } = this.form.value;
     const { id } = this.exchangeService.selectedOffer;
 
-    if (!toToken || !fromAmount || !fromToken || !fromChain || !toChain || !recipientAddress) {
+    if (
+      !toToken ||
+      !fromAmount ||
+      !fromToken ||
+      !fromChain ||
+      !toChain ||
+      !recipientAddress
+    ) {
       throw new Error('Invalid form values');
     }
 
@@ -146,7 +161,8 @@ export class ConfirmationCardComponent {
         toToken,
         toChain,
         recipientAddress,
-        refundAddress
+        refundAddress,
+        toAmount.toString()
       );
 
       res.subscribe(ce => {
