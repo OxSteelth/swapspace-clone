@@ -117,7 +117,7 @@ export class PaymentCardComponent {
   ngOnInit() {
     this.cacheService.createdExchange$.subscribe(ce => {
       if (ce) {
-        this.updateDepositAddress(ce.from.address);
+        this.updateDepositAddress(this.web3Service.getChecksumAddress(ce.from.address));
         this.updateCreatedExchange(ce);
 
         const chainId = this.web3Service.getChainIdFromNetwork(ce.from.network);

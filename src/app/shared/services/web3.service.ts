@@ -81,6 +81,10 @@ export class Web3Service {
     }
   }
 
+  public getChecksumAddress(address: string): string {
+    return this.web3.utils.toChecksumAddress(address);
+  }
+
   public sendTransaction(fromAddr: string, to: string, amount: string): Observable<any> {
     if (!this.web3) {
       return new Observable(observer => {
@@ -91,7 +95,8 @@ export class Web3Service {
     const transactionParams = {
       from: fromAddr,
       to,
-      value: this.web3.utils.toWei(amount, 'ether')
+      value: this.web3.utils.toWei(amount, 'ether'),
+      gas: '21000',
     };
 
     return from(this.web3.eth.sendTransaction(transactionParams)).pipe(
