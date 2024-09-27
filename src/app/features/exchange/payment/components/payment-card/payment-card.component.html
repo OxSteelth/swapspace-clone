@@ -146,7 +146,7 @@
         <div class="field d-f mb-3" id="step3-panel-deposit-address">
           <div class="d-f d-f-c">
             <span class="field__label field__label_standard">
-              Send {{ fromAmount$ | async }} {{ fromAsset }} to the deposit address:
+              Send {{ fromAmount$ | async }} {{ fromAsset.code }} to the deposit address:
             </span>
             <div class="field__wrapper">
               <p class="field__value field__value_lead">
@@ -156,6 +156,7 @@
                 <button
                   type="button"
                   class="button field__button button_lg button_transparent button_uppercase button_"
+                  (click)="copyDepositAddress()"
                 >
                   <svg
                     aria-hidden="true"

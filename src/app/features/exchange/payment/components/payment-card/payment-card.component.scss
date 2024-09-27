@@ -166,21 +166,6 @@
   font-weight: 500;
 }
 
-.button_transparent {
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  font-size: 1rem;
-  font-weight: 400;
-  height: 60px;
-  justify-content: center;
-  transition: color 0.2s ease;
-  width: inherit;
-}
-
 .field__small-button_light-violet {
   color: #a0789c;
 }
@@ -289,6 +274,21 @@ svg:not(:root).svg-inline--fa {
   font-size: 1rem;
   justify-content: center;
   transition: background-color 0.2s ease;
+}
+
+.button_transparent {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 60px;
+  justify-content: center;
+  transition: color 0.2s ease;
+  width: inherit;
 }
 
 .step3-panel-wallet__connect-button {

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Clipboard } from '@angular/cdk/clipboard';
 import {
   BehaviorSubject,
   combineLatest,
@@ -10,6 +11,7 @@ import {
   from,
   map,
   Observable,
+  of,
   startWith,
   Subscription,
   tap
@@ -106,7 +108,8 @@ export class PaymentCardComponent {
     private storeService: StoreService,
     private swapFormQueryService: SwapFormQueryService,
     private web3Service: Web3Service,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private clipboard: Clipboard
   ) {
     this.accounts$ = this.web3Service.getAccountsObservable();
   }
@@ -249,5 +252,14 @@ export class PaymentCardComponent {
     if (!this.recipientPanel) return;
 
     this.recipientPanel.nativeElement.style.maxHeight = this.isShowingPanel() ? '100px' : '0px';
+  }
+
+  copyDepositAddress() {
+    of(this._depositAddress$.getValue())
+      .pipe(
+        tap(textToCopy => this.clipboard.copy(textToCopy)),
+        tap(() => console.log('Copied to clipboard:', this._depositAddress$.getValue()))
+      )
+      .subscribe();
   }
 }
