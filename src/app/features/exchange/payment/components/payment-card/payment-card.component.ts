@@ -7,6 +7,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   forkJoin,
+  from,
   map,
   Observable,
   startWith,
@@ -233,18 +234,34 @@ export class PaymentCardComponent {
       this._depositAddress$.getValue() &&
       this._exchangeInfo$.getValue().fromAmount.toString()
     ) {
-      this.web3Service
-        .sendTransaction(
-          this.walletId,
-          this._depositAddress$.getValue(),
-          this._exchangeInfo$.getValue().fromAmount.toString()
-        )
-        .subscribe({
-          next: data => {},
-          error: err => {
-            console.error('Error occurred:', err);
-          }
-        });
+      if (this.web3Service.isZeroAddress(this._createdExchange$.getValue().from.contractAddress)) {
+        this.web3Service
+          .sendTransaction(
+            this.walletId,
+            this._depositAddress$.getValue(),
+            this._exchangeInfo$.getValue().fromAmount.toString()
+          )
+          .subscribe({
+            next: data => {},
+            error: err => {
+              console.error('Error occurred:', err);
+            }
+          });
+      } else {
+        this.web3Service
+          .sendTokenTransaction(
+            this.walletId,
+            this._depositAddress$.getValue(),
+            this._exchangeInfo$.getValue().fromAmount.toString(),
+            this._createdExchange$.getValue().from.contractAddress
+          )
+          .subscribe({
+            next: data => {},
+            error: err => {
+              console.error('Error occurred:', err);
+            }
+          });
+      }
     }
   }
 

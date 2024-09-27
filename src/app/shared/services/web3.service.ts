@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import Web3 from 'web3';
-import { BehaviorSubject, from, fromEvent, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, from, fromEvent, Observable, of, Subject } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
+import BigNumber from 'bignumber.js';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,25 @@ export class Web3Service {
     );
   }
 
+  public getNativeTokenDecimals(network: string): number {
+    switch (network) {
+      case 'ethereum':
+      case 'binance':
+        return 18;  // Ether (ETH) and BNB both have 18 decimals
+      case 'solana':
+        return 9;   // Solana (SOL) has 9 decimals
+      case 'bitcoin':
+        return 8;   // Bitcoin (BTC) has 8 decimals
+      case 'polkadot':
+        return 10;  // Polkadot (DOT) has 10 decimals
+      case 'cardano':
+      case 'ripple':
+        return 6;   // Cardano (ADA) and Ripple (XRP) have 6 decimals
+      default:
+        throw new Error('Unknown network');
+    }
+  }
+
   public sendTransaction(fromAddr: string, to: string, amount: string): Observable<any> {
     if (!this.web3) {
       return new Observable(observer => {
@@ -80,6 +100,68 @@ export class Web3Service {
         throw error;
       })
     );
+  }
+
+  public sendTokenTransaction(
+    fromAddr: string,
+    to: string,
+    amount: string,
+    contractAddress: string
+  ): Observable<any> {
+    if (!this.web3) {
+      return new Observable(observer => {
+        observer.error('Web3 not initialized');
+      });
+    }
+
+    const abi = [
+      {
+        constant: false,
+        inputs: [
+          { name: '_to', type: 'address' },
+          { name: '_value', type: 'uint256' }
+        ],
+        name: 'transfer',
+        outputs: [{ name: '', type: 'bool' }],
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [] as any[],
+        name: 'decimals',
+        outputs: [
+          {
+            name: '',
+            type: 'uint8'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      }
+    ];
+
+    const contract = this.getContract(abi, contractAddress);
+
+    return contract.methods
+      .decimals()
+      .call()
+      .then((decimals: number) => {
+        const toWei = (Number(amount) * Math.pow(10, decimals)).toFixed();
+        const weiValue = this.web3.utils.toWei(toWei, 'wei');
+
+        return from(contract.methods.transfer(to, weiValue).send({ from: fromAddr })).pipe(
+          catchError(error => {
+            console.error('Error sending transaction', error);
+            throw error;
+          })
+        );
+      })
+      .catch((error: any) => {
+        return new Observable(observer => {
+          observer.error('getting decimals error');
+        });
+      });
   }
 
   // Sign a message as an observable
@@ -104,6 +186,10 @@ export class Web3Service {
       throw new Error('Web3 not initialized');
     }
     return new this.web3.eth.Contract(abi, address);
+  }
+
+  public isZeroAddress(address: string) {
+    return address.toLowerCase() === '0x0000000000000000000000000000000000000000';
   }
 
   switchNetwork(chainId: string): Observable<any> {
@@ -265,7 +351,7 @@ export class Web3Service {
 
   public async getNetworkInfo() {
     if (this.web3) {
-      const networkId = (await this.web3.eth.net.getId());
+      const networkId = await this.web3.eth.net.getId();
       this._currentNetwork$.next('0x' + networkId.toString(16));
     }
   }

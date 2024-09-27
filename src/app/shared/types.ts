@@ -31,6 +31,7 @@ export type CreateExchange = {
     code: string;
     network: string;
     amount: number;
+    contractAddress: string;
     address: string;
     extraId: string;
     transactionHash: string;
