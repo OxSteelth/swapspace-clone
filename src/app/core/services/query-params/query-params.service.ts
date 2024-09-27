@@ -58,7 +58,7 @@ export class QueryParamsService {
     });
   }
 
-  public FreshQueryParams(params: Partial<QueryParams>): void {
+  public freshQueryParams(params: Partial<QueryParams>): void {
     this.queryParams = params;
 
     this.router.navigate([], {

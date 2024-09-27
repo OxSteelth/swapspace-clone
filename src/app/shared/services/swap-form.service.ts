@@ -15,6 +15,7 @@ import { observableToBehaviorSubject } from '../utils/observableToBehaviorSubjec
 import { Currency } from '../models/currency';
 import { CacheService } from './cache.service';
 import { QueryParamsService } from '@app/core/services/query-params/query-params.service';
+import { CurrencyService } from './currency.service';
 
 @Injectable()
 export class SwapFormService {
@@ -130,19 +131,19 @@ export class SwapFormService {
     return this._isFilled$.getValue();
   }
 
-  constructor(private cacheService: CacheService, private queryParamsService: QueryParamsService) {
+  constructor(private cacheService: CacheService, private queryParamsService: QueryParamsService, private currencyService: CurrencyService) {
     this.subscribeOnFormValueChange();
   }
 
   private subscribeOnFormValueChange(): void {
     this.form.get('input').valueChanges.subscribe(inputValue => {
       this._inputValue$.next(inputValue);
-      this.cacheService.updateFromToken(inputValue.fromToken.code);
+      this.cacheService.updateFromToken(inputValue.fromToken);
       this.cacheService.updateFromChain(inputValue.fromBlockchain);
       this.cacheService.updateFromAmount(inputValue.fromAmount);
       this.cacheService.updateToChain(inputValue.toBlockchain);
-      this.cacheService.updateToToken(inputValue.toToken.code);
-      this.queryParamsService.patchQueryParams({
+      this.cacheService.updateToToken(inputValue.toToken);
+      this.queryParamsService.freshQueryParams({
         from: inputValue.fromToken.code,
         fromChain: inputValue.fromBlockchain,
         to: inputValue.toToken.code,

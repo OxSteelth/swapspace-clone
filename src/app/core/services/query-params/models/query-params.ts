@@ -8,6 +8,7 @@ interface AllQueryParams {
   direction: string;
   partner: string;
   fixed: boolean;
+  id: string;
 }
 
 export type QueryParams = {

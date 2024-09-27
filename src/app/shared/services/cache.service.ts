@@ -3,21 +3,22 @@ import { StoreService } from './store/store.service';
 import { BehaviorSubject, startWith } from 'rxjs';
 import { Currency } from '../models/currency';
 import { Exchange } from '../models/exchange';
+import { CreateExchange } from '../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CacheService {
-  private _fromToken$ = new BehaviorSubject<string>('');
+  private _fromToken$ = new BehaviorSubject<Currency | null>(null);
   public fromToken$ = this._fromToken$.asObservable();
-  public updateFromToken(token: string) {
+  public updateFromToken(token: Currency) {
     this._fromToken$.next(token);
     this.storeService.setItem('FROM_TOKEN', token);
   }
 
-  private _toToken$ = new BehaviorSubject<string>('');
+  private _toToken$ = new BehaviorSubject<Currency | null>(null);
   public toToken$ = this._toToken$.asObservable();
-  public updateToToken(token: string) {
+  public updateToToken(token: Currency) {
     this._toToken$.next(token);
     this.storeService.setItem('TO_TOKEN', token);
   }
@@ -71,6 +72,37 @@ export class CacheService {
     this.storeService.setItem('SELECTED_OFFER', ex);
   }
 
+  private _depositAddress$ = new BehaviorSubject<string>('');
+  public depositAddress$ = this._depositAddress$.asObservable();
+  public updateDepositAddress(address: string) {
+    this._depositAddress$.next(address);
+    this.storeService.setItem('DEPOSIT_ADDRESS', address);
+  }
+
+  private _createdExchange$ = new BehaviorSubject<CreateExchange | null>(null);
+  public createdExchange$ = this._createdExchange$.asObservable();
+  public updateCreatedExchange(ex: CreateExchange) {
+    this._createdExchange$.next(ex);
+    this.storeService.setItem('CREATED_EXCHANGE', ex);
+  }
+
+  private _exchangeStep$ = new BehaviorSubject<number>(0);
+  public exchangeStep$ = this._exchangeStep$.asObservable();
+  public updateExchangeStep(step: number) {
+    this._exchangeStep$.next(step);
+    this.storeService.setItem('EXCHANGE_STEP', step);
+  }
+  public get exchangeStep(): number {
+    return this._exchangeStep$.getValue();
+  }
+
+  private _recipientAddress$ = new BehaviorSubject<string>('');
+  public recipientAddress$ = this._recipientAddress$.asObservable();
+  public updateRecipientAddress(address: string) {
+    this._recipientAddress$.next(address);
+    this.storeService.setItem('RECIPIENT_ADDRESS', address);
+  }
+
   constructor(private storeService: StoreService) {}
 
   public init() {
@@ -108,6 +140,22 @@ export class CacheService {
 
     if (this.storeService.getItem('SELECTED_OFFER')) {
       this.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'));
+    }
+
+    if (this.storeService.getItem('DEPOSIT_ADDRESS')) {
+      this.updateDepositAddress(this.storeService.getItem('DEPOSIT_ADDRESS'));
+    }
+
+    if (this.storeService.getItem('CREATED_EXCHANGE')) {
+      this.updateCreatedExchange(this.storeService.getItem('CREATED_EXCHANGE'));
+    }
+
+    if (this.storeService.getItem('EXCHANGE_STEP')) {
+      this.updateExchangeStep(this.storeService.getItem('EXCHANGE_STEP'));
+    }
+
+    if (this.storeService.getItem('RECIPIENT_ADDRESS')) {
+      this.updateRecipientAddress(this.storeService.getItem('RECIPIENT_ADDRESS'));
     }
   }
 }

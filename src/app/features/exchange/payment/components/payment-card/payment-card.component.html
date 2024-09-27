@@ -5,22 +5,128 @@
 <div class="app-card c-echange-selector">
   <div class="app-group">
     <ng-container *ngLet="fromAsset$ | async as fromAsset">
-      <app-cyrrency-amount-selector
-        label="You send"
-        label2="From"
-        [asset]="fromAsset"
-        [amountValue]="fromAmount$ | async"
-        inputMode="output"
-      ></app-cyrrency-amount-selector>
+      <div class="pair-input pair-input_dark pair__input">
+        <label
+          for="amountInput"
+          class="form-input pair-input__input form-input_max-width form-input_disabled form-input_dark form-input_rounded form-input_lg"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text">You send</span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="amountInput"
+              spellcheck="false"
+              max="Infinity"
+              min="0"
+              maxlength="Infinity"
+              placeholder=""
+              step="any"
+              trim="true"
+              type="string"
+              autocomplete="off"
+              class="form-input__input form-input__input_rounded form-input__input_transparent-border"
+              [value]="fromAmount$ | async"
+              disabled
+            />
+          </span>
+        </label>
+        <div class="pair-search">
+          <span class="pair-search__label">
+            <span class="pair-search__label_text">
+              From
+              <span class="pair-search__button-dark-label-network">
+                {{ fromAsset?.network }}
+              </span>
+            </span>
+          </span>
+          <button
+            type="button"
+            class="pair-search__button-dark pair-search__button-no-bottom-round"
+            disabled
+          >
+            <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
+              <img
+                loading="lazy"
+                [src]="
+                  'https://storage.swapspace.co' +
+                  (fromAsset?.icon && fromAsset?.icon !== ''
+                    ? fromAsset?.icon
+                    : '/static/default-coin-icon.svg')
+                "
+                [alt]="fromAsset?.icon"
+                class="coin-icon__image coin-icon__white"
+              />
+            </div>
+
+            <span class="pair-search__button-dark-label d-f-c">
+              <span> {{ fromAsset?.code }} </span>
+            </span>
+          </button>
+        </div>
+      </div>
     </ng-container>
-    <ng-container *ngLet="{ toAsset: toAsset$ | async } as input">
-      <app-cyrrency-amount-selector
-        label="You get"
-        label2="To"
-        [asset]="input.toAsset"
-        [amountValue]="toAmount$ | async"
-        inputMode="output"
-      ></app-cyrrency-amount-selector>
+    <ng-container *ngLet="toAsset$ | async as toAsset">
+      <div class="pair-input pair-input_dark pair__input">
+        <label
+          for="amountInput"
+          class="form-input pair-input__input form-input_max-width form-input_disabled form-input_dark form-input_rounded form-input_lg"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text">You get</span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="amountInput"
+              spellcheck="false"
+              max="Infinity"
+              min="0"
+              maxlength="Infinity"
+              placeholder=""
+              step="any"
+              trim="true"
+              type="string"
+              autocomplete="off"
+              class="form-input__input form-input__input_rounded form-input__input_transparent-border"
+              [value]="toAmount$ | async"
+              disabled
+            />
+          </span>
+        </label>
+        <div class="pair-search">
+          <span class="pair-search__label">
+            <span class="pair-search__label_text">
+              To
+              <span class="pair-search__button-dark-label-network">
+                {{ toAsset?.network }}
+              </span>
+            </span>
+          </span>
+          <button
+            type="button"
+            class="pair-search__button-dark pair-search__button-no-bottom-round"
+            disabled
+          >
+            <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
+              <img
+                loading="lazy"
+                [src]="
+                  'https://storage.swapspace.co' +
+                  (toAsset?.icon && toAsset?.icon !== ''
+                    ? toAsset?.icon
+                    : '/static/default-coin-icon.svg')
+                "
+                [alt]="toAsset?.icon"
+                class="coin-icon__image coin-icon__white"
+              />
+            </div>
+
+            <span class="pair-search__button-dark-label d-f-c">
+              <span> {{ toAsset?.code }} </span>
+            </span>
+          </button>
+        </div>
+      </div>
     </ng-container>
   </div>
   <div class="c-exchange-rate" *ngIf="assetsExist$ | async">
@@ -40,7 +146,7 @@
         <div class="field d-f mb-3" id="step3-panel-deposit-address">
           <div class="d-f d-f-c">
             <span class="field__label field__label_standard">
-              Send {{ fromAmount$ | async }} {{ fromAsset.code }} to the deposit address:
+              Send {{ fromAmount$ | async }} {{ fromAsset }} to the deposit address:
             </span>
             <div class="field__wrapper">
               <p class="field__value field__value_lead">

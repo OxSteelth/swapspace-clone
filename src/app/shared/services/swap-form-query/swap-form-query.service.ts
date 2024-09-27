@@ -2,19 +2,12 @@ import { Injectable } from '@angular/core';
 import { QueryParamsService } from '@core/services/query-params/query-params.service';
 import { catchError, distinctUntilChanged, first, map, pairwise, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, forkJoin, from, Observable, of, scheduled } from 'rxjs';
-import BigNumber from 'bignumber.js';
 import { QueryParams } from '@core/services/query-params/models/query-params';
-import { List } from 'immutable';
-import { compareAddresses, compareObjects, switchIif } from '@shared/utils/utils';
 import { CurrencyService } from '../currency.service';
 import { SwapFormService } from '../swap-form.service';
 import {
   defaultFormParameters,
-  DefaultParametersFrom,
-  DefaultParametersTo
 } from './constants/default-tokens-params';
-import { tuiIsPresent } from '@taiga-ui/cdk';
-import { Currency } from '@app/shared/models/currency';
 import { CacheService } from '../cache.service';
 
 @Injectable()
@@ -41,23 +34,25 @@ export class SwapFormQueryService {
           const protectedParams = this.getProtectedSwapParams(queryParams);
           const fromBlockchain = protectedParams.fromChain;
           const toBlockchain = protectedParams.toChain;
-          const findFromToken$ = this.getTokenBySymbol(
+          const fromToken = this.currencyService.searchTokenBySymbol(
             tokens,
             protectedParams.from,
             fromBlockchain
           );
-          const findToToken$ = this.getTokenBySymbol(tokens, protectedParams.to, toBlockchain);
-
-          return forkJoin([findFromToken$, findToToken$]).pipe(
-            map(([fromToken, toToken]) => ({
-              fromToken,
-              toToken,
-              fromBlockchain,
-              toBlockchain,
-              amount: protectedParams.amount,
-              amountTo: protectedParams.amountTo
-            }))
+          const toToken = this.currencyService.searchTokenBySymbol(
+            tokens,
+            protectedParams.to,
+            toBlockchain
           );
+
+          return of({
+            fromToken,
+            toToken,
+            fromBlockchain,
+            toBlockchain,
+            amount: protectedParams.amount,
+            amountTo: protectedParams.amountTo
+          });
         })
       )
       .subscribe(({ fromBlockchain, toToken, fromToken, toBlockchain, amount }) => {
@@ -87,6 +82,16 @@ export class SwapFormQueryService {
     });
   }
 
+  public subscribeOnStep3QueryParams() {
+    this.cacheService.createdExchange$.subscribe(ce => {
+      if (ce) {
+        this.queryParamsService.freshQueryParams({
+          id: ce.id
+        });
+      }
+    });
+  }
+
   private getProtectedSwapParams(queryParams: QueryParams): QueryParams {
     let newParams = {
       fromChain: '',
@@ -105,8 +110,8 @@ export class SwapFormQueryService {
     ]).subscribe(([fromToken, fromChain, fromAmount, toChain, toToken]) => {
       newParams.fromChain = fromChain || defaultFormParameters.swap.fromChain;
       newParams.toChain = toChain || defaultFormParameters.swap.toChain;
-      newParams.from = fromToken || defaultFormParameters.swap.from;
-      newParams.to = toToken || defaultFormParameters.swap.to;
+      newParams.from = fromToken.code || defaultFormParameters.swap.from;
+      newParams.to = toToken.code || defaultFormParameters.swap.to;
       newParams.amount = fromAmount || defaultFormParameters.swap.amount;
     });
 
@@ -125,43 +130,5 @@ export class SwapFormQueryService {
     }
 
     return newParams;
-  }
-
-  public getTokenBySymbol(tokens: Currency[], token: string, chain: string): Observable<Currency> {
-    if (!token) {
-      return of(null);
-    }
-
-    return this.searchTokenBySymbol(tokens, token, chain);
-  }
-
-  private searchTokenBySymbol(
-    tokens: Currency[],
-    symbol: string,
-    chain: string
-  ): Observable<Currency | null> {
-    const similarTokens = tokens.filter(
-      token => token.code.toLowerCase() === symbol.toLowerCase() && token.network === chain
-    );
-
-    if (similarTokens.length === 0) {
-      return this.cacheService.allCurrencyList$.pipe(
-        map(tokens => {
-          if (tokens.length > 0) {
-            const token =
-              tokens.length > 1
-                ? tokens.find(el => el.code.toLowerCase() === symbol.toLowerCase())
-                : tokens[0];
-            if (!token) {
-              return null;
-            }
-            return token;
-          }
-          return null;
-        })
-      );
-    }
-
-    return of(similarTokens[0]);
   }
 }

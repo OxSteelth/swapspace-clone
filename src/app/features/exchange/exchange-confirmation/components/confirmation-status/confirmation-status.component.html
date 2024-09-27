@@ -2,19 +2,19 @@
   <div class="c-status__container">
     <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 0 }">
       <div class="c-status__icon">
-        <app-status-icon [status]="calculateStatus(0)"></app-status-icon>
+        <app-status-icon [status]="calculateStatus(1)"></app-status-icon>
       </div>
       Creating exchange
     </div>
     <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 1 }">
       <div class="c-status__icon">
-        <app-status-icon [status]="calculateStatus(1)"></app-status-icon>
+        <app-status-icon [status]="calculateStatus(2)"></app-status-icon>
       </div>
       Awaiting payment
     </div>
     <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 2 }">
       <div class="c-status__icon">
-        <app-status-icon [status]="calculateStatus(2)"></app-status-icon>
+        <app-status-icon [status]="calculateStatus(3)"></app-status-icon>
       </div>
       Processing
     </div>

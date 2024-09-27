@@ -112,8 +112,6 @@ export class ConfirmationCardComponent {
         : 'rotate(0deg)';
     }
 
-
-
     this.swapFormService.inputControl.valueChanges.subscribe(v => {
       this.form.controls.fromAmount.setValue(Number(v.fromAmount));
       this.form.controls.fromToken.setValue(v.fromToken?.code);
@@ -123,7 +121,7 @@ export class ConfirmationCardComponent {
     });
 
     this.swapFormService.outputControl.valueChanges.subscribe(v => {
-      this.form.controls.toAmount.setValue(Number(v));
+      this.form.controls.toAmount.setValue(Number(v.toAmount));
     });
 
     if (!this.exchangeService.selectedOffer) {
@@ -132,6 +130,7 @@ export class ConfirmationCardComponent {
 
     this.form.controls.recipientAddress.valueChanges.subscribe(value => {
       this.exchangeService.updateRecipientAddress(value);
+      this.cacheService.updateRecipientAddress(value);
     });
   }
 
@@ -156,9 +155,16 @@ export class ConfirmationCardComponent {
       refundAddress,
       toAmount
     } = this.form.value;
-    const { id } = this.exchangeService.selectedOffer;
 
-    if (!toToken || !fromAmount || !fromToken || !fromChain || !toChain || !recipientAddress) {
+    if (
+      !toToken ||
+      !fromAmount ||
+      !fromToken ||
+      !fromChain ||
+      !toChain ||
+      !recipientAddress ||
+      !toAmount
+    ) {
       throw new Error('Invalid form values');
     }
 
@@ -175,13 +181,13 @@ export class ConfirmationCardComponent {
       );
 
       res.subscribe(ce => {
-        if (ce.id) {
+        if (ce) {
           this.exchangeService.setConfirmationStep(1);
           this.exchangeService.stopInterval();
           this.swapFormService.disableInput();
           this.confirmed.set(true);
-          this._depositAddress$.next(ce.from.address);
-          this.storeService.setItem('CREATED_EXCHANGE', ce);
+          this.cacheService.updateCreatedExchange(ce);
+          this.cacheService.updateExchangeStep(3);
 
           this.router.navigate(['/exchange/step3'], {
             queryParams: {
@@ -252,10 +258,13 @@ export class ConfirmationCardComponent {
   }
 
   onPaste() {
-    navigator.clipboard.readText().then((text) => {
-      this.form.controls.recipientAddress.setValue(text);
-    }).catch(err => {
-      console.error('Failed to read clipboard contents: ', err);
-    });
+    navigator.clipboard
+      .readText()
+      .then(text => {
+        this.form.controls.recipientAddress.setValue(text);
+      })
+      .catch(err => {
+        console.error('Failed to read clipboard contents: ', err);
+      });
   }
 }

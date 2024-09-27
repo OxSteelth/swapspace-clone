@@ -46,10 +46,10 @@ export class PaymentCardComponent {
     this._depositAddress$.next(address);
   }
 
-  public readonly fromAsset$ = this.swapFormService.fromToken$;
-  public readonly fromAmount$ = this.swapFormService.fromAmount$;
-  public readonly toAsset$ = this.swapFormService.toToken$;
-  public readonly toAmount$ = this.swapFormService.toAmount$;
+  public readonly fromAsset$ = this.cacheService.fromToken$;
+  public readonly fromAmount$ = this.cacheService.fromAmount$;
+  public readonly toAsset$ = this.cacheService.toToken$;
+  public readonly toAmount$ = this.cacheService.toAmount$;
 
   public swapDirection = '';
   public recipientAddress$ = this.exchangeService.recipientAddress$;
@@ -101,7 +101,6 @@ export class PaymentCardComponent {
 
   constructor(
     private exchangeService: ExchangeService,
-    private swapFormService: SwapFormService,
     private currencyService: CurrencyService,
     private walletService: WalletService,
     private storeService: StoreService,
@@ -113,50 +112,9 @@ export class PaymentCardComponent {
   }
 
   ngOnInit() {
-    this.swapFormService.disableInput();
-
-    if (this.storeService.getItem('CREATED_EXCHANGE')) {
-      this.updateCreatedExchange(this.storeService.getItem('CREATED_EXCHANGE'));
-    }
-
-    if (!this.exchangeService.selectedOffer) {
-      this.exchangeService.updateSelectedOffer(this.storeService.getItem('SELECTED_OFFER'));
-    }
-
-    this.createdExchange$.subscribe(ce => {
+    this.cacheService.createdExchange$.subscribe(ce => {
       if (ce) {
         this.updateDepositAddress(ce.from.address);
-        this.exchangeService.updateRecipientAddress(ce.to.address);
-
-        let findFromToken$: Observable<Currency>;
-        let findToToken$: Observable<Currency>;
-
-        this.cacheService.allCurrencyList$.subscribe(list => {
-          findFromToken$ = this.swapFormQueryService.getTokenBySymbol(
-            list,
-            ce.from.code,
-            ce.from.network
-          );
-          findToToken$ = this.swapFormQueryService.getTokenBySymbol(
-            list,
-            ce.to.code,
-            ce.to.network
-          );
-        });
-
-        forkJoin([findFromToken$, findToToken$])
-          .pipe(
-            map(([fromToken, toToken]) => {
-              this.swapFormService.inputControl.setValue({
-                fromBlockchain: ce.from.network,
-                fromToken,
-                fromAmount: ce.from.amount.toString(),
-                toBlockchain: ce.to.network,
-                toToken
-              });
-            })
-          )
-          .subscribe();
 
         const chainId = this.web3Service.getChainIdFromNetwork(ce.from.network);
 
@@ -179,7 +137,7 @@ export class PaymentCardComponent {
       this.updateExchangeInfo(offer);
     });
 
-    this.exchangeInfo$.subscribe(info => {
+    this.cacheService.selectedOffer$.subscribe(info => {
       if (info) {
         this.updateExchangeRate(info.toAmount / info.fromAmount);
       }

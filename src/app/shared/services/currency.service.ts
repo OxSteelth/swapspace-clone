@@ -39,10 +39,7 @@ export class CurrencyService {
     }
   ]).pipe(delay(200), shareReplay(1));
 
-  constructor(
-    private readonly httpService: HttpService,
-    private cacheService: CacheService
-  ) {}
+  constructor(private readonly httpService: HttpService, private cacheService: CacheService) {}
 
   public fetchCurrencyList(): void {
     this.cacheService.allCurrencyList$.subscribe(list => {
@@ -58,5 +55,28 @@ export class CurrencyService {
           .subscribe();
       }
     });
+  }
+
+  public searchTokenBySymbol(tokens: Currency[], symbol: string, chain: string): Currency | null {
+    if (tokens.length > 0) {
+      const similarTokens = tokens.filter(
+        token =>
+          token.code.toLowerCase() === symbol.toLowerCase() &&
+          token.network.toLowerCase() === chain.toLowerCase()
+      );
+
+      if (similarTokens.length === 0) {
+        const token = tokens.find(token => token.code.toLowerCase() === symbol.toLowerCase());
+
+        if (!token) {
+          return tokens[0];
+        }
+        return token;
+      }
+
+      return similarTokens[0];
+    } else {
+      return null;
+    }
   }
 }

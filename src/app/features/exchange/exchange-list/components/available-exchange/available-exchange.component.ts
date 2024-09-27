@@ -124,6 +124,7 @@ export class AvailableExchangeComponent implements OnInit {
       this.cacheService.toChain$,
       this.cacheService.selectedOffer$
     ]).subscribe(([fromToken, fromChain, fromAmount, toToken, toChain, selectedOffer]) => {
+      this.cacheService.updateExchangeStep(2);
       this.router.navigate(['/exchange/step2'], {
         queryParams: {
           from: fromToken,

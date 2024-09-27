@@ -119,11 +119,11 @@ export class ExchangeService {
     toCurrency: string,
     fromAmount: number,
     partner?: string,
-    fixed?: boolean,
+    fixed?: string,
   ) {
     return this.httpService
       .get<Exchange[]>(
-        `amounts?fromCurrency=${fromCurrency}&fromNetwork=${fromNetwork}&toNetwork=${toNetwork}&toCurrency=${toCurrency}&amount=${fromAmount}&partner=${partner}&fixed=${fixed}`
+        `amounts?fromCurrency=${fromCurrency}&fromNetwork=${fromNetwork}&toNetwork=${toNetwork}&toCurrency=${toCurrency}&amount=${fromAmount}&partner=${partner || ''}&fixed=${fixed || ''}`
       )
       .pipe(
         catchError(error => {

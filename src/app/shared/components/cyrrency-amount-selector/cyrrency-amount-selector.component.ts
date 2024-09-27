@@ -230,7 +230,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
               value.toToken.code,
               Number(value.fromAmount),
               selectedOffer.partner,
-              selectedOffer.fixed
+              selectedOffer.fixed.toString()
             );
           } else {
             return of([]);

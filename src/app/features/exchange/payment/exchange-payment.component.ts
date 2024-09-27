@@ -9,12 +9,9 @@ import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExchangePaymentComponent implements OnInit {
-  constructor(
-    private swapFormQueryService: SwapFormQueryService,
-    private currencyService: CurrencyService
-  ) {}
+  constructor(private swapFormQueryService: SwapFormQueryService) {}
 
   ngOnInit(): void {
-    this.swapFormQueryService.subscribeOnQueryParams();
+    this.swapFormQueryService.subscribeOnStep3QueryParams();
   }
 }

@@ -17,16 +17,19 @@ import { CreateExchange } from '@app/shared/types';
 import BigNumber from 'bignumber.js';
 
 export type Store = {
-  FROM_TOKEN: string;
+  FROM_TOKEN: Currency;
   FROM_CHAIN: string;
   FROM_AMOUNT: string;
-  TO_TOKEN: string;
+  TO_TOKEN: Currency;
   TO_CHAIN: string;
   TO_AMOUNT: string;
   SELECTED_OFFER: Exchange;
   ALL_CURRENCY_LIST: Currency[];
   POPULAR_CURRENCY_LIST: Currency[];
   CREATED_EXCHANGE: CreateExchange;
+  DEPOSIT_ADDRESS: string;
+  EXCHANGE_STEP: number;
+  RECIPIENT_ADDRESS: string;
 };
 
 export const storeRecord: Record<keyof Store, null> = {
@@ -39,5 +42,8 @@ export const storeRecord: Record<keyof Store, null> = {
   SELECTED_OFFER: null,
   ALL_CURRENCY_LIST: null,
   POPULAR_CURRENCY_LIST: null,
-  CREATED_EXCHANGE: null
+  CREATED_EXCHANGE: null,
+  DEPOSIT_ADDRESS: null,
+  EXCHANGE_STEP: null,
+  RECIPIENT_ADDRESS: null
 };

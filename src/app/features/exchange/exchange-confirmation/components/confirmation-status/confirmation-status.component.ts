@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ExchangeConfirmationViewModel } from '../../viewmodel/exchange-confirmation.viewmodel.';
 import { IconStatus } from '../../type';
 import { ExchangeService } from '@app/shared/services/exchange.service';
+import { CacheService } from '@app/shared/services/cache.service';
 
 @Component({
   selector: 'app-confirmation-status',
@@ -13,14 +14,14 @@ export class ConfirmationStatusComponent {
   public exchangeInfo$ = this.exchangeService.selectedOffer$;
   public confirmationStep$ = this.exchangeService.confirmationStep$;
 
-  constructor(private exchangeService: ExchangeService) {}
+  constructor(private exchangeService: ExchangeService, private cacheService: CacheService) {}
 
   calculateStatus(index: number): IconStatus {
-    if (this.exchangeService.confirmationStep === index) {
+    if (this.cacheService.exchangeStep === index) {
       return 'loading';
     }
 
-    if (this.exchangeService.confirmationStep > index) {
+    if (this.cacheService.exchangeStep > index) {
       return 'success';
     }
 
