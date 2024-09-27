@@ -223,15 +223,15 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
             value.fromAmount &&
             selectedOffer
           ) {
-            return this.exchangeService.getEstimatedExchangeAmounts(
-              value.fromToken.code,
-              value.fromBlockchain,
-              value.toBlockchain,
-              value.toToken.code,
-              value.fromAmount,
-              selectedOffer.partner,
-              selectedOffer.fixed.toString()
-            );
+            return this.exchangeService.getEstimatedExchangeAmounts({
+              fromCurrency: value.fromToken.code,
+              fromNetwork: value.fromBlockchain,
+              toNetwork: value.toBlockchain,
+              toCurrency: value.toToken.code,
+              amount: value.fromAmount,
+              partner: selectedOffer.partner,
+              fixed: selectedOffer.fixed.toString()
+            });
           } else {
             return of([]);
           }

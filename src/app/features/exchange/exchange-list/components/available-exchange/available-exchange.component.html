@@ -25,7 +25,7 @@
               [src]="'assets/exchange-icons/' + exchange.partner + '.svg'"
               class="c-exchange__icon"
             />
-            {{ exchange.partner }}
+            {{ exchange.partner.toUpperCase() }}
           </div>
           <div>
             <span class="c-exchange__item-name">Rate</span>
@@ -83,15 +83,15 @@
                     high: false
                   }"
                 ></tui-svg>
-                Low
+                High
               </div>
             </div>
           </div>
         </div>
         <div class="c-exchange-container__actions">
           <div class="c-chips">
-            <div *ngIf="true" class="app-chip app-chip__green">Trusted Partner</div>
-            <div *ngIf="false" class="app-chip app-chip__yellow-2">Giveaway</div>
+            <!-- <div *ngIf="true" class="app-chip app-chip__green">Trusted Partner</div>
+            <div *ngIf="false" class="app-chip app-chip__yellow-2">Giveaway</div> -->
           </div>
           <button class="app-button-outline" (click)="exchangeCurrency(exchange)">Exchange</button>
         </div>

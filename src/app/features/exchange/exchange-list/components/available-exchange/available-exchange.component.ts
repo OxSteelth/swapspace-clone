@@ -74,13 +74,16 @@ export class AvailableExchangeComponent implements OnInit {
           ) {
             this._isLoading$.next(true);
 
-            const res = this.exchangeService.getEstimatedExchangeAmounts(
-              value.fromToken.code,
-              value.fromBlockchain,
-              value.toBlockchain,
-              value.toToken.code,
-              value.fromAmount
-            );
+            const res = this.exchangeService.getEstimatedExchangeAmounts({
+              fromCurrency: value.fromToken.code,
+              fromNetwork: value.fromBlockchain,
+              toNetwork: value.toBlockchain,
+              toCurrency: value.toToken.code,
+              amount: value.fromAmount,
+              direction: 'direct',
+              estimated: true.toString(),
+              isContentPage: false.toString()
+            });
 
             return res;
           } else {

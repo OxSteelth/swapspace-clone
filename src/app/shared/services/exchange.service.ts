@@ -96,7 +96,7 @@ export class ExchangeService {
 
   startInterval() {
     if (!this.intervalSubscription) {
-      this.intervalSubscription = interval(30000)
+      this.intervalSubscription = interval(60000)
         .pipe(startWith(0))
         .subscribe(val => {
           this._interval$.next(val);
@@ -119,10 +119,10 @@ export class ExchangeService {
       const value = params[key];
 
       if (value) {
-        if(!updatedParams) {
+        if (!updatedParams) {
           updatedParams += `?${key}=${value}`;
         } else {
-          updatedParams += `&${key}=${value}`
+          updatedParams += `&${key}=${value}`;
         }
       }
     });
@@ -130,24 +130,8 @@ export class ExchangeService {
     return updatedParams;
   }
 
-  getEstimatedExchangeAmounts(
-    fromCurrency: string,
-    fromNetwork: string,
-    toNetwork: string,
-    toCurrency: string,
-    fromAmount: string,
-    partner?: string,
-    fixed?: string
-  ) {
-    const updatedUrl = this.addMultipleQueryParams({
-      fromCurrency,
-      fromNetwork,
-      toNetwork,
-      toCurrency,
-      amount: fromAmount,
-      partner,
-      fixed
-    });
+  getEstimatedExchangeAmounts(params: { [key: string]: string }) {
+    const updatedUrl = this.addMultipleQueryParams(params);
 
     return this.httpService.get<Exchange[]>(`amounts${updatedUrl}`).pipe(
       catchError(error => {
@@ -319,8 +303,12 @@ export class ExchangeService {
         } else if (field === 'rate') {
           return b.toAmount - a.toAmount;
         } else if (field === 'eta') {
-          const aEta = a.duration.split('-').reduce((result, v) => Number(result) + Number(v), 0);
-          const bEta = b.duration.split('-').reduce((result, v) => Number(result) + Number(v), 0);
+          const aEta = a.duration
+            .split('-')
+            .reduce((result, v) => (v ? result + Number(v) : result * 2), 0);
+          const bEta = b.duration
+            .split('-')
+            .reduce((result, v) => (v ? result + Number(v) : result * 2), 0);
           return aEta - bEta;
         } else {
           return 1;
