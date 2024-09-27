@@ -34,6 +34,12 @@ export class AvailableExchangeComponent implements OnInit {
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);
   public isLoading$ = this._isLoading$.asObservable();
 
+  private readonly _bestRatePartner$ = new BehaviorSubject<Exchange | null>(null);
+  public bestRatePartner$ = this._bestRatePartner$.asObservable();
+
+  private readonly _fastestPartner$ = new BehaviorSubject<Exchange | null>(null);
+  public fastestPartner$ = this._fastestPartner$.asObservable();
+
   constructor(
     public swapFormService: SwapFormService,
     public exchangeService: ExchangeService,
@@ -43,12 +49,22 @@ export class AvailableExchangeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.cacheService.filteredExchanges$.subscribe(value => {
+      this._availableExchanges$.next(value);
+      this.exchangeService.updatedEstimatedExchange(value);
+      this.exchangeService
+        .getBestPartner('eta')
+        .subscribe(value => this._fastestPartner$.next(value));
+      this.exchangeService
+        .getBestPartner('rate')
+        .subscribe(value => this._bestRatePartner$.next(value));
+    });
 
-    this.cacheService.filteredExchanges$.subscribe(value =>
-      this._availableExchanges$.next(value)
-    );
-
-    combineLatest([this.cacheService.availableExchanges$, this.cacheService.isFilterFixedRate$, this.cacheService.isFilterFloatingRate$])
+    combineLatest([
+      this.cacheService.availableExchanges$,
+      this.cacheService.isFilterFixedRate$,
+      this.cacheService.isFilterFloatingRate$
+    ])
       .pipe(distinctUntilChanged())
       .subscribe(([availableExchanges, fixedRate, floatingRate]) => {
         const value = availableExchanges.filter(
@@ -109,11 +125,11 @@ export class AvailableExchangeComponent implements OnInit {
 
   onTabChange(event: any) {
     if (event === 0) {
-      this.exchangeService.sortExchanges('relevance');
+      this.exchangeService.sortExchanges('relevance').subscribe();
     } else if (event === 1) {
-      this.exchangeService.sortExchanges('rate');
+      this.exchangeService.sortExchanges('rate').subscribe();
     } else {
-      this.exchangeService.sortExchanges('eta');
+      this.exchangeService.sortExchanges('eta').subscribe();
     }
   }
 

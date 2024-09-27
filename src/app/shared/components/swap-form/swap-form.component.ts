@@ -145,10 +145,12 @@ export class SwapFormComponent implements OnInit, OnDestroy {
           this.swapFormService.outputControl.patchValue({
             toAmount: value.toAmount.toString()
           });
+          this.cacheService.updateSelectedOffer(value);
         } else {
           this.swapFormService.outputControl.patchValue({
             toAmount: '0'
           });
+          this.cacheService.updateSelectedOffer(null);
         }
         this._isLoading$.next(false);
       });

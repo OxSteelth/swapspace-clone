@@ -89,8 +89,16 @@
           </div>
         </div>
         <div class="c-exchange-container__actions">
-          <div class="c-chips">
-            <!-- <div *ngIf="true" class="app-chip app-chip__green">Trusted Partner</div>
+          <div class="c-chips" *ngLet="fastestPartner$ | async as fastestPartner">
+            <!-- <div
+              *ngIf="
+                exchange.partner === fastestPartner.partner &&
+                exchange.duration === fastestPartner.duration
+              "
+              class="app-chip app-chip__green"
+            >
+              Trusted Partner
+            </div>
             <div *ngIf="false" class="app-chip app-chip__yellow-2">Giveaway</div> -->
           </div>
           <button class="app-button-outline" (click)="exchangeCurrency(exchange)">Exchange</button>

@@ -2,12 +2,15 @@ import { Injectable, OnDestroy } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
+  debounceTime,
   delay,
   distinctUntilChanged,
   firstValueFrom,
   interval,
   map,
+  Observable,
   of,
+  shareReplay,
   startWith,
   Subscription,
   switchMap,
@@ -297,10 +300,30 @@ export class ExchangeService {
     );
   }
 
-  sortExchanges(field: string) {
-    this.cacheService.filteredExchanges$.pipe(distinctUntilChanged()).subscribe(exchanges => {
-      this.cacheService.updateFilteredExchanges(
-        exchanges.sort((a, b) => {
+  sortExchanges(field: string): Observable<Exchange[]> {
+    return this.cacheService.filteredExchanges$.pipe(
+      switchMap(exchanges => {
+        return of(exchanges.sort((a, b) => {
+          if (field === 'relevance') {
+            return b.toAmount - a.toAmount;
+          } else if (field === 'rate') {
+            return b.toAmount - a.toAmount;
+          } else if (field === 'eta') {
+            const aEta = a.duration.split('-').reduce((result, v) => result + Number(v), 0);
+            const bEta = b.duration.split('-').reduce((result, v) => result + Number(v), 0);
+            return aEta - bEta;
+          } else {
+            return 1;
+          }
+        }));
+      })
+    );
+  }
+
+  getBestPartner(field: string): Observable<Exchange> {
+    return this.cacheService.filteredExchanges$.pipe(
+      switchMap(exchanges => {
+        const sorted = exchanges.sort((a, b) => {
           if (field === 'relevance') {
             return b.toAmount - a.toAmount;
           } else if (field === 'rate') {
@@ -316,8 +339,10 @@ export class ExchangeService {
           } else {
             return 1;
           }
-        })
-      );
-    });
+        });
+
+        return of(sorted[0]);
+      })
+    );
   }
 }

@@ -123,12 +123,18 @@ export class CacheService {
     this._availableExchanges$.next(exchanges);
     this.storeService.setItem('AVAILABLE_EXCHANGES', exchanges);
   }
+  public get availableExchanges(): Exchange[] {
+    return this._availableExchanges$.getValue();
+  }
 
   private _filteredExchanges$ = new BehaviorSubject<Exchange[]>([]);
   public filteredExchanges$ = this._filteredExchanges$.asObservable();
   public updateFilteredExchanges(exchanges: Exchange[]) {
     this._filteredExchanges$.next(exchanges);
     this.storeService.setItem('FILTERED_EXCHANGES', exchanges);
+  }
+  public get filteredExchanges(): Exchange[] {
+    return this._filteredExchanges$.getValue();
   }
 
   constructor(private storeService: StoreService) {}
