@@ -228,7 +228,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
               value.fromBlockchain,
               value.toBlockchain,
               value.toToken.code,
-              Number(value.fromAmount),
+              value.fromAmount,
               selectedOffer.partner,
               selectedOffer.fixed.toString()
             );

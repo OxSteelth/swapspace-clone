@@ -79,7 +79,7 @@ export class AvailableExchangeComponent implements OnInit {
               value.fromBlockchain,
               value.toBlockchain,
               value.toToken.code,
-              Number(value.fromAmount)
+              value.fromAmount
             );
 
             return res;

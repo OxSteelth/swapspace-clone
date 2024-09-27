@@ -112,25 +112,49 @@ export class ExchangeService {
     }
   }
 
+  addMultipleQueryParams(params: { [key: string]: string }) {
+    let updatedParams = '';
+
+    Object.keys(params).forEach(key => {
+      const value = params[key];
+
+      if (value) {
+        if(!updatedParams) {
+          updatedParams += `?${key}=${value}`;
+        } else {
+          updatedParams += `&${key}=${value}`
+        }
+      }
+    });
+
+    return updatedParams;
+  }
+
   getEstimatedExchangeAmounts(
     fromCurrency: string,
     fromNetwork: string,
     toNetwork: string,
     toCurrency: string,
-    fromAmount: number,
+    fromAmount: string,
     partner?: string,
-    fixed?: string,
+    fixed?: string
   ) {
-    return this.httpService
-      .get<Exchange[]>(
-        `amounts?fromCurrency=${fromCurrency}&fromNetwork=${fromNetwork}&toNetwork=${toNetwork}&toCurrency=${toCurrency}&amount=${fromAmount}&partner=${partner || ''}&fixed=${fixed || ''}`
-      )
-      .pipe(
-        catchError(error => {
-          console.error('Error fetching data', error);
-          return of([] as Exchange[]);
-        })
-      );
+    const updatedUrl = this.addMultipleQueryParams({
+      fromCurrency,
+      fromNetwork,
+      toNetwork,
+      toCurrency,
+      amount: fromAmount,
+      partner,
+      fixed
+    });
+
+    return this.httpService.get<Exchange[]>(`amounts${updatedUrl}`).pipe(
+      catchError(error => {
+        console.error('Error fetching data', error);
+        return of([] as Exchange[]);
+      })
+    );
   }
 
   getBestExchangeAmount(
