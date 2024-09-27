@@ -115,6 +115,7 @@ export class PaymentCardComponent {
     this.cacheService.createdExchange$.subscribe(ce => {
       if (ce) {
         this.updateDepositAddress(ce.from.address);
+        this.updateCreatedExchange(ce);
 
         const chainId = this.web3Service.getChainIdFromNetwork(ce.from.network);
 
@@ -190,14 +191,14 @@ export class PaymentCardComponent {
     if (
       this.walletId &&
       this._depositAddress$.getValue() &&
-      this._exchangeInfo$.getValue().fromAmount.toString()
+      this._createdExchange$.getValue().from.amount.toString()
     ) {
       if (this.web3Service.isZeroAddress(this._createdExchange$.getValue().from.contractAddress)) {
         this.web3Service
           .sendTransaction(
             this.walletId,
             this._depositAddress$.getValue(),
-            this._exchangeInfo$.getValue().fromAmount.toString()
+            this._createdExchange$.getValue().from.amount.toString()
           )
           .subscribe({
             next: data => {},
@@ -210,7 +211,7 @@ export class PaymentCardComponent {
           .sendTokenTransaction(
             this.walletId,
             this._depositAddress$.getValue(),
-            this._exchangeInfo$.getValue().fromAmount.toString(),
+            this._createdExchange$.getValue().from.amount.toString(),
             this._createdExchange$.getValue().from.contractAddress
           )
           .subscribe({
