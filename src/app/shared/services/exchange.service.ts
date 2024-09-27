@@ -3,6 +3,7 @@ import {
   BehaviorSubject,
   catchError,
   delay,
+  distinctUntilChanged,
   firstValueFrom,
   interval,
   map,
@@ -16,6 +17,7 @@ import {
 import { AvailableExchange, CreateExchange } from '../types';
 import { HttpService } from '@app/core/services/http/http.service';
 import { Exchange, EXCHANGE_STATUS } from '../models/exchange';
+import { CacheService } from './cache.service';
 
 const EXCHANGE_RATES: Record<string, Record<string, number>> = {
   BTC: {
@@ -92,7 +94,7 @@ export class ExchangeService {
   private _interval$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public interval$ = this._interval$.asObservable();
 
-  constructor(private readonly httpService: HttpService) {}
+  constructor(private readonly httpService: HttpService, private cacheService: CacheService) {}
 
   startInterval() {
     if (!this.intervalSubscription) {
@@ -296,24 +298,26 @@ export class ExchangeService {
   }
 
   sortExchanges(field: string) {
-    this._estimatedExchange$.next(
-      this.estimatedExchange.sort((a, b) => {
-        if (field === 'relevance') {
-          return b.toAmount - a.toAmount;
-        } else if (field === 'rate') {
-          return b.toAmount - a.toAmount;
-        } else if (field === 'eta') {
-          const aEta = a.duration
-            .split('-')
-            .reduce((result, v) => (v ? result + Number(v) : result * 2), 0);
-          const bEta = b.duration
-            .split('-')
-            .reduce((result, v) => (v ? result + Number(v) : result * 2), 0);
-          return aEta - bEta;
-        } else {
-          return 1;
-        }
-      })
-    );
+    this.cacheService.filteredExchanges$.pipe(distinctUntilChanged()).subscribe(exchanges => {
+      this.cacheService.updateFilteredExchanges(
+        exchanges.sort((a, b) => {
+          if (field === 'relevance') {
+            return b.toAmount - a.toAmount;
+          } else if (field === 'rate') {
+            return b.toAmount - a.toAmount;
+          } else if (field === 'eta') {
+            const aEta = a.duration
+              .split('-')
+              .reduce((result, v) => (v ? result + Number(v) : result * 2), 0);
+            const bEta = b.duration
+              .split('-')
+              .reduce((result, v) => (v ? result + Number(v) : result * 2), 0);
+            return aEta - bEta;
+          } else {
+            return 1;
+          }
+        })
+      );
+    });
   }
 }

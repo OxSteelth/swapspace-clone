@@ -43,17 +43,18 @@ export class AvailableExchangeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.exchangeService.estimatedExchange$.subscribe(value =>
+
+    this.cacheService.filteredExchanges$.subscribe(value =>
       this._availableExchanges$.next(value)
     );
 
-    combineLatest([this.exchangeService.fixedRate$, this.exchangeService.floatingRate$])
+    combineLatest([this.cacheService.availableExchanges$, this.cacheService.isFilterFixedRate$, this.cacheService.isFilterFloatingRate$])
       .pipe(distinctUntilChanged())
-      .subscribe(([fixedRate, floatingRate]) => {
-        const value = this.exchangeService.estimatedExchange.filter(
+      .subscribe(([availableExchanges, fixedRate, floatingRate]) => {
+        const value = availableExchanges.filter(
           v => v.fixed === fixedRate || v.fixed !== floatingRate
         );
-        this.exchangeService.updatedEstimatedExchange(value);
+        this.cacheService.updateFilteredExchanges(value);
       });
 
     combineLatest([
@@ -93,9 +94,9 @@ export class AvailableExchangeComponent implements OnInit {
       )
       .subscribe((value: Exchange[]) => {
         if (Array.isArray(value) && value.length > 0) {
-          this.exchangeService.updatedEstimatedExchange(value);
+          this.cacheService.updateAvailableExchanges(value);
         } else {
-          this.exchangeService.updatedEstimatedExchange([]);
+          this.cacheService.updateAvailableExchanges([]);
         }
 
         this._isLoading$.next(false);

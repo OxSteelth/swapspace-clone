@@ -30,6 +30,10 @@ export type Store = {
   DEPOSIT_ADDRESS: string;
   EXCHANGE_STEP: number;
   RECIPIENT_ADDRESS: string;
+  FILTER_FIXED_RATE: boolean;
+  FILTER_FLOATING_RATE: boolean;
+  AVAILABLE_EXCHANGES: Exchange[];
+  FILTERED_EXCHANGES: Exchange[];
 };
 
 export const storeRecord: Record<keyof Store, null> = {
@@ -45,5 +49,9 @@ export const storeRecord: Record<keyof Store, null> = {
   CREATED_EXCHANGE: null,
   DEPOSIT_ADDRESS: null,
   EXCHANGE_STEP: null,
-  RECIPIENT_ADDRESS: null
+  RECIPIENT_ADDRESS: null,
+  FILTER_FIXED_RATE: null,
+  FILTER_FLOATING_RATE: null,
+  AVAILABLE_EXCHANGES: null,
+  FILTERED_EXCHANGES: null
 };

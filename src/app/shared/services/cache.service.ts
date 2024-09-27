@@ -103,6 +103,34 @@ export class CacheService {
     this.storeService.setItem('RECIPIENT_ADDRESS', address);
   }
 
+  private _isFilterFixedRate$ = new BehaviorSubject<boolean>(true);
+  public isFilterFixedRate$ = this._isFilterFixedRate$.asObservable();
+  public updateIsFilterFixedRate(rate: boolean) {
+    this._isFilterFixedRate$.next(rate);
+    this.storeService.setItem('FILTER_FIXED_RATE', rate);
+  }
+
+  private _isFilterFloatingRate$ = new BehaviorSubject<boolean>(true);
+  public isFilterFloatingRate$ = this._isFilterFloatingRate$.asObservable();
+  public updateIsFilterFloatingRate(rate: boolean) {
+    this._isFilterFloatingRate$.next(rate);
+    this.storeService.setItem('FILTER_FLOATING_RATE', rate);
+  }
+
+  private _availableExchanges$ = new BehaviorSubject<Exchange[]>([]);
+  public availableExchanges$ = this._availableExchanges$.asObservable();
+  public updateAvailableExchanges(exchanges: Exchange[]) {
+    this._availableExchanges$.next(exchanges);
+    this.storeService.setItem('AVAILABLE_EXCHANGES', exchanges);
+  }
+
+  private _filteredExchanges$ = new BehaviorSubject<Exchange[]>([]);
+  public filteredExchanges$ = this._filteredExchanges$.asObservable();
+  public updateFilteredExchanges(exchanges: Exchange[]) {
+    this._filteredExchanges$.next(exchanges);
+    this.storeService.setItem('FILTERED_EXCHANGES', exchanges);
+  }
+
   constructor(private storeService: StoreService) {}
 
   public init() {
@@ -156,6 +184,22 @@ export class CacheService {
 
     if (this.storeService.getItem('RECIPIENT_ADDRESS')) {
       this.updateRecipientAddress(this.storeService.getItem('RECIPIENT_ADDRESS'));
+    }
+
+    if (this.storeService.getItem('FILTER_FIXED_RATE')) {
+      this.updateIsFilterFixedRate(this.storeService.getItem('FILTER_FIXED_RATE'));
+    }
+
+    if (this.storeService.getItem('FILTER_FLOATING_RATE')) {
+      this.updateIsFilterFloatingRate(this.storeService.getItem('FILTER_FLOATING_RATE'));
+    }
+
+    if (this.storeService.getItem('AVAILABLE_EXCHANGES')) {
+      this.updateAvailableExchanges(this.storeService.getItem('AVAILABLE_EXCHANGES'));
+    }
+
+    if (this.storeService.getItem('FILTERED_EXCHANGES')) {
+      this.updateFilteredExchanges(this.storeService.getItem('FILTERED_EXCHANGES'));
     }
   }
 }
