@@ -16,12 +16,12 @@ export class RatesComponent {
   }
 
   viewOffers() {
-    this.cacheService.updateExchangeStep(1);
+    this.cacheService.updateExchangeStep(0);
     this.navigateToUrl('/exchange/step1')
   }
 
   quickExchange() {
-    this.cacheService.updateExchangeStep(2);
+    this.cacheService.updateExchangeStep(0);
     this.navigateToUrl('/exchange/step2')
   }
 }

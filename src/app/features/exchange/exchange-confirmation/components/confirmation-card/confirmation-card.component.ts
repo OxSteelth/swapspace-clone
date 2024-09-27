@@ -187,7 +187,7 @@ export class ConfirmationCardComponent {
           this.swapFormService.disableInput();
           this.confirmed.set(true);
           this.cacheService.updateCreatedExchange(ce);
-          this.cacheService.updateExchangeStep(3);
+          this.cacheService.updateExchangeStep(2);
 
           this.router.navigate(['/exchange/step3'], {
             queryParams: {
