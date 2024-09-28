@@ -155,12 +155,18 @@ export class Web3Service {
         const toWei = (Number(amount) * Math.pow(10, decimals)).toFixed();
         const weiValue = this.web3.utils.toWei(toWei, 'wei');
 
-        return from(contract.methods.transfer(to, weiValue).send({ from: fromAddr })).pipe(
-          catchError(error => {
-            console.error('Error sending transaction', error);
-            throw error;
-          })
-        );
+        contract.methods.transfer(to, weiValue).estimateGas({ from: fromAddr }).then((gasAmount: number) => {
+          return from(contract.methods.transfer(to, weiValue).send({ from: fromAddr, gas: gasAmount })).pipe(
+            catchError(error => {
+              console.error('Error sending transaction', error);
+              throw error;
+            })
+          );
+        }).catch(() => {
+          return new Observable(observer => {
+            observer.error('estimating gas failed');
+          });
+        });
       })
       .catch((error: any) => {
         return new Observable(observer => {
