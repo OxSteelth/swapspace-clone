@@ -18,6 +18,11 @@ const routes: Routes = [
     path: 'step3',
     loadChildren: () =>
       import('./payment/exchange-payment.module').then(m => m.ExchangePaymentModule)
+  },
+  {
+    path: 'step4',
+    loadChildren: () =>
+      import('./process/exchange-process.module').then(m => m.ExchangeProcessModule)
   }
 ];
 

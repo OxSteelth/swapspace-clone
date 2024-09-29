@@ -82,7 +82,7 @@ export class SwapFormQueryService {
     });
   }
 
-  public subscribeOnStep3QueryParams() {
+  public subscribeOnStep34QueryParams() {
     this.cacheService.createdExchange$.subscribe(ce => {
       if (ce) {
         this.queryParamsService.freshQueryParams({

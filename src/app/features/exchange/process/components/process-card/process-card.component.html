@@ -1,0 +1,504 @@
+<div class="app-card c-echange-selector">
+  <div class="app-group">
+    <ng-container *ngLet="fromAsset$ | async as fromAsset">
+      <div class="pair-input pair-input_dark pair__input">
+        <label
+          for="amountInput"
+          class="form-input pair-input__input form-input_max-width form-input_disabled form-input_dark form-input_rounded form-input_lg"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text">You send</span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="amountInput"
+              spellcheck="false"
+              max="Infinity"
+              min="0"
+              maxlength="Infinity"
+              placeholder=""
+              step="any"
+              trim="true"
+              type="string"
+              autocomplete="off"
+              class="form-input__input form-input__input_rounded form-input__input_transparent-border"
+              [value]="fromAmount$ | async"
+              disabled
+            />
+          </span>
+        </label>
+        <div class="pair-search">
+          <span class="pair-search__label">
+            <span class="pair-search__label_text">
+              From
+              <span class="pair-search__button-dark-label-network">
+                {{ fromAsset?.network }}
+              </span>
+            </span>
+          </span>
+          <button
+            type="button"
+            class="pair-search__button-dark pair-search__button-no-bottom-round"
+            disabled
+          >
+            <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
+              <img
+                loading="lazy"
+                [src]="
+                  'https://storage.swapspace.co' +
+                  (fromAsset?.icon && fromAsset?.icon !== ''
+                    ? fromAsset?.icon
+                    : '/static/default-coin-icon.svg')
+                "
+                [alt]="fromAsset?.icon"
+                class="coin-icon__image coin-icon__white"
+              />
+            </div>
+
+            <span class="pair-search__button-dark-label d-f-c">
+              <span> {{ fromAsset?.code }} </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngLet="toAsset$ | async as toAsset">
+      <div class="pair-input pair-input_dark pair__input">
+        <label
+          for="amountInput"
+          class="form-input pair-input__input form-input_max-width form-input_disabled form-input_dark form-input_rounded form-input_lg"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text">You get</span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="amountInput"
+              spellcheck="false"
+              max="Infinity"
+              min="0"
+              maxlength="Infinity"
+              placeholder=""
+              step="any"
+              trim="true"
+              type="string"
+              autocomplete="off"
+              class="form-input__input form-input__input_rounded form-input__input_transparent-border"
+              [value]="toAmount$ | async"
+              disabled
+            />
+          </span>
+        </label>
+        <div class="pair-search">
+          <span class="pair-search__label">
+            <span class="pair-search__label_text">
+              To
+              <span class="pair-search__button-dark-label-network">
+                {{ toAsset?.network }}
+              </span>
+            </span>
+          </span>
+          <button
+            type="button"
+            class="pair-search__button-dark pair-search__button-no-bottom-round"
+            disabled
+          >
+            <div class="coin-icon coin-icon__sm coin-icon__bg_ pair-search__button-dark-icon icon">
+              <img
+                loading="lazy"
+                [src]="
+                  'https://storage.swapspace.co' +
+                  (toAsset?.icon && toAsset?.icon !== ''
+                    ? toAsset?.icon
+                    : '/static/default-coin-icon.svg')
+                "
+                [alt]="toAsset?.icon"
+                class="coin-icon__image coin-icon__white"
+              />
+            </div>
+
+            <span class="pair-search__button-dark-label d-f-c">
+              <span> {{ toAsset?.code }} </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="c-exchange-rate" *ngIf="assetsExist$ | async">
+    <div class="c-exchange-rate__label">Exchange rate:</div>
+    <div *ngLet="{ from: fromAsset$ | async, to: toAsset$ | async } as asset">
+      1 {{ asset.from.code }} <span> &nbsp; = &nbsp; </span>
+      {{ exchangeRate$ | async }}
+      {{ asset.to.code }}
+    </div>
+  </div>
+</div>
+
+<div class="step4-panel mt-3">
+  <div class="panel" id="step4-panel">
+    <div class="step4-info">
+      <div class="step4-info__image">
+        <div class="lottie step4-info__image">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 64 64"
+            width="64"
+            height="64"
+            preserveAspectRatio="xMidYMid meet"
+            style="
+              width: 100%;
+              height: 100%;
+              transform: translate3d(0px, 0px, 0px);
+              content-visibility: visible;
+            "
+          >
+            <defs>
+              <clipPath id="__lottie_element_2">
+                <rect width="64" height="64" x="0" y="0"></rect>
+              </clipPath>
+              <clipPath id="__lottie_element_4">
+                <path d="M0,0 L48,0 L48,48 L0,48z"></path>
+              </clipPath>
+            </defs>
+            <g clip-path="url(#__lottie_element_2)">
+              <g
+                clip-path="url(#__lottie_element_4)"
+                style="display: block"
+                transform="matrix(-0.999995768070221,0.0029053783509880304,-0.0029053783509880304,-0.999995768070221,56.06962585449219,55.93016815185547)"
+                opacity="1"
+              >
+                <g style="display: block" transform="matrix(1,0,0,1,24,24)" opacity="1">
+                  <g opacity="1" transform="matrix(2,0,0,2,0,0)"></g>
+                </g>
+                <g style="display: block" transform="matrix(1,0,0,1,10,40)" opacity="1">
+                  <g
+                    opacity="1"
+                    transform="matrix(2.018209934234619,0,0,1.9799699783325195,0.0007572174072265625,-0.0008296966552734375)"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill-opacity="0"
+                      stroke="rgb(107,77,104)"
+                      stroke-opacity="1"
+                      stroke-width="1.5"
+                      d=" M3,-3 C3,-3 -3,-3 -3,-3 C-3,-3 -3,3 -3,3"
+                    ></path>
+                  </g>
+                </g>
+                <g style="display: block" transform="matrix(-1,0,0,-1,38,8)" opacity="1">
+                  <g
+                    opacity="1"
+                    transform="matrix(2.018209934234619,0,0,1.9799699783325195,0.052626609802246094,-0.05704545974731445)"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill-opacity="0"
+                      stroke="rgb(107,77,104)"
+                      stroke-opacity="1"
+                      stroke-width="1.5"
+                      d=" M-3,3 C-3,3 -3,-3 -3,-3 C-3,-3 3,-3 3,-3"
+                    ></path>
+                  </g>
+                </g>
+                <g style="display: block" transform="matrix(1,0,0,1,24,40)" opacity="1">
+                  <g opacity="1" transform="matrix(2,0,0,2,0,0)">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill-opacity="0"
+                      stroke="rgb(107,77,104)"
+                      stroke-opacity="1"
+                      stroke-width="1.5"
+                      d=" M9.800999641418457,-3 C7.980000019073486,0.5619999766349792 4.275000095367432,3 0,3 C-4.275000095367432,3 -7.980000019073486,0.5619999766349792 -9.800999641418457,-3"
+                    ></path>
+                  </g>
+                </g>
+                <g
+                  style="display: block"
+                  transform="matrix(1,0,0,1,23.60099983215332,8)"
+                  opacity="1"
+                >
+                  <g opacity="1" transform="matrix(2,0,0,2,0,0)">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="miter"
+                      fill-opacity="0"
+                      stroke-miterlimit="4"
+                      stroke="rgb(107,77,104)"
+                      stroke-opacity="1"
+                      stroke-width="1.5"
+                      d=" M9.800999641418457,3 C7.980000019073486,-0.5619999766349792 4.275000095367432,-3 0,-3 C-4.275000095367432,-3 -7.980000019073486,-0.5619999766349792 -9.800999641418457,3"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="step4-info__container">
+        <div>
+          <p class="step4-info__info">Binance received your payment. Exchange in process.</p>
+          <!---->
+        </div>
+        <div class="telegram-notify">
+          <div class="telegram-notify__icon-container">
+            <svg
+              fill="#7a7a7a"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+              class="telegram-notify__icon-container_icon"
+            >
+              <path
+                clip-rule="evenodd"
+                d="m9.62631 14.9483-.00346-.0025 9.36455-8.45085c.411-.36475-.0897-.54262-.6353-.21178l-11.55717 7.29123-4.99206-1.5581c-1.078064-.33-1.085805-1.0709.24204-1.6034l19.45289-7.50101c.8885-.40336 1.746.2134 1.4069 1.57323l-3.3129 15.61128c-.2313 1.1094-.9016 1.3747-1.8303.8623l-5.046-3.7281-2.4264 2.3594c-.0077.0074-.0153.0148-.0229.0222-.27127.2641-.49573.4827-.9869.4827l.34365-5.1486z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <div class="telegram-notify__text">
+            <div class="telegram-notify__text_title">
+              Notify me on Telegram when my exchange is finished
+            </div>
+            <div class="telegram-notify__text_description">Or for additional questions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-f-c step4-panel__collapse">
+      <div class="step-panel-info step-panel-info__opened">
+        <div class="row step-panel-info__row">
+          <div class="column col-12 col-md-6">
+            <div class="field d-f">
+              <div class="d-f d-f-c">
+                <span class="field__label field__label_light-violet">Deposit address:</span>
+                <div class="field__wrapper">
+                  <p class="field__value field__value_small">
+                    <span class="field__value_link field__value_link_light-violet">
+                      0xba766e74CB5A94f3D6932e9eeD8b10F9F53782D2
+                    </span>
+                    <button
+                      type="button"
+                      class="button field__button button_lg button_transparent button_uppercase button_"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="clone"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-clone fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"
+                          class=""
+                        ></path>
+                      </svg>
+                    </button>
+                    <!---->
+                    <a
+                      href="https://bscscan.com/address/0xba766e74CB5A94f3D6932e9eeD8b10F9F53782D2"
+                      target="_blank"
+                      class="field__button field__button_last"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="arrow-up-right-from-square"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-arrow-up-right-from-square fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"
+                          class=""
+                        ></path></svg
+                    ></a>
+                  </p>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <!---->
+          </div>
+          <div class="column col-12 col-md-6">
+            <div class="field d-f step-panel-info__column_mt">
+              <div class="d-f d-f-c">
+                <span class="field__label field__label_light-violet">Recipient address:</span>
+                <div class="field__wrapper">
+                  <p class="field__value field__value_small">
+                    <span class="field__value_link field__value_link_light-violet"
+                      >0xC8bf539C56aD2ABc9AdeD1A5433348315A10e9d1</span
+                    >
+                    <button
+                      type="button"
+                      class="button field__button button_lg button_transparent button_uppercase button_"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="clone"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-clone fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"
+                          class=""
+                        ></path>
+                      </svg>
+                    </button>
+                    <!---->
+                    <a
+                      href="https://bscscan.com/address/0xC8bf539C56aD2ABc9AdeD1A5433348315A10e9d1"
+                      target="_blank"
+                      class="field__button field__button_last"
+                      ><svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="arrow-up-right-from-square"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-arrow-up-right-from-square fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"
+                          class=""
+                        ></path></svg
+                    ></a>
+                  </p>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <!---->
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="column col-12 col-md-6">
+            <div class="field d-f">
+              <div class="d-f d-f-c">
+                <span class="field__label field__label_light-violet"
+                  >Input transaction in BNB<small style="color: #a0789c; margin-left: 3px"
+                    >BEP20</small
+                  >:</span
+                >
+                <div class="field__wrapper">
+                  <p class="field__value field__value_small">
+                    <span class="field__value_link field__value_link_light-violet"
+                      >0xdef735bd483667a1f8d3751f822d2e9edb26fd4006069c99da84bcb4c18e2df2</span
+                    >
+                    <button
+                      type="button"
+                      class="button field__button button_lg button_transparent button_uppercase button_"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="clone"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-clone fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"
+                          class=""
+                        ></path>
+                      </svg>
+                    </button>
+                    <!---->
+                    <a
+                      href="https://bscscan.com/tx/0xdef735bd483667a1f8d3751f822d2e9edb26fd4006069c99da84bcb4c18e2df2"
+                      target="_blank"
+                      class="field__button field__button_last"
+                      ><svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="arrow-up-right-from-square"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        class="field__small-button svg-inline--fa fa-arrow-up-right-from-square fa-w-16 field__small-button_light-violet"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"
+                          class=""
+                        ></path></svg
+                    ></a>
+                  </p>
+                </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+          <!---->
+        </div>
+      </div>
+      <div class="d-fc step4-panel__hide-button">
+        <p class="step4-panel__details">hide details</p>
+        <svg
+          data-v-78e23fac=""
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fa"
+          data-icon="caret-down"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          class="step4-panel__caret svg-inline--fa fa-caret-down fa-w-10 step4-panel__caret_collapse"
+        >
+          <path
+            data-v-78e23fac=""
+            fill="currentColor"
+            d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+            class=""
+          ></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="invaders-game step4__game" data-v-49591a1a="">
+  <div class="invaders-game-tile invaders-game-tile__gradient">
+    <img
+      src="../../../../../../assets/img/game-tile-laser.webp"
+      alt="laser"
+      width="292"
+      height="146"
+      class="invaders-game-tile__image"
+    />
+    <h2 class="invaders-game-tile__title">Start game!</h2>
+    <p class="invaders-game-tile__text">
+      Thank you for choosing SwapSpace! Feel free to pass the time playing our Invaders game.
+    </p>
+    <button
+      type="button"
+      class="button invaders-game-tile__button button_sm button_primary button_none button_"
+    >
+      Start
+    </button>
+  </div>
+</div>
