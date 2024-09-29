@@ -11,10 +11,10 @@ import { CacheService } from '@app/shared/services/cache.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationStatusComponent {
-  public exchangeInfo$ = this.exchangeService.selectedOffer$;
-  public confirmationStep$ = this.exchangeService.confirmationStep$;
+  public exchangeInfo$ = this.cacheService.selectedOffer$;
+  public confirmationStep$ = this.cacheService.exchangeStep$;
 
-  constructor(private exchangeService: ExchangeService, private cacheService: CacheService) {}
+  constructor(private cacheService: CacheService) {}
 
   calculateStatus(index: number): IconStatus {
     if (this.cacheService.exchangeStep === index) {
