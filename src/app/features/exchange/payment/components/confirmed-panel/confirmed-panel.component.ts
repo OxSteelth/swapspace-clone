@@ -29,12 +29,12 @@ import { CacheService } from '@app/shared/services/cache.service';
 import { Currency } from '@app/shared/models/currency';
 
 @Component({
-  selector: 'app-confirmed-card',
-  templateUrl: './confirmed-card.component.html',
-  styleUrls: ['./confirmed-card.component.scss'],
+  selector: 'app-confirmed-panel',
+  templateUrl: './confirmed-panel.component.html',
+  styleUrls: ['./confirmed-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConfirmedCardComponent {
+export class ConfirmedPanelComponent {
   termsOfUseControl = new FormControl<boolean>(true);
   isEstimatingExchange = signal(false);
 

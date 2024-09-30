@@ -30,12 +30,12 @@ import { Currency } from '@app/shared/models/currency';
 import { WalletModalComponent } from '@app/shared/components/wallet-modal/wallet-modal.component';
 
 @Component({
-  selector: 'app-payment-card',
-  templateUrl: './payment-card.component.html',
-  styleUrls: ['./payment-card.component.scss'],
+  selector: 'app-payment-panel',
+  templateUrl: './payment-panel.component.html',
+  styleUrls: ['./payment-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaymentCardComponent {
+export class PaymentPanelComponent {
   termsOfUseControl = new FormControl<boolean>(true);
   isEstimatingExchange = signal(false);
 

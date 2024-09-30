@@ -127,7 +127,10 @@
   </div>
   <div class="c-exchange-rate" *ngIf="assetsExist$ | async">
     <div class="c-exchange-rate__label">Exchange rate:</div>
-    <div *ngLet="{ from: fromAsset$ | async, to: toAsset$ | async } as asset">
+    <div
+      class="c-exchange-rate__value"
+      *ngLet="{ from: fromAsset$ | async, to: toAsset$ | async } as asset"
+    >
       1 {{ asset.from.code }} <span> &nbsp; = &nbsp; </span>
       {{ exchangeRate$ | async }}
       {{ asset.to.code }}

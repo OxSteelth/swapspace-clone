@@ -131,7 +131,10 @@
   </div>
   <div class="c-exchange-rate" *ngIf="assetsExist$ | async">
     <div class="c-exchange-rate__label">Exchange rate:</div>
-    <div *ngLet="{ from: fromAsset$ | async, to: toAsset$ | async } as asset">
+    <div
+      class="c-exchange-rate__value"
+      *ngLet="{ from: fromAsset$ | async, to: toAsset$ | async } as asset"
+    >
       1 {{ asset.from.code }} <span> &nbsp; = &nbsp; </span>
       {{ exchangeRate$ | async }}
       {{ asset.to.code }}
@@ -146,7 +149,8 @@
         <div class="field d-f mb-3" id="step3-panel-deposit-address">
           <div class="d-f d-f-c">
             <span class="field__label field__label_standard">
-              Send {{ fromAmount$ | async }} {{ fromAsset.code }} to the deposit address:
+              Send {{ fromAmount$ | async }} {{ fromAsset.code.toUpperCase() }} to the deposit
+              address:
             </span>
             <div class="field__wrapper">
               <p class="field__value field__value_lead">
@@ -357,7 +361,7 @@
   </div>
 </div>
 
-<!-- <app-confirmed-card></app-confirmed-card> -->
+<!-- <app-confirmed-panel></app-confirmed-panel> -->
 
 <div class="invaders-game-tile invaders-game-tile__gradient invaders-game-tile__disabled">
   <img

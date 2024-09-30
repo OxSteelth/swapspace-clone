@@ -28,7 +28,7 @@
     </div>
     <div class="c-exchange-rate">
       <div class="c-exchange-rate__label">Exchange rate:</div>
-      <div>
+      <div class="c-exchange-rate__value">
         1 {{ this.fromTokenFormControl | appFormValue }} <span> &nbsp; = &nbsp; </span>
         {{ this.exchangeRate$ | async }}
         {{ this.toTokenFormControl | appFormValue }}
