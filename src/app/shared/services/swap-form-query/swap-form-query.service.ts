@@ -5,9 +5,7 @@ import { BehaviorSubject, combineLatest, forkJoin, from, Observable, of, schedul
 import { QueryParams } from '@core/services/query-params/models/query-params';
 import { CurrencyService } from '../currency.service';
 import { SwapFormService } from '../swap-form.service';
-import {
-  defaultFormParameters,
-} from './constants/default-tokens-params';
+import { defaultFormParameters } from './constants/default-tokens-params';
 import { CacheService } from '../cache.service';
 
 @Injectable()
@@ -108,14 +106,13 @@ export class SwapFormQueryService {
       this.cacheService.toChain$,
       this.cacheService.toToken$
     ]).subscribe(([fromToken, fromChain, fromAmount, toChain, toToken]) => {
-      newParams.fromChain = fromChain || defaultFormParameters.swap.fromChain;
-      newParams.toChain = toChain || defaultFormParameters.swap.toChain;
-      newParams.from = fromToken.code || defaultFormParameters.swap.from;
-      newParams.to = toToken.code || defaultFormParameters.swap.to;
-      newParams.amount = fromAmount || defaultFormParameters.swap.amount;
+      newParams.fromChain =
+        queryParams?.fromChain || fromChain || defaultFormParameters.swap.fromChain;
+      newParams.toChain = queryParams?.toChain || toChain || defaultFormParameters.swap.toChain;
+      newParams.from = queryParams?.from || fromToken?.code || defaultFormParameters.swap.from;
+      newParams.to = queryParams?.to || toToken?.code || defaultFormParameters.swap.to;
+      newParams.amount = queryParams?.amount || fromAmount || defaultFormParameters.swap.amount;
     });
-
-    newParams = { ...newParams, ...queryParams };
 
     if (
       newParams.fromChain === newParams.toChain &&

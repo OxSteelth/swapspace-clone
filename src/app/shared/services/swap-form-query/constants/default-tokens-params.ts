@@ -1,10 +1,10 @@
 
 export const defaultFormParameters = {
   swap: {
-    fromChain: 'btc',
-    toChain: 'eth',
-    from: 'btc',
-    to: 'eth',
+    fromChain: 'bep20',
+    toChain: 'bep20',
+    from: 'bnb',
+    to: 'usdt',
     amount: '1'
   }
 };
