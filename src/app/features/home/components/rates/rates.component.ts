@@ -21,7 +21,7 @@ export class RatesComponent {
   }
 
   quickExchange() {
-    this.cacheService.updateExchangeStep(0);
+    this.cacheService.updateExchangeStep(1);
     this.navigateToUrl('/exchange/step2')
   }
 }
