@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ElementRef, signal, ViewChild } from '@angular/core';
-import { ExchangeConfirmationViewModel } from '../../viewmodel/exchange-confirmation.viewmodel.';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -25,12 +24,12 @@ import { Exchange } from '@app/shared/models/exchange';
 import { CacheService } from '@app/shared/services/cache.service';
 
 @Component({
-  selector: 'app-confirmation-card',
-  templateUrl: './confirmation-card.component.html',
-  styleUrls: ['./confirmation-card.component.scss'],
+  selector: 'app-exchange-create-panel',
+  templateUrl: './exchange-create-panel.component.html',
+  styleUrls: ['./exchange-create-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConfirmationCardComponent {
+export class ExchangeCreatePanelComponent {
   termsOfUseControl = new FormControl<boolean>(true);
   isEstimatingExchange = signal(false);
   private readonly _isLoading$ = new BehaviorSubject<boolean>(false);

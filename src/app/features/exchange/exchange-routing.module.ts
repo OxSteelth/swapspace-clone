@@ -5,13 +5,13 @@ const routes: Routes = [
   {
     path: 'step1',
     loadChildren: () =>
-      import('./exchange-list/exchange-list.module').then(m => m.ExchangeListModule)
+      import('./list/exchange-list.module').then(m => m.ExchangeListModule)
   },
   {
     path: 'step2',
     loadChildren: () =>
-      import('./exchange-confirmation/exchange-confirmation.module').then(
-        m => m.ExchangeConfirmationModule
+      import('./create/exchange-create.module').then(
+        m => m.ExchangeCreateModule
       )
   },
   {

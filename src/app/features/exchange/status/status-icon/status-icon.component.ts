@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IconStatus } from '../../type';
+import { IconStatus } from '../type';
 
 @Component({
   selector: 'app-status-icon',

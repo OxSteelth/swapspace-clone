@@ -1,16 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ExchangeConfirmationViewModel } from '../../viewmodel/exchange-confirmation.viewmodel.';
-import { IconStatus } from '../../type';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { CacheService } from '@app/shared/services/cache.service';
+import { IconStatus } from './type';
 
 @Component({
-  selector: 'app-confirmation-status',
-  templateUrl: './confirmation-status.component.html',
-  styleUrls: ['./confirmation-status.component.scss'],
+  selector: 'app-exchange-status',
+  templateUrl: './exchange-status.component.html',
+  styleUrls: ['./exchange-status.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConfirmationStatusComponent {
+export class ExchangeStatusComponent {
   public exchangeInfo$ = this.cacheService.selectedOffer$;
   public confirmationStep$ = this.cacheService.exchangeStep$;
 
