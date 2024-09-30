@@ -14,12 +14,19 @@ import {
   of,
   startWith,
   Subscription,
+  switchMap,
   tap
 } from 'rxjs';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
 import { SwapFormService } from '@app/shared/services/swap-form.service';
-import { AvailableExchange, CreateExchange, CurrencyOption } from '@app/shared/types';
+import {
+  AvailableExchange,
+  CreateExchange,
+  CurrencyOption,
+  ExchangeStatus,
+  Transaction
+} from '@app/shared/types';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { StoreService } from '@app/shared/services/store/store.service';
 import { WalletService } from '@app/shared/services/wallet.service';
@@ -107,12 +114,10 @@ export class PaymentPanelComponent {
   constructor(
     private exchangeService: ExchangeService,
     private currencyService: CurrencyService,
-    private walletService: WalletService,
-    private storeService: StoreService,
-    private swapFormQueryService: SwapFormQueryService,
     private web3Service: Web3Service,
     private cacheService: CacheService,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private router: Router
   ) {
     this.accounts$ = this.web3Service.getAccountsObservable();
   }
@@ -123,13 +128,41 @@ export class PaymentPanelComponent {
         this.updateDepositAddress(this.web3Service.getChecksumAddress(ce.from.address));
         this.updateCreatedExchange(ce);
 
+        console.log(ce.id);
+
         const chainId = this.web3Service.getChainIdFromNetwork(ce.from.network);
 
         if (chainId) {
           this.networkId = chainId;
         }
+
+        this.exchangeService.startCheckExchangeStatusInterval();
       }
     });
+
+    this.exchangeService.checkExchangeStatusInterval$
+      .pipe(
+        switchMap(() => {
+          if (this.cacheService.createdExchange.id) {
+            return this.exchangeService.checkExchangeStatus(this.cacheService.createdExchange.id);
+          } else {
+            return of(null);
+          }
+        })
+      )
+      .subscribe((status: ExchangeStatus) => {
+        this.cacheService.updateExchangeStatus(status);
+
+        if (status?.status === 'confirming') {
+          this.cacheService.updateExchangeStep(3);
+
+          this.router.navigate(['/exchange/step4'], {
+            queryParams: {
+              id: this.cacheService.createdExchange.id
+            }
+          });
+        }
+      });
 
     this.checkNetworkConnected();
 
@@ -200,7 +233,9 @@ export class PaymentPanelComponent {
             this._createdExchange$.getValue().from.amount.toString()
           )
           .subscribe({
-            next: data => {},
+            next: (data: Transaction) => {
+              console.log(data);
+            },
             error: err => {
               console.error('Error occurred:', err);
             }
@@ -214,7 +249,9 @@ export class PaymentPanelComponent {
             this._createdExchange$.getValue().from.contractAddress
           )
           .subscribe({
-            next: data => {},
+            next: data => {
+              console.log(data);
+            },
             error: err => {
               console.error('Error occurred:', err);
             }

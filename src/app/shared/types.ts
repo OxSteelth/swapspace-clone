@@ -1,3 +1,5 @@
+import { ExchangeStatusInfo } from './models/exchange';
+
 export type CurrencyOption = {
   label: string;
   fullLabel?: string;
@@ -45,7 +47,7 @@ export type CreateExchange = {
     transactionHash: string;
   };
   rate: number;
-  status: string;
+  status: ExchangeStatusInfo;
   confirmations: number;
   refundExtraId: string;
   blockExplorerTransactionUrl: {
@@ -56,4 +58,61 @@ export type CreateExchange = {
     from: string;
     to: string;
   };
+};
+
+export type ExchangeStatus = {
+  actualStatus: ExchangeStatusInfo;
+  amountDeviation: number;
+  blockExplorerAddressUrl: { from: string; to: string };
+  blockExplorerTransactionUrl: { from: string; to: string };
+  confirmations: number;
+  duration: number;
+  error: boolean;
+  eta: string;
+  fixed: boolean;
+  from: {
+    network: string;
+    extraId: string;
+    transactionHash: string;
+    code: string;
+    amount: number;
+    contractAddress: string;
+    address: string;
+  };
+  hasIssues: boolean;
+  id: string;
+  partner: string;
+  rate: number;
+  refundAddress: string;
+  refundAddressSource: string;
+  refundExtraId: string;
+  status: ExchangeStatusInfo;
+  timestamps: { createdAt: string; expiresAt: string };
+  to: {
+    network: string;
+    extraId: string;
+    transactionHash: string;
+    code: string;
+    amount: number;
+    address: string;
+  };
+  type: string;
+  warnings: { from: string; to: string };
+};
+
+export type Transaction = {
+  blockHash: string;
+  blockNumber: number;
+  contractAddress: string | null;
+  cumulativeGasUsed: number;
+  effectiveGasPrice: number;
+  from: string;
+  gasUsed: number;
+  logs: string[];
+  logsBloom: string;
+  status: boolean;
+  to: string;
+  transactionHash: string;
+  transactionIndex: number;
+  type: string;
 };

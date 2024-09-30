@@ -246,6 +246,10 @@ p {
 }
 .step4-info__info {
   font-size: 0.875rem;
+
+  .capitalize {
+    text-transform: capitalize;
+  }
 }
 .step4-info__container {
   display: flex;

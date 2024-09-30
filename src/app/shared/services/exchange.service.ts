@@ -15,11 +15,12 @@ import {
   Subscription,
   switchMap,
   take,
+  tap,
   timer
 } from 'rxjs';
-import { AvailableExchange, CreateExchange } from '../types';
+import { AvailableExchange, CreateExchange, ExchangeStatus } from '../types';
 import { HttpService } from '@app/core/services/http/http.service';
-import { Exchange, EXCHANGE_STATUS } from '../models/exchange';
+import { Exchange } from '../models/exchange';
 import { CacheService } from './cache.service';
 
 const EXCHANGE_RATES: Record<string, Record<string, number>> = {
@@ -44,13 +45,6 @@ const EXCHANGE_RATES: Record<string, Record<string, number>> = {
   providedIn: 'root'
 })
 export class ExchangeService {
-  private readonly _status$ = new BehaviorSubject<EXCHANGE_STATUS>('CONFIRM');
-  public status$ = this._status$.asObservable();
-
-  public get status() {
-    return this._status$.getValue();
-  }
-
   private readonly _confirmationStep$ = new BehaviorSubject<number>(0);
   public confirmationStep$ = this._confirmationStep$.asObservable();
 
@@ -97,6 +91,10 @@ export class ExchangeService {
   private _interval$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public interval$ = this._interval$.asObservable();
 
+  private checkExchangeStatusIntervalSubscription: Subscription | null = null;
+  private _checkExchangeStatusInterval$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public checkExchangeStatusInterval$ = this._checkExchangeStatusInterval$.asObservable();
+
   constructor(private readonly httpService: HttpService, private cacheService: CacheService) {}
 
   startInterval() {
@@ -114,6 +112,23 @@ export class ExchangeService {
     if (this.intervalSubscription) {
       this.intervalSubscription.unsubscribe();
       this.intervalSubscription = null;
+    }
+  }
+
+  startCheckExchangeStatusInterval() {
+    if (!this.checkExchangeStatusIntervalSubscription) {
+      this.checkExchangeStatusIntervalSubscription = interval(10000)
+        .pipe(startWith(0))
+        .subscribe(val => {
+          this._checkExchangeStatusInterval$.next(val);
+        });
+    }
+  }
+
+  stopCheckExchangeStatusInterval() {
+    if (this.checkExchangeStatusIntervalSubscription) {
+      this.checkExchangeStatusIntervalSubscription.unsubscribe();
+      this.checkExchangeStatusIntervalSubscription = null;
     }
   }
 
@@ -303,19 +318,21 @@ export class ExchangeService {
   sortExchanges(field: string): Observable<Exchange[]> {
     return this.cacheService.filteredExchanges$.pipe(
       switchMap(exchanges => {
-        return of(exchanges.sort((a, b) => {
-          if (field === 'relevance') {
-            return b.toAmount - a.toAmount;
-          } else if (field === 'rate') {
-            return b.toAmount - a.toAmount;
-          } else if (field === 'eta') {
-            const aEta = a.duration.split('-').reduce((result, v) => result + Number(v), 0);
-            const bEta = b.duration.split('-').reduce((result, v) => result + Number(v), 0);
-            return aEta - bEta;
-          } else {
-            return 1;
-          }
-        }));
+        return of(
+          exchanges.sort((a, b) => {
+            if (field === 'relevance') {
+              return b.toAmount - a.toAmount;
+            } else if (field === 'rate') {
+              return b.toAmount - a.toAmount;
+            } else if (field === 'eta') {
+              const aEta = a.duration.split('-').reduce((result, v) => result + Number(v), 0);
+              const bEta = b.duration.split('-').reduce((result, v) => result + Number(v), 0);
+              return aEta - bEta;
+            } else {
+              return 1;
+            }
+          })
+        );
       })
     );
   }
@@ -342,6 +359,15 @@ export class ExchangeService {
         });
 
         return of(sorted[0]);
+      })
+    );
+  }
+
+  checkExchangeStatus(id: string) {
+    return this.httpService.get<ExchangeStatus>(`exchange/${id}`).pipe(
+      catchError(error => {
+        console.error('Error fetching exchange status', error);
+        return of(null);
       })
     );
   }

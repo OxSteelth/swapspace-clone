@@ -3,7 +3,7 @@ import { StoreService } from './store/store.service';
 import { BehaviorSubject, startWith } from 'rxjs';
 import { Currency } from '../models/currency';
 import { Exchange } from '../models/exchange';
-import { CreateExchange } from '../types';
+import { CreateExchange, ExchangeStatus } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +85,9 @@ export class CacheService {
     this._createdExchange$.next(ex);
     this.storeService.setItem('CREATED_EXCHANGE', ex);
   }
+  public get createdExchange() {
+    return this._createdExchange$.getValue();
+  }
 
   private _exchangeStep$ = new BehaviorSubject<number>(0);
   public exchangeStep$ = this._exchangeStep$.asObservable();
@@ -153,6 +156,13 @@ export class CacheService {
   }
   public get walletId(): string {
     return this._walletId$.getValue();
+  }
+
+  private _exchangeStatus$ = new BehaviorSubject<ExchangeStatus| null>(null);
+  public exchangeStatus$ = this._exchangeStatus$.asObservable();
+  public updateExchangeStatus(status: ExchangeStatus) {
+    this._exchangeStatus$.next(status);
+    this.storeService.setItem('EXCHANGE_STATUS', status);
   }
 
   constructor(private storeService: StoreService) {}
@@ -224,6 +234,10 @@ export class CacheService {
 
     if (this.storeService.getItem('FILTERED_EXCHANGES')) {
       this.updateFilteredExchanges(this.storeService.getItem('FILTERED_EXCHANGES'));
+    }
+
+    if (this.storeService.getItem('EXCHANGE_STATUS')) {
+      this.updateExchangeStatus(this.storeService.getItem('EXCHANGE_STATUS'));
     }
   }
 }

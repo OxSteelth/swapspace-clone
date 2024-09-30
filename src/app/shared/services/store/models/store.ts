@@ -13,7 +13,7 @@
 import { QueryParams } from '@app/core/services/query-params/models/query-params';
 import { Currency } from '@app/shared/models/currency';
 import { Exchange } from '@app/shared/models/exchange';
-import { CreateExchange } from '@app/shared/types';
+import { CreateExchange, ExchangeStatus } from '@app/shared/types';
 import BigNumber from 'bignumber.js';
 
 export type Store = {
@@ -34,6 +34,7 @@ export type Store = {
   FILTER_FLOATING_RATE: boolean;
   AVAILABLE_EXCHANGES: Exchange[];
   FILTERED_EXCHANGES: Exchange[];
+  EXCHANGE_STATUS: ExchangeStatus;
 };
 
 export const storeRecord: Record<keyof Store, null> = {
@@ -53,5 +54,6 @@ export const storeRecord: Record<keyof Store, null> = {
   FILTER_FIXED_RATE: null,
   FILTER_FLOATING_RATE: null,
   AVAILABLE_EXCHANGES: null,
-  FILTERED_EXCHANGES: null
+  FILTERED_EXCHANGES: null,
+  EXCHANGE_STATUS: null
 };

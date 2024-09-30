@@ -30,7 +30,7 @@
             --end-y: -28%;
           "
         >
-          <img src="/_nuxt/img/purple-big-coin.b4e4e82.webp" alt="purple-big-coin" />
+          <img src="../../../../assets/img/purple-big-coin.webp" alt="purple-big-coin" />
         </div>
         <div
           class="animated-element purple-small-coin animate"
@@ -43,7 +43,7 @@
             --end-y: -15%;
           "
         >
-          <img src="/_nuxt/img/purple-small-coin.74cd279.webp" alt="purple-small-coin" />
+          <img src="../../../../assets/img/purple-small-coin.webp" alt="purple-small-coin" />
         </div>
         <div
           class="animated-element rocket animate"
@@ -56,7 +56,7 @@
             --end-y: 10%;
           "
         >
-          <img src="/_nuxt/img/rocket.6e296c2.webp" alt="rocket" />
+          <img src="../../../../assets//img/rocket.webp" alt="rocket" />
         </div>
         <div
           class="animated-element violet-big-coin animate"
@@ -69,7 +69,7 @@
             --end-y: -20%;
           "
         >
-          <img src="/_nuxt/img/violet-big-coin.4cde218.webp" alt="violet-big-coin" />
+          <img src="../../../../assets/img/violet-big-coin.webp" alt="violet-big-coin" />
         </div>
         <div
           class="animated-element violet-small-coin animate"
@@ -82,7 +82,7 @@
             --end-y: -5%;
           "
         >
-          <img src="/_nuxt/img/violet-small-coin.b1a013a.webp" alt="violet-small-coin" />
+          <img src="../../../../assets/img/violet-small-coin.webp" alt="violet-small-coin" />
         </div>
         <div
           class="animated-element violet-star animate"
@@ -289,7 +289,7 @@
         <div class="step3-pair-component step-exchange-panel__info_coin">
           <div class="step3-pair-component__amount">
             <span class="step3-pair-component__amount_label"> You send </span>
-            <span class="step3-pair-component__amount_value"> 0.04 </span>
+            <span class="step3-pair-component__amount_value"> {{ fromAmount$ | async }} </span>
           </div>
           <div class="step3-pair-component__coin step3-pair-component__coin_light-disabled">
             <div
@@ -303,8 +303,10 @@
               />
             </div>
             <span class="step3-pair-component__coin-label d-f-c"
-              ><span> bnb </span>
-              <span class="step3-pair-component__coin-label-network"> bep20 </span></span
+              ><span> {{ (fromAsset$ | async).code.toUpperCase() }} </span>
+              <span class="step3-pair-component__coin-label-network">
+                {{ fromChain$ | async }}
+              </span></span
             >
             <!---->
           </div>
@@ -313,7 +315,7 @@
         <div class="step3-pair-component step-exchange-panel__info_coin">
           <div class="step3-pair-component__amount">
             <span class="step3-pair-component__amount_label"> You get </span>
-            <span class="step3-pair-component__amount_value"> 22.86166301 </span>
+            <span class="step3-pair-component__amount_value"> {{ toAmount$ | async }} </span>
           </div>
           <div class="step3-pair-component__coin step3-pair-component__coin_light-disabled">
             <div
@@ -327,8 +329,10 @@
               />
             </div>
             <span class="step3-pair-component__coin-label d-f-c"
-              ><span> usdt </span>
-              <span class="step3-pair-component__coin-label-network"> bep20 </span></span
+              ><span> {{ (toAsset$ | async).code }} </span>
+              <span class="step3-pair-component__coin-label-network">
+                {{ toChain$ | async }}
+              </span></span
             >
             <!---->
           </div>
@@ -336,7 +340,10 @@
       </div>
       <div class="step-exchange-panel__rate">
         <div class="step-exchange-panel__rate_label">Exchange rate:</div>
-        <div>1 BNB = 571.54157525 USDT</div>
+        <div>
+          1 {{ (fromAsset$ | async).code.toUpperCase() }} = {{ exchangeRate$ | async }}
+          {{ (toAsset$ | async).code.toUpperCase() }}
+        </div>
       </div>
     </div>
     <div class="step-exchange-panel__animated-content show">
@@ -357,7 +364,7 @@
         >
       </div>
       <div class="d-f-c step-exchange-panel__collapse">
-        <div class="step-panel-info">
+        <div class="step-panel-info step-panel-info__opened">
           <div class="row step-panel-info__row">
             <div class="column col-12 col-md-6">
               <div class="field d-f">
@@ -365,9 +372,9 @@
                   <span class="field__label field__label_light-violet">Deposit address:</span>
                   <div class="field__wrapper">
                     <p class="field__value field__value_small">
-                      <span class="field__value_link field__value_link_light-violet"
-                        >0xaf64aFb087212b32Dae97fD523cbe442449966da</span
-                      >
+                      <span class="field__value_link field__value_link_light-violet">{{
+                        (exchangeStatus$ | async).from.address
+                      }}</span>
                       <button
                         type="button"
                         class="button field__button button_lg button_transparent button_uppercase button_"
@@ -391,7 +398,9 @@
                       </button>
                       <!---->
                       <a
-                        href="https://bscscan.com/address/0xaf64aFb087212b32Dae97fD523cbe442449966da"
+                        href="https://bscscan.com/address/{{
+                          (exchangeStatus$ | async).from.address
+                        }}"
                         target="_blank"
                         class="field__button field__button_last"
                         ><svg
@@ -423,9 +432,9 @@
                   <span class="field__label field__label_light-violet">Recipient address:</span>
                   <div class="field__wrapper">
                     <p class="field__value field__value_small">
-                      <span class="field__value_link field__value_link_light-violet"
-                        >0xC8bf539C56aD2ABc9AdeD1A5433348315A10e9d1</span
-                      >
+                      <span class="field__value_link field__value_link_light-violet">{{
+                        (exchangeStatus$ | async).to.address
+                      }}</span>
                       <button
                         type="button"
                         class="button field__button button_lg button_transparent button_uppercase button_"
@@ -449,7 +458,9 @@
                       </button>
                       <!---->
                       <a
-                        href="https://bscscan.com/address/0xC8bf539C56aD2ABc9AdeD1A5433348315A10e9d1"
+                        href="https://bscscan.com/address/{{
+                          (exchangeStatus$ | async).to.address
+                        }}"
                         target="_blank"
                         class="field__button field__button_last"
                         ><svg
@@ -481,15 +492,17 @@
               <div class="field d-f">
                 <div class="d-f d-f-c">
                   <span class="field__label field__label_light-violet"
-                    >Input transaction in BNB<small style="color: #a0789c; margin-left: 3px"
-                      >BEP20</small
+                    >Input transaction in {{ (exchangeStatus$ | async).from.code.toUpperCase()
+                    }}<small style="color: #a0789c; margin-left: 3px">{{
+                      (exchangeStatus$ | async).from.network.toUpperCase()
+                    }}</small
                     >:</span
                   >
                   <div class="field__wrapper">
                     <p class="field__value field__value_small">
-                      <span class="field__value_link field__value_link_light-violet"
-                        >0x87fccf5d28037914a1f4ba7c1548b478778a9008441ff8225c207dadab132280</span
-                      >
+                      <span class="field__value_link field__value_link_light-violet">{{
+                        (exchangeStatus$ | async).from.transactionHash
+                      }}</span>
                       <button
                         type="button"
                         class="button field__button button_lg button_transparent button_uppercase button_"
@@ -513,7 +526,9 @@
                       </button>
                       <!---->
                       <a
-                        href="https://bscscan.com/tx/0x87fccf5d28037914a1f4ba7c1548b478778a9008441ff8225c207dadab132280"
+                        href="https://bscscan.com/tx/{{
+                          (exchangeStatus$ | async).from.transactionHash
+                        }}"
                         target="_blank"
                         class="field__button field__button_last"
                         ><svg
@@ -542,15 +557,17 @@
               <div class="field d-f">
                 <div class="d-f d-f-c">
                   <span class="field__label field__label_light-violet"
-                    >Output transaction in USDT<small style="color: #a0789c; margin-left: 3px"
-                      >BEP20</small
+                    >Output transaction in {{ (exchangeStatus$ | async).to.code.toUpperCase()
+                    }}<small style="color: #a0789c; margin-left: 3px">{{
+                      (exchangeStatus$ | async).to.network.toUpperCase()
+                    }}</small
                     >:</span
                   >
                   <div class="field__wrapper">
                     <p class="field__value field__value_small">
-                      <span class="field__value_link field__value_link_light-violet"
-                        >0x0ec985c9bececab5a6e4c10ccdecc6b760497e42c79236b285586694873a5f90</span
-                      >
+                      <span class="field__value_link field__value_link_light-violet">{{
+                        (exchangeStatus$ | async).to.transactionHash
+                      }}</span>
                       <button
                         type="button"
                         class="button field__button button_lg button_transparent button_uppercase button_"
@@ -574,7 +591,9 @@
                       </button>
                       <!---->
                       <a
-                        href="https://bscscan.com/tx/0x0ec985c9bececab5a6e4c10ccdecc6b760497e42c79236b285586694873a5f90"
+                        href="https://bscscan.com/tx/{{
+                          (exchangeStatus$ | async).to.transactionHash
+                        }}"
                         target="_blank"
                         class="field__button field__button_last"
                         ><svg

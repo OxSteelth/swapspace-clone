@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CacheService } from '@app/shared/services/cache.service';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { ExchangeService } from '@app/shared/services/exchange.service';
+import { ExchangeStatus } from '@app/shared/types';
+import { BehaviorSubject, combineLatest, map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-exchange-process-panel',
@@ -22,7 +24,16 @@ export class ExchangeProcessPanelComponent {
     this._exchangeRate$.next(rate);
   }
 
-  constructor(private cacheService: CacheService) {}
+  private _isFinished$ = new BehaviorSubject<boolean>(false);
+  public isFinished$ = this._isFinished$.asObservable();
+
+  public updateIsFinished(isFinished: boolean) {
+    this._isFinished$.next(isFinished);
+  }
+
+  public exchangeStatus$ = this.cacheService.exchangeStatus$;
+
+  constructor(private cacheService: CacheService, private exchangeService: ExchangeService) {}
 
   ngOnInit() {
     this.assetsExist$ = combineLatest([this.fromAsset$, this.toAsset$]).pipe(
@@ -34,5 +45,33 @@ export class ExchangeProcessPanelComponent {
         this.updateExchangeRate(info.toAmount / info.fromAmount);
       }
     });
+
+    this.exchangeService.checkExchangeStatusInterval$
+      .pipe(
+        switchMap(() => {
+          if (this.cacheService.createdExchange.id) {
+            return this.exchangeService.checkExchangeStatus(this.cacheService.createdExchange.id);
+          } else {
+            return of(null);
+          }
+        })
+      )
+      .subscribe((status: ExchangeStatus) => {
+        this.cacheService.updateExchangeStatus(status);
+
+        if (status?.status === 'finished') {
+          this.updateIsFinished(true);
+          this.cacheService.updateExchangeStep(4);
+          this.exchangeService.stopCheckExchangeStatusInterval();
+        }
+      });
+
+      this.cacheService.exchangeStatus$.subscribe((status) => {
+        if(status?.status === 'finished') {
+          this.updateIsFinished(true);
+          this.cacheService.updateExchangeStep(4);
+          this.exchangeService.stopCheckExchangeStatusInterval();
+        }
+      })
   }
 }

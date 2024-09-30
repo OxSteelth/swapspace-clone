@@ -15,7 +15,7 @@ export interface Exchange {
   toNetwork: string;
 }
 
-export type EXCHANGE_STATUS = 'CONFIRM' | 'INSERT' | 'PERFORM';
+export type ExchangeStatusInfo = 'waiting' | 'confirming' | 'sending' | 'finished';
 
 export interface CreatedExchange {
   id: string;
@@ -42,7 +42,7 @@ export interface CreatedExchange {
     transactionHash: string;
   };
   rate: number;
-  status: string;
+  status: ExchangeStatusInfo;
   confirmations: number;
   refundExtraId: string;
   blockExplorerTransactionUrl: {
