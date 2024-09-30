@@ -137,6 +137,24 @@ export class CacheService {
     return this._filteredExchanges$.getValue();
   }
 
+  private _isWalletConnected$ = new BehaviorSubject<boolean>(false);
+  public isWalletConnected$ = this._isWalletConnected$.asObservable();
+  public updateIsWalletConnected(isConnected: boolean) {
+    this._isWalletConnected$.next(isConnected);
+  }
+  public get isWalletConnected(): boolean {
+    return this._isWalletConnected$.getValue();
+  }
+
+  private _walletId$ = new BehaviorSubject<string>('');
+  public walletId$ = this._walletId$.asObservable();
+  public updatewalletId(id: string) {
+    this._walletId$.next(id);
+  }
+  public get walletId(): string {
+    return this._walletId$.getValue();
+  }
+
   constructor(private storeService: StoreService) {}
 
   public init() {

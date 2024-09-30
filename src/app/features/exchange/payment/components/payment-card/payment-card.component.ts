@@ -27,6 +27,7 @@ import { Exchange } from '@app/shared/models/exchange';
 import { Web3Service } from '@app/shared/services/web3.service';
 import { CacheService } from '@app/shared/services/cache.service';
 import { Currency } from '@app/shared/models/currency';
+import { WalletModalComponent } from '@app/shared/components/wallet-modal/wallet-modal.component';
 
 @Component({
   selector: 'app-payment-card',
@@ -88,15 +89,17 @@ export class PaymentCardComponent {
   confirmed = signal(false);
   isShowingPanel = signal(false);
 
-  public isWalletConnected: boolean = false;
+  public isWalletConnected$ = this.cacheService.isWalletConnected$;
   public isNetworkSelected: boolean = false;
   public networkId: string = '';
-  public walletId: string = '';
+  public walletId$ = this.cacheService.walletId$;
 
   public assetsExist$: Observable<boolean>;
 
   @ViewChild('recipientPanel')
   recipientPanel!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('modal') walletModal: WalletModalComponent;
 
   accounts$: Observable<string[]>;
   balance$: Observable<string> | undefined;
@@ -128,7 +131,6 @@ export class PaymentCardComponent {
       }
     });
 
-    this.checkWalletConnected();
     this.checkNetworkConnected();
 
     if (this.arrow) {
@@ -163,15 +165,9 @@ export class PaymentCardComponent {
   }
 
   connectToWallet = () => {
-    this.walletService.connectWallet();
-  };
+    this.walletModal.openModal();
 
-  checkWalletConnected = async () => {
-    const accounts = await this.walletService.checkWalletConnected();
-    if (accounts.length > 0) {
-      this.isWalletConnected = true;
-      this.walletId = accounts[0];
-    }
+    // this.walletService.connectWallet();
   };
 
   checkNetworkConnected() {
@@ -192,14 +188,14 @@ export class PaymentCardComponent {
 
   send(): void {
     if (
-      this.walletId &&
+      this.cacheService.walletId &&
       this._depositAddress$.getValue() &&
       this._createdExchange$.getValue().from.amount.toString()
     ) {
       if (this.web3Service.isZeroAddress(this._createdExchange$.getValue().from.contractAddress)) {
         this.web3Service
           .sendTransaction(
-            this.walletId,
+            this.cacheService.walletId,
             this._depositAddress$.getValue(),
             this._createdExchange$.getValue().from.amount.toString()
           )
@@ -212,7 +208,7 @@ export class PaymentCardComponent {
       } else {
         this.web3Service
           .sendTokenTransaction(
-            this.walletId,
+            this.cacheService.walletId,
             this._depositAddress$.getValue(),
             this._createdExchange$.getValue().from.amount.toString(),
             this._createdExchange$.getValue().from.contractAddress

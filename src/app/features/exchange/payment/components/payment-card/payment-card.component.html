@@ -241,15 +241,16 @@
             type="button"
             class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
             (click)="connectToWallet()"
-            *ngIf="!isWalletConnected"
+            *ngIf="!(isWalletConnected$ | async)"
           >
             Connect Wallet
           </button>
+          <app-wallet-modal #modal></app-wallet-modal>
           <button
             type="button"
             class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
             (click)="switchNetwork()"
-            *ngIf="isWalletConnected && !isNetworkSelected"
+            *ngIf="(isWalletConnected$ | async) && !isNetworkSelected"
           >
             Wrong network
           </button>
@@ -258,7 +259,7 @@
               type="button"
               class="button step3-panel-wallet__connect-button button_sm button_primary button_none button_"
               (click)="send()"
-              *ngIf="isWalletConnected && isNetworkSelected"
+              *ngIf="(isWalletConnected$ | async) && isNetworkSelected"
             >
               Send
             </button>

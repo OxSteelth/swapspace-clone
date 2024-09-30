@@ -1,0 +1,61 @@
+<div class="modal-common step3-panel-wallet__modal" *ngIf="isOpen$ | async">
+  <div class="modal-common__card" style="--width: 400px">
+    <button class="button-close modal-common__close" (click)="closeModal()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        class="icon-close"
+      >
+        <path
+          d="M14 14L8 8M8 8L14 2M8 8L2 2M8 8L2 14"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+      </svg>
+    </button>
+    <div class="step3-panel-modal">
+      <h2 class="step3-panel-modal__title">Connect Wallet</h2>
+      <div class="step3-panel-modal__wallet-container" (click)="connectMetamask()">
+        <div class="step3-panel-common__wallet step3-panel-common__wallet_active" id="metamask">
+          <img
+            alt="MetaMask"
+            src="../../../../assets/wallets/metamask.svg"
+            width="48"
+            height="48"
+            loading="lazy"
+            class="step3-panel-common__icon"
+          />
+          MetaMask
+        </div>
+      </div>
+      <div class="step3-panel-modal__wallet-container">
+        <div class="step3-panel-common__wallet" id="walletConnect">
+          <img
+            alt="WalletConnect"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAaVBMVEUAAABAn/86mvs6mfs5mfo5mfo6mvw4l/c6mfw4l/85mPs6mPo6l/o5mfs6lfo4mfs5mfs4l/o6mPo5lvg6mfo8l/s5mfk5mPs4l/c6l/k6mfs9mfw7mfo6mfo6mvo6mfs5mvs5mfo6mfvyRmRZAAAAInRSTlMAEM+AoN+fIN8gv5BgrzB/j2CfcMBAUK9AgM9Q0OAw779wj3lHjgAAAQVJREFUeF7tktuOwyAMRHFIIAtpmrTd+93//5ErIZmROiTa56rzOD5HyIC7mdwjUz6l8S0956f4D/qcFNG0yj5+/NarDMcd/mVUBMq6xS+6kfYhEnQzB2nwXQU+8zTHOL/nj1p1bLwafnlEOffWTiQ8jAUfCo58jTihZVxoIAfwbPStvjeeDd/uz3LFpYUYSSehcknRtg18x7xnUB2i3U4gHgb4YhTeDPAwwBfD/SgM8GQEqzAOxMMALwXAtOyElC0JgSHgYRBfXt+KymdfDen4k/dmGO+dq4bxvauBAR4GeDbAwwDPBngY4NkAD4N5mvpGl9GQ4Xc7Nvxex5nWRvfrbiD3/AFoIEI3CcrGXgAAAABJRU5ErkJggg=="
+            width="48"
+            height="48"
+            loading="lazy"
+            class="step3-panel-common__icon"
+          />
+          WalletConnect
+        </div>
+      </div>
+      <div class="step3-panel-modal__wallet-container">
+        <div class="step3-panel-common__wallet" id="trezor">
+          <img
+            alt="Trezor"
+            src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjE3IiB2aWV3Qm94PSIwIDAgMTEgMTciIHdpZHRoPSIxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNS41MDg4NSAwYy0yLjE5MjQ4IDAtMy45NjY4MSAxLjg4NzMyLTMuOTY2ODEgNC4yMTk0MXYxLjU4MTM5Yy0uNzY5OTE2LjE0ODI2LTEuNTQyMDQuMzQ1OTMtMS41NDIwNC42MDI0NHY4LjI1Mjg2czAgLjIyODMuMjQxMTUuMzM2NmMuODczODkuMzc2NSA0LjMxMTk1IDEuNjcwOCA1LjEwMTc3IDEuOTY3My4xMDE3Ny4wNC4xMzA1My4wNC4xNTcwOC4wNC4wMzc2MSAwIC4wNTUzMSAwIC4xNTcwOC0uMDQuNzg5ODItLjI5NjUgNC4yMzY3My0xLjU5MDggNS4xMTA2Mi0xLjk2NzMuMjIzNS0uMDk4OS4yMzIzLS4zMjcxLjIzMjMtLjMyNzF2LTguMjYyMzZjMC0uMjU2NTEtLjc2MTEtLjQ2MzU5LTEuNTMzMTktLjYwMjQ0di0xLjU4MTM5Yy4wMTEwNy0yLjMzMjA5LTEuNzc0MzMtNC4yMTk0MS0zLjk1Nzk2LTQuMjE5NDF6bTAgMi4wMTY3NWMxLjI5MjA0IDAgMi4wNzMwMS44MzA3IDIuMDczMDEgMi4yMDUwMXYxLjM3NDMxYy0xLjQ0OTEyLS4xMDgyNS0yLjY4NTg0LS4xMDgyNS00LjE0MzgxIDB2LTEuMzc0MzFjMC0xLjM3NjY2Ljc4MDk4LTIuMjA1MDEgMi4wNzA4LTIuMjA1MDF6bS0uMDA4ODUgNS42MDMxM2MxLjgwMzEgMCAzLjMxNjM3LjE0ODI1IDMuMzE2MzcuNDE0MTd2NS4xNDg5NWMwIC4wOC0uMDA4ODUuMDg5NC0uMDc1MjIuMTE3Ny0uMDY0MTYuMDMwNi0zLjA3NTIyIDEuMTg2LTMuMDc1MjIgMS4xODZzLS4xMjE2OC4wNC0uMTU3MDguMDRjLS4wMzc2MSAwLS4xNTcwOC0uMDQ5NC0uMTU3MDgtLjA0OTRzLTMuMDExMDYtMS4xNTU1LTMuMDc1MjItMS4xODZjLS4wNjQxNi0uMDMwNi0uMDc1MjItLjA0MDEtLjA3NTIyLS4xMTc3di01LjE0ODk2Yy0uMDE3Ny0uMjY1OTIgMS40OTU1Ny0uNDA0NzYgMy4yOTg2Ny0uNDA0NzZ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+"
+            width="48"
+            height="48"
+            loading="lazy"
+            class="step3-panel-common__icon"
+          />
+          Trezor
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

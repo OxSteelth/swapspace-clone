@@ -128,7 +128,6 @@ export class ConfirmedCardComponent {
       }
     });
 
-    this.checkWalletConnected();
     this.checkNetworkConnected();
 
     if (this.arrow) {
@@ -164,14 +163,6 @@ export class ConfirmedCardComponent {
 
   connectToWallet = () => {
     this.walletService.connectWallet();
-  };
-
-  checkWalletConnected = async () => {
-    const accounts = await this.walletService.checkWalletConnected();
-    if (accounts.length > 0) {
-      this.isWalletConnected = true;
-      this.walletId = accounts[0];
-    }
   };
 
   checkNetworkConnected() {
