@@ -3,12 +3,12 @@ import { CacheService } from '@app/shared/services/cache.service';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-process-card',
-  templateUrl: './process-card.component.html',
-  styleUrls: ['./process-card.component.scss'],
+  selector: 'app-exchange-process-panel',
+  templateUrl: './process-panel.component.html',
+  styleUrls: ['./process-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProcessCardComponent {
+export class ExchangeProcessPanelComponent {
   public readonly fromAsset$ = this.cacheService.fromToken$;
   public readonly fromAmount$ = this.cacheService.fromAmount$;
   public readonly toAsset$ = this.cacheService.toToken$;

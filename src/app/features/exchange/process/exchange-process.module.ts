@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ExchangeProcessComponent } from './exchange-process.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { ProcessCardComponent } from './components/process-card/process-card.component';
+import { ExchangeProcessPanelComponent } from './components/process-panel/process-panel.component';
 
 @NgModule({
-  declarations: [ExchangeProcessComponent, ProcessCardComponent],
+  declarations: [ExchangeProcessComponent, ExchangeProcessPanelComponent],
   providers: [],
   imports: [
     SharedModule,
