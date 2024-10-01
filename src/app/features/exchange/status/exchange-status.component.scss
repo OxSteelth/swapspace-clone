@@ -27,10 +27,6 @@
 }
 
 ::ng-deep {
-  .status-desktop .c-status-exchange-id {
-    display: none;
-  }
-
   @media screen and (max-width: 900px) {
     .status-desktop {
       display: none;
