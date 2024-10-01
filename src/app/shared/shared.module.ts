@@ -36,8 +36,9 @@ import { SwapFormComponent } from './components/swap-form/swap-form.component';
 import { SwapFormService } from './services/swap-form.service';
 import { SwapFormQueryService } from './services/swap-form-query/swap-form-query.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-status.component';
+import { ExchangeInfoComponent } from '@app/features/exchange/info/exchange-info.component';
 import { StatusIconComponent } from '@app/features/exchange/status/status-icon/status-icon.component';
+import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-status.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { StatusIconComponent } from '@app/features/exchange/status/status-icon/s
     AssetSelectorComponent,
     FormSwitcherComponent,
     SwapFormComponent,
+    ExchangeInfoComponent,
     ExchangeStatusComponent,
     StatusIconComponent
   ],
@@ -111,6 +113,7 @@ import { StatusIconComponent } from '@app/features/exchange/status/status-icon/s
     TuiPaginationModule,
     AssetSelectorComponent,
     FormSwitcherComponent,
+    ExchangeInfoComponent,
     ExchangeStatusComponent,
     StatusIconComponent
   ]

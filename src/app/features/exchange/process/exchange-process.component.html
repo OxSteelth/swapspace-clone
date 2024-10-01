@@ -1,7 +1,12 @@
 <div class="c-title" *ngIf="(exchangeStatus$ | async).status === 'finished'">
   Your exchange successfully completed!
 </div>
+
+<div class="c-title" *ngIf="(exchangeStatus$ | async).status !== 'finished'">
+  Your exchange is in progress!
+</div>
+<app-exchange-status class="status-mobile"></app-exchange-status>
 <div class="c-container">
   <app-exchange-process-panel></app-exchange-process-panel>
-  <app-exchange-status></app-exchange-status>
+  <app-exchange-info></app-exchange-info>
 </div>

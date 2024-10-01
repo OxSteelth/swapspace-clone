@@ -10,8 +10,8 @@ import { IconStatus } from './type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExchangeStatusComponent {
-  public exchangeInfo$ = this.cacheService.selectedOffer$;
-  public confirmationStep$ = this.cacheService.exchangeStep$;
+  public exchangeInfo$ = this.cacheService.createdExchange$;
+  public exchangeStep$ = this.cacheService.exchangeStep$;
 
   constructor(private cacheService: CacheService) {}
 

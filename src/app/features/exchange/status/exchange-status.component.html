@@ -1,204 +1,68 @@
-<div class="app-card app-card__outlined c-card">
+<div class="c-status-wrapper">
   <div class="c-status__container">
-    <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 0 }">
+    <div
+      class="c-status"
+      [ngClass]="{
+        active: (exchangeStep$ | async) >= 1,
+        loading: (exchangeStep$ | async) === 1
+      }"
+    >
       <div class="c-status__icon">
         <app-status-icon [status]="calculateStatus(1)"></app-status-icon>
       </div>
-      Creating exchange
+      <div class="c-status-label">Creating exchange</div>
     </div>
-    <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 1 }">
+    <div class="exchange-side-status__border"></div>
+    <div
+      class="c-status"
+      [ngClass]="{
+        active: (exchangeStep$ | async) >= 2,
+        loading: (exchangeStep$ | async) === 2
+      }"
+    >
       <div class="c-status__icon">
         <app-status-icon [status]="calculateStatus(2)"></app-status-icon>
       </div>
-      Awaiting payment
+      <div class="c-status-label">Awaiting payment</div>
     </div>
-    <div class="c-status" [ngClass]="{ active: (confirmationStep$ | async) >= 2 }">
+    <div class="exchange-side-status__border"></div>
+    <div
+      class="c-status"
+      [ngClass]="{
+        active: (exchangeStep$ | async) >= 3,
+        loading: (exchangeStep$ | async) >= 3
+      }"
+    >
       <div class="c-status__icon">
         <app-status-icon [status]="calculateStatus(3)"></app-status-icon>
       </div>
-      Processing
+      <div class="c-status-label" *ngIf="(exchangeStep$ | async) !== 4">Processing</div>
+      <div class="c-status-label" *ngIf="(exchangeStep$ | async) === 4">Exchange completed</div>
     </div>
   </div>
-
-  <div
-    class="app-card app-card__outlined"
-    *ngIf="exchangeInfo$ | async as exchangeInfo; else infoLoading"
-  >
-    <div>Exchange info</div>
-    <div class="c-exchange__info">
-      <div class="c-exchange__info-item">
-        <div class="c-item-name">Exchange partner:</div>
-        <div class="c-item-value">
-          <img
-            [src]="'assets/exchange-icons/' + exchangeInfo.partner + '.svg'"
-            class="c-item-image"
-          />
-          {{ exchangeInfo.partner }}
-        </div>
-      </div>
-    </div>
-    <div class="c-exchange__info">
-      <div class="c-exchange__info-item">
-        <div class="c-item-name">Type:</div>
-        <div class="c-item-value">
-          <div *ngIf="exchangeInfo.fixed" class="exchange-type">
-            <svg
-              data-v-48eb64e5=""
-              width="10"
-              height="16"
-              viewBox="0 0 10 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="fixed-icon__icon"
-            >
-              <path
-                data-v-48eb64e5=""
-                d="M1.47481 6.65124C1.47481 5.69412 1.46701 4.76809 1.4787 3.84285C1.48338 3.48662 1.49352 3.12163 1.57069 2.77735C1.99087 0.896594 3.61856 -0.206359 5.58613 0.0327201C7.19978 0.228765 8.5102 1.80908 8.52033 3.57907C8.52579 4.58559 8.52111 5.59212 8.52111 6.65124C8.7768 6.65124 9.00599 6.64407 9.2344 6.65283C9.74344 6.67276 9.99679 6.93415 9.99757 7.45375C10.0007 10.0422 10.0007 12.6314 9.99757 15.2198C9.99679 15.7163 9.74344 15.9945 9.25934 15.9961C6.41556 16.0032 3.57178 16.0032 0.728003 15.9961C0.256378 15.9953 0.00458543 15.7291 0.00380589 15.2509C-0.00165093 12.6354 -0.000871382 10.0207 0.00380589 7.40513C0.00458543 6.93335 0.262615 6.67754 0.731121 6.65443C0.961866 6.64167 1.19417 6.65124 1.47481 6.65124ZM8.58659 8.09209C6.16845 8.09209 3.79551 8.09209 1.40932 8.09209C1.39685 8.18692 1.37736 8.26343 1.37736 8.34073C1.3758 10.3187 1.38204 12.2975 1.36957 14.2755C1.36723 14.5974 1.52782 14.5998 1.75778 14.5998C3.914 14.5951 6.06944 14.5974 8.22566 14.5958C8.33948 14.5958 8.45329 14.5823 8.58737 14.5743C8.58659 12.4059 8.58659 10.2629 8.58659 8.09209ZM7.13352 6.63928C7.13352 5.61124 7.1343 4.61906 7.13352 3.62688C7.13196 2.38447 6.20664 1.41141 5.01706 1.39707C3.82513 1.38272 2.85226 2.38048 2.84836 3.62529C2.84525 4.50032 2.84836 5.37615 2.84836 6.25118C2.84836 6.37709 2.84836 6.50301 2.84836 6.63849C4.29754 6.63928 5.68357 6.63928 7.13352 6.63928Z"
-                fill="white"
-              ></path>
-            </svg>
-            <div>Fixed</div>
-          </div>
-          <div *ngIf="!exchangeInfo.fixed" class="exchange-type">
-            <svg
-              data-v-68b0206a=""
-              width="20"
-              height="8"
-              viewBox="0 0 20 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon-floating"
-            >
-              <path
-                data-v-68b0206a=""
-                d="M14.5419 8.00076C13.1739 8.00076 11.8069 7.36573 10.7653 6.09449L8.62364 3.48055C7.25281 1.80744 5.02184 1.80744 3.651 3.48055L1.55731 6.03591C1.20116 6.47059 0.62422 6.47059 0.267111 6.03591C-0.0890372 5.60123 -0.0890372 4.89589 0.267111 4.46121L2.3608 1.90585C4.44298 -0.635447 7.83167 -0.635447 9.91288 1.90585L12.0546 4.5198C13.4254 6.19291 15.6564 6.19291 17.0272 4.5198L18.4422 2.79279C18.7984 2.35811 19.3753 2.35811 19.7324 2.79279C20.0886 3.22747 20.0886 3.93163 19.7324 4.36748L18.3174 6.09449C17.2768 7.36573 15.9098 8.00076 14.5419 8.00076Z"
-                fill="white"
-              ></path>
-            </svg>
-            <div>Floating</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="c-exchange__info">
-      <div class="c-exchange__info-item">
-        <div class="c-item-name">ETA:</div>
-        <div class="c-item-value">{{ exchangeInfo.duration }} min</div>
+  <div class="c-status-exchange-id" *ngIf="(exchangeInfo$ | async).id">
+    <div class="exchange-side-field exchange-side-id step4__status" id="exchange-side-id">
+      <span class="exchange-side-field__title"> Exchange ID: </span>
+      <span class="exchange-side-field__text exchange-side-field__text-"> </span>
+      <div class="exchange-side-id__hover">
+        {{ (exchangeInfo$ | async).id }}
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="clone"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          class="social-icon exchange-side-id__icon svg-inline--fa fa-clone fa-w-16 social-icon_violet"
+        >
+          <path
+            fill="currentColor"
+            d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"
+            class=""
+          ></path>
+        </svg>
       </div>
     </div>
   </div>
-
-  <div
-    class="app-card app-card__outlined"
-    *ngIf="exchangeInfo$ | async as exchangeInfo; else infoLoading"
-  >
-    <div>Partner info</div>
-    <div class="c-exchange__info">
-      <div class="c-exchange__info-item">
-        <div class="c-item-name">
-          <span class="exchange-side-section__help_text"> KYC Risk </span>
-          <div class="help">
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="far"
-              data-icon="circle-question"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              class="svg-inline--fa fa-circle-question fa-w-16 help__icon help__icon_violet"
-            >
-              <path
-                fill="currentColor"
-                d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
-                class=""
-              ></path>
-            </svg>
-          </div>
-        </div>
-        <div class="c-item-value">
-          <div class="exchange-side-section__slot">
-            <div class="step1-table-kyc">
-              <div class="dot-indicate dot-indicate_green"></div>
-              <span class="step1-table-kyc__text"> low </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="c-exchange__info">
-      <div class="c-exchange__info-item">
-        <div class="c-item-name">
-          <span class="exchange-side-section__help_text">Support Rate</span>
-          <div class="help">
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="far"
-              data-icon="circle-question"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              class="svg-inline--fa fa-circle-question fa-w-16 help__icon help__icon_violet"
-            >
-              <path
-                fill="currentColor"
-                d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
-                class=""
-              ></path>
-            </svg>
-          </div>
-        </div>
-        <div class="c-item-value">
-          <div class="exchange-side-section__slot">
-            <div class="exchange-partner-info_indicator-segmented">
-              <div class="indicator-segmented">
-                <span
-                  class="indicator-segmented__segment indicator-segmented__segment_1_active"
-                ></span
-                ><span
-                  class="indicator-segmented__segment indicator-segmented__segment_2_active"
-                ></span
-                ><span
-                  class="indicator-segmented__segment indicator-segmented__segment_3_active"
-                ></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="c-exchange__info">
-      <div class="c-exchange__info-item">
-        <div class="c-item-name">
-          <span class="exchange-side-section__help_text">Rating:</span>
-        </div>
-        <div class="exchange-side-section__slot">
-          <div class="exchange-partner-info__rating">
-            <a href="#" class="step1-table-rating" target="_blank">
-              <span class="step1-table-rating__star"> ★ </span>
-              <span class="step1-table-rating__text"> 4.3 </span>
-            </a>
-            <a href="#" class="exchange-partner-info__kyc_help-text" target="_blank">
-              (180 reviews)
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <ng-template #infoLoading>
-    <div class="c-info-loading app-skeleton"></div>
-  </ng-template>
-
-  <p class="app-text-secondary app-text-small">
-    Please note that the exchange time depends on the speed of work of our partners and a total load
-    of blockchain networks.
-  </p>
-
-  <p class="app-text-small">
-    If you have any questions, please contact our support team:
-    <a href=""> support&#64;swapspace.co </a>
-  </p>
 </div>
