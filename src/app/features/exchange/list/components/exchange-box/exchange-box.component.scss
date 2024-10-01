@@ -8,17 +8,6 @@
   }
 }
 
-::ng-deep {
-  .index-rates__widget {
-    margin-left: 1rem;
-  }
-}
-
-.c-title {
-  padding-left: 1rem;
-  margin-bottom: 1.5rem;
-}
-
 .c-exchange-box {
   max-width: 350px;
   width: 100%;
@@ -75,7 +64,6 @@
 .rate-options {
   display: flex;
   flex-direction: row;
-  margin-left: 1rem;
   margin-top: 1.5rem;
   gap: 1.5rem;
 

@@ -2,15 +2,27 @@
   &__widget {
     background-color: #36293b;
     border-radius: 1rem;
-    width: 359px;
+    max-width: 359px;
     padding: 1rem;
-    // width: 100%;
+    width: 100%;
     position: relative;
   }
 
   @media screen and (max-width: 1199px) {
     &__widget {
-      width: 377px;
+      max-width: 377px;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    &__widget {
+      max-width: 454px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .index-rates__widget {
+      max-width: none;
     }
   }
 

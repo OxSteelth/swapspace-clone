@@ -597,6 +597,10 @@ svg:not(:root).svg-inline--fa {
 .app-group {
   flex-direction: row;
   flex-wrap: nowrap;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 }
 
 .pair {

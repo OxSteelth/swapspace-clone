@@ -7,7 +7,10 @@
 .c-card {
   width: 100%;
   max-width: 450px;
-  margin-top: 5rem;
+
+  @media screen and (max-width: 900px) {
+    max-width: none;
+  }
 }
 
 .c-status__container {

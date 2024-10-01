@@ -89,6 +89,12 @@ img {
   will-change: opacity;
 }
 
+@media (max-width: 575px) {
+  .step-exchange-panel_badges {
+    margin-inline: 15px;
+  }
+}
+
 .finished-status .step-exchange-panel__buttons,
 .finished-status .step-exchange-panel__details,
 .finished-status .step-exchange-panel__hide-button,
@@ -580,4 +586,62 @@ a:hover {
 }
 .step-exchange-panel__caret_collapse {
   transform: rotate(180deg);
+}
+
+@media (max-width: 767px) {
+  .badges-panel__badges {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 767px) {
+  .elements-container_border {
+    border-bottom: 1px solid;
+    border-image-source: linear-gradient(
+      90deg,
+      rgba(160, 120, 156, 0) 8%,
+      #a0789c 45%,
+      #a0789c 55%,
+      rgba(160, 120, 156, 0) 92%
+    );
+  }
+}
+
+@media (max-width: 767px) {
+  .elements-container {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 767px) {
+  .badges-panel__badges_badge {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .badges-panel {
+    height: auto;
+    margin-top: -16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .step-exchange-panel__info_container {
+    padding: 0 16px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .step-exchange-panel__info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 767px) {
+  .step-exchange-panel__buttons {
+    flex-direction: column;
+    padding: 0 16px;
+  }
 }

@@ -3,7 +3,23 @@
 }
 
 .c-title {
-  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 991px) {
+  .c-title {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .c-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 .c-echange-selector {
@@ -597,6 +613,10 @@ svg:not(:root).svg-inline--fa {
 .app-group {
   flex-direction: row;
   flex-wrap: nowrap;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 }
 
 .pair {

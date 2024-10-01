@@ -95,8 +95,44 @@
   }
 }
 
+.index-rates__banner {
+  margin-top: 2rem;
+}
+
 .index-banner {
   height: 90px;
+  width: 100%;
+}
+
+.index-banner__bg {
+  background-image: var(--desktop-image-bg);
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  color: #fff;
+}
+
+a,
+a:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.index-banner__front {
+  background-image: var(--desktop-image-front);
+  background-position: 0;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  border-radius: 20px;
+  height: 100%;
   width: 100%;
 }
 
@@ -128,5 +164,80 @@
     font-size: 0.75rem;
     line-height: 0.875rem;
     max-width: 243px;
+  }
+}
+
+.index-banner__front {
+  background-image: var(--desktop-image-front);
+  background-position: 0;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 1199px) {
+  .index__margin-rates {
+    margin-top: 80px;
+  }
+  .index-rates__widget {
+    max-width: 377px;
+  }
+
+  .index-rates__container {
+    max-width: 456px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .index-rates__info-desktop {
+    display: none;
+  }
+
+  .index__margin-rates {
+    margin-top: 24px;
+  }
+
+  .index-rates {
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .index-rates__title {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    text-align: center;
+  }
+
+  .index-rates__slogan {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .index-rates__widget {
+    max-width: 454px;
+  }
+
+  .index-rates-trustpilot {
+    justify-content: center;
+  }
+
+  .index-rates__banner {
+    margin-top: 1.5rem;
+  }
+
+  .index-rates__container {
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .index-rates-trustpilot {
+    flex-direction: column;
   }
 }

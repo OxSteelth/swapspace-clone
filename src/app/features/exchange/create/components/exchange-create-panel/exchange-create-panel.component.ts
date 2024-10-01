@@ -84,7 +84,11 @@ export class ExchangeCreatePanelComponent {
 
   currencyList$: Observable<CurrencyOption[]> = this.currencyService.currencyList$;
 
-  exchangeRate$ = new BehaviorSubject<number | null>(22.6511428);
+  private _exchangeRate$ = new BehaviorSubject<number>(0);
+  public exchangeRate$ = this._exchangeRate$.asObservable();
+  public updateExchangeRate(rate: number) {
+    this._exchangeRate$.next(rate);
+  }
   echangeInfo = signal<AvailableExchange | undefined>(undefined);
   confirmationStep = signal(0);
   confirmed = signal(false);
@@ -111,6 +115,8 @@ export class ExchangeCreatePanelComponent {
         : 'rotate(0deg)';
     }
 
+    console.log(this.form.controls.fromToken);
+
     this.swapFormService.inputControl.valueChanges.subscribe(v => {
       this.form.controls.fromAmount.setValue(Number(v.fromAmount));
       this.form.controls.fromToken.setValue(v.fromToken?.code);
@@ -121,6 +127,13 @@ export class ExchangeCreatePanelComponent {
 
     this.swapFormService.outputControl.valueChanges.subscribe(v => {
       this.form.controls.toAmount.setValue(Number(v.toAmount));
+    });
+
+    combineLatest([
+      this.form.controls.fromAmount.valueChanges,
+      this.form.controls.toAmount.valueChanges
+    ]).subscribe(([from, to]) => {
+      this.updateExchangeRate(to / from);
     });
 
     if (!this.exchangeService.selectedOffer) {
@@ -222,30 +235,6 @@ export class ExchangeCreatePanelComponent {
           this.confirmationStep.set(3);
       }
     });
-  }
-
-  async estimateExchange() {
-    const value = this.fromAmountFormControl.value;
-    const currencyToSend = this.fromTokenFormControl.value;
-    const currencyToGet = this.toTokenFormControl.value;
-    const exchangeId = this.echangeInfo()?.id;
-
-    if (!exchangeId) {
-      throw new Error('Exchange not set');
-    }
-
-    if (!value || !currencyToSend || !currencyToGet) {
-      return;
-    }
-
-    const valueToGet = await this.exchangeService.calculateExchangeRate(
-      currencyToSend,
-      currencyToGet,
-      value,
-      exchangeId
-    );
-
-    this.toAmountFormControl.setValue(valueToGet);
   }
 
   showDetails() {
