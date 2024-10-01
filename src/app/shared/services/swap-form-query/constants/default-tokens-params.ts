@@ -5,7 +5,7 @@ export const defaultFormParameters = {
     toChain: 'bep20',
     from: 'bnb',
     to: 'usdt',
-    amount: '1'
+    amount: '0.1'
   }
 };
 
