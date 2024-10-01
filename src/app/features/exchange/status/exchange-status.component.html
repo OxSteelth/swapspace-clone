@@ -40,7 +40,7 @@
       <div class="c-status-label" *ngIf="(exchangeStep$ | async) === 4">Exchange completed</div>
     </div>
   </div>
-  <div class="c-status-exchange-id" *ngIf="(exchangeInfo$ | async).id">
+  <div class="c-status-exchange-id" *ngIf="(exchangeInfo$ | async)?.id">
     <div class="exchange-side-field exchange-side-id step4__status" id="exchange-side-id">
       <span class="exchange-side-field__title"> Exchange ID: </span>
       <span class="exchange-side-field__text exchange-side-field__text-"> </span>

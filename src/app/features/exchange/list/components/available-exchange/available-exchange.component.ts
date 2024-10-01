@@ -135,6 +135,7 @@ export class AvailableExchangeComponent implements OnInit {
 
   exchangeCurrency(exchange: Exchange) {
     this.cacheService.updateSelectedOffer(exchange);
+    this.cacheService.updateCreatedExchange(null);
 
     combineLatest([
       this.cacheService.fromToken$,
