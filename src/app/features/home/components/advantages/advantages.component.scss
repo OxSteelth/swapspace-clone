@@ -1,31 +1,89 @@
 .index-advantages {
-    background: #27212b;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(270deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
-    border-radius: 1.5rem;
-    border-top: 1px solid;
+  background: #27212b;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(
+    270deg,
+    rgba(160, 120, 156, 0),
+    #a0789c 51%,
+    rgba(160, 120, 156, 0)
+  );
+  border-radius: 1.5rem;
+  border-top: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 1.5rem 1rem;
+
+  &__container {
+    align-items: center;
+    color: #e35760;
     display: flex;
-    justify-content: space-between;
-    padding: 2rem 1.5rem 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    &__container {
-        align-items: center;
-        color: #e35760;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+  &__number {
+    font-size: 3.125rem;
+    font-weight: 700;
+    line-height: 4rem;
+  }
 
-    &__number {
-        font-size: 3.125rem;
-        font-weight: 700;
-        line-height: 4rem;
-    }
+  &__title {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
 
-    &__title {
-        font-size: 1.25rem;
-        line-height: 1.875rem;
-        text-align: center;
-        text-transform: uppercase;
-    }
+.index-advantages__container {
+  align-items: center;
+  color: #e35760;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 991px) {
+  .index-advantages__number {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .index-advantages__title {
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .index-advantages {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .index-advantages__container:first-child,
+  .index-advantages__container:nth-child(2) {
+    margin-bottom: 2rem;
+  }
+
+  .index-advantages__container {
+    gap: 0;
+    flex-basis: 50%;
+  }
+
+  .index-advantages__number {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .index-advantages__title {
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .index-advantages__title {
+    max-width: 122px;
+  }
 }

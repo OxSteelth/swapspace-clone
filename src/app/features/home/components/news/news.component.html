@@ -1,93 +1,92 @@
 <div class="index-news index__margin">
-    <h3 class="index-news__title">Our latest news</h3>
-    <div class="index-news__container">
-        <div class="index-news-carousel index-news__carousel">
-            <div class="index-news-carousel__wrapper">
-                <div dir="ltr" class="carousel index-news__mask slick-slider slick-initialized index-news">
-                    <div class="slick-list">
-                        <tui-carousel
-                            #carousel
-                            [draggable]="true"
-                            [itemsCount]="1"
-                            [(index)]="index"
-                        >
-                            <ng-container *ngFor="let item of items">
-                                <div *tuiItem class="index-news-carousel__container">
-                                    <img
-                                        [src]="item.img"
-                                        [alt]="item.title"
-                                        loading="lazy"
-                                        class="index-news-carousel__image"
-                                    />
-                                    <div class="index-news-carousel__item">
-                                        <div class="index-news-item">
-                                            <h4 class="index-news-item__title">{{ item.title }}</h4>
-                                            <div class="index-news-item__date-time">{{ item.dateTime }}</div>
-                                            <div class="index-news-item__subtitle">
-                                                {{ item.subtitle }}
-                                            </div>
-                                            <a [href]="item.link" class="index-news-item__link" target="_blank"> Read more </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-container>
-                        </tui-carousel>
-                        <tui-pagination
-                            size="s"
-                            class="tui-space_top-4"
-                            [index]="rounded"
-                            [length]="items.length / itemsCount"
-                            (indexChange)="onIndex($event)"
-                        />
+  <h3 class="index-news__title">Our latest news</h3>
+  <div class="index-news__container">
+    <div class="index-news-carousel index-news__carousel">
+      <div class="index-news-carousel__wrapper">
+        <div dir="ltr" class="carousel index-news__mask slick-slider slick-initialized index-news">
+          <div class="slick-list">
+            <tui-carousel #carousel [draggable]="true" [itemsCount]="1" [(index)]="index">
+              <ng-container *ngFor="let item of items">
+                <div *tuiItem class="index-news-carousel__container">
+                  <img
+                    [src]="item.img"
+                    [alt]="item.title"
+                    loading="lazy"
+                    class="index-news-carousel__image"
+                  />
+                  <div class="index-news-carousel__item">
+                    <div class="index-news-item">
+                      <h4 class="index-news-item__title">{{ item.title }}</h4>
+                      <div class="index-news-item__date-time">{{ item.dateTime }}</div>
+                      <div class="index-news-item__subtitle">
+                        {{ item.subtitle }}
+                      </div>
+                      <a [href]="item.link" class="index-news-item__link" target="_blank">
+                        Read more
+                      </a>
                     </div>
+                  </div>
                 </div>
-                <div class="index-news-carousel__arrow-container">
-                    <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="angle-left"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 320 512"
-                        class="index-news-carousel__arrow svg-inline--fa fa-angle-left fa-w-10"
-                        (click)="carousel.prev()"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
-                            class=""
-                        ></path>
-                    </svg>
-                </div>
-                <div class="index-news-carousel__arrow-container index-news-carousel__arrow-container_right">
-                    <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="angle-right"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 320 512"
-                        class="index-news-carousel__arrow svg-inline--fa fa-angle-right fa-w-10"
-                        (click)="carousel.next()"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"
-                            class=""
-                        ></path>
-                    </svg>
-                </div>
-            </div>
+              </ng-container>
+            </tui-carousel>
+            <tui-pagination
+              size="s"
+              class="tui-space_top-4"
+              [index]="rounded"
+              [length]="items.length / itemsCount"
+              (indexChange)="onIndex($event)"
+            />
+          </div>
         </div>
-        <div class="index-news__item">
-            <div class="index-news-item">
-                <h4 class="index-news-item__title">{{ items[index].title }}</h4>
-                <div class="index-news-item__date-time">{{ items[index].dateTime }}</div>
-                <div class="index-news-item__subtitle">{{ items[index].subtitle }}</div>
-                <a [href]="items[index].link" class="index-news-item__link" target="_blank"> Read more </a>
-            </div>
+        <div class="index-news-carousel__arrow-container">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="angle-left"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 320 512"
+            class="index-news-carousel__arrow svg-inline--fa fa-angle-left fa-w-10"
+            (click)="carousel.prev()"
+          >
+            <path
+              fill="currentColor"
+              d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+              class=""
+            ></path>
+          </svg>
         </div>
+        <div
+          class="index-news-carousel__arrow-container index-news-carousel__arrow-container_right"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="angle-right"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 320 512"
+            class="index-news-carousel__arrow svg-inline--fa fa-angle-right fa-w-10"
+            (click)="carousel.next()"
+          >
+            <path
+              fill="currentColor"
+              d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"
+              class=""
+            ></path>
+          </svg>
+        </div>
+      </div>
     </div>
+    <div class="index-news__item">
+      <div class="index-news-item">
+        <h4 class="index-news-item__title">{{ items[index].title }}</h4>
+        <div class="index-news-item__date-time">{{ items[index].dateTime }}</div>
+        <div class="index-news-item__subtitle">{{ items[index].subtitle }}</div>
+        <a [href]="items[index].link" class="index-news-item__link" target="_blank"> Read more </a>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,22 +1,16 @@
 <div class="index-pair-widget index__margin">
-    <div class="index-pair-widget__title">Exchange your crypto now</div>
-    <div class="pair-widget">
-        <div class="pair-widget__input d-fc">
-            <div class="pair pair-widget__pair">
-                <app-asset-selector label="You send"></app-asset-selector>
-
-                <app-form-switcher></app-form-switcher>
-
-                <app-asset-selector label="You get" inputMode="output"></app-asset-selector>
-            </div>
-
-            <button
-                type="button"
-                class="button pair-widget__button-partner ml-i button_lg button_primary button_uppercase button_"
-                id="widget_lower"
-            >
-                View offers
-            </button>
-        </div>
+  <div class="index-pair-widget__title">Exchange your crypto now</div>
+  <div class="index-rates__wrapper footer-swap-form">
+    <app-swap-form></app-swap-form>
+    <div class="index-rates__button-container">
+      <button
+        type="button"
+        class="button index-rates__button index-rates__next button_m button_primary button_none button_"
+        id="widget_upper"
+        (click)="viewOffers()"
+      >
+        View offers
+      </button>
     </div>
+  </div>
 </div>

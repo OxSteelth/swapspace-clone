@@ -1,47 +1,122 @@
 .index {
-    &__margin {
-        margin-top: 120px;
-    }
+  &__margin {
+    margin-top: 120px;
+  }
 
-    &__margin:last-child {
-        margin-bottom: 50px;
-    }
+  &__margin:last-child {
+    margin-bottom: 50px;
+  }
 }
 
 .index-pair-widget {
-    background-color: #36293b;
-    border-radius: 1rem;
-    padding: 40px;
+  background-color: #36293b;
+  border-radius: 1rem;
+  padding: 40px;
 
-    &__title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        line-height: 1.875rem;
-        margin-bottom: 2.5rem;
-    }
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.875rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .pair {
-    align-items: center;
-    display: flex;
-    gap: 6px;
-    justify-content: flex-end;
-    position: relative;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
 }
 
 .pair-widget {
-    &__pair {
-        display: flex;
-        flex-grow: 0;
-        flex-wrap: nowrap;
-        width: 100%;
+  &__pair {
+    display: flex;
+    flex-grow: 0;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  &__button-partner {
+    flex-shrink: 0;
+    text-transform: uppercase;
+    width: 25%;
+    z-index: 1;
+  }
+}
+
+.footer-swap-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  ::ng-deep app-swap-form {
+    .fund-mode {
+      display: none;
     }
 
-    &__button-partner {
-        flex-shrink: 0;
-        text-transform: uppercase;
-        width: 25%;
-        z-index: 1;
+    .index-rates__widget {
+      max-width: 100%;
     }
+
+    .exchange-pair__pair {
+      flex-wrap: nowrap;
+    }
+
+    app-form-switcher {
+      flex: 1;
+    }
+
+    @media screen and (max-width: 991px) {
+      flex-direction: column;
+
+      .exchange-pair__pair {
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .index-rates__button-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .index-rates__button {
+    width: calc(100% - 2rem);
+    min-width: 150px;
+    margin-left: 1rem;
+    height: 70px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .index__margin {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .index__margin {
+    margin-top: 69px;
+  }
+  .footer-swap-form {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .index-pair-widget {
+    padding: 1rem;
+  }
+
+  .index__margin {
+    margin-top: 48px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .index__margin {
+    margin-top: 40px;
+  }
 }
