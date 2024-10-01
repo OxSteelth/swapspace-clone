@@ -128,8 +128,6 @@ export class PaymentPanelComponent {
         this.updateDepositAddress(this.web3Service.getChecksumAddress(ce.from.address));
         this.updateCreatedExchange(ce);
 
-        console.log(ce.id);
-
         const chainId = this.web3Service.getChainIdFromNetwork(ce.from.network);
 
         if (chainId) {

@@ -115,8 +115,6 @@ export class ExchangeCreatePanelComponent {
         : 'rotate(0deg)';
     }
 
-    console.log(this.form.controls.fromToken);
-
     this.swapFormService.inputControl.valueChanges.subscribe(v => {
       this.form.controls.fromAmount.setValue(Number(v.fromAmount));
       this.form.controls.fromToken.setValue(v.fromToken?.code);
