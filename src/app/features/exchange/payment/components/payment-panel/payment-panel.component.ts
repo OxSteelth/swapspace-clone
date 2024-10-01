@@ -141,7 +141,7 @@ export class PaymentPanelComponent {
     this.exchangeService.checkExchangeStatusInterval$
       .pipe(
         switchMap(() => {
-          if (this.cacheService.createdExchange.id) {
+          if (this.cacheService.createdExchange?.id) {
             return this.exchangeService.checkExchangeStatus(this.cacheService.createdExchange.id);
           } else {
             return of(null);
