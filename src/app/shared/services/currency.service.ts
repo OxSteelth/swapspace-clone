@@ -48,8 +48,13 @@ export class CurrencyService {
           .get<Currency[]>(`currencies`)
           .pipe(
             tap(tokens => {
-              this.cacheService.updateAllCurrencyList(tokens);
-              this.cacheService.updatePopularCurrencyList(tokens.filter(token => token.popular));
+              const filtered = tokens.map((token) => {
+                token.icon =  token.icon.split('/').pop();
+
+                return token
+              })
+              this.cacheService.updateAllCurrencyList(filtered);
+              this.cacheService.updatePopularCurrencyList(filtered.filter(token => token.popular));
             })
           )
           .subscribe();

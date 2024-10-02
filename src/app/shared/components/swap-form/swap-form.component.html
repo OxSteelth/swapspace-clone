@@ -136,8 +136,10 @@
                 <img
                   loading="lazy"
                   [src]="
-                    'https://storage.swapspace.co' +
-                    (currency.icon !== '' ? currency.icon : '/static/default-coin-icon.svg')
+                    'assets/img/tokens/' +
+                    (currency?.icon && currency?.icon !== ''
+                      ? currency?.icon
+                      : 'default-coin-icon.svg')
                   "
                   [alt]="currency.icon"
                   class="coin-icon__image coin-icon__white"

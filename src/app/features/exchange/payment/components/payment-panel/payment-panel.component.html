@@ -45,10 +45,10 @@
               <img
                 loading="lazy"
                 [src]="
-                  'https://storage.swapspace.co' +
+                  'assets/img/tokens/' +
                   (fromAsset?.icon && fromAsset?.icon !== ''
                     ? fromAsset?.icon
-                    : '/static/default-coin-icon.svg')
+                    : 'default-coin-icon.svg')
                 "
                 [alt]="fromAsset?.icon"
                 class="coin-icon__image coin-icon__white"
@@ -107,10 +107,8 @@
               <img
                 loading="lazy"
                 [src]="
-                  'https://storage.swapspace.co' +
-                  (toAsset?.icon && toAsset?.icon !== ''
-                    ? toAsset?.icon
-                    : '/static/default-coin-icon.svg')
+                  'assets/img/tokens/' +
+                  (toAsset?.icon && toAsset?.icon !== '' ? toAsset?.icon : 'default-coin-icon.svg')
                 "
                 [alt]="toAsset?.icon"
                 class="coin-icon__image coin-icon__white"
@@ -361,7 +359,7 @@
 
 <div class="invaders-game-tile invaders-game-tile__gradient invaders-game-tile__disabled">
   <img
-    src="../../../../../../assets/img/game-tile-laser.webp"
+    src="assets/img/game-tile-laser.webp"
     alt="laser"
     width="292"
     height="146"

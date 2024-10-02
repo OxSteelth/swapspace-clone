@@ -52,8 +52,8 @@
             <img
               loading="lazy"
               [src]="
-                'https://storage.swapspace.co' +
-                (asset?.icon && asset?.icon !== '' ? asset?.icon : '/static/default-coin-icon.svg')
+                'assets/img/tokens/' +
+                (asset?.icon && asset?.icon !== '' ? asset?.icon : 'default-coin-icon.svg')
               "
               [alt]="asset?.icon"
               class="coin-icon__image coin-icon__white"
@@ -141,10 +141,10 @@
                     <img
                       loading="lazy"
                       [src]="
-                        'https://storage.swapspace.co' +
-                        (token.token.icon !== ''
-                          ? token.token.icon
-                          : '/static/default-coin-icon.svg')
+                        'assets/img/tokens/' +
+                        (token.token?.icon && token.token?.icon !== ''
+                          ? token.token?.icon
+                          : 'default-coin-icon.svg')
                       "
                       [alt]="token.token.icon"
                       class="coin-icon__image coin-icon__white"

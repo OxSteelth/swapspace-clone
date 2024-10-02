@@ -30,7 +30,7 @@
             --end-y: -28%;
           "
         >
-          <img src="../../../../assets/img/purple-big-coin.webp" alt="purple-big-coin" />
+          <img src="assets/img/purple-big-coin.webp" alt="purple-big-coin" />
         </div>
         <div
           class="animated-element purple-small-coin animate"
@@ -43,7 +43,7 @@
             --end-y: -15%;
           "
         >
-          <img src="../../../../assets/img/purple-small-coin.webp" alt="purple-small-coin" />
+          <img src="assets/img/purple-small-coin.webp" alt="purple-small-coin" />
         </div>
         <div
           class="animated-element rocket animate"
@@ -56,7 +56,7 @@
             --end-y: 10%;
           "
         >
-          <img src="../../../../assets//img/rocket.webp" alt="rocket" />
+          <img src="assets//img/rocket.webp" alt="rocket" />
         </div>
         <div
           class="animated-element violet-big-coin animate"
@@ -69,7 +69,7 @@
             --end-y: -20%;
           "
         >
-          <img src="../../../../assets/img/violet-big-coin.webp" alt="violet-big-coin" />
+          <img src="assets/img/violet-big-coin.webp" alt="violet-big-coin" />
         </div>
         <div
           class="animated-element violet-small-coin animate"
@@ -82,7 +82,7 @@
             --end-y: -5%;
           "
         >
-          <img src="../../../../assets/img/violet-small-coin.webp" alt="violet-small-coin" />
+          <img src="assets/img/violet-small-coin.webp" alt="violet-small-coin" />
         </div>
         <div
           class="animated-element violet-star animate"
@@ -294,10 +294,16 @@
           <div class="step3-pair-component__coin step3-pair-component__coin_light-disabled">
             <div
               class="coin-icon step3-pair-component__coin-icon icon coin-icon__sm coin-icon__bg_"
+              *ngLet="fromAsset$ | async as fromAsset"
             >
               <img
                 loading="lazy"
-                src="https://storage.swapspace.co/static/font/src/bnb.svg"
+                [src]="
+                  'assets/img/tokens/' +
+                  (fromAsset?.icon && fromAsset?.icon !== ''
+                    ? fromAsset?.icon
+                    : 'default-coin-icon.svg')
+                "
                 alt="bnb-icon"
                 class="coin-icon__image coin-icon__white"
               />
@@ -320,10 +326,14 @@
           <div class="step3-pair-component__coin step3-pair-component__coin_light-disabled">
             <div
               class="coin-icon step3-pair-component__coin-icon icon coin-icon__sm coin-icon__bg_"
+              *ngLet="toAsset$ | async as toAsset"
             >
               <img
                 loading="lazy"
-                src="https://storage.swapspace.co/static/font/src/usdt.svg"
+                [src]="
+                  'assets/img/tokens/' +
+                  (toAsset?.icon && toAsset?.icon !== '' ? toAsset?.icon : 'default-coin-icon.svg')
+                "
                 alt="usdt-icon"
                 class="coin-icon__image coin-icon__white"
               />
