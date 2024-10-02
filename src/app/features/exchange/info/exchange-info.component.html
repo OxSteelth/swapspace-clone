@@ -71,6 +71,7 @@
   <div
     class="app-card app-card__outlined"
     *ngIf="exchangeInfo$ | async as exchangeInfo; else infoLoading"
+    style="display: none"
   >
     <div>Partner info</div>
     <div class="c-exchange__info">

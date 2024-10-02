@@ -33,7 +33,13 @@
   </div>
 
   <div class="app-card c-address-card" *ngIf="!this.confirmed()">
-    <label for="address" class="app-input-label">Provide the ETH address:</label>
+    <label for="address" class="app-input-label"
+      >Provide the {{ this.form.controls.toToken.value.toUpperCase() }}
+      <small class="small" style="color: #e35760; margin-left: 3px">{{
+        this.form.controls.toChain.value.toUpperCase()
+      }}</small>
+      address:</label
+    >
     <div class="form-textarea__container">
       <input
         placeholder="Recipient address"
@@ -41,6 +47,7 @@
         formControlName="recipientAddress"
         class="app-input"
         id="address"
+        autocomplete="off"
       />
       <div class="form-textarea__paste">
         <div (click)="onPaste()">Paste</div>
