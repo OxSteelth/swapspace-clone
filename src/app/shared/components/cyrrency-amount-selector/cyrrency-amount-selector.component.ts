@@ -92,7 +92,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
 
   public searchInputControl: FormControl = new FormControl('');
 
-  private readonly _filteredList$ = new BehaviorSubject<{ name: string; tokens: Currency[] }[]>([]);
+  private readonly _filteredList$ = new BehaviorSubject<{ label: string; token: Currency }[]>([]);
   public readonly filteredList$ = this._filteredList$.asObservable();
 
   public get filteredList() {
@@ -100,33 +100,6 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   }
 
   public swapDirection = '';
-
-  private _tokens$ = new BehaviorSubject<Token[]>([]);
-  public tokens$ = this._tokens$.asObservable();
-
-  public get tokens() {
-    return this._tokens$.getValue();
-  }
-
-  private _filteredTokens$ = new BehaviorSubject<Token[]>([]);
-  public filteredTokens$ = this._filteredTokens$.asObservable();
-
-  public get filteredTokens() {
-    return this._filteredTokens$.getValue();
-  }
-
-  private _groupedTokens$ = new BehaviorSubject<GroupedToken[]>([]);
-  public groupedTokens$ = this._groupedTokens$.asObservable();
-
-  private _loadedTokens$ = new BehaviorSubject<Token[]>([]);
-  public loadedTokens$ = this._loadedTokens$.asObservable();
-
-  public get loadedTokens() {
-    return this._loadedTokens$.getValue();
-  }
-
-  itemsPerPage = 10;
-  currentPage = 0;
 
   private readonly _isDisabled$ = new BehaviorSubject<boolean>(false);
   public isDisabled$ = this._isDisabled$.asObservable();
@@ -137,9 +110,7 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
     private readonly swapFormQueryService: SwapFormQueryService,
     private readonly exchangeService: ExchangeService,
     private readonly cacheService: CacheService
-  ) {
-    this.initializeData();
-  }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['isLoading']) {
@@ -170,18 +141,21 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
       this.cacheService.allCurrencyList$,
       this.cacheService.popularCurrencyList$
     ]).subscribe(([all, popular]) => {
-      this._tokens$.next([
-        ...popular.slice(0, 10).map(v => ({ group: 'Popular Currencies', token: v })),
-        ...all.slice(0, 10).map(v => ({ group: 'All Currencies', token: v }))
-      ]);
-      this._filteredTokens$.next([
-        ...popular.slice(0, 10).map(v => ({ group: 'Popular Currencies', token: v })),
-        ...all.slice(0, 10).map(v => ({ group: 'All Currencies', token: v }))
-      ]);
+      let tokens: { label: string; token: Currency }[] = [];
+      popular.map((token, i) => {
+        if (i === 0) tokens.push({ label: 'Popular Currencies', token });
+        else tokens.push({ label: '', token });
+      });
+      all.map((token, i) => {
+        if (i === 0) tokens.push({ label: 'All Currencies', token });
+        else tokens.push({ label: '', token });
+      });
+      this._filteredList$.next(tokens);
     });
 
     combineLatest([
-      this.tokens$,
+      this.cacheService.allCurrencyList$,
+      this.cacheService.popularCurrencyList$,
       this.searchInputControl.valueChanges.pipe(
         debounceTime(300),
         distinctUntilChanged(),
@@ -189,17 +163,37 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
       )
     ])
       .pipe(
-        map(([tokens, searchValue]) => {
-          return tokens.filter(
-            token =>
-              token.token.code.toLowerCase().includes(searchValue.toLowerCase()) ||
-              token.token.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-              token.token.network.toLowerCase().includes(searchValue.toLowerCase()) ||
-              token.token.networkName.toLowerCase().includes(searchValue.toLowerCase())
-          );
+        map(([all, popular, searchValue]) => {
+          return [
+            all.filter(
+              token =>
+                token.code.toLowerCase().includes(searchValue.toLowerCase()) ||
+                token.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                token.network.toLowerCase().includes(searchValue.toLowerCase()) ||
+                token.networkName.toLowerCase().includes(searchValue.toLowerCase())
+            ),
+            popular.filter(
+              token =>
+                token.code.toLowerCase().includes(searchValue.toLowerCase()) ||
+                token.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                token.network.toLowerCase().includes(searchValue.toLowerCase()) ||
+                token.networkName.toLowerCase().includes(searchValue.toLowerCase())
+            )
+          ];
         })
       )
-      .subscribe(value => this._filteredTokens$.next(value));
+      .subscribe(([filteredAll, filteredPopular]) => {
+        let tokens: { label: string; token: Currency }[] = [];
+        filteredPopular.map((token, i) => {
+          if (i === 0) tokens.push({ label: 'Popular Currencies', token });
+          else tokens.push({ label: '', token });
+        });
+        filteredAll.map((token, i) => {
+          if (i === 0) tokens.push({ label: 'All Currencies', token });
+          else tokens.push({ label: '', token });
+        });
+        this._filteredList$.next(tokens);
+      });
 
     this.swapFormService.inputControl.valueChanges.pipe(startWith(null));
 
@@ -250,46 +244,11 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
         this._isLoading$.next(false);
       });
 
-    this.loadMoreData();
-
     this.swapFormService.inputControl.statusChanges.subscribe(_status => {
       if (_status === 'DISABLED') {
         this._isDisabled$.next(true);
       }
     });
-  }
-
-  initializeData(): void {
-    this.filteredTokens$.subscribe(tokens => {
-      const grouped = tokens.reduce((res, token) => {
-        const group = res.find(r => r.group === token.group);
-
-        if (group) {
-          group.tokens.push(token);
-        } else {
-          res.push({ group: token.group, tokens: [token] });
-        }
-
-        return res;
-      }, [] as GroupedToken[]);
-
-      this._groupedTokens$.next(grouped);
-    });
-  }
-
-  loadMoreData(): void {
-    const nextPage = this.tokens.slice(
-      this.currentPage * this.itemsPerPage,
-      (this.currentPage + 1) * this.itemsPerPage
-    );
-    this._loadedTokens$.next([...this.loadedTokens, ...nextPage]);
-    this.currentPage++;
-  }
-
-  onScroll(): void {
-    if (this.currentPage * this.itemsPerPage < this.tokens.length) {
-      this.loadMoreData();
-    }
   }
 
   public tokenClicked(label: string): void {

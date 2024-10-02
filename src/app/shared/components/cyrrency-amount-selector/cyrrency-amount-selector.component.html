@@ -122,20 +122,14 @@
           </svg>
         </div>
         <div class="tokens-list">
-          <cdk-virtual-scroll-viewport
-            itemSize="10"
-            class="example-viewport"
-            (scrolledIndexChange)="onScroll()"
-          >
-            <div *cdkVirtualFor="let group of groupedTokens$ | async" class="tokens-list__tokens">
-              <div class="group-name">
-                {{ group.group }}
-              </div>
-              <div
-                *ngFor="let token of group.tokens"
-                class="tokens-list__tokens_token"
-                (click)="selectToken(token.token)"
-              >
+          <cdk-virtual-scroll-viewport itemSize="30" class="example-viewport">
+            <div
+              *cdkVirtualFor="let token of filteredList$ | async"
+              class="tokens-list__tokens"
+              (click)="selectToken(token.token)"
+            >
+              <div *ngIf="token.label !== ''" class="group-name">{{ token.label }}</div>
+              <div class="tokens-list__tokens_token">
                 <div class="tokens-list__tokens__icon">
                   <div class="coin-icon coin-icon__sm coin-icon__bg_">
                     <img
