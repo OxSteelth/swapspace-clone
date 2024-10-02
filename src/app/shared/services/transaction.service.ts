@@ -84,7 +84,6 @@ export class TransactionService {
       toCurrency: 'BTC',
     },
   ]).pipe(delay(3000), shareReplay(1));
-  
 
   constructor(private readonly httpService: HttpService) {
     this.fetchRecentTrades().subscribe((trades: Trade[]) => {
