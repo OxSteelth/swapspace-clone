@@ -2,9 +2,9 @@
   <h1 class="c-title">Recent Transactions</h1>
 
   <div class="c-container">
-    <ng-container *ngIf="transactionService.allTransactions$ | async as allTransactions; else loadingSkeleton">
+    <ng-container *ngIf="transactionService.recentTraces$ | async as recentTraces; else loadingSkeleton">
       <ul class="c-transaction-container">
-        <li *ngFor="let transaction of allTransactions" class="c-transaction-container__item app-card">
+        <li *ngFor="let transaction of recentTraces" class="c-transaction-container__item app-card">
           <div class="c-transaction-container__time">
             {{ transaction.date | appDateDiff }}
           </div>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { delay, of, shareReplay } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, delay, of, shareReplay } from 'rxjs';
+import { HttpService } from '@app/core/services/http/http.service';
+import { RecentTrade, Trade } from '@shared/models/trade';
 
 const now = Date.now();
 
@@ -7,6 +9,9 @@ const now = Date.now();
   providedIn: 'root',
 })
 export class TransactionService {
+  private _recentTrades$: BehaviorSubject<RecentTrade[]> = new BehaviorSubject<RecentTrade[]>([]);
+  public recentTraces$ = this._recentTrades$.asObservable();
+
   allTransactions$ = of([
     {
       id: 1,
@@ -81,5 +86,27 @@ export class TransactionService {
   ]).pipe(delay(3000), shareReplay(1));
   
 
-  constructor() {}
+  constructor(private readonly httpService: HttpService) {
+    this.fetchRecentTrades().subscribe((trades: Trade[]) => {
+      this._recentTrades$.next(trades.map((trade => {
+        return {
+          date: Date.parse(trade.timestamp),
+          amount: trade.from_amount,
+          fromCurrency: trade.from_token.symbol,
+          toCurrency: trade.to_token.symbol,
+        }
+      })))
+    });
+  }
+
+  public fetchRecentTrades(): Observable<Trade[]> {
+    return this.httpService
+      .get<Trade[]>(`recent_trades`)
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching data', error);
+          return of([] as Trade[]);
+        })
+      );
+  }
 }
