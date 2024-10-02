@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { CacheService } from '@app/shared/services/cache.service';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 
@@ -9,11 +10,14 @@ import { ExchangeService } from '@app/shared/services/exchange.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  constructor(private currencyService: CurrencyService, private exchangeService: ExchangeService) {}
+  constructor(private cacheService: CacheService, private exchangeService: ExchangeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cacheService.updateExchangeStep(0);
+  }
 
   ngOnDestroy(): void {
     this.exchangeService.stopInterval();
+
   }
 }

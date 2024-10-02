@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CacheService } from '@app/shared/services/cache.service';
 import { CurrencyService } from '@app/shared/services/currency.service';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-form-query.service';
@@ -12,7 +14,9 @@ import { SwapFormQueryService } from '@app/shared/services/swap-form-query/swap-
 export class ExchangeCreateComponent implements OnInit, OnDestroy {
   constructor(
     private swapFormQueryService: SwapFormQueryService,
-    private exchangeService: ExchangeService
+    private exchangeService: ExchangeService,
+    private router: Router,
+    private cacheService: CacheService
   ) {}
 
   ngOnInit(): void {
@@ -22,5 +26,10 @@ export class ExchangeCreateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.exchangeService.stopInterval();
+  }
+
+  goToStep1() {
+    this.cacheService.updateExchangeStep(0);
+    this.router.navigate(['/exchange/step1']);
   }
 }

@@ -46,3 +46,40 @@
   //   gap: 2rem;
   // }
 }
+
+@media screen and (min-width: 992px) {
+  .step2__title-container {
+    margin-top: 2rem;
+  }
+}
+
+.step2__title-container {
+  align-items: baseline;
+  display: flex;
+}
+
+.step2__title-container {
+  align-items: baseline;
+  display: flex;
+}
+
+.step2__title-container_back {
+  z-index: 2;
+  cursor: pointer;
+}
+
+.back {
+  color: hsla(0, 0%, 100%, 0.3);
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+.mr-3 {
+  margin-right: 1rem;
+}
+
+.back__label {
+  color: #fff;
+  margin-left: 0.5rem;
+  vertical-align: top;
+}

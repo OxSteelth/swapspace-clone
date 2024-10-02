@@ -12,6 +12,7 @@ import {
   interval,
   map,
   of,
+  shareReplay,
   startWith,
   switchMap
 } from 'rxjs';
@@ -136,6 +137,7 @@ export class AvailableExchangeComponent implements OnInit {
   exchangeCurrency(exchange: Exchange) {
     this.cacheService.updateSelectedOffer(exchange);
     this.cacheService.updateCreatedExchange(null);
+    this.cacheService.updateExchangeStep(1);
 
     combineLatest([
       this.cacheService.fromToken$,
@@ -145,7 +147,6 @@ export class AvailableExchangeComponent implements OnInit {
       this.cacheService.toChain$,
       this.cacheService.selectedOffer$
     ]).subscribe(([fromToken, fromChain, fromAmount, toToken, toChain, selectedOffer]) => {
-      this.cacheService.updateExchangeStep(1);
       this.router.navigate(['/exchange/step2'], {
         queryParams: {
           from: fromToken,

@@ -1,4 +1,20 @@
-<div class="c-title">Enter the recipient address</div>
+<div class="step2__title-container mb-4">
+  <div class="back step2__title-container_back mr-3" (click)="goToStep1()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#E35760"></rect>
+      <path
+        d="M14.6667 17.334L9.33337 12.0007L14.6667 6.66732"
+        stroke="#E35760"
+        stroke-width="2"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+      ></path>
+    </svg>
+    <span class="back__label"> </span>
+  </div>
+  <div class="c-title">Enter the recipient address</div>
+</div>
+
 <app-exchange-status class="status-mobile"></app-exchange-status>
 <div class="c-container">
   <app-exchange-create-panel></app-exchange-create-panel>
