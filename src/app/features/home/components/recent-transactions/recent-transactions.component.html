@@ -15,10 +15,16 @@
 
             <div class="c-transaction-container__currency">
               {{ transaction.fromCurrency }}
-              <img [src]="getCurrencyIcon(transaction.fromCurrency)" class="c-currency-image" />
+              <img
+                [src]="'assets/img/tokens/' + transaction.fromCurrency.toLowerCase() + '.svg'"
+                class="c-currency-image"
+              />
               <tui-svg src="tuiIconArrowRight"></tui-svg>
               {{ transaction.toCurrency }}
-              <img [src]="getCurrencyIcon(transaction.toCurrency)" class="c-currency-image" />
+              <img
+                [src]="'assets/img/tokens/' + transaction.toCurrency.toLowerCase() + '.svg'"
+                class="c-currency-image"
+              />
             </div>
           </div>
         </li>
