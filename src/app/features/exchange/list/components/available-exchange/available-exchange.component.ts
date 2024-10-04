@@ -124,12 +124,11 @@ export class AvailableExchangeComponent implements OnInit {
 
     combineLatest([this.cacheService.fromAmount$, this.cacheService.selectedOffer$]).subscribe(
       ([fromAmount, selectedOffer]) => {
-        if (
-          !!fromAmount &&
-          !!selectedOffer &&
-          Number(fromAmount) >= selectedOffer.min &&
-          Number(fromAmount) <= selectedOffer.max
-        ) {
+        if (!!fromAmount && !!selectedOffer && Number(fromAmount) >= selectedOffer.min) {
+          if (selectedOffer.max && Number(fromAmount) > selectedOffer.max) {
+            this._isExchangeAvailable$.next(false);
+          }
+
           this._isExchangeAvailable$.next(true);
         } else {
           this._isExchangeAvailable$.next(false);
