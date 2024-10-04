@@ -47,17 +47,20 @@ export class CurrencyService {
         this.httpService
           .get<Currency[]>(`currencies`)
           .pipe(
-            tap(tokens => {
-              const filtered = tokens.map((token) => {
-                token.icon =  token.icon.split('/').pop();
+            switchMap(tokens => {
+              const filtered = tokens.map(token => {
+                token.icon = token.icon.split('/').pop();
 
-                return token
-              })
-              this.cacheService.updateAllCurrencyList(filtered);
-              this.cacheService.updatePopularCurrencyList(filtered.filter(token => token.popular));
+                return token;
+              });
+
+              return of(filtered);
             })
           )
-          .subscribe();
+          .subscribe(tokens => {
+            this.cacheService.updateAllCurrencyList(tokens);
+            this.cacheService.updatePopularCurrencyList(tokens.filter(token => token.popular));
+          });
       }
     });
   }
