@@ -104,6 +104,11 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
   private readonly _isDisabled$ = new BehaviorSubject<boolean>(false);
   public isDisabled$ = this._isDisabled$.asObservable();
 
+  private _amount$ = new BehaviorSubject<number>(0);
+  public amount$ = this._amount$.asObservable();
+
+  public selectedOffer$ = this.cacheService.selectedOffer$;
+
   constructor(
     private readonly currencyService: CurrencyService,
     private readonly swapFormService: SwapFormService,
@@ -249,6 +254,8 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
         this._isDisabled$.next(true);
       }
     });
+
+    this.cacheService.fromAmount$.subscribe(value => this._amount$.next(Number(value)));
   }
 
   public tokenClicked(label: string): void {
@@ -301,5 +308,17 @@ export class CyrrencyAmountSelectorComponent implements OnChanges, OnInit {
       });
       this.amountUpdated.emit(event.target.value);
     }
+  }
+
+  public setLimit() {
+    this.cacheService.selectedOffer$.subscribe(selectedOffer => {
+      if (selectedOffer?.min && this._amount$.getValue() < selectedOffer.min) {
+        this.amount.setValue(selectedOffer.min.toString());
+        this.amountUpdated.emit(selectedOffer.min.toString());
+      } else if (selectedOffer?.max && this._amount$.getValue() > selectedOffer.max) {
+        this.amount.setValue(selectedOffer.max.toString());
+        this.amountUpdated.emit(selectedOffer.max.toString());
+      }
+    });
   }
 }

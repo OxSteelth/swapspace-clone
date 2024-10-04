@@ -7,11 +7,13 @@
       class="fund-mode"
     ></app-tabs>
     <div class="pair exchange-pair__pair" *ngIf="selectedMode === 'exchange'">
-      <ng-container *ngLet="{ fromAsset: fromAsset$ | async } as input">
+      <ng-container *ngLet="{ fromAsset: fromAsset$ | async, offer: offer$ | async } as input">
         <app-asset-selector
           label="You send"
           label2="From"
           [asset]="input.fromAsset"
+          [min]="input.offer?.min || 0"
+          [max]="input.offer?.max || 0"
           [amountValue]="fromAmount$ | async"
           (amountUpdated)="updateInputValue($event)"
           (tokenClickedEvent)="tokenClicked($event, 'from')"

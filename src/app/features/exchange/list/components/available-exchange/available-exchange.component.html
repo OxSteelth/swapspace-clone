@@ -101,7 +101,13 @@
             </div>
             <div *ngIf="false" class="app-chip app-chip__yellow-2">Giveaway</div> -->
           </div>
-          <button class="app-button-outline" (click)="exchangeCurrency(exchange)">Exchange</button>
+          <button
+            class="app-button-outline"
+            (click)="exchangeCurrency(exchange)"
+            [disabled]="!(isExchangeAvailable$ | async)"
+          >
+            Exchange
+          </button>
         </div>
       </li>
     </ul>

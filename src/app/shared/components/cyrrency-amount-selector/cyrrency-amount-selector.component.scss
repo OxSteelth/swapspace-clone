@@ -595,3 +595,46 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #e35760; /* Darker on hover */
 }
+
+.button_transparent {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 60px;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.button_sm {
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: 40px;
+}
+
+.button_none {
+  text-transform: none;
+}
+
+.exchange-widget-pair__extremum {
+  height: 15px;
+  left: 12px;
+  top: 58px;
+}
+
+.exchange-widget-pair__extremum,
+.exchange-widget-pair__no-options {
+  color: #e35760;
+  font-size: 0.625rem;
+  line-height: 0.75rem;
+  position: absolute;
+}
+
+.pair-extremum {
+  color: #e35760;
+}

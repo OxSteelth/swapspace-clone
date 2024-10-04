@@ -12,7 +12,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
 import { Currency } from '../../models/currency';
@@ -35,6 +35,10 @@ export class AssetSelectorComponent implements OnChanges, OnInit {
   @Input() label2: string;
 
   @Input() asset: Currency;
+
+  @Input() min: number;
+
+  @Input() max: number;
 
   @Input() set amountValue(value: string | null) {
     if (this.inputMode !== 'input') {
@@ -59,6 +63,9 @@ export class AssetSelectorComponent implements OnChanges, OnInit {
 
   public readonly allCurrencyList$: Observable<Currency[]>;
 
+  private _amount$ = new BehaviorSubject<number>(0);
+  public amount$ = this._amount$.asObservable();
+
   constructor(
     private readonly cdr: ChangeDetectorRef,
     private readonly currencyService: CurrencyService,
@@ -80,7 +87,9 @@ export class AssetSelectorComponent implements OnChanges, OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cacheService.fromAmount$.subscribe(value => this._amount$.next(Number(value)));
+  }
 
   public tokenClicked(label: string): void {
     this.tokenClickedEvent.emit(label);
@@ -106,6 +115,16 @@ export class AssetSelectorComponent implements OnChanges, OnInit {
         emitViewToModelChange: false
       });
       this.amountUpdated.emit(event.target.value);
+    }
+  }
+
+  public setLimit() {
+    if (this.min !== undefined && this._amount$.getValue() < this.min) {
+      this.amount.setValue(this.min.toString());
+      this.amountUpdated.emit(this.min.toString());
+    } else if (this.max !== undefined && this._amount$.getValue() > this.max) {
+      this.amount.setValue(this.max.toString());
+      this.amountUpdated.emit(this.max.toString());
     }
   }
 }

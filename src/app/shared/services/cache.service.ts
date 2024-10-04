@@ -71,6 +71,9 @@ export class CacheService {
     this._selectedOffer$.next(ex);
     this.storeService.setItem('SELECTED_OFFER', ex);
   }
+  public get selectedOffer(): Exchange {
+    return this._selectedOffer$.getValue();
+  }
 
   private _depositAddress$ = new BehaviorSubject<string>('');
   public depositAddress$ = this._depositAddress$.asObservable();

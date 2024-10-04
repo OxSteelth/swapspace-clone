@@ -65,6 +65,8 @@ export class SwapFormComponent implements OnInit, OnDestroy {
 
   public readonly toAmount$ = this.swapFormService.toAmount$;
 
+  public readonly offer$ = this.cacheService.selectedOffer$;
+
   public popularCurrencyList$: Observable<Currency[]>;
 
   public allCurrencyList$: Observable<Currency[]>;

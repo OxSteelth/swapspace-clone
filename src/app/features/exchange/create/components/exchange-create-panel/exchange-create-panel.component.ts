@@ -47,7 +47,8 @@ export class ExchangeCreatePanelComponent {
   public fromChainFormControl = new FormControl<string>('BTC', [Validators.required]);
   public fromAmountFormControl = new FormControl<number | null>(null, [
     Validators.required,
-    Validators.min(0)
+    Validators.min(this.cacheService.selectedOffer?.min || 0),
+    this.cacheService.selectedOffer?.max && Validators.max(this.cacheService.selectedOffer?.max)
   ]);
 
   public toAmountFormControl = new FormControl<number | null>(null, [

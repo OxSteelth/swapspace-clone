@@ -99,7 +99,7 @@ export class ExchangeService {
 
   startInterval() {
     if (!this.intervalSubscription) {
-      this.intervalSubscription = interval(60000)
+      this.intervalSubscription = interval(300000)
         .pipe(startWith(0))
         .subscribe(val => {
           this._interval$.next(val);

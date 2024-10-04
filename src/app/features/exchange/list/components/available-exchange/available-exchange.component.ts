@@ -41,6 +41,9 @@ export class AvailableExchangeComponent implements OnInit {
   private readonly _fastestPartner$ = new BehaviorSubject<Exchange | null>(null);
   public fastestPartner$ = this._fastestPartner$.asObservable();
 
+  private _isExchangeAvailable$ = new BehaviorSubject<boolean>(false);
+  public isExchangeAvailable$ = this._isExchangeAvailable$.asObservable();
+
   constructor(
     public swapFormService: SwapFormService,
     public exchangeService: ExchangeService,
@@ -118,6 +121,21 @@ export class AvailableExchangeComponent implements OnInit {
 
         this._isLoading$.next(false);
       });
+
+    combineLatest([this.cacheService.fromAmount$, this.cacheService.selectedOffer$]).subscribe(
+      ([fromAmount, selectedOffer]) => {
+        if (
+          !!fromAmount &&
+          !!selectedOffer &&
+          Number(fromAmount) >= selectedOffer.min &&
+          Number(fromAmount) <= selectedOffer.max
+        ) {
+          this._isExchangeAvailable$.next(true);
+        } else {
+          this._isExchangeAvailable$.next(false);
+        }
+      }
+    );
   }
 
   getCurrencyIcon(currency: string): string {

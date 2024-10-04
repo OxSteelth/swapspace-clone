@@ -28,6 +28,14 @@
             (input)="handleAmountChange($event)"
           />
         </span>
+        <button
+          type="button"
+          class="button pair-extremum exchange-widget-pair__extremum button_sm button_transparent button_none button_"
+          (click)="setLimit()"
+        >
+          <span class="pair-extremum" *ngIf="min && (amount$ | async) < min"> min: {{ min }} </span>
+          <span class="pair-extremum" *ngIf="max && (amount$ | async) > max"> max: {{ max }} </span>
+        </button>
       </label>
 
       <div
