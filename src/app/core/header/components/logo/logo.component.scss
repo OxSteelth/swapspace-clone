@@ -1,0 +1,21 @@
+.logo-link {
+  cursor: pointer;
+  display: flex;
+  position: relative;
+}
+
+.image-link-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.logo-general {
+  height: 54px;
+  padding-bottom: 2px;
+  padding-top: 4px;
+  width: auto;
+}

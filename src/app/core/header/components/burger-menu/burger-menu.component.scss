@@ -1,0 +1,150 @@
+.burger-menu {
+  cursor: pointer;
+  height: 24px;
+  position: relative;
+  width: 24px;
+  z-index: 6;
+}
+
+.s-header__burger {
+  margin-left: 36px;
+  margin-top: 4px;
+}
+
+.burger-menu span,
+.burger-menu span:after,
+.burger-menu span:before {
+  background: #fff;
+  display: block;
+  height: 2px;
+  opacity: 1;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+}
+
+.burger-menu span {
+  top: 2px;
+  width: 20px;
+}
+
+.burger-menu span,
+.burger-menu span:after,
+.burger-menu span:before {
+  background: #fff;
+  display: block;
+  height: 2px;
+  opacity: 1;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+}
+
+.burger-menu span:after,
+.burger-menu span:before {
+  content: '';
+}
+
+.burger-menu span:before {
+  right: 0;
+  top: 16px;
+  width: 16px;
+}
+
+.burger-menu span:after {
+  right: 0;
+  top: 8px;
+  width: 12px;
+}
+
+.burger-menu.close span {
+  background: #a0789c;
+  top: 8px;
+  transform: rotate(45deg);
+  width: 21px;
+}
+
+.burger-menu.close span:before {
+  background: #a0789c;
+  top: 0;
+  transform: rotate(-90deg);
+  width: 21px;
+}
+
+.burger-menu.close span:after {
+  background: #a0789c;
+  opacity: 0;
+  top: 0;
+  transform: rotate(-90deg);
+  width: 0;
+}
+
+.overlapping {
+  background-color: #36293b;
+  height: 100vh;
+  padding: 5.5rem 1.25rem 0 1rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
+}
+
+@media screen and (min-width: 576px) {
+  .overlapping {
+    padding-left: 1rem;
+    padding-right: calc(50vw - 250px);
+  }
+
+  .overlapping__index {
+    padding-left: 1rem;
+    padding-right: calc(50vw - 266px);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .overlapping {
+    padding-left: 1rem;
+    padding-right: calc(50vw - 340px);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .overlapping {
+    padding-left: 1rem;
+    padding-right: calc(50vw - 460px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .overlapping {
+    padding-left: 1rem;
+    padding-right: calc(50vw - 550px);
+  }
+}
+
+.overlapping__content {
+  min-width: 188px;
+}
+
+.dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+::ng-deep {
+  .t-wrapper::after {
+    border: none !important;
+  }
+
+  .t-header {
+    border: none !important;
+    background-color: transparent !important;
+
+    &_open {
+      color: var(--tui-link) !important;
+    }
+  }
+
+  .overlapping .t-content {
+    padding: 0 1.25rem 1.25rem !important;
+  }
+}

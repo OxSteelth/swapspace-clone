@@ -1,0 +1,26 @@
+<div class="s-header__menu">
+  <div class="s-header-menu">
+    <div class="desktop-menu" *ngFor="let menu of menus">
+      <tui-hosted-dropdown [content]="content">
+        <button tuiButton appearance="secondary" type="button" size="m" class="drop-down__button">
+          {{ menu.label }}
+          <tui-svg src="tuiIconChevronDown"></tui-svg>
+        </button>
+      </tui-hosted-dropdown>
+      <ng-template #content>
+        <tui-data-list size="m" role="menu">
+          <tui-opt-group>
+            <a
+              *ngFor="let item of menu.menu"
+              tuiOption
+              role="menuitem"
+              [routerLink]="item.routerLink"
+            >
+              {{ item.label }}
+            </a>
+          </tui-opt-group>
+        </tui-data-list>
+      </ng-template>
+    </div>
+  </div>
+</div>

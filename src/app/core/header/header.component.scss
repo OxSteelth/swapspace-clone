@@ -1,0 +1,22 @@
+.s-header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+  width: inherit;
+  z-index: 3;
+
+  &__wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 1rem 0.5rem;
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  app-burger-menu {
+    display: none;
+  }
+}

@@ -1,0 +1,29 @@
+<div
+  class="burger-menu s-header__burger"
+  [ngClass]="isOpened ? 'close' : 'overlay'"
+  (click)="toggle()"
+>
+  <span></span>
+</div>
+<div
+  class="overlapping s-header__hide-desktop overlapping__active overlapping__index"
+  *ngIf="isOpened"
+>
+  <div class="overlapping__content">
+    <tui-accordion [closeOthers]="true" [rounded]="false">
+      <tui-accordion-item *ngFor="let menu of menus">
+        <div class="">{{ menu.label }}</div>
+
+        <ng-template tuiAccordionItemContent>
+          <div class="dropdown-list">
+            <div *ngFor="let item of menu.menu" tuiOption role="menuitem">
+              <a [routerLink]="item.routerLink">
+                {{ item.label }}
+              </a>
+            </div>
+          </div>
+        </ng-template>
+      </tui-accordion-item>
+    </tui-accordion>
+  </div>
+</div>

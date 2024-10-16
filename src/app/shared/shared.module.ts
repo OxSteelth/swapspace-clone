@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   TuiButtonModule,
   TuiDataListModule,
@@ -79,11 +80,13 @@ import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-
     TuiCheckboxModule,
     ScrollingModule,
     FormsModule,
+    RouterModule,
   ],
   providers: [AsyncPipe, TuiDestroyService, SwapFormService, SwapFormQueryService],
   exports: [
     LetDirective,
     CommonModule,
+    RouterModule,
     TuiDialogModule,
     TuiSvgModule,
     TuiAccordionModule,

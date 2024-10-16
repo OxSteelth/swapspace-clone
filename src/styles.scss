@@ -172,6 +172,12 @@ textarea:focus {
   font-weight: 500;
 }
 
+.button_s {
+  border-radius: 4px;
+  font-size: .75rem;
+  height: 32px;
+}
+
 .button_none {
   text-transform: none;
 }
@@ -308,15 +314,9 @@ svg:not(:root).svg-inline--fa {
   width: 100%;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 576px) {
   .container {
-    max-width: 1140px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
+    max-width: 540px;
   }
 }
 
@@ -326,9 +326,15 @@ svg:not(:root).svg-inline--fa {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .container {
-    max-width: 540px;
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
   }
 }
 
