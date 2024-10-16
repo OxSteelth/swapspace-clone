@@ -15,7 +15,17 @@
   }
 }
 
+app-navbar {
+  align-items: center;
+  display: none;
+  margin-left: auto;
+}
+
 @media screen and (min-width: 1440px) {
+  app-navbar {
+    display: flex;
+  }
+
   app-burger-menu {
     display: none;
   }

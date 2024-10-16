@@ -1,18 +1,14 @@
-.s-header {
-  &__menu {
-    align-items: center;
-    display: flex;
-    margin-left: auto;
-  }
-
-  &-menu {
-    align-items: center;
-    display: flex;
-    gap: 60px;
-  }
+.s-header-menu {
+  align-items: center;
+  display: flex;
+  gap: 60px;
 }
 
 ::ng-deep {
+  tui-dropdown {
+    border: none !important;
+  }
+
   .t-wrapper {
     background: transparent !important;
     color: white !important;
@@ -25,18 +21,4 @@
 
 .arrow {
   margin-left: 4px;
-}
-
-.desktop-menu {
-  display: none;
-}
-
-@media (min-width: 1440px) {
-  .desktop-menu {
-    display: block;
-  }
-
-  .mobile-menu {
-    display: none;
-  }
 }
