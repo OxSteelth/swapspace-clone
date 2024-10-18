@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { catchError, first, map } from 'rxjs/operators';
-import { forkJoin, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { WINDOW } from '@ng-web-apis/common';
 import { QueryParams } from './core/services/query-params/models/query-params';
 import { QueryParamsService } from './core/services/query-params/query-params.service';
@@ -15,13 +15,20 @@ import { CurrencyService } from './shared/services/currency.service';
 })
 export class AppComponent implements OnInit {
   title = 'swapspace-clone';
+  public appContentClass: string = '';
+  public classes: { [key: string]: string } = {
+    '': 'app__content_alt-bg-index app__content_alt-bg-step1',
+    'exchange-listing': 'app__content_alt-bg-exchange-listing',
+    'affiliate': 'app__content_alt-bg-affiliate'
+  };
 
   constructor(
     private readonly queryParamsService: QueryParamsService,
     @Inject(WINDOW) private window: Window,
     private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
     private readonly cacheService: CacheService,
-    private currencyService: CurrencyService
+    private readonly currencyService: CurrencyService
   ) {
     this.cacheService.init();
     this.initQueryParamsSubscription().subscribe();
@@ -29,6 +36,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.currencyService.fetchCurrencyList();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.appContentClass = this.classes[event.url.split('/')[1].split('?')[0]];
+      }
+    });
   }
 
   /**

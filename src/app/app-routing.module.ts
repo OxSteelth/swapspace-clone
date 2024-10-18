@@ -4,19 +4,32 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule),
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'exchange',
     loadChildren: () =>
-      import('./features/exchange/exchange-routing.module').then(
-        (m) => m.ExchangeRoutingModule
-      ),
+      import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
   },
+  {
+    path: 'exchange-listing',
+    loadChildren: () =>
+      import('./features/exchange-listing/exchange-listing.module').then(
+        m => m.ExchangeListingModule
+      )
+  },
+  {
+    path: 'affiliate',
+    loadChildren: () => import('./features/affiliate/affiliate.module').then(m => m.AffiliateModule)
+  },
+  {
+    path: 'api',
+    loadChildren: () => import('./features/api/api.module').then(m => m.ApiModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

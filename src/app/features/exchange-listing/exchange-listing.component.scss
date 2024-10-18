@@ -1,0 +1,413 @@
+.exchange-listing-top {
+  max-width: 41.6666666667%;
+  width: 100%;
+}
+
+.exchange-listing__top {
+  margin-bottom: 200px;
+  margin-top: 130px;
+}
+
+.exchange-listing-top__image {
+  height: auto;
+  width: 100%;
+}
+
+@media screen and (min-width: 992px) {
+  .exchange-listing-top__image {
+    display: none;
+  }
+}
+
+.exchange-listing-top__title {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.partners-carousel {
+  height: 170px;
+  opacity: 1;
+  position: relative;
+  transition: opacity 0.6s ease;
+}
+
+.exchange-listing__carousel {
+  margin-bottom: 80px;
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.slick-slider {
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: pan-y;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.partners-carousel__mask {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 4%,
+    #a4a4a4 8%,
+    #000 50%,
+    #a4a4a4 92%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 4%,
+    #a4a4a4 8%,
+    #000 50%,
+    #a4a4a4 92%,
+    transparent 96%
+  );
+}
+
+.slick-list {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  transform: translateZ(0);
+}
+
+.carousel .slick-track {
+  display: flex;
+}
+
+.slick-track {
+  display: block;
+  left: 0;
+  position: relative;
+  top: 0;
+  transform: translateZ(0);
+}
+
+.slick-track:after, .slick-track:before {
+    content: "";
+    display: table;
+}
+
+.slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+
+.slick-initialized .slick-slide {
+  display: block;
+}
+
+.partners-carousel__tile {
+  align-items: center;
+  background-color: #27212b;
+  border-radius: 8px;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  margin-right: 1rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.partners-carousel__logo {
+  filter: invert(54%) sepia(13%) saturate(835%) hue-rotate(255deg) brightness(93%) contrast(90%);
+  height: auto;
+  max-height: 48px;
+  max-width: 150px;
+  transition: opacity 0.2s ease;
+}
+
+.partners-carousel__logo_hide {
+  filter: none;
+  opacity: 0;
+  position: absolute;
+}
+
+.partners-carousel__arrow-container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.partners-carousel__arrow {
+    color: #a0789c;
+    cursor: pointer;
+    transition: color .2s ease;
+}
+
+.partners-carousel__arrow-container_right {
+    left: auto;
+    right: 0;
+}
+
+.exchange-listing-profit {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.exchange-listing__profit {
+    margin-bottom: 80px;
+}
+
+@media screen and (min-width: 1200px) {
+    .exchange-listing-profit__text-container {
+        max-width: 390px;
+    }
+}
+
+.exchange-listing-profit__title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.exchange-listing-profit__text {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 992px) {
+    .exchange-listing-profit__text {
+        max-width: 360px;
+    }
+}
+
+.exchange-listing-profit__image {
+    background: url(https://swapspace.co/_nuxt/img/exchange-listing-profit.0045abe.svg) no-repeat 100%;
+    height: 364px;
+    width: 100%;
+}
+
+.exchange-listing-steps {
+    display: flex;
+}
+
+.exchange-listing__steps {
+    margin-bottom: 120px;
+}
+
+.exchange-listing-steps__container {
+    align-items: center;
+    display: flex;
+    gap: calc(50% - 125.5px);
+}
+
+@media screen and (min-width: 768px) {
+    .exchange-listing-steps__container:not(:last-child) {
+        flex: 1;
+    }
+}
+
+.exchange-listing-steps__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 175px;
+}
+
+.exchange-listing-form {
+    background: url(https://swapspace.co/_nuxt/img/exchange-listing-form.047b2b6.svg) no-repeat 100% 100%, radial-gradient(50% 100% at 100% 100%, rgba(93, 53, 72, .9) 30%, #36293b 100%);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+}
+
+.exchange-listing-form__success-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 80px);
+    justify-content: center;
+    max-width: calc(58.33333% - 5rem);
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.exchange-listing-form__lottie {
+    margin-bottom: 1rem;
+    width: 100px;
+}
+
+.exchange-listing-form__success-title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.exchange-listing-form__success-text {
+    color: #a0789c;
+    max-width: 315px;
+    text-align: center;
+}
+
+.exchange-listing-form__form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 58.3333333333%;
+    position: relative;
+}
+
+.exchange-listing-form__title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    margin-bottom: .5rem;
+}
+
+.exchange-listing-form__description {
+    margin-bottom: 2rem;
+}
+
+.exchange-listing-form__form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-input_rounded {
+    border-radius: 8px;
+}
+
+.exchange-listing-form__input {
+    flex: 1;
+}
+
+.form-input__label {
+    -moz-column-gap: .25rem;
+    column-gap: .25rem;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+}
+
+.form-input_dark .form-input__label {
+    color: #fff;
+    font-size: .8125rem;
+}
+
+.form-input__label_text {
+    line-height: 1.5rem;
+    word-wrap: anywhere;
+    margin-bottom: .3rem;
+}
+
+.form-input__wrapper {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+
+.form-input__input {
+    border: 1px solid #dbdbdb;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #181919;
+    flex-grow: 1;
+    font-size: 1.25rem;
+    font-weight: 400;
+    height: 60px;
+    padding: 1.25rem;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.form-input__input_rounded {
+    border-radius: 8px;
+}
+
+.form-input_xl .form-input__input {
+    font-size: 1rem;
+    height: 56px;
+}
+
+.form-input_dark .form-input__input {
+    background-color: #27212b;
+    border-color: #27212b;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-textarea {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: .3rem;
+    position: relative;
+    width: 100%;
+}
+
+.exchange-listing-form__textarea {
+    margin-bottom: 2rem;
+}
+
+.form-textarea__label-container {
+    align-items: center;
+    display: flex;
+    gap: 4px;
+    margin-bottom: .5rem;
+}
+
+.form-textarea__label {
+    font-size: .8125rem;
+}
+
+.form-textarea__container {
+    align-items: center;
+    display: flex;
+}
+
+.form-textarea__textarea {
+    background-color: #27212b;
+    border-color: #27212b;
+    border-radius: inherit;
+    border-style: solid;
+    color: #fff;
+    flex-grow: 1;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4rem;
+    padding: .9rem 1rem;
+    resize: vertical;
+    width: 100%;
+}
+
+.form-textarea__textarea_rounded {
+    border-radius: 8px;
+}
+
+.form-textarea__textarea_xl {
+    line-height: 1.25rem;
+    padding: 17px 1rem;
+}
+
+.exchange-listing-form__button {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, .2), 0 4px 50px rgba(227, 87, 96, .5), 0 60px 150px rgba(227, 87, 96, .62);
+    width: 100%;
+}

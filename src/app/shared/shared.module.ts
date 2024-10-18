@@ -13,7 +13,12 @@ import {
   TuiLoaderModule,
   TuiSvgModule
 } from '@taiga-ui/core';
-import { TuiActiveZoneModule, TuiDestroyService, TuiLetModule, TuiPortalModule } from '@taiga-ui/cdk';
+import {
+  TuiActiveZoneModule,
+  TuiDestroyService,
+  TuiLetModule,
+  TuiPortalModule
+} from '@taiga-ui/cdk';
 import {
   TuiAccordionModule,
   TuiCarouselModule,
@@ -26,6 +31,7 @@ import {
   TuiSelectModule
 } from '@taiga-ui/kit';
 import { TuiTableModule } from '@taiga-ui/addon-table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LetDirective } from './directives/let/let.directive';
 import { CyrrencyAmountSelectorComponent } from './components/cyrrency-amount-selector/cyrrency-amount-selector.component';
 import { TabsComponent } from './components/tabs/tabs.component';
@@ -36,7 +42,6 @@ import { FormSwitcherComponent } from './components/form-switcher/form-switcher.
 import { SwapFormComponent } from './components/swap-form/swap-form.component';
 import { SwapFormService } from './services/swap-form.service';
 import { SwapFormQueryService } from './services/swap-form-query/swap-form-query.service';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ExchangeInfoComponent } from '@app/features/exchange/info/exchange-info.component';
 import { StatusIconComponent } from '@app/features/exchange/status/status-icon/status-icon.component';
 import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-status.component';
@@ -80,7 +85,7 @@ import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-
     TuiCheckboxModule,
     ScrollingModule,
     FormsModule,
-    RouterModule,
+    RouterModule
   ],
   providers: [AsyncPipe, TuiDestroyService, SwapFormService, SwapFormQueryService],
   exports: [

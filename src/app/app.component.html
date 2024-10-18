@@ -1,8 +1,10 @@
 <tui-root>
   <div class="app">
-    <app-header></app-header>
-    <div class="container app__container">
-      <router-outlet></router-outlet>
+    <div class="app__content" [ngClass]="appContentClass">
+      <app-header></app-header>
+      <div class="container app__container">
+        <router-outlet></router-outlet>
+      </div>
     </div>
     <app-footer></app-footer>
   </div>

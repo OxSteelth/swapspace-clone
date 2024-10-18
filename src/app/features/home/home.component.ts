@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CacheService } from '@app/shared/services/cache.service';
-import { CurrencyService } from '@app/shared/services/currency.service';
 import { ExchangeService } from '@app/shared/services/exchange.service';
 
 @Component({
@@ -18,6 +17,5 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.exchangeService.stopInterval();
-
   }
 }

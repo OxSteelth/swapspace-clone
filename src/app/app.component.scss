@@ -1,3 +1,12 @@
+.container {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
@@ -33,17 +42,32 @@
   margin-top: 1rem;
 }
 
-.container {
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
-  width: 100%;
+.app__content {
+  background: #231f26;
+  padding-bottom: 5rem;
+  position: relative;
+  flex: 1 0 auto;
 }
 
-@media (max-width: 575px) {
-  .container {
-    padding-inline: 0px;
-  }
+.app__content_alt-bg-step1 {
+  background-image: radial-gradient(30.89% 86.89% at 65% 53.11%, rgba(81, 53, 79, .42) 0, rgba(81, 53, 79, 0) 93.75%);
+}
+
+.app__content_alt-bg-index {
+  background: #27212b;
+  background-image: radial-gradient(800px 400px at 50% 150px, rgba(41, 23, 59, .3) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(400px 300px at 40% 17%, rgba(83, 57, 125, .2) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(300px 200px at 80% 25%, rgba(83, 57, 125, .2) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(400px 300px at 67% 40%, rgba(83, 57, 125, .3) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(300px 300px at 30% 50%, rgba(83, 57, 125, .2) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(500px 600px at 40% 85%, rgba(227, 87, 96, .1) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(400px 300px at 70% 83%, rgba(227, 87, 96, .1) 0, rgba(41, 23, 59, 0) 100%), radial-gradient(400px 500px at 35% 90%, rgba(83, 57, 125, .3) 0, rgba(41, 23, 59, 0) 100%);
+  background-repeat: no-repeat;
+}
+
+.app__content_alt-bg-exchange-listing {
+  background: url(https://swapspace.co/_nuxt/img/exchange-listing-bg.a446999.svg), radial-gradient(800px 800px at 50% 35%, rgba(81, 53, 79, .6) 0, rgba(81, 53, 79, 0) 70%), #231f26;
+  background-position: top 90px left calc(50vw - 70px), top;
+  background-repeat: no-repeat;
+}
+
+.app__content_alt-bg-affiliate {
+  background-image: radial-gradient(50% 50% at 100% 0, #36293b 0, rgba(54, 41, 59, 0) 100%), url(https://swapspace.co/img/bg/planets.webp);
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }

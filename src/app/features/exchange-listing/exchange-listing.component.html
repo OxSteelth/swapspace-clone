@@ -1,0 +1,873 @@
+<div class="exchange-listing">
+  <div class="exchange-listing-top exchange-listing__top">
+    <img
+      src="https://swapspace.co/_nuxt/img/exchange-listing-bg.a446999.svg"
+      alt="exchange-listing"
+      width="567"
+      height="346"
+      class="exchange-listing-top__image"
+    />
+    <h1 class="exchange-listing-top__title">Exchange listing</h1>
+    <p class="exchange-listing-top__description">
+      Enhance your income and boost your traffic. Check the rates in one place and be always on par
+      with your competitors. Increase your trustworthiness and loyalty by accumulation of additional
+      reviews for your exchange on SwapSpace.
+    </p>
+  </div>
+  <div class="partners-carousel exchange-listing__carousel">
+    <div
+      dir="ltr"
+      class="carousel partners-carousel__mask slick-slider slick-initialized exchange-listing"
+    >
+      <tui-carousel #carousel [draggable]="true" [itemsCount]="4" [(index)]="index">
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/shapebtc" class="partners-carousel__tile mb-3" target="_blank">
+            <img
+              src="https://storage.swapspace.co/static/63c19e2c75c477137324621e94fd69281f4e0b571b4bfee27e8b2b9073096669.svg"
+              alt="ShapeBTC logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/70b5a5ddd416009b354d2c68c49b480e848e144f27a2c880f17212fa51d57e08.svg"
+              alt="ShapeBTC color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+          <a href="/partners/nanswap" class="partners-carousel__tile">
+            <img
+              src="https://storage.swapspace.co/static/c9500b861a7a88fca68b3be4acbdac3682735e21fb71c4072a1977264aa27498.svg"
+              alt="Nanswap logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/a13706ceafbd5ab8f84fd33a8815627dbb87c6cff2bf8952eca6bab5a6a2ba6e.svg"
+              alt="Nanswap color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/goexme" class="partners-carousel__tile mb-3" target="_blank">
+            <img
+              src="https://storage.swapspace.co/static/14a029af990382bb026c5da9e5da643b81eb7c454955a2ebd11842c440091a7d.svg"
+              alt="GoExme logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/c9c19112c41a4caebf08196766eaead480e33bce2d4201c572a39c1800cb95e2.svg"
+              alt="GoExme color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+          <a href="/partners/bitcoinvn" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/31ee4b1497770ee672097c16f8ad0e1e5e9e7ba86269feffe4edc721089a1eb9.svg"
+              alt="BitcoinVN logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/8d860047e42dedbf4db7bfe23852cd009dc9c4877eb2ff35ae3c97a82b337b09.svg"
+              alt="BitcoinVN color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/guardex" class="partners-carousel__tile mb-3" target="_blank">
+            <img
+              src="https://storage.swapspace.co/static/2b33da203ab1fdf947d9d14de8b9db00ba67ddab713f49d0b081e2556636b667.svg"
+              alt="Guardex logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/07a96ec7b40d61a46a4b13ec06fb1fb13621c383246f6447222d936957b36377.svg"
+              alt="Guardex color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+          <a href="/partners/swappix" class="partners-carousel__tile">
+            <img
+              src="https://storage.swapspace.co/static/021ff2c20acab46bc9c95ef855dee45ca0dc227d16275cef24240c672da81b6a.svg"
+              alt="Swappix logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/e2b4b90930f9c81b3d6516bf022d8823c5b7006ce99eb7e2aa374b6ef86f282a.svg"
+              alt="Swappix color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/xgram" class="partners-carousel__tile mb-3" target="_blank">
+            <img
+              src="https://storage.swapspace.co/static/6bd446c866274737f0c389ed9c970bc11ea2adf4975ecf01f373a65c2b9f23f4.svg"
+              alt="Xgram logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/c7f586d48339f16ef0890ecf15923bf2533b02acdd6ddcf9036bccd3cd97db92.svg"
+              alt="Xgram color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+          <a href="/partners/alfacash" class="partners-carousel__tile">
+            <img
+              src="https://storage.swapspace.co/static/qrd9ISPL30Y697olbaIZmCahL.svg"
+              alt="Alfacash logo"
+              class="partners-carousel__logo"
+            />
+            <img
+              src="https://storage.swapspace.co/static/zV_2iSjvsoHt0gouAvHist8Bk.svg"
+              alt="Alfacash color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+            />
+          </a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/binance" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/7BNpSk9xboOpRrrrnHMgPz279.svg"
+              alt="Binance logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/z9CguKkuE2THrbZT4q1xds3ZI.svg"
+              alt="Binance color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/oneinch" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/Ox6F5idpG9r3YD_2lZ_6A5vQL.svg"
+              alt="1inch logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/jf2Bv_Go6_dsylXm2SltYqWqv.svg"
+              alt="1inch color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/bybit" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/78a26f03df20ac05c87d3803ceef34519beaab937d2294d369252ca0ab0af7ec.svg"
+              alt="Bybit logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/490a3c86e5cc73c028a5c8d96732e01669468ef7b34e9199f1098096bfe60a67.svg"
+              alt="Bybit color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/easybit" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/f02316460591876d7e67b8687b018c1559315dd5b3741425abc8b55cd6d1a0c2.svg"
+              alt="EasyBit logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/4c3071716815d298bababfe519497cfb2fbb2fa013243546c45009954ba649b9.svg"
+              alt="EasyBit color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/moonpay" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/E2Z0O9J0NcbgPfmSF_7kBsYSu.svg"
+              alt="MoonPay logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/j6HM6GUGlAM_MgKU5hc36mKrC.svg"
+              alt="MoonPay color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/blockchaincom" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/d606bf0903aa848e6dfe9a0cc7a51ff935dea5e642c38af1bf3af595ca52793e.svg"
+              alt="Blockchain.com logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/d606bf0903aa848e6dfe9a0cc7a51ff935dea5e642c38af1bf3af595ca52793e.svg"
+              alt="Blockchain.com color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/letsexchange" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/068b28af813b180e30bb10a288679dcdccb33c4237b2fe6de657724c5a3989d3.svg"
+              alt="LetsExchange logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/0fb7c8a468b9c2f7b029acebfd541126128c7f0851fae726897f5de44a88511b.svg"
+              alt="LetsExchange color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/fixedfloat" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/f7ECU1b_n1tfgvaORoWwpkV-s.svg"
+              alt="FixedFloat logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/2tquUO1RX36nRAUOZUHDYO-d7.svg"
+              alt="FixedFloat color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/changelly" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/GQY-NsrTS823beUantZTvGbKF.svg"
+              alt="Changelly logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/9YdNTttE6B3qD389yMnxMrCKT.svg"
+              alt="Changelly color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/changenow" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/gah8ZdR0Y1B6mOGQ3j2koSgO7.svg"
+              alt="ChangeNOW logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/wrzph_gI7rsmSgYt3x5f1kAuz.svg"
+              alt="ChangeNOW color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/changehero" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/d62b6be418ed857f71e30315839244ea0759030aaedcb4935e7446ad7dbdda0f.svg"
+              alt="ChangeHero logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/o0dC5pN0OG4iP0vfrQPdRWoeO.svg"
+              alt="ChangeHero color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/mercuryo" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/tV7GhZyT7APH2qAcK_R-BPBQa.svg"
+              alt="Mercuryo logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/uc9wl8Hjl84BevFKH8xOXgpaS.svg"
+              alt="Mercuryo color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/sideshift" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/-Njin4XZ7v_MmO1AjpvbujLHv.svg"
+              alt="SideShift logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/Pe2izQacX6efdPj50owKDxKI8.svg"
+              alt="SideShift color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/exwell" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/80e57f5cea2fbad369f06d715a447f6e5dcebe758d4b50303e7985e20086d330.svg"
+              alt="ExWell logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/80e57f5cea2fbad369f06d715a447f6e5dcebe758d4b50303e7985e20086d330.svg"
+              alt="ExWell color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/changee" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/W3dlyw_NoSSmBoh16ZDbCDalL.svg"
+              alt="Changee logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/3qkAZhkAsRIq2LzDtLja9mHEu.svg"
+              alt="Changee color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/coincraddle" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/pE516U7B8IuIasLFL7syV1Lbs.svg"
+              alt="CoinCraddle logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/wJOn5n2WYANmtCi2dgtuYKFN8.svg"
+              alt="CoinCraddle color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/guardarian" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/u0b5-V2VbLMFvU6DkZ4sxmxeH.svg"
+              alt="Guardarian logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/L9kj28scM4xITNie6Ev3cu0CP.svg"
+              alt="Guardarian color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/swft" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/6C0gDPbVIj2RlH8rHoQc90Bvf.svg"
+              alt="SWFT logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/Sxr48znbtXQTN2eN2VlR9b7Qz.svg"
+              alt="SWFT color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/finchpay" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/4119be899bdd126d8a93e2005d47f334e1eb124fac336ef5a5886d2280a90acd.svg"
+              alt="FinchPay logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/727064ce71d474c00411ab9ace2a7eaa2b8cf12dab94bcad789cd22a6a339a92.svg"
+              alt="FinchPay color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/alfacash" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/qrd9ISPL30Y697olbaIZmCahL.svg"
+              alt="Alfacash logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/zV_2iSjvsoHt0gouAvHist8Bk.svg"
+              alt="Alfacash color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/nexchange" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/AfgW829TmRnfrU0SthaLqAgGQ.svg"
+              alt="n.exchange logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/PF3KNqhKoLdN2ZBmuE2iHoLeL.svg"
+              alt="n.exchange color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/swapuz" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/3-A_55aCWDMek1d4NldYeRYCF.svg"
+              alt="Swapuz logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/6g8mz5QaSEauFuxymD475huL-.svg"
+              alt="Swapuz color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/godex" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/sIG5EOsqXRKtVSGDfshE33jxO.svg"
+              alt="Godex logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/C5Xk34lMRhNLg3KSwsh4nEEX0.svg"
+              alt="Godex color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/exolix" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/8w77P-faMb85JJG2KMGB0bFe1.svg"
+              alt="Exolix logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/RsjL8-KCUqm1Rciqg2-G_pQfd.svg"
+              alt="Exolix color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/simplex" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/RHJWCnTGNnAZvdoy2qhj09jQ1.svg"
+              alt="Simplex logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/wC82wVii_BvZEdB7pOZfQjlHo.svg"
+              alt="Simplex color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/kucoin" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/77QspuTnXtZ7MnPiHLRjq_LlT.svg"
+              alt="KuCoin logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/59wTPzbx_7682KRkExS8iJzgW.svg"
+              alt="KuCoin color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/gateio" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/h00deQ0g61BhU-A9Rudtv1h56.svg"
+              alt="Gate.io logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/ZLtSxvDelQnaFi12BStdE-zH7.svg"
+              alt="Gate.io color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/quantex" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/a098b90879c4b026c0ea4251680d294093b4a01e06d34717f03244133eff2c8b.svg"
+              alt="Quantex logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/7f82546d6cb5bc297efa0af2bbb3afe64291a78746cd025ad241d75d5cfe5945.svg"
+              alt="Quantex color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+        <div *tuiItem style="width: 100%; display: inline-block">
+          <a href="/partners/quickex" class="partners-carousel__tile mb-3" target="_blank"
+            ><img
+              src="https://storage.swapspace.co/static/92ff55c6a77ae6176a8377702c3f1aa99ed2e9b88c85a90f257c89e5516a0c29.svg"
+              alt="Quickex logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/92ff55c6a77ae6176a8377702c3f1aa99ed2e9b88c85a90f257c89e5516a0c29.svg"
+              alt="Quickex color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+          <a href="/partners/swapter" class="partners-carousel__tile"
+            ><img
+              src="https://storage.swapspace.co/static/76d5c989edeaf659949bc31d4c93950ce0e5a6e91b15d63743022e591b92bbc2.svg"
+              alt="Swapter logo"
+              class="partners-carousel__logo" />
+            <img
+              src="https://storage.swapspace.co/static/31ae86ee2110e0217b0941f324a68121e40b86ddb5c428929b936dc95026c259.svg"
+              alt="Swapter color logo"
+              class="partners-carousel__logo partners-carousel__logo_hide"
+          /></a>
+        </div>
+      </tui-carousel>
+    </div>
+    <div class="partners-carousel__arrow-container" (click)="prev()">
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="angle-left"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 320 512"
+        class="partners-carousel__arrow svg-inline--fa fa-angle-left fa-w-10"
+      >
+        <path
+          fill="currentColor"
+          d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+    <div class="partners-carousel__arrow-container partners-carousel__arrow-container_right" (click)="next()">
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="angle-right"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 320 512"
+        class="partners-carousel__arrow svg-inline--fa fa-angle-right fa-w-10"
+      >
+        <path
+          fill="currentColor"
+          d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <div class="exchange-listing-profit exchange-listing__profit">
+    <div class="exchange-listing-profit__text-container">
+      <h3 class="exchange-listing-profit__title">
+        The better your exchange terms, the more profit you will get with us
+      </h3>
+      <p class="exchange-listing-profit__text">
+        SwapSpace does not charge any extra fee to its customers. Our partnership program is based
+        on a transparent and equal allocation: we split the partner’s fee 50-50.
+      </p>
+    </div>
+    <div class="exchange-listing-profit__image"></div>
+  </div>
+  <div class="exchange-listing-steps exchange-listing__steps">
+    <div class="exchange-listing-steps__container">
+      <div class="exchange-listing-steps__wrapper">
+        <img
+          src="https://swapspace.co/_nuxt/img/step-1.24b132b.svg"
+          alt="Acquaintance"
+          width="120"
+          height="120"
+          class="exchange-listing-steps__image"
+        />
+        <div class="exchange-listing-steps__text-container">
+          <span class="exchange-listing-steps__step"> Step 1 </span>
+          Acquaintance
+        </div>
+      </div>
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgNzYgNTAiIHdpZHRoPSI3NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9Ijc1Ljk5OCIgeDI9Ii0uMDAxOTU0IiB5MT0iMjUuMDE4NSIgeTI9IjI1LjAxODUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2UzNTc2MCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzMwMjYzNCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0zMS4wMDEgNTAgNDUtMjUtNDUtMjV2MTIuNTA5M2gtMzEuMDAyOTUzMTJ2MjMuMDk0aDMxLjAwMjk1MzEyeiIgZmlsbD0idXJsKCNhKSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+"
+        alt="arrow"
+        width="76"
+        height="50"
+        class="exchange-listing-steps__arrow"
+      />
+    </div>
+    <div class="exchange-listing-steps__container">
+      <div class="exchange-listing-steps__wrapper">
+        <img
+          src="https://swapspace.co/_nuxt/img/step-2.506200e.svg"
+          alt="Testing stage"
+          width="120"
+          height="120"
+          class="exchange-listing-steps__image"
+        />
+        <div class="exchange-listing-steps__text-container">
+          <span class="exchange-listing-steps__step"> Step 2 </span>
+          Testing stage
+        </div>
+      </div>
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgNzYgNTAiIHdpZHRoPSI3NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9Ijc1Ljk5OCIgeDI9Ii0uMDAxOTU0IiB5MT0iMjUuMDE4NSIgeTI9IjI1LjAxODUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2UzNTc2MCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzMwMjYzNCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0zMS4wMDEgNTAgNDUtMjUtNDUtMjV2MTIuNTA5M2gtMzEuMDAyOTUzMTJ2MjMuMDk0aDMxLjAwMjk1MzEyeiIgZmlsbD0idXJsKCNhKSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+"
+        alt="arrow"
+        width="76"
+        height="50"
+        class="exchange-listing-steps__arrow"
+      />
+    </div>
+    <div class="exchange-listing-steps__container">
+      <div class="exchange-listing-steps__wrapper">
+        <img
+          src="https://swapspace.co/_nuxt/img/step-3.fedd413.svg"
+          alt="Integration stage"
+          width="120"
+          height="120"
+          class="exchange-listing-steps__image"
+        />
+        <div class="exchange-listing-steps__text-container">
+          <span class="exchange-listing-steps__step"> Step 3 </span>
+          Integration stage
+        </div>
+      </div>
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgNzYgNTAiIHdpZHRoPSI3NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9Ijc1Ljk5OCIgeDI9Ii0uMDAxOTU0IiB5MT0iMjUuMDE4NSIgeTI9IjI1LjAxODUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2UzNTc2MCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzMwMjYzNCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0zMS4wMDEgNTAgNDUtMjUtNDUtMjV2MTIuNTA5M2gtMzEuMDAyOTUzMTJ2MjMuMDk0aDMxLjAwMjk1MzEyeiIgZmlsbD0idXJsKCNhKSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+"
+        alt="arrow"
+        width="76"
+        height="50"
+        class="exchange-listing-steps__arrow"
+      />
+    </div>
+    <div class="exchange-listing-steps__container">
+      <div class="exchange-listing-steps__wrapper">
+        <img
+          src="https://swapspace.co/_nuxt/img/step-4.2b135c1.svg"
+          alt="Partnership"
+          width="120"
+          height="120"
+          class="exchange-listing-steps__image"
+        />
+        <div class="exchange-listing-steps__text-container">
+          <span class="exchange-listing-steps__step"> Step 4 </span>
+          Partnership
+        </div>
+      </div>
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgNzYgNTAiIHdpZHRoPSI3NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9Ijc1Ljk5OCIgeDI9Ii0uMDAxOTU0IiB5MT0iMjUuMDE4NSIgeTI9IjI1LjAxODUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2UzNTc2MCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzMwMjYzNCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0zMS4wMDEgNTAgNDUtMjUtNDUtMjV2MTIuNTA5M2gtMzEuMDAyOTUzMTJ2MjMuMDk0aDMxLjAwMjk1MzEyeiIgZmlsbD0idXJsKCNhKSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+"
+        alt="arrow"
+        width="76"
+        height="50"
+        class="exchange-listing-steps__arrow hidden"
+      />
+    </div>
+  </div>
+  <div class="exchange-listing-form">
+    <div class="exchange-listing-form__success-container">
+      <div class="exchange-listing-form__lottie">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 64 64"
+          width="64"
+          height="64"
+          preserveAspectRatio="xMidYMid meet"
+          style="
+            width: 100%;
+            height: 100%;
+            transform: translate3d(0px, 0px, 0px);
+            content-visibility: visible;
+          "
+        >
+          <defs>
+            <clipPath id="__lottie_element_26">
+              <rect width="64" height="64" x="0" y="0"></rect>
+            </clipPath>
+            <clipPath id="__lottie_element_34">
+              <path d="M0,0 L48,0 L48,48 L0,48z"></path>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#__lottie_element_26)">
+            <g
+              clip-path="url(#__lottie_element_34)"
+              style="display: block"
+              transform="matrix(1,0,0,1,8,8)"
+              opacity="1"
+            >
+              <g style="display: block" transform="matrix(1,0,0,1,24,40)" opacity="1">
+                <g opacity="1" transform="matrix(2,0,0,2,0,0)">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill-opacity="0"
+                    stroke="rgb(38,174,96)"
+                    stroke-opacity="1"
+                    stroke-width="1.5"
+                    d=" M9.800999641418457,-3 C7.980000019073486,0.5619999766349792 4.275000095367432,3 0,3 C-4.275000095367432,3 -7.980000019073486,0.5619999766349792 -9.800999641418457,-3"
+                  ></path>
+                </g>
+              </g>
+              <g style="display: block" transform="matrix(1,0,0,1,23.60099983215332,8)" opacity="1">
+                <g opacity="1" transform="matrix(2,0,0,2,0,0)">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="miter"
+                    fill-opacity="0"
+                    stroke-miterlimit="4"
+                    stroke="rgb(38,174,96)"
+                    stroke-opacity="1"
+                    stroke-width="1.5"
+                    d=" M9.800999641418457,3 C7.980000019073486,-0.5619999766349792 4.275000095367432,-3 0,-3 C-4.189000129699707,-3 -7.829999923706055,-0.6589999794960022 -9.689000129699707,2.7860000133514404"
+                  ></path>
+                </g>
+              </g>
+              <g style="display: block" transform="matrix(1,0,0,1,10,40)" opacity="1">
+                <g
+                  opacity="1"
+                  transform="matrix(2.018209934234619,0,0,1.9799699783325195,0.0007572174072265625,-0.0008296966552734375)"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill-opacity="0"
+                    stroke="rgb(38,174,96)"
+                    stroke-opacity="1"
+                    stroke-width="1.5"
+                    d=" M3,-3 C3,-3 -3,-3 -3,-3 C-3,-3 -3,3 -3,3"
+                  ></path>
+                </g>
+              </g>
+              <g style="display: block" transform="matrix(-1,0,0,-1,38,8)" opacity="1">
+                <g
+                  opacity="1"
+                  transform="matrix(2.018209934234619,0,0,1.9799699783325195,0.052626609802246094,-0.05704545974731445)"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill-opacity="0"
+                    stroke="rgb(38,174,96)"
+                    stroke-opacity="1"
+                    stroke-width="1.5"
+                    d=" M-3,3 C-3,3 -3,-3 -3,-3 C-3,-3 3,-3 3,-3"
+                  ></path>
+                </g>
+              </g>
+            </g>
+            <g
+              style="display: block"
+              transform="matrix(1.7820130586624146,-0.9079809784889221,0.9079809784889221,1.7820130586624146,31.625,32.125)"
+              opacity="1"
+            >
+              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="miter"
+                  fill-opacity="0"
+                  stroke-miterlimit="4"
+                  stroke="rgb(38,174,96)"
+                  stroke-opacity="1"
+                  stroke-width="1.5"
+                  d="M0 0"
+                ></path>
+              </g>
+            </g>
+            <g style="display: block" transform="matrix(1,0,0,1,32,32)" opacity="1">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="miter"
+                fill-opacity="0"
+                stroke-miterlimit="4"
+                stroke="rgb(38,174,96)"
+                stroke-opacity="1"
+                stroke-width="3"
+                d="M0 0"
+              ></path>
+              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                <path
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                  fill-opacity="0"
+                  stroke-miterlimit="4"
+                  stroke="rgb(38,174,96)"
+                  stroke-opacity="1"
+                  stroke-width="2"
+                  d="M0 0"
+                ></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h4 class="exchange-listing-form__success-title">Success!</h4>
+      <p class="exchange-listing-form__success-text">
+        Your application has been sent! We will review it and get in touch with you shortly.
+      </p>
+    </div>
+    <div class="exchange-listing-form__form-container">
+      <h2 class="exchange-listing-form__title">Apply for integration</h2>
+      <p class="exchange-listing-form__description">
+        Just fill in the form and we’ll get in touch with you shortly
+      </p>
+      <div class="exchange-listing-form__form">
+        <label
+          for="u0JIz8"
+          class="form-input exchange-listing-form__input form-input_dark form-input_rounded form-input_xl"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text"> Your project name* </span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="u0JIz8"
+              spellcheck="false"
+              max="Infinity"
+              min="-Infinity"
+              maxlength="Infinity"
+              placeholder="Exchanger"
+              step="any"
+              trim="true"
+              type="text"
+              autocomplete="off"
+              lang="en"
+              inputmode="text"
+              class="form-input__input form-input__input_rounded"
+            />
+          </span>
+        </label>
+        <label
+          for="mHZG5X"
+          class="form-input exchange-listing-form__input form-input_dark form-input_rounded form-input_xl"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text"> Link to your website* </span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="mHZG5X"
+              spellcheck="false"
+              max="Infinity"
+              min="-Infinity"
+              maxlength="Infinity"
+              placeholder="https://exchanger.com"
+              step="any"
+              trim="true"
+              type="text"
+              autocomplete="off"
+              lang="en"
+              inputmode="text"
+              class="form-input__input form-input__input_rounded"
+            />
+          </span>
+        </label>
+      </div>
+      <div class="exchange-listing-form__form">
+        <label
+          for="wATA96"
+          class="form-input exchange-listing-form__input form-input_dark form-input_rounded form-input_xl"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text"> Link to your API documentation </span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="wATA96"
+              spellcheck="false"
+              max="Infinity"
+              min="-Infinity"
+              maxlength="Infinity"
+              placeholder="https://docs.exchanger.com"
+              step="any"
+              trim="true"
+              type="text"
+              autocomplete="off"
+              lang="en"
+              inputmode="text"
+              class="form-input__input form-input__input_rounded"
+            />
+          </span>
+        </label>
+        <label
+          for="nHEqNO"
+          class="form-input exchange-listing-form__input form-input_dark form-input_rounded form-input_xl"
+        >
+          <span class="form-input__label">
+            <span class="form-input__label_text"> Your contact e-mail* </span>
+          </span>
+          <span class="form-input__wrapper">
+            <input
+              id="nHEqNO"
+              spellcheck="false"
+              max="Infinity"
+              min="-Infinity"
+              maxlength="Infinity"
+              placeholder="cryptonaut@exchanger.com"
+              step="any"
+              trim="true"
+              type="email"
+              name="email"
+              autocomplete="off"
+              lang="en"
+              inputmode="email"
+              class="form-input__input form-input__input_rounded"
+            />
+          </span>
+        </label>
+      </div>
+      <div class="form-textarea exchange-listing-form__textarea">
+        <label for="hkOKZI" class="form-textarea__label-container">
+          <span class="form-textarea__label">Additional info</span>
+        </label>
+        <div class="form-textarea__container">
+          <textarea
+            id="hkOKZI"
+            placeholder="Please specify any additional information that we should know about your crypto exchange"
+            rows="6"
+            trim="true"
+            spellcheck="false"
+            class="form-textarea__textarea form-textarea__textarea_rounded form-textarea__textarea_xl"
+          ></textarea>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="button exchange-listing-form__button button_lg button_primary button_uppercase button_"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+</div>
