@@ -1,0 +1,161 @@
+<div class="faq">
+  <div class="faq__gradient"></div>
+  <nav class="breadcrumbs faq__breadcrumbs">
+    <!---->
+    <span><a href="/" class="breadcrumbs__link nuxt-link-active breadcrumbs__arrow"> Main </a></span
+    ><span
+      ><a
+        href="/faq"
+        aria-current="page"
+        class="breadcrumbs__link link-exact-active nuxt-link-active breadcrumbs__arrow"
+      >
+        FAQ
+      </a></span
+    ><span
+      ><span class="breadcrumbs__text breadcrumbs__text-white breadcrumbs__text-bold">
+        About SwapSpace
+      </span></span
+    >
+  </nav>
+  <div class="faq__header">
+    <h1 class="faq__header_title col-12">How can we help you?</h1>
+    <div class="search-input faq__header_search">
+      <label
+        for="aiXmrE"
+        class="form-input form-input_dark form-input_rounded form-input_md search-input__input_md search-input__input_dark"
+        ><span class="form-input__label"
+          ><!---->
+          <!----></span
+        >
+        <span class="form-input__wrapper"
+          ><input
+            id="aiXmrE"
+            spellcheck="false"
+            max="Infinity"
+            min="-Infinity"
+            maxlength="Infinity"
+            placeholder="Search"
+            step="any"
+            trim="true"
+            type="text"
+            autocomplete="off"
+            lang="en"
+            inputmode="text"
+            class="form-input__input form-input__input_rounded"
+          />
+          <!---->
+          <!----></span
+        ></label
+      >
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="magnifying-glass"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        class="fa-search svg-inline--fa fa-magnifying-glass fa-w-16 fa-search_dark search-input__icon-without-dropdown"
+      >
+        <path
+          fill="currentColor"
+          d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+          class=""
+        ></path>
+      </svg>
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="xmark"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 384 512"
+        class="fa-close svg-inline--fa fa-xmark fa-w-12 search-input__icon-without-dropdown"
+        style="display: none"
+      >
+        <path
+          fill="currentColor"
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <div class="faq__container">
+    <div class="faq__container_questions-block">
+      <div class="faq-contents">
+        <tui-accordion id="faq" class="faq-contents__faq">
+          <tui-accordion-item *ngFor="let faq of faqs[index]" [id]="faq.id" class="faq__item faq__item_transparent">
+            <div class="faq_container">
+              <h3 class="faq__item-title faq__item-title_dark faq__item-title_bold">
+                {{ faq.title }}
+              </h3>
+            </div>
+            <ng-template tuiAccordionItemContent>
+              <div class="faq__description faq__description_dark">
+                <div [innerHTML]="faq.content"></div>
+              </div>
+            </ng-template>
+          </tui-accordion-item>
+        </tui-accordion>
+      </div>
+      <!---->
+    </div>
+    <div class="faq__container_contents-block">
+      <div class="faq-contents">
+        <div class="faq-contents__element" [ngClass]="index === 0 ? 'faq-contents__element_active' : 'faq-contents__element_inactive'" (click)="change(0)">
+          <img
+            src="https://swapspace.co/_nuxt/img/about-category.862de7c.svg"
+            alt="About SwapSpace"
+            width="24"
+            height="24"
+            class="faq-contents__element_image"
+          />
+          <span class="faq-contents__element_text"> About SwapSpace </span>
+        </div>
+        <div class="faq-contents__element" [ngClass]="index === 1 ? 'faq-contents__element_active' : 'faq-contents__element_inactive'" (click)="change(1)">
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTkgMTUuNUg0TDQgMjAuNSIgc3Ryb2tlPSIjRTM1NzYwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTUgOC41TDIwIDguNUwyMCAzLjUiIHN0cm9rZT0iI0UzNTc2MCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTQgMTUuNUM1LjQ4NjIxIDE4LjQ2ODEgOC41MTA2NyAyMC41IDEyIDIwLjVDMTUuNDg5MyAyMC41IDE4LjUxMzggMTguNDY4MSAyMCAxNS41IiBzdHJva2U9IiNFMzU3NjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik00IDguNUM1LjM5MzMyIDUuNTMxOTQgOC4yMjg3NSAzLjUgMTEuNSAzLjVDMTQuNzcxMiAzLjUgMTcuNjA2NyA1LjUzMTk0IDE5IDguNSIgc3Ryb2tlPSIjRTM1NzYwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K"
+            alt="Exchange process"
+            width="24"
+            height="24"
+            class="faq-contents__element_image"
+          />
+          <span class="faq-contents__element_text"> Exchange process </span>
+        </div>
+        <div class="faq-contents__element" [ngClass]="index === 2 ? 'faq-contents__element_active' : 'faq-contents__element_inactive'" (click)="change(2)">
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYgOEgxMCIgc3Ryb2tlPSIjRTM1NzYwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0yMC44MzMgOUwxOC4yMzEgOUMxNi40NDYgOSAxNSAxMC4zNDMgMTUgMTJDMTUgMTMuNjU3IDE2LjQ0NyAxNSAxOC4yMyAxNUgyMC44MzNDMjAuOTE3IDE1IDIwLjk1OCAxNSAyMC45OTMgMTQuOTk4QzIxLjUzMyAxNC45NjUgMjEuOTYzIDE0LjU2NiAyMS45OTggMTQuMDY1QzIyIDE0LjAzMyAyMiAxMy45OTQgMjIgMTMuOTE3VjEwLjA4M0MyMiAxMC4wMDYgMjIgOS45NjcgMjEuOTk4IDkuOTM1QzIxLjk2MiA5LjQzNCAyMS41MzMgOS4wMzUgMjAuOTkzIDkuMDAyQzIwLjk1OSA5IDIwLjkxNyA5IDIwLjgzMyA5WiIgc3Ryb2tlPSIjRTM1NzYwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8cGF0aCBkPSJNMjAuOTY1IDlDMjAuODg3IDcuMTI4IDIwLjYzNyA1Ljk4IDE5LjgyOCA1LjE3MkMxOC42NTcgNCAxNi43NzEgNCAxMyA0SDEwQzYuMjI5IDQgNC4zNDMgNCAzLjE3MiA1LjE3MkMyIDYuMzQzIDIgOC4yMjkgMiAxMkMyIDE1Ljc3MSAyIDE3LjY1NyAzLjE3MiAxOC44MjhDNC4zNDMgMjAgNi4yMjkgMjAgMTAgMjBIMTNDMTYuNzcxIDIwIDE4LjY1NyAyMCAxOS44MjggMTguODI4QzIwLjYzNyAxOC4wMiAyMC44ODggMTYuODcyIDIwLjk2NSAxNSIgc3Ryb2tlPSIjRTM1NzYwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8cGF0aCBkPSJNMTcuOTkxIDEySDE4LjAwMSIgc3Ryb2tlPSIjRTM1NzYwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
+            alt="Wallet"
+            width="24"
+            height="24"
+            class="faq-contents__element_image"
+          />
+          <span class="faq-contents__element_text"> Wallet </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="email-tile">
+    <div class="email-tile__text-container">
+      <p class="email-tile__text-container_text">
+        If you can't find the answer to your question, drop an email to
+        <a href="mailto:support@swapspace.co">support@swapspace.co</a>.
+      </p>
+      <p class="email-tile__text-container_sub-text">
+        SwapSpace support team is always happy to help you.
+      </p>
+      <a href="mailto:support@swapspace.co" class="email-tile__text-container_button-link"
+        ><div class="email-tile__text-container_button">Write an e-mail</div></a
+      >
+    </div>
+    <img
+      src="https://swapspace.co/_nuxt/img/email-tile-pic.bf71023.svg"
+      alt="Write an e-mail"
+      width="453"
+      height="268"
+      class="email-tile__image"
+    />
+  </div>
+</div>

@@ -12209,6 +12209,13 @@ ngx-cookie-service@^16.0.0:
   dependencies:
     tslib "^2.0.0"
 
+ngx-lite-video@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-lite-video/-/ngx-lite-video-1.2.0.tgz#4625e1af49220d167db385f9b84eddde4608e4ec"
+  integrity sha512-zVo5B3OljQTl+0grDhpYRZU81M6kd4j+u0aZfuFA4YTRxd7CCZaZ09YPJKXog/ZQ01Ic0dZLbSm5t6r5E68AjQ==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-unused-css@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/ngx-unused-css/-/ngx-unused-css-3.0.4.tgz#ff9f315257d8595557949ac872261908cbf928c4"

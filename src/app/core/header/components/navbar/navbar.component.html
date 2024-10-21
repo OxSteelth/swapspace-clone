@@ -9,14 +9,24 @@
     <ng-template #content>
       <tui-data-list size="m" role="menu">
         <tui-opt-group>
-          <a
-            *ngFor="let item of menu.menu"
-            tuiOption
-            role="menuitem"
-            [routerLink]="item.routerLink"
-          >
-            {{ item.label }}
-          </a>
+          <ng-container *ngFor="let item of menu.menu">
+            <a
+              *ngIf="item.routerLink !== ''"
+              tuiOption
+              role="menuitem"
+              [routerLink]="item.routerLink"
+            >
+              {{ item.label }}
+            </a>
+            <a
+              *ngIf="item.routerLink === ''"
+              tuiOption
+              role="menuitem"
+              [href]="item.href"
+            >
+              {{ item.label }}
+            </a>
+          </ng-container>
         </tui-opt-group>
       </tui-data-list>
     </ng-template>

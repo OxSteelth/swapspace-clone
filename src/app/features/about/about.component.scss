@@ -1,0 +1,612 @@
+.about-description {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.about-description__text-constainer_title {
+    font-size: 3.125rem;
+    font-weight: 700;
+}
+.about-description__text-constainer_text {
+    color: #a0789c;
+}
+.about-description__text-constainer_advantages {
+    display: flex;
+    justify-content: space-between;
+}
+.about-description__text-constainer_advantages_block--number {
+    color: #e35760;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: .03125rem;
+}
+.about-description__text-constainer_advantages_wrapper {
+    background: linear-gradient(287deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    height: 84px;
+    width: 1px;
+}
+.project-features {
+    background: #27212b;
+    border: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(270deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    border-radius: 24px;
+    position: relative;
+}
+.about__features {
+    padding: 32px;
+}
+.project-features__title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.project-features__wrapper {
+    display: flex;
+    position: relative;
+    row-gap: 48px;
+}
+.project-features__wrapper:before {
+    border: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(270deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 90%;
+}
+.project-features__container {
+    border-image-slice: 1;
+    border-image-source: linear-gradient(361deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    border-right: 1px solid;
+    flex-direction: column;
+}
+.project-features-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 98px;
+}
+.project-features-item__large-height {
+    height: 234px;
+}
+.project-features-item__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.project-features-item__text {
+    color: #a0789c;
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
+.about-exchange-block {
+    align-items: center;
+    display: flex;
+}
+.about-exchange-block__content_title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.about-exchange-block__content_bottom-text, .about-exchange-block__content_top-text {
+    color: #a0789c;
+    line-height: 1.25rem;
+}
+.about-exchange-block__content_bottom-text {
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+.about-exchange-block__logo {
+    margin-bottom: 36px;
+}
+.about-exchange-block-logo__container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 484px;
+    width: 100%;
+}
+.about-exchange-block-logo__image-container {
+    display: flex;
+    flex: 1;
+    gap: calc((100% - var(--width)) / 2);
+    max-width: calc(var(--width) + 16px);
+}
+.about-exchange-block-logo__separator {
+    background: linear-gradient(58deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    height: 32px;
+    width: 1px;
+}
+.about-exchange-block__content_link {
+    color: #e35760;
+}
+.about-buy-sell-block {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.about-buy-sell-block__content {
+    width: 454px;
+}
+.about-buy-sell-block__content_title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.about-buy-sell-block__content_description {
+    color: #a0789c;
+    line-height: 1.25rem;
+    margin-bottom: 16px;
+}
+.about-buy-sell-logo {
+    align-items: center;
+    display: flex;
+    max-width: 360px;
+    width: 100%;
+}
+.about-buy-sell-block__logo {
+    margin-bottom: 36px;
+}
+.about-buy-sell-logo__container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    gap: calc(50% - 39px);
+}
+.about-buy-sell-logo__separator {
+    background: linear-gradient(58deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    display: block;
+    height: 32px;
+    width: 1px;
+}
+.about-buy-sell-block__content_link {
+    color: #e35760;
+}
+.about-crypto-loans-block {
+    align-items: center;
+    display: flex;
+}
+.about-crypto-loans-block__content_title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.about-crypto-loans-block__content_description {
+    color: #a0789c;
+    line-height: 1.25rem;
+    margin-bottom: 16px;
+}
+.about-crypto-loan-logo {
+    align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: flex-end;
+    margin-bottom: 3rem;
+    position: relative;
+    top: .5rem;
+}
+.about-crypto-loans-block__logo {
+    margin-bottom: 36px;
+}
+.about-crypto-loan-logo__logos {
+    background: url(https://swapspace.co/_nuxt/img/coin-icons.09e6df0.svg) no-repeat;
+    background-position-y: center;
+    display: flex;
+    height: 35px;
+    position: absolute;
+    width: 100%;
+}
+.about-crypto-loan-logo__more {
+    align-items: center;
+    background: #231f26;
+    color: #a0789c;
+    display: flex;
+    font-size: .875rem;
+    font-weight: 700;
+    height: 100%;
+    z-index: 1;
+}
+@media screen and (min-width: 1200px) {
+    .about-crypto-loan-logo__more {
+        margin-right: 15%;
+    }
+}
+.about-crypto-loans-block__content_link {
+    color: #e35760;
+}
+.about__review-carousel {
+    position: relative;
+    z-index: 2;
+}
+.project-reviews__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 3rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.project-reviews__wrapper {
+    margin: 0 -32px 20px;
+    min-height: 327px;
+}
+.carousel {
+    overflow: hidden;
+    position: relative;
+}
+.slick-slider {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: pan-y;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.slick-next, .slick-prev {
+    border: none;
+    cursor: pointer;
+    display: block;
+    font-size: 0;
+    height: 20px;
+    line-height: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+}
+.slick-next, .slick-next:focus, .slick-next:hover, .slick-prev, .slick-prev:focus, .slick-prev:hover {
+    background: transparent;
+    color: transparent;
+    outline: none;
+}
+.slick-prev {
+    left: -25px;
+}
+.slick-next {
+    right: -25px;
+}
+.carousel__arrow {
+    color: #6b4d68;
+    height: 18px;
+    width: 18px;
+}
+.arrow-control {
+    color: #7a7a7a;
+    cursor: pointer;
+    transition: color .2s ease;
+    z-index: 1;
+}
+.carousel.bridge-listings .carousel__arrow, .carousel.index-news .carousel__arrow, .carousel.project-reviews .carousel__arrow, .carousel.trustpilot-reviews .carousel__arrow {
+    color: #a0789c;
+    height: 24px;
+    width: 24px;
+    z-index: 1;
+}
+.carousel.bridge-listings .slick-prev, .carousel.index-news .slick-prev, .carousel.project-reviews .slick-prev, .carousel.trustpilot-reviews .slick-prev {
+    left: 0;
+    position: absolute;
+}
+.slick-next:before, .slick-prev:before {
+    color: #fff;
+    font-family: "slick";
+    font-size: 1.25rem;
+    line-height: 1;
+    opacity: .75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-prev:before {
+    content: "←";
+}
+.slick-list {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    transform: translateZ(0);
+}
+.carousel.bridge-listings .slick-list, .carousel.project-reviews .slick-list {
+    mask-image: linear-gradient(90deg, hsla(0, 0%, 85%, 0), #d9d9d9 25%, #d9d9d9 75.88%, hsla(0, 0%, 85%, 0));
+}
+.slick-track {
+    display: block;
+    left: 0;
+    position: relative;
+    top: 0;
+    transform: translateZ(0);
+}
+.carousel .slick-track {
+    display: flex;
+}
+.slick-track.slick-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+.carousel.bridge-listings .slick-track, .carousel.index-news .slick-track, .carousel.project-reviews .slick-track, .carousel.trustpilot-reviews .slick-track {
+    display: flex;
+}
+.slick-track:after, .slick-track:before {
+    content: "";
+    display: table;
+}
+.slick-track:after {
+    clear: both;
+}
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+.slick-initialized .slick-slide {
+    display: block;
+}
+.project-review-tile {
+    border-radius: 24px;
+    height: auto;
+}
+.project-review-tile__container {
+    background-color: #27212b;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 .5rem;
+    padding: 1rem;
+    width: 358px;
+}
+.project-review-tile__apostrophe {
+    height: 20px;
+    margin-bottom: 1rem;
+    width: 30px;
+}
+.project-review-tile__text {
+    color: #a0789c;
+    display: -webkit-box;
+    height: 130px;
+    line-height: 1.25rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+.project-review-tile__author {
+    align-items: center;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(270deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    border-top: 1px solid;
+    display: flex;
+    padding-top: 1rem;
+}
+.project-review-tile__image {
+    border-radius: 50%;
+    height: 48px;
+    margin-right: 1.5rem;
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 48px;
+}
+.project-review-tile__author-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.project-review-tile__link {
+    margin-top: .5rem;
+    white-space: nowrap;
+}
+.project-review-tile__project {
+    color: #a0789c;
+    margin-bottom: 0;
+}
+.carousel.bridge-listings .slick-next, .carousel.index-news .slick-next, .carousel.project-reviews .slick-next, .carousel.trustpilot-reviews .slick-next {
+    position: absolute;
+    right: 0;
+}
+.slick-next:before, .slick-prev:before {
+    color: #fff;
+    font-family: "slick";
+    font-size: 1.25rem;
+    line-height: 1;
+    opacity: .75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-next:before {
+    content: "→";
+}
+.slick-dots {
+    bottom: -25px;
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.carousel .slick-dots {
+    position: static;
+}
+.carousel.bridge-listings .slick-dots, .carousel.index-news .slick-dots, .carousel.project-reviews .slick-dots, .carousel.trustpilot-reviews .slick-dots {
+    margin-top: .5rem;
+}
+.slick-dots li {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0;
+    position: relative;
+}
+.slick-dots li, .slick-dots li button {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+.carousel.bridge-listings .slick-dots li, .carousel.index-news .slick-dots li, .carousel.project-reviews .slick-dots li, .carousel.trustpilot-reviews .slick-dots li {
+    margin: 0;
+}
+.slick-dots li button {
+    background: transparent;
+    border: 0;
+    color: transparent;
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    outline: none;
+    padding: 5px;
+}
+.slick-dots li button:before {
+    color: #000;
+    content: "•";
+    font-family: "slick";
+    font-size: .375rem;
+    height: 20px;
+    left: 0;
+    line-height: 1.25rem;
+    opacity: .25;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.carousel .slick-dots button:before {
+    color: #6b4d68;
+}
+.slick-dots li.slick-active button:before {
+    color: #000;
+    opacity: .75;
+}
+.carousel .slick-dots .slick-active button:before {
+    color: #a0789c;
+}
+.carousel.bridge-listings .slick-dots button:before, .carousel.index-news .slick-dots button:before, .carousel.project-reviews .slick-dots button:before, .carousel.trustpilot-reviews .slick-dots button:before {
+    font-size: .5rem;
+}
+.about-team__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.about-team__row {
+    display: flex;
+    gap: 16px;
+}
+.about-team__row_tile {
+    align-items: center;
+    border: 1px solid #51354f;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    height: 346px;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    padding: 24px;
+    position: relative;
+    width: 359px;
+}
+.about-team__row_tile_box {
+    align-items: center;
+    bottom: 20%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    transition: bottom 1s ease;
+    width: 100%;
+}
+.about-team__row_tile_box--icon {
+    margin-bottom: 24px;
+}
+.about-team__row_tile_box--container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.about-team__row_tile_box--container_title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.about-team__row_tile_box--container_info {
+    background: #36293b;
+    border-radius: 16px;
+    color: #a0789c;
+    padding: 2px 8px;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.about-team__row_tile_description {
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.125rem;
+    padding: 24px;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    transition: top 1s ease;
+    width: 100%;
+}
+.about__margin {
+    margin-bottom: 120px;
+}
+.about-social-block {
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(270deg, rgba(160, 120, 156, 0), #a0789c 51%, rgba(160, 120, 156, 0));
+    border-top: 1px solid;
+    height: 216px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+.about-social-block__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+.social-links {
+    align-items: center;
+    -moz-column-gap: 16px;
+    column-gap: 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 24px;
+    justify-content: center;
+}
+.social-links__center {
+    justify-content: center;
+}
+.social-links__link {
+    height: 100%;
+}
+.social-links__link_social-background {
+    background-color: #36293b;
+    border-radius: 16px;
+    height: 56px;
+    padding: 16px;
+    width: 56px;
+}
+.social-links__link_icon-with-background, .social-links__link_icon {
+    height: 24px;
+    transition: fill .2s ease;
+    width: 24px;
+    fill: gray;
+}
+.social-links__link_icon-with-background_violet-light, .social-links__link_icon_violet-light {
+    fill: #a0789c;
+}
+.image-link-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.pagination {
+    margin: 1rem auto 0;
+}

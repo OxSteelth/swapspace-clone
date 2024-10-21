@@ -305,6 +305,15 @@ svg:not(:root).svg-inline--fa {
     width: 100%;
   }
 
+  .col-lg-4 {
+    display: block;
+    max-width: 33.33333%;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    width: 100%;
+  }
+
   .col-lg-5 {
     display: block;
     max-width: 41.66667%;
@@ -317,6 +326,15 @@ svg:not(:root).svg-inline--fa {
   .col-lg-6 {
     display: block;
     max-width: 50%;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    width: 100%;
+  }
+
+  .col-lg-8 {
+    display: block;
+    max-width: 66.66667%;
     padding-left: 16px;
     padding-right: 16px;
     position: relative;
@@ -417,6 +435,10 @@ svg:not(:root).svg-inline--fa {
   .container {
     max-width: 1140px;
   }
+}
+
+.p-r {
+  position: relative;
 }
 
 img {

@@ -65,7 +65,8 @@ export const MENUS_LIST: MenuList[] = [
       },
       {
         label: 'Contact Support',
-        routerLink: 'mailto:support@swapspace.co'
+        routerLink: '',
+        href: 'mailto:support@swapspace.co'
       }
     ]
   },

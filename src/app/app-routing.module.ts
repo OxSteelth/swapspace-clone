@@ -25,6 +25,18 @@ const routes: Routes = [
   {
     path: 'api',
     loadChildren: () => import('./features/api/api.module').then(m => m.ApiModule)
+  },
+  {
+    path: 'how-it-works',
+    loadChildren: () => import('./features/how-it-works/how-it-works.module').then(m => m.HowItWorksModule)
+  },
+  {
+    path: 'faq',
+    loadChildren: () => import('./features/faq/faq.module').then(m => m.FaqModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./features/about/about.module').then(m => m.AboutModule)
   }
 ];
 

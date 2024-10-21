@@ -19,7 +19,9 @@ export class AppComponent implements OnInit {
   public classes: { [key: string]: string } = {
     '': 'app__content_alt-bg-index app__content_alt-bg-step1',
     'exchange-listing': 'app__content_alt-bg-exchange-listing',
-    'affiliate': 'app__content_alt-bg-affiliate'
+    'affiliate': 'app__content_alt-bg-affiliate',
+    'how-it-works': 'app__content_alt-bg-hiw',
+    'about': 'app__content_alt-bg-about'
   };
 
   constructor(
