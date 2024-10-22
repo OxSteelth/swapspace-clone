@@ -73,6 +73,14 @@ const routes: Routes = [
   {
     path: 'price-predictions',
     loadChildren: () => import('./features/price-predictions/price-predictions.module').then(m => m.PricePredictionsModule)
+  },
+  {
+    path: 'crypto-profit-calculator',
+    loadChildren: () => import('./features/crypto-profit-calculator/crypto-profit-calculator.module').then(m => m.CryptoProfitCalculatorModule)
+  },
+  {
+    path: 'invaders',
+    loadChildren: () => import('./features/invaders/invaders.module').then(m => m.InvadersModule)
   }
 ];
 

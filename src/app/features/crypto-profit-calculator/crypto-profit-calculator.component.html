@@ -1,0 +1,666 @@
+<div class="row crypto-profit-calculator">
+  <div class="column crypto-profit-calculator__col col-12 col-lg-8">
+    <div class="crypto-calculator-widget crypto-profit-calculator__margin">
+      <h1 class="crypto-calculator-widget__title">Crypto profit calculator</h1>
+      <p class="crypto-calculator-widget__text">
+        Welcome to our crypto profit calculator page! This simple trading calculator allows you to
+        quickly find out your potential gains or losses by choosing a cryptocurrency to invest in
+        and filling in just a few numbers.
+      </p>
+      <div class="crypto-calculator-widget__main">
+        <div class="crypto-calculator-widget__container">
+          <div class="crypto-calculator-inputs">
+            <div class="crypto-calculator-inputs__container">
+              <div class="crypto-calculator-input crypto-calculator-inputs__input">
+                <div class="crypto-calculator-input__input-container">
+                  <label class="crypto-calculator-input__label"> Investment </label>
+                  <input
+                    type="text"
+                    placeholder="25 000"
+                    maxlength="15"
+                    min="0"
+                    class="crypto-calculator-input__input"
+                  />
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDNWMjFNMTcgOC4yM0MxNyAzLjI1NyA3IDMuMjU3IDcgOC4yM0M3IDEzLjgwOCAxNyAxMC4xOTIgMTcgMTUuNzdDMTcgMjAuNzQzIDcgMjAuNzQzIDcgMTUuNzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo="
+                    alt="USD"
+                    class="crypto-calculator-input__icon"
+                  />
+                </div>
+              </div>
+              <span class="crypto-calculator-inputs__separator"></span>
+              <!---->
+              <div class="crypto-calculator-coin-preview crypto-calculator-inputs__input">
+                <span class="crypto-calculator-coin-preview__label"> Cryptocurrency </span>
+                <div class="crypto-calculator-coin-preview__container">
+                  <div class="coin-icon coin-icon__sm coin-icon__bg_">
+                    <img
+                      loading="lazy"
+                      src="https://storage.swapspace.co/static/font/src/btc.svg"
+                      alt="btc-icon"
+                      class="coin-icon__image coin-icon__white"
+                    />
+                  </div>
+                  <span class="crypto-calculator-coin-preview__code"> btc </span>
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fa"
+                    data-icon="caret-down"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                    class="crypto-calculator-coin-preview__caret svg-inline--fa fa-caret-down fa-w-10"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+                      class=""
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <div class="crypto-calculator-inputs__container">
+              <div class="crypto-calculator-input crypto-calculator-inputs__input">
+                <div class="crypto-calculator-input__input-container">
+                  <label class="crypto-calculator-input__label"> Buy price </label>
+                  <input
+                    type="text"
+                    placeholder="15"
+                    maxlength="15"
+                    min="0"
+                    class="crypto-calculator-input__input"
+                  />
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDNWMjFNMTcgOC4yM0MxNyAzLjI1NyA3IDMuMjU3IDcgOC4yM0M3IDEzLjgwOCAxNyAxMC4xOTIgMTcgMTUuNzdDMTcgMjAuNzQzIDcgMjAuNzQzIDcgMTUuNzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo="
+                    alt="USD"
+                    class="crypto-calculator-input__icon"
+                  />
+                </div>
+              </div>
+              <span class="crypto-calculator-inputs__separator"></span>
+              <div class="crypto-calculator-input crypto-calculator-inputs__input">
+                <div class="crypto-calculator-input__input-container">
+                  <label class="crypto-calculator-input__label"> Sell price </label>
+                  <input
+                    type="text"
+                    placeholder="40"
+                    maxlength="15"
+                    min="0"
+                    class="crypto-calculator-input__input"
+                  />
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDNWMjFNMTcgOC4yM0MxNyAzLjI1NyA3IDMuMjU3IDcgOC4yM0M3IDEzLjgwOCAxNyAxMC4xOTIgMTcgMTUuNzdDMTcgMjAuNzQzIDcgMjAuNzQzIDcgMTUuNzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo="
+                    alt="USD"
+                    class="crypto-calculator-input__icon"
+                  />
+                </div>
+              </div>
+              <!---->
+            </div>
+            <div class="crypto-calculator-inputs__container">
+              <div class="crypto-calculator-input crypto-calculator-inputs__input">
+                <div class="crypto-calculator-input__input-container">
+                  <label class="crypto-calculator-input__label"> Investment fee </label>
+                  <input
+                    type="text"
+                    placeholder="0"
+                    maxlength="15"
+                    min="0"
+                    class="crypto-calculator-input__input"
+                  />
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDNWMjFNMTcgOC4yM0MxNyAzLjI1NyA3IDMuMjU3IDcgOC4yM0M3IDEzLjgwOCAxNyAxMC4xOTIgMTcgMTUuNzdDMTcgMjAuNzQzIDcgMjAuNzQzIDcgMTUuNzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo="
+                    alt="USD"
+                    class="crypto-calculator-input__icon"
+                  />
+                </div>
+              </div>
+              <span class="crypto-calculator-inputs__separator"></span>
+              <div class="crypto-calculator-input crypto-calculator-inputs__input">
+                <div class="crypto-calculator-input__input-container">
+                  <label class="crypto-calculator-input__label"> Exit fee </label>
+                  <input
+                    type="text"
+                    placeholder="0"
+                    maxlength="15"
+                    min="0"
+                    class="crypto-calculator-input__input"
+                  />
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDNWMjFNMTcgOC4yM0MxNyAzLjI1NyA3IDMuMjU3IDcgOC4yM0M3IDEzLjgwOCAxNyAxMC4xOTIgMTcgMTUuNzdDMTcgMjAuNzQzIDcgMjAuNzQzIDcgMTUuNzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo="
+                    alt="USD"
+                    class="crypto-calculator-input__icon"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="crypto-calculator-widget__button-container">
+            <a href="/" class="crypto-calculator-widget__button nuxt-link-active" target="_blank"
+              ><button
+                type="button"
+                class="button crypto-calculator-widget__exchange button_xl button_outline button_uppercase button_"
+              >
+                Exchange
+              </button></a
+            >
+            <button
+              type="button"
+              class="button crypto-calculator-widget__button button_xl button_primary button_uppercase button_"
+              id="crypto-calculator-exchange-button"
+            >
+              Calculate
+            </button>
+          </div>
+        </div>
+        <div class="crypto-calculator-outcome">
+          <div class="crypto-calculator-outcome__title">Investment outcome</div>
+          <div class="crypto-calculator-outcome__container">
+            <span class="crypto-calculator-outcome__subtitle"> Profit/loss </span>
+            <span class="crypto-calculator-outcome__profit"> 104,040.35$ </span>
+            <span class="crypto-calculator-outcome__profit"> 1,040.4% </span>
+          </div>
+          <div class="crypto-calculator-outcome__container">
+            <span class="crypto-calculator-outcome__subtitle"> Total investment </span>
+            <span class="crypto-calculator-outcome__number"> $10,000 </span>
+            <span class="crypto-calculator-outcome__subtitle"> Total take-home </span>
+            <span class="crypto-calculator-outcome__number"> $114,040.35 </span>
+          </div>
+        </div>
+      </div>
+      <img
+        src="https://swapspace.co/_nuxt/img/coins.012eae2.svg"
+        alt="coins"
+        class="crypto-calculator-main__image"
+      />
+    </div>
+    <div class="crypto-calculator-steps crypto-profit-calculator__margin">
+      <div class="crypto-calculator-steps__gradient"></div>
+      <h4 class="crypto-calculator-steps__title">How to use this crypto profit calculator</h4>
+      <div class="crypto-calculator-steps__tiles">
+        <div class="crypto-calculator-steps__tile">
+          <div class="crypto-calculator-steps__container">
+            <img
+              src="https://swapspace.co/_nuxt/img/input.3b78d87.svg"
+              alt="step.title"
+              width="88"
+              height="88"
+            />
+            <div class="crypto-calculator-steps__text-container">
+              <span class="crypto-calculator-steps__number"> 1 </span>
+              <div class="crypto-calculator-steps__text">
+                Fill in the amount (in $) that you want to invest in crypto
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="crypto-calculator-steps__tile">
+          <div class="crypto-calculator-steps__container">
+            <img
+              src="https://swapspace.co/_nuxt/img/dropdown.33dba29.svg"
+              alt="step.title"
+              width="88"
+              height="88"
+            />
+            <div class="crypto-calculator-steps__text-container">
+              <span class="crypto-calculator-steps__number"> 2 </span>
+              <div class="crypto-calculator-steps__text">
+                Choose the currency you want to invest in from the dropdown list
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="crypto-calculator-steps__tile crypto-calculator-steps__tile_lg">
+          <div class="crypto-calculator-steps__container">
+            <img
+              src="https://swapspace.co/_nuxt/img/exchange.9ece603.svg"
+              alt="step.title"
+              width="88"
+              height="88"
+            />
+            <div class="crypto-calculator-steps__text-container">
+              <span class="crypto-calculator-steps__number"> 3 </span>
+              <div class="crypto-calculator-steps__text">
+                You’ll see the current exchange rate for your chosen crypto: for example, the price
+                of BTC in USD. You can also edit this number if you’re planning to buy at some
+                specific price and not at the current one.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="crypto-calculator-steps__tile">
+          <div class="crypto-calculator-steps__container">
+            <img
+              src="https://swapspace.co/_nuxt/img/price-sell.88e826a.svg"
+              alt="step.title"
+              width="88"
+              height="88"
+            />
+            <div class="crypto-calculator-steps__text-container">
+              <span class="crypto-calculator-steps__number"> 4 </span>
+              <div class="crypto-calculator-steps__text">
+                Fill in the price at which you want to sell your crypto
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="crypto-calculator-steps__tile">
+          <div class="crypto-calculator-steps__container">
+            <img
+              src="https://swapspace.co/_nuxt/img/commission.f1f74f9.svg"
+              alt="step.title"
+              width="88"
+              height="88"
+            />
+            <div class="crypto-calculator-steps__text-container">
+              <span class="crypto-calculator-steps__number"> 5 </span>
+              <div class="crypto-calculator-steps__text">
+                Additionally, you can fill in investment and exit fees to be subtracted from your
+                profits.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="crypto-calculator-steps__helper">
+        That’s it: you can now see how much you’ll profit (or lose) and the whole take-home amount!
+      </div>
+    </div>
+    <div class="crypto-calculator-widget crypto-profit-calculator__margin">
+      <h2 class="crypto-calculator-widget__title">What-if</h2>
+      <p class="crypto-calculator-widget__text">
+        To put things into perspective and help yourself decide whether to invest in
+        cryptocurrencies, you can look at historical data on crypto profitability. With the “What
+        if” calculator, you can get answers to questions, such as: how much is one Bitcoin, bought
+        at a certain time in the past, bringing its owner today in profits?
+      </p>
+      <div class="crypto-calculator-widget__main">
+        <div class="crypto-calculator-widget__container">
+          <div class="crypto-calculator-what-if-inputs">
+            <div class="crypto-calculator-what-if-inputs__container">
+              <div
+                class="crypto-calculator-input crypto-calculator-what-if-inputs__input"
+                separator=""
+              >
+                <div class="crypto-calculator-input__input-container">
+                  <label class="crypto-calculator-input__label"> Investment </label>
+                  <input
+                    type="text"
+                    placeholder="25 000"
+                    maxlength="15"
+                    min="0"
+                    class="crypto-calculator-input__input"
+                  />
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDNWMjFNMTcgOC4yM0MxNyAzLjI1NyA3IDMuMjU3IDcgOC4yM0M3IDEzLjgwOCAxNyAxMC4xOTIgMTcgMTUuNzdDMTcgMjAuNzQzIDcgMjAuNzQzIDcgMTUuNzciIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo="
+                    alt="USD"
+                    class="crypto-calculator-input__icon"
+                  />
+                </div>
+              </div>
+              <span class="crypto-calculator-what-if-inputs__separator"></span>
+              <!---->
+              <div class="crypto-calculator-coin-preview crypto-calculator-what-if-inputs__input">
+                <span class="crypto-calculator-coin-preview__label"> Cryptocurrency </span>
+                <div class="crypto-calculator-coin-preview__container">
+                  <div class="coin-icon coin-icon__sm coin-icon__bg_">
+                    <img
+                      loading="lazy"
+                      src="https://storage.swapspace.co/static/font/src/eth.svg"
+                      alt="eth-icon"
+                      class="coin-icon__image coin-icon__white"
+                    />
+                  </div>
+                  <span class="crypto-calculator-coin-preview__code"> eth </span>
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fa"
+                    data-icon="caret-down"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                    class="crypto-calculator-coin-preview__caret svg-inline--fa fa-caret-down fa-w-10"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+                      class=""
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <!---->
+            </div>
+            <div class="crypto-calculator-what-if-inputs__container">
+              <div class="form-input-date crypto-calculator-what-if-inputs__input">
+                <!---->
+                <div class="xmx-datepicker">
+                  <div class="xmx-input-wrapper">
+                    <input
+                      id="date-input"
+                      maxlength="10"
+                      type="text"
+                      placeholder="29.04.2013"
+                      autocomplete="off"
+                      class="form-input-date__input form-input-date__input_base form-input-date__input_inside-label"
+                    />
+                    <i class="xmx-icon-calendar">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        class="icon-calendar form-input-date__calendar form-input-date__calendar_white"
+                      >
+                        <path
+                          d="M4.426 9.84313C9.48901 9.84313 14.505 9.84313 19.5526 9.84313C19.5526 9.08672 19.5865 8.34366 19.5395 7.60611C19.5134 7.19059 19.1767 6.99737 18.7815 6.95574C18.6158 6.93767 18.4464 6.95495 18.2823 6.93374C17.9156 6.88661 17.6575 6.56928 17.6698 6.20011C17.6814 5.84508 17.9387 5.56231 18.2915 5.51518C19.8308 5.30939 20.9948 6.34228 20.9933 7.91323C20.9925 8.75132 20.9956 9.58864 20.9925 10.4267C20.9902 10.953 20.7999 11.1902 20.2899 11.2837C20.1019 11.3182 19.9078 11.3253 19.716 11.3253C14.7862 11.3261 9.85649 11.3261 4.92675 11.3261C4.77498 11.3261 4.62322 11.3261 4.42446 11.3261C4.42446 11.4981 4.42446 11.6371 4.42446 11.7762C4.42446 13.9488 4.42369 16.1222 4.42446 18.2948C4.42446 19.1156 4.8135 19.5484 5.6124 19.55C9.87421 19.5578 14.1368 19.5578 18.3986 19.5492C19.1775 19.5476 19.5727 19.1101 19.5742 18.3184C19.5765 16.8 19.5727 15.2817 19.5765 13.7634C19.5773 13.3173 19.7722 13.0439 20.1181 12.9748C20.6073 12.8766 20.9879 13.1782 20.9902 13.6967C20.9979 15.3587 21.0095 17.0216 20.9863 18.6836C20.9702 19.8492 19.9378 20.8837 18.746 20.9874C18.6313 20.9976 18.5149 20.9984 18.3994 20.9984C14.1245 20.9992 9.84956 21.0023 5.57465 20.9968C4.03618 20.9953 2.99923 19.9168 3 18.349C3.00154 14.867 3.00154 11.3858 3 7.9038C3 6.34307 4.20643 5.27954 5.71409 5.51597C6.05769 5.57016 6.315 5.87178 6.31577 6.22289C6.31654 6.57243 6.06154 6.88269 5.7164 6.93139C5.50146 6.96202 5.28113 6.95495 5.06696 6.9903C4.66867 7.05628 4.44911 7.33119 4.4337 7.71921C4.40674 8.41043 4.426 9.10321 4.426 9.84313ZM15.0643 7.5684C15.0728 8.0554 15.3548 8.36094 15.7793 8.36251C16.203 8.36409 16.498 8.05461 16.5027 7.57547C16.5104 6.64862 16.5096 5.72097 16.5034 4.79412C16.4996 4.30948 16.2122 4.00158 15.7877 4.00001C15.3633 3.99844 15.0736 4.30555 15.0651 4.78705C15.0566 5.24419 15.0636 5.70134 15.0636 6.15848C15.0628 6.62819 15.0566 7.09791 15.0643 7.5684ZM8.9274 4.80669C8.91892 4.28984 8.63773 3.98979 8.19013 4.00158C7.76411 4.01336 7.50217 4.31498 7.49986 4.81297C7.49601 5.72647 7.49601 6.64076 7.49986 7.55426C7.50217 8.04754 7.77027 8.35309 8.19475 8.36094C8.63927 8.36958 8.91815 8.06718 8.9274 7.54877C8.9351 7.09162 8.92894 6.63526 8.92894 6.17812C8.92971 5.72097 8.93587 5.26383 8.9274 4.80669ZM13.2917 6.94317C13.7793 6.93374 14.0698 6.65176 14.0628 6.21111C14.0567 5.78774 13.7747 5.51282 13.304 5.50811C12.4311 5.49869 11.5583 5.49869 10.6854 5.5089C10.2247 5.51439 9.93276 5.80188 9.92891 6.21818C9.92506 6.64704 10.2286 6.93453 10.7116 6.94317C11.1353 6.95102 11.5591 6.94474 11.9828 6.94474C12.4188 6.94474 12.8549 6.95102 13.2917 6.94317Z"
+                        ></path>
+                      </svg>
+                    </i>
+                  </div>
+                </div>
+                <span class="form-input-date__inside-label"> Date buy </span>
+              </div>
+              <span class="crypto-calculator-what-if-inputs__separator"></span>
+              <div class="form-input-date crypto-calculator-what-if-inputs__input">
+                <!---->
+                <div class="xmx-datepicker">
+                  <div class="xmx-input-wrapper">
+                    <input
+                      id="date-input"
+                      maxlength="10"
+                      type="text"
+                      placeholder="21.12.2023"
+                      autocomplete="off"
+                      class="form-input-date__input form-input-date__input_base form-input-date__input_inside-label"
+                    /><i class="xmx-icon-calendar"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        class="icon-calendar form-input-date__calendar form-input-date__calendar_white"
+                      >
+                        <path
+                          d="M4.426 9.84313C9.48901 9.84313 14.505 9.84313 19.5526 9.84313C19.5526 9.08672 19.5865 8.34366 19.5395 7.60611C19.5134 7.19059 19.1767 6.99737 18.7815 6.95574C18.6158 6.93767 18.4464 6.95495 18.2823 6.93374C17.9156 6.88661 17.6575 6.56928 17.6698 6.20011C17.6814 5.84508 17.9387 5.56231 18.2915 5.51518C19.8308 5.30939 20.9948 6.34228 20.9933 7.91323C20.9925 8.75132 20.9956 9.58864 20.9925 10.4267C20.9902 10.953 20.7999 11.1902 20.2899 11.2837C20.1019 11.3182 19.9078 11.3253 19.716 11.3253C14.7862 11.3261 9.85649 11.3261 4.92675 11.3261C4.77498 11.3261 4.62322 11.3261 4.42446 11.3261C4.42446 11.4981 4.42446 11.6371 4.42446 11.7762C4.42446 13.9488 4.42369 16.1222 4.42446 18.2948C4.42446 19.1156 4.8135 19.5484 5.6124 19.55C9.87421 19.5578 14.1368 19.5578 18.3986 19.5492C19.1775 19.5476 19.5727 19.1101 19.5742 18.3184C19.5765 16.8 19.5727 15.2817 19.5765 13.7634C19.5773 13.3173 19.7722 13.0439 20.1181 12.9748C20.6073 12.8766 20.9879 13.1782 20.9902 13.6967C20.9979 15.3587 21.0095 17.0216 20.9863 18.6836C20.9702 19.8492 19.9378 20.8837 18.746 20.9874C18.6313 20.9976 18.5149 20.9984 18.3994 20.9984C14.1245 20.9992 9.84956 21.0023 5.57465 20.9968C4.03618 20.9953 2.99923 19.9168 3 18.349C3.00154 14.867 3.00154 11.3858 3 7.9038C3 6.34307 4.20643 5.27954 5.71409 5.51597C6.05769 5.57016 6.315 5.87178 6.31577 6.22289C6.31654 6.57243 6.06154 6.88269 5.7164 6.93139C5.50146 6.96202 5.28113 6.95495 5.06696 6.9903C4.66867 7.05628 4.44911 7.33119 4.4337 7.71921C4.40674 8.41043 4.426 9.10321 4.426 9.84313ZM15.0643 7.5684C15.0728 8.0554 15.3548 8.36094 15.7793 8.36251C16.203 8.36409 16.498 8.05461 16.5027 7.57547C16.5104 6.64862 16.5096 5.72097 16.5034 4.79412C16.4996 4.30948 16.2122 4.00158 15.7877 4.00001C15.3633 3.99844 15.0736 4.30555 15.0651 4.78705C15.0566 5.24419 15.0636 5.70134 15.0636 6.15848C15.0628 6.62819 15.0566 7.09791 15.0643 7.5684ZM8.9274 4.80669C8.91892 4.28984 8.63773 3.98979 8.19013 4.00158C7.76411 4.01336 7.50217 4.31498 7.49986 4.81297C7.49601 5.72647 7.49601 6.64076 7.49986 7.55426C7.50217 8.04754 7.77027 8.35309 8.19475 8.36094C8.63927 8.36958 8.91815 8.06718 8.9274 7.54877C8.9351 7.09162 8.92894 6.63526 8.92894 6.17812C8.92971 5.72097 8.93587 5.26383 8.9274 4.80669ZM13.2917 6.94317C13.7793 6.93374 14.0698 6.65176 14.0628 6.21111C14.0567 5.78774 13.7747 5.51282 13.304 5.50811C12.4311 5.49869 11.5583 5.49869 10.6854 5.5089C10.2247 5.51439 9.93276 5.80188 9.92891 6.21818C9.92506 6.64704 10.2286 6.93453 10.7116 6.94317C11.1353 6.95102 11.5591 6.94474 11.9828 6.94474C12.4188 6.94474 12.8549 6.95102 13.2917 6.94317Z"
+                        ></path>
+                      </svg>
+                    </i>
+                  </div>
+                </div>
+                <span class="form-input-date__inside-label"> Date sell </span>
+              </div>
+              <!---->
+            </div>
+          </div>
+          <div class="crypto-calculator-widget__button-container">
+            <a href="/" class="crypto-calculator-widget__button nuxt-link-active" target="_blank"
+              ><button
+                type="button"
+                class="button crypto-calculator-widget__exchange button_xl button_outline button_uppercase button_"
+              >
+                Exchange
+              </button></a
+            >
+            <button
+              type="button"
+              class="button crypto-calculator-widget__button button_xl button_primary button_uppercase button_"
+              id="crypto-calculator-exchange-button"
+            >
+              Calculate
+            </button>
+          </div>
+        </div>
+        <div class="crypto-calculator-outcome">
+          <div class="crypto-calculator-outcome__title">Profit/loss</div>
+          <div class="crypto-calculator-outcome__container">
+            <!---->
+            <span class="crypto-calculator-outcome__profit"> 38,670,844.82$ </span>
+            <span class="crypto-calculator-outcome__profit"> 386,708.45% </span>
+          </div>
+          <!---->
+        </div>
+      </div>
+      <img
+        src="https://swapspace.co/_nuxt/img/coins.012eae2.svg"
+        alt="coins"
+        class="crypto-calculator-what-if__image"
+      />
+    </div>
+    <div class="crypto-calculator-how-to crypto-profit-calculator__margin">
+      <div class="crypto-calculator-steps crypto-calculator-how-to__steps">
+        <div class="crypto-calculator-steps__gradient"></div>
+        <h4 class="crypto-calculator-steps__title">
+          Using this crypto calculator is even easier than the main one
+        </h4>
+        <div class="crypto-calculator-steps__tiles">
+          <div class="crypto-calculator-steps__tile">
+            <div class="crypto-calculator-steps__container">
+              <img
+                src="https://swapspace.co/_nuxt/img/input.3b78d87.svg"
+                alt="step.title"
+                width="88"
+                height="88"
+              />
+              <div class="crypto-calculator-steps__text-container">
+                <span class="crypto-calculator-steps__number"> 1 </span>
+                <div class="crypto-calculator-steps__text">Fill in the amount (in $) invested</div>
+              </div>
+            </div>
+          </div>
+          <div class="crypto-calculator-steps__tile">
+            <div class="crypto-calculator-steps__container">
+              <img
+                src="https://swapspace.co/_nuxt/img/dropdown.33dba29.svg"
+                alt="step.title"
+                width="88"
+                height="88"
+              />
+              <div class="crypto-calculator-steps__text-container">
+                <span class="crypto-calculator-steps__number"> 2 </span>
+                <div class="crypto-calculator-steps__text">
+                  Choose the cryptocurrency from the list
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="crypto-calculator-steps__tile">
+            <div class="crypto-calculator-steps__container">
+              <img
+                src="https://swapspace.co/_nuxt/img/calendar.78aa8b2.svg"
+                alt="step.title"
+                width="88"
+                height="88"
+              />
+              <div class="crypto-calculator-steps__text-container">
+                <span class="crypto-calculator-steps__number"> 3 </span>
+                <div class="crypto-calculator-steps__text">
+                  Choose the date when this hypothetical crypto investment has been made
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="crypto-calculator-steps__tile">
+            <div class="crypto-calculator-steps__container">
+              <img
+                src="https://swapspace.co/_nuxt/img/calendar-up.711e308.svg"
+                alt="step.title"
+                width="88"
+                height="88"
+              />
+              <div class="crypto-calculator-steps__text-container">
+                <span class="crypto-calculator-steps__number"> 4 </span>
+                <div class="crypto-calculator-steps__text">
+                  The sell date is today by default, but you can change it to any day in the past
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="crypto-calculator-steps__helper">
+          This is everything that you need to see how much profit this investment could have
+          brought!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column col-12 col-lg-10">
+    <div class="crypto-calculator-faq">
+      <h2 class="crypto-calculator-faq__title">FAQ</h2>
+      <section id="faq" class="faq crypto-calculator-faq__faq">
+        <!---->
+        <div id="" class="faq__item faq__item_transparent" (click)="toggle(0)">
+          <div class="faq__container">
+            <h3 class="faq__item-title faq__item-title_dark faq__item-title_bold">
+              How are crypto gains calculated?
+            </h3>
+            <div class="faq__plus-wrapper">
+              <div class="faq__plus faq__plus_dark" *ngIf="!isOpened[0]"></div>
+              <div class="faq__plus faq__plus_dark-collapse faq__plus_dark" *ngIf="isOpened[0]"></div>
+            </div>
+          </div>
+          <div class="faq__description faq__description_dark" *ngIf="isOpened[0]">
+            <div>
+              Crypto profits (or losses) are calculated by subtracting the cost of investment
+              (including your initial investment amount plus any fees) from the current value of
+              investment. If by the time you sell your chosen crypto goes up in price enough to
+              offset the fees, your crypto investment becomes profitable.
+            </div>
+          </div>
+        </div>
+        <div id="" class="faq__item faq__item_transparent" (click)="toggle(1)">
+          <div class="faq__container">
+            <h3 class="faq__item-title faq__item-title_dark faq__item-title_bold">
+              Why use a crypto profit calculator?
+            </h3>
+            <div class="faq__plus-wrapper">
+              <div class="faq__plus faq__plus_dark" *ngIf="!isOpened[1]"></div>
+              <div class="faq__plus faq__plus_dark-collapse faq__plus_dark" *ngIf="isOpened[1]"></div>
+            </div>
+          </div>
+          <div class="faq__description faq__description_dark" *ngIf="isOpened[1]">
+            <div>
+              This simple but powerful coin calculator saves you the time and effort of figuring out
+              the potential outcome of your investment. We provide you with the current prices of
+              popular cryptocurrencies to invest in, so that you don’t have to search for this
+              information, and make all the calculations ourselves!
+            </div>
+          </div>
+        </div>
+        <div id="" class="faq__item faq__item_transparent" (click)="toggle(2)">
+          <div class="faq__container">
+            <h3 class="faq__item-title faq__item-title_dark faq__item-title_bold">
+              Why invest in crypto?
+            </h3>
+            <div class="faq__plus-wrapper">
+              <div class="faq__plus faq__plus_dark" *ngIf="!isOpened[2]"></div>
+              <div class="faq__plus faq__plus_dark-collapse faq__plus_dark" *ngIf="isOpened[2]"></div>
+            </div>
+          </div>
+          <div class="faq__description faq__description_dark" *ngIf="isOpened[2]">
+            <div>
+              <span>Cryptocurrencies are a popular investment for a number of reasons.</span>
+              <ul>
+                <li>
+                  While high volatility can lead to some unexpected losses, it can bring large gains
+                  as well. For example, people who figured out how to invest in Bitcoin early on
+                  enjoyed substantial profits.
+                </li>
+                <li>
+                  Many people invest in cryptocurrencies to diversify their portfolios and hedge
+                  against downturns in the traditional markets.
+                </li>
+                <li>
+                  There’s a wide variety of projects available for investing, so almost everyone who
+                  sees the potential in technology and innovation it brings can pick something
+                  suited to their interest (moreover, new crypto to invest in appears on the market
+                  pretty regularly).
+                </li>
+                <li>
+                  Crypto is decentralized, which attracts investors who appreciate financial
+                  independence and relative anonymity, as well as freedom from censorship and safety
+                  from regulatory meddling.
+                </li>
+                <li>
+                  Crypto markets are open 24/7 which is appealing to many investors, as this allows
+                  more flexibility with their investments and easier access to their accounts.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="" class="faq__item faq__item_transparent faq__item_no-border" (click)="toggle(3)">
+          <div class="faq__container">
+            <h3 class="faq__item-title faq__item-title_dark faq__item-title_bold">
+              Tips for the beginner crypto investor
+            </h3>
+            <div class="faq__plus-wrapper">
+              <div class="faq__plus faq__plus_dark" *ngIf="!isOpened[3]"></div>
+              <div class="faq__plus faq__plus_dark-collapse faq__plus_dark" *ngIf="isOpened[3]"></div>
+            </div>
+          </div>
+          <div class="faq__description faq__description_dark" *ngIf="isOpened[3]">
+            <div>
+              <span
+                >There are some important pieces of advice to remember if you’re interested in
+                investing in cryptocurrency.</span
+              >
+              <ul>
+                <li>
+                  Learn the trade: as an investor, you will benefit from understanding both
+                  fundamentals and technicals. Try to understand what and why is happening with the
+                  markets.
+                </li>
+                <li>
+                  Start small: since the cryptocurrency market is inherently volatile, don’t invest
+                  more than you are ready to lose.
+                </li>
+                <li>
+                  Diversify your crypto portfolio: spreading your funds across different
+                  cryptocurrencies instead of putting the whole investment into one crypto project
+                  helps mitigating risks and offset potential losses.
+                </li>
+                <li>
+                  Keep tabs on the market: regularly check trends, news, etc., so if the conditions
+                  on the crypto market change, you can detect this early and be ready to act
+                </li>
+                <li>
+                  Secure your investment: due to cryptocurrencies’ decentralized nature, there’s a
+                  higher level of responsibility when it comes to keeping your funds safe. Use only
+                  reputable exchanges, secure wallets, and beware the crypto scams.
+                </li>
+                <li>
+                  Have a defined investment strategy: you should be clear on your goals, acceptable
+                  risks, tools, how long you’ll hold your crypto, etc.
+                </li>
+                <li>
+                  Keep a level head: the volatility of crypto prices can lead to panic or impulsive
+                  decisions. Be patient and remember your goals.
+                </li>
+                <li>
+                  Brush up on regulations: many countries already have some rules and laws
+                  concerning crypto investments, such as tax regulations. Find that information out
+                  early, so that you don’t get in the hot water with the law later.
+                </li>
+                <li>
+                  Do your own research: don’t forget to find out everything you can about your
+                  potential investment.
+                </li>
+              </ul>
+              <span
+                >To get started, you can take a look at our Academy which has a lot of
+                <a href="/academy">information on cryptocurrency for beginners</a>, such as more
+                tips, in-depth explanations and tutorials, and more.</span
+              >
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -97,6 +97,15 @@ small {
   flex-direction: row;
 }
 
+.d-f-cc {
+  align-items: center;
+}
+
+.d-f-cc, .d-f-ce {
+  display: flex;
+  flex-direction: column;
+}
+
 .d-fc,
 .d-fcw {
   display: flex;
@@ -134,11 +143,11 @@ small {
 }
 
 .mb-1 {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .mb-2 {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .mb-3 {
@@ -158,11 +167,11 @@ small {
 }
 
 .mr-1 {
-  margin-right: .25rem;
+  margin-right: 0.25rem;
 }
 
 .mr-2 {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .mr-3 {
@@ -213,6 +222,25 @@ textarea:focus {
   border-color: #6b4d68;
   color: #6b4d68;
   cursor: default;
+}
+
+.button_transparent {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 60px;
+  justify-content: center;
+  transition: color .2s ease;
+  width: inherit;
+}
+
+.button_transparent:hover {
+  color: #ff626e;
 }
 
 .button_xl {
@@ -399,6 +427,15 @@ svg:not(:root).svg-inline--fa {
     width: 100%;
   }
 
+  .col-lg-10 {
+    display: block;
+    max-width: 83.33333%;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    width: 100%;
+  }
+
   .col-lg-12 {
     display: block;
     max-width: 100%;
@@ -520,7 +557,7 @@ img {
 
 .form-input_light .form-input__label {
   color: #000;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
 }
 
 .form-input__label_text {

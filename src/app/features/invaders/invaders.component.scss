@@ -1,0 +1,750 @@
+h2 {
+    font-size: 1.8225rem;
+    font-weight: 400;
+    line-height: 2.46rem;
+    margin-bottom: 1.3669rem;
+}
+h3 {
+    font-size: 1.35rem;
+    line-height: 1.8225rem;
+    margin-bottom: 1.0125rem;
+}
+.loyalty {
+    margin-top: 2rem;
+}
+@media (min-width: 768px) {
+    .loyalty {
+        display: flex;
+        flex-direction: column;
+    }
+}
+.loyalty-header {
+    position: relative;
+    z-index: 1;
+}
+.loyalty-partners {
+    position: relative;
+    width: 100%;
+    z-index: 4;
+}
+.loyalty__mb {
+    margin-bottom: 92px;
+}
+.loyalty-header__container {
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+}
+.loyalty-header__text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: space-between;
+    width: 50%;
+}
+.loyalty-header__title {
+    font-family: Audiowide, sans-serif;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.3125rem;
+    margin-bottom: 11px;
+}
+.loyalty-header__description {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.875rem;
+    margin-bottom: 0;
+}
+.loyalty-header-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.loyalty-header-features__feature {
+    background-color: #36293b;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    padding: 16px 8px;
+}
+.loyalty-header-stages {
+    display: flex;
+    gap: 48px;
+}
+.loyalty-header-stages__stage {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 94px;
+    justify-content: space-between;
+    width: 150px;
+}
+.loyalty-header-stages__id {
+    color: #e35760;
+    font-size: .875rem;
+    line-height: 1.125rem;
+    white-space: nowrap;
+}
+.loyalty-header-stages__image {
+    align-items: center;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 35px;
+    margin-right: 35px;
+    position: relative;
+}
+.loyalty-header-stages__dot {
+    height: 24px;
+    width: 24px;
+    z-index: 1;
+}
+.loyalty-header-stages__link {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    text-align: center;
+}
+.loyalty-header-stages__stick {
+    align-items: center;
+    display: flex;
+    position: absolute;
+    right: 22px;
+    top: 50%;
+}
+.loyalty-header-stages__stick:before {
+    background: #6b4d68;
+    content: "";
+    height: 2px;
+    width: 178px;
+}
+.loyalty-header-stages__stick_active:before {
+    background: #e35760;
+}
+.loyalty-header-animation {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.loyalty-header__animation {
+    margin-top: 4rem;
+    width: 44%;
+}
+.loyalty-header-animation__gif-container {
+    display: flex;
+    gap: 2rem;
+    min-height: 242px;
+}
+.loyalty-header-animation__gif {
+    animation: blurScale-658e7b7a 3s 1s infinite alternate;
+    filter: drop-shadow(0 20px 20px rgba(0, 0, 0, .35));
+    height: 100%;
+    transform: rotate(-12deg);
+    width: 242px;
+}
+@keyframes blurScale-658e7b7a {
+    0% {
+        filter: blur(5px);
+    }
+    100% {
+        filter: blur(15px);
+    }
+}
+.loyalty-header-animation__gif:nth-child(2) {
+    transform: rotate(12deg);
+}
+.loyalty-header-animation__image-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 300px;
+    min-width: 300px;
+    position: absolute;
+    top: -4rem;
+}
+.loyalty-header-animation__image {
+    filter: drop-shadow(0 20px 20px rgba(0, 0, 0, .35));
+    height: 300px;
+    width: 300px;
+}
+.loyalty-header-animation__laser-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+.loyalty-header-animation__timer {
+    background: rgba(54, 41, 59, .6);
+    border-radius: 20px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, .05);
+    display: flex;
+    flex-direction: column;
+    height: 210px;
+    justify-content: flex-end;
+    margin-top: -1rem;
+    padding: 1.5rem 2rem;
+    width: 460px;
+}
+.loyalty-header-animation__timer_button {
+    z-index: 1;
+}
+.loyalty-header-animation__button {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.375rem;
+    width: 100%;
+}
+.loyalty-header-animation__stage {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    text-align: center;
+}
+.loyalty-header-animation__button-account {
+    color: #e35760;
+    font-size: 1rem;
+    font-weight: 400;
+    height: 60px;
+    line-height: 1.375rem;
+    white-space: nowrap;
+    width: 100%;
+}
+@media screen and (min-width: 768px) {
+    .loyalty-header__stages_mobile {
+        display: none;
+    }
+}
+@media screen and (min-width: 768px) {
+    .loyalty-header__stages_mobile {
+        display: none;
+    }
+}
+.cover {
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.loyalty-step2__cover {
+    z-index: 0;
+}
+.loyalty-step2__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10rem;
+    z-index: 1;
+}
+.stage-title {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 1;
+}
+.stage-title__stage-num {
+    color: #e35760;
+    font-weight: 500;
+}
+.stage-title__title {
+    font-weight: 700;
+}
+.stage-title__description {
+    color: #a0789c;
+    font-size: 1rem;
+    max-width: 546px;
+    text-align: center;
+}
+.loyalty-progress {
+    display: flex;
+    width: 100%;
+}
+.loyalty-step2__progress {
+    left: 0;
+    margin-top: 22rem;
+    position: absolute;
+}
+.loyalty-progress__part_link {
+    display: flex;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+}
+.image-link-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.loyalty-progress__fill {
+    background: linear-gradient(180deg, rgba(227, 87, 96, .2), rgba(227, 87, 96, 0));
+    border-top: 1px solid #e35760;
+    flex: 1;
+    position: relative;
+}
+.loyalty-progress__image {
+    height: 90px;
+    position: absolute;
+    right: -5px;
+    top: -11px;
+}
+.loyalty-progress__image-right {
+    left: -5px;
+}
+.loyalty-progress__container {
+    display: flex;
+    height: 150px;
+    padding: 0;
+}
+.loyalty-progress__part {
+    background: linear-gradient(180deg, rgba(227, 87, 96, .2), rgba(227, 87, 96, 0));
+    border-top: 1px solid #e35760;
+    position: relative;
+}
+.loyalty-progress__part:first-child {
+    flex: 1;
+}
+.loyalty-progress__part:nth-child(2) {
+    flex: 2;
+}
+.loyalty-progress__text {
+    position: absolute;
+    text-align: center;
+    top: -3rem;
+    width: 100%;
+}
+.loyalty-progress__number {
+    color: #e35760;
+    font-size: 1.8125rem;
+    font-weight: 900;
+    top: 1.5rem;
+}
+.loyalty-progress__exchange {
+    flex: 6;
+    height: inherit;
+    position: relative;
+}
+.loyalty-progress__exchange-fill {
+    display: flex;
+    height: inherit;
+    position: absolute;
+    width: 100%;
+}
+.loyalty-progress__exchange-full {
+    background: linear-gradient(180deg, rgba(227, 87, 96, .2), rgba(227, 87, 96, 0));
+    border-top: 1px solid #e35760;
+    height: inherit;
+}
+.loyalty-progress__empty {
+    background: linear-gradient(180deg, rgba(107, 77, 104, .2), rgba(107, 77, 104, 0));
+    border-top: 1px solid #6b4d68;
+    flex: 1;
+    position: relative;
+}
+.loyalty-step4__cover {
+    z-index: 0;
+}
+.loyalty-step4__container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 1;
+}
+.stage-title {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 1;
+}
+.loyalty-image-generator__container {
+    width: 100%;
+}
+.loyalty-image-generator {
+    align-items: center;
+    gap: 4rem;
+    justify-content: center;
+    margin-left: 7.5rem;
+    width: 100%;
+    z-index: 1;
+}
+.loyalty-image-generator-layer {
+    align-items: flex-end;
+    background-image: url(https://swapspace.co/_nuxt/img/orbit-left.9a2421e.webp);
+    background-position-x: 100px;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    justify-content: center;
+    margin-right: 1.5rem;
+    width: 185px;
+    z-index: 1;
+}
+.loyalty-image-generator-layer__container {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: space-around;
+}
+.loyalty-image-generator-layer__block {
+    align-items: center;
+    background-color: #e35760;
+    border-radius: 50%;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    position: relative;
+    width: 36px;
+    z-index: 99;
+}
+.loyalty-image-generator-layer__block__active {
+    transform: scale(1.1);
+}
+.loyalty-image-generator-layer__block-0, .loyalty-image-generator-layer__block-3 {
+    margin-right: 1.8rem;
+}
+.loyalty-image-generator-layer__block-1, .loyalty-image-generator-layer__block-2 {
+    margin-right: 3.8rem;
+}
+.loyalty-image-generator-layer__text {
+    font-size: 1.25rem;
+    line-height: 1.8125rem;
+    position: absolute;
+    right: 3.5rem;
+    text-transform: capitalize;
+}
+.loyalty-image-generator-layer__block__active .loyalty-image-generator-layer__text {
+    color: #e35760;
+}
+.loyalty-image-generator-layer__active {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(227, 87, 96, 0) 66.15%, rgba(227, 87, 96, .54) 98.96%);
+    border-radius: 50%;
+    height: 52px;
+    position: absolute;
+    width: 52px;
+}
+.loyalty-image-generator__image-container {
+    position: relative;
+}
+.loyalty-image-generator__image {
+    filter: drop-shadow(0 20px 38px rgba(0, 0, 0, .24));
+    height: 245px;
+    width: 245px;
+    z-index: 1;
+}
+.loyalty-image-generator__invader {
+    height: auto;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.loyalty-image-generator-scene {
+    display: flex;
+    gap: 5rem;
+}
+.loyalty-image-generator__layer {
+    width: 300px;
+}
+.loyalty-image-generator-scene__first {
+    background-image: url(https://swapspace.co/_nuxt/img/orbit-right.08d64b0.webp);
+    background-position-x: 93px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    justify-content: center;
+    margin: auto 0;
+    width: 100px;
+}
+.loyalty-image-generator-scene__first-container {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    height: 345px;
+    justify-content: space-around;
+}
+.loyalty-image-generator-scene__block {
+    align-items: center;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    position: relative;
+    width: 24px;
+    z-index: 99;
+}
+.loyalty-image-generator-scene__block__active {
+    transform: scale(1.1);
+}
+.loyalty-image-generator-scene__block-earth, .loyalty-image-generator-scene__block-sun {
+    margin-right: 1.5rem;
+}
+.loyalty-image-generator-scene__image {
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+}
+.loyalty-image-generator-scene__text {
+    font-size: .875rem;
+    left: 2.5rem;
+    position: absolute;
+}
+.loyalty-image-generator-scene__block__active .loyalty-image-generator-scene__text {
+    color: #e35760;
+}
+.loyalty-image-generator-scene__active {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(227, 87, 96, 0) 66.15%, rgba(227, 87, 96, .54) 98.96%);
+    border-radius: 50%;
+    height: 40px;
+    position: absolute;
+    width: 40px;
+}
+.loyalty-image-generator-scene__block-earth, .loyalty-image-generator-scene__block-sun {
+    margin-right: 1.5rem;
+}
+.loyalty-image-generator-scene__second {
+    align-items: flex-end;
+    background-image: url(https://swapspace.co/_nuxt/img/orbit-right.08d64b0.webp);
+    background-position-x: 109px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    justify-content: center;
+    width: 120px;
+}
+.loyalty-image-generator-scene__second-container {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: space-around;
+}
+.loyalty-image-generator-scene__block-mars, .loyalty-image-generator-scene__block-uranus {
+    margin-right: 2.3rem;
+}
+.loyalty-image-generator-scene__block-jupiter, .loyalty-image-generator-scene__block-saturn {
+    margin-right: .5rem;
+}
+.loyalty-image-generator__share-button {
+    align-items: center;
+    display: flex;
+    margin-left: 2rem;
+    width: 306px;
+}
+.loyalty-image-generator__share-button_button {
+    width: 100%;
+}
+.loyalty-image-generator__share-button_icon {
+    height: 15px;
+    margin-left: 16px;
+}
+.loyalty-step6 {
+    justify-content: center;
+}
+.loyalty-step6__cover {
+    z-index: 0;
+}
+.loyalty-step6__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 66.6666666667%;
+    z-index: 1;
+}
+.loyalty-step6__mb {
+    margin-bottom: 92px;
+}
+.loyalty-account-levels__main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.loyalty-account-levels__container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 9px;
+}
+.loyalty-account-levels__sqrt {
+    align-items: center;
+    aspect-ratio: 1;
+    background: rgba(227, 87, 96, .14);
+    border: 1px solid #e35760;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    font-size: .75rem;
+    gap: 5px;
+    justify-content: center;
+    padding: 6px;
+    width: 100%;
+}
+.loyalty-account-levels__head {
+    color: #e35760;
+    font-weight: 700;
+    text-align: center;
+}
+.loyalty-step6__faq_title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    text-align: center;
+}
+.faq__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.faq__item:hover {
+    cursor: pointer;
+}
+.faq__item_transparent {
+    border-bottom: 1px solid #6b4d68;
+    padding-bottom: 1rem;
+}
+.faq__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.faq__item-title {
+    margin: 0;
+}
+.faq__item-title_dark {
+    color: #fff;
+}
+.faq__item-title_bold {
+    font-weight: 700;
+}
+.faq__plus-wrapper {
+    height: 14px;
+    width: 14px;
+}
+.faq__plus {
+    background: linear-gradient(#ff353d, #ff353d) 50% no-repeat, linear-gradient(#ff353d, #ff353d) 50% no-repeat;
+    background-position-y: 4px;
+    background-size: 100% 2px, 2px 100%;
+    display: inline-block;
+    height: inherit;
+    transition: transform .2s ease;
+    width: inherit;
+}
+.faq__plus_dark {
+    background: linear-gradient(#e35760, #e35760) 50% no-repeat, linear-gradient(#e35760, #e35760) 50% no-repeat;
+    background-size: 100% 2px, 2px 100%;
+}
+.faq__plus_dark-collapse {
+    background: linear-gradient(#e35760, #e35760) no-repeat 50%;
+    background-size: 100% 2px, 2px 100%;
+    transform: rotate(180deg);
+    transition: transform .2s ease;
+}
+.faq__description {
+    margin-top: 1rem;
+}
+.faq__description_dark {
+    color: #a0789c;
+}
+.faq__item_no-border {
+    border-bottom: none;
+}
+.loyalty-partners__title {
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+}
+.loyalty-partners__row {
+    justify-content: center;
+}
+.loyalty-partners__slide {
+    align-items: center;
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    margin-left: .3rem;
+}
+.loyalty-partners__container {
+    position: relative;
+    z-index: 1;
+}
+.loyalty-partners__logo {
+    filter: brightness(0) saturate(100%) invert(34%) sepia(6%) saturate(2223%) hue-rotate(255deg) brightness(94%) contrast(91%);
+    max-height: 48px;
+    max-width: 150px;
+}
+.loyalty-partners__color-logo {
+    cursor: pointer;
+    left: 0;
+    max-height: 48px;
+    max-width: 150px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity .2s ease;
+}
+.loyalty__mb-bottom {
+    margin-bottom: 24px;
+}
+.loyalty-step9__cover {
+    z-index: 0;
+}
+.loyalty-step9__container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+}
+.social-networks {
+    width: 100%;
+}
+.social-networks__title {
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+    width: 100%;
+}
+.social-networks__tile-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    justify-content: center;
+    width: 100%;
+}
+.social-networks__social-tile {
+    align-items: center;
+    background: radial-gradient(102.87% 102.87% at 49.9% 102.87%, #5d3548 0, #36293b 100%), #36293b;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: space-between;
+    padding: 16px 32px;
+    width: 229px;
+}
+.social-networks__icon {
+    height: 40px;
+    width: auto;
+    fill: #fff;
+}
+.social-networks__text {
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 2.5rem;
+    text-align: center;
+}
+.social-networks__button {
+    height: 48px;
+    width: 100%;
+}
