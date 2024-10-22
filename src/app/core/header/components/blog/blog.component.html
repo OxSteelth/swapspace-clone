@@ -1,0 +1,41 @@
+<div>
+  <nav class="breadcrumbs breadcrumbs">
+    <span>
+      <a
+        href="/"
+        class="breadcrumbs__link nuxt-link-active breadcrumbs__arrow breadcrumbs__arrow_violet-light breadcrumbs__link_violet-light"
+      >
+        Main
+      </a>
+    </span>
+    <span *ngIf="category !== 'blog'">
+      <a
+        href="/blog"
+        class="breadcrumbs__link nuxt-link-active breadcrumbs__arrow breadcrumbs__arrow_violet-light breadcrumbs__link_violet-light"
+      >
+        Blog
+      </a>
+    </span>
+    <span>
+      <span
+        class="breadcrumbs__text breadcrumbs__text-white breadcrumbs__text-bold breadcrumbs__text_violet-light"
+      >
+        {{ category }}
+      </span>
+    </span>
+  </nav>
+  <nav class="blog-header">
+    <a
+      href="/blog"
+      aria-current="page"
+      class="blog-header__link"
+      [ngClass]="category === 'blog' ? 'link-exact-active' : ''"
+    >
+      All
+    </a>
+    <a href="/blog/categories/opinion" class="blog-header__link" [ngClass]="category === 'opinion' ? 'link-exact-active' : ''"> Opinion </a>
+    <a href="/blog/categories/academy" class="blog-header__link" [ngClass]="category === 'academy' ? 'link-exact-active' : ''"> Academy </a>
+    <a href="/blog/categories/guides" class="blog-header__link" [ngClass]="category === 'guides' ? 'link-exact-active' : ''"> Guides </a>
+    <a href="/blog/categories/announcements" class="blog-header__link" [ngClass]="category === 'announcements' ? 'link-exact-active' : ''"> Announcements </a>
+  </nav>
+</div>

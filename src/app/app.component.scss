@@ -76,3 +76,29 @@
   background: url(https://swapspace.co/img/bg/how-it-works-bg.svg), #231f26 no-repeat 100%;
   background-size: cover;
 }
+
+.app__content_alt-bg-1 {
+  background: #fff;
+}
+
+.app-academy__content {
+  background: #fff;
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.academy-layout-header {
+  background-image: url(https://swapspace.co/img/academy/1440.webp);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  z-index: 3;
+}
+
+.price-predictions-list__page {
+  background: #fff;
+  padding-bottom: 5rem;
+}

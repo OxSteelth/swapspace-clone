@@ -1,0 +1,332 @@
+main {
+    display: block;
+}
+h1 {
+    font-size: 2.46rem;
+    line-height: 3.321rem;
+    margin-bottom: 1.8453rem;
+}
+h3 {
+    font-size: 1.35rem;
+    line-height: 1.8225rem;
+    margin-bottom: 1.0125rem;
+}
+.blog__container {
+    background-color: #fff;
+    padding: 2rem 0;
+}
+.blog__row {
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.search-input {
+    align-items: center;
+    display: flex;
+}
+.blog__search {
+    width: 100%;
+}
+.search-input__icon-with-dropdown {
+    position: absolute;
+    right: 7%;
+}
+.search-input__input_md+.search-input__icon-with-dropdown {
+    top: 17px;
+}
+.blog__title {
+    color: #000;
+}
+.blog-articles {
+    width: 100%;
+}
+.content-widget {
+    background-color: #000;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+}
+.content-widget:hover {
+    cursor: pointer;
+}
+.content-widget__long-tile {
+    height: 475px;
+}
+.content-widget_light {
+    background-color: #fff;
+    box-shadow: 0 4px 31px rgba(0, 0, 0, .06);
+}
+.content-widget__image {
+    border-radius: 20px 20px 0 0;
+    cursor: pointer;
+    height: 160px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    transition: transform 1.5s ease;
+    width: 100%;
+}
+@media screen and (min-width: 767px) {
+    .content-widget:hover .content-widget__image {
+        transform: scale(1.05);
+    }
+}
+.content-widget__body {
+    display: flex;
+    flex-direction: column;
+    height: 310px;
+    padding: 1.5rem;
+}
+.content-widget__title {
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    transition: color .2s ease;
+}
+.content-widget_light .content-widget__title {
+    color: #181919;
+}
+.content-widget:hover .content-widget__link, .content-widget:hover .content-widget__title {
+    color: #ff626e;
+}
+.blog-articles__small {
+    color: #7a7a7a;
+    margin-bottom: .7rem;
+}
+.content-widget__text, .content-widget__title_m {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.content-widget__text {
+    line-height: 1.25rem;
+    -webkit-line-clamp: 4;
+    color: #181919;
+    margin-bottom: .75rem;
+}
+.content-widget__link {
+    align-items: center;
+    display: flex;
+    margin-top: auto;
+}
+.content-widget_light .content-widget__link {
+    color: #e35760;
+}
+.blog-articles__button {
+    width: 100%;
+}
+.blog-sidebar {
+    color: #000;
+    height: 100%;
+}
+.content-banner {
+    background: 50% / cover no-repeat url(https://swapspace.co/_nuxt/img/banner.6c2eb99.webp);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+}
+.blog-sidebar__banner {
+    margin-bottom: 3rem;
+}
+.content-banner__logo {
+    height: 20px;
+    margin: 1.2rem 0 1rem;
+    width: 45%;
+}
+.content-banner__title {
+    color: #fbff2d;
+    margin-bottom: .5rem;
+    padding: 0;
+    width: 90%;
+}
+.widget-buy-crypto__title {
+    font-weight: 400;
+}
+.widget-buy-crypto__container {
+    display: flex;
+}
+.widget-buy-crypto__container-item {
+    background: url(https://swapspace.co/img/bg/widget-buy-crypto-bg.svg) no-repeat 50% 50%;
+    background-size: auto 100%;
+    box-shadow: 0 4px 31px rgba(0, 0, 0, .06);
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-between;
+    margin-right: .5rem;
+    padding: .5rem;
+    position: relative;
+}
+.widget-buy-crypto__item {
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+}
+.widget-buy-crypto__item:not(:nth-child(3)) {
+    z-index: 2;
+}
+.widget-buy-crypto__item:nth-child(3) {
+    order: 2;
+    z-index: 1;
+}
+.widget-buy-crypto__image {
+    align-self: center;
+    height: auto;
+    margin: auto;
+    width: auto;
+}
+.widget-buy-crypto__item-text {
+    color: #181919;
+    text-transform: uppercase;
+}
+@media screen and (min-width: 1200px) {
+    .widget-buy-crypto__item-text {
+        margin-top: auto;
+    }
+}
+.arrow-control {
+    color: #7a7a7a;
+    cursor: pointer;
+    transition: color .2s ease;
+    z-index: 1;
+}
+.widget-buy-crypto__arrow {
+    color: #181919;
+    margin: auto;
+    transform: rotate(180deg);
+}
+.blog-sidebar-recent-articles {
+    display: flex;
+    flex-direction: column;
+}
+.blog-sidebar-recent-articles__title {
+    font-weight: 400;
+}
+.blog-sidebar-recent-articles__article-title {
+    color: #7a7a7a;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    line-height: 1.35rem;
+}
+.blog-sidebar-recent-articles__arrow:before {
+    color: #e35760;
+    content: "❯";
+    margin-right: 5px;
+}
+.blog-sidebar-recent-articles__span-title {
+    position: relative;
+    width: 100%;
+}
+.widget-best-rates {
+    color: #181919;
+    position: sticky;
+    top: 1rem;
+    transition: transform .2s ease;
+    width: 100%;
+}
+.widget-best-rates__title {
+    font-weight: 400;
+}
+.widget-best-rates__code {
+    margin-right: -5px;
+}
+.widget-best-rates__container {
+    display: flex;
+}
+.widget-best-rates__from-container {
+    margin-right: 1rem;
+}
+.widget-best-rate {
+    align-items: center;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-right: .5rem;
+}
+.coin-icon {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    position: relative;
+}
+.coin-icon__sm .coin-icon__image, .coin-icon__sm {
+    height: 20px;
+    width: 20px;
+}
+.coin-icon__primary {
+    filter: invert(.38) sepia(1) hue-rotate(310deg) saturate(3.1);
+}
+.coin-icon__sm .coin-icon__image, .coin-icon__sm {
+    height: 20px;
+    width: 20px;
+}
+.widget-best-rate__text {
+    display: flex;
+    width: 100%;
+}
+.widget-best-rate__text-container {
+    flex-basis: 60%;
+    font-size: .8125rem;
+}
+.widget-best-rate__coin-name {
+    color: #7a7a7a;
+    font-size: .8125rem;
+    height: 17px;
+    text-transform: uppercase;
+}
+.widget-best-rate__coin-rate {
+    color: #181919;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.widget-best-rate__coin-rate__exch {
+    width: 130px;
+}
+.widget-best-rates__line-container {
+    border-left: 1px solid #e2e6e8;
+    margin-right: 1rem;
+    position: relative;
+}
+.widget-best-rates__arrow-container {
+    background-color: #fff;
+    color: #181919;
+    height: 26px;
+    left: -9px;
+    padding: 4px 3px;
+    position: absolute;
+    top: 4px;
+    width: 20px;
+}
+.widget-best-rates__to-container {
+    margin-left: .5rem;
+}
+.widget-best-rate {
+    align-items: center;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-right: .5rem;
+}
+.widget-best-rate__exchanger-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 50px;
+}
+.widget-best-rate__exchanger-via {
+    color: #7a7a7a;
+    font-size: .8125rem;
+    height: 17px;
+}
+.widget-best-rate__exchanger {
+    color: #e35760;
+    font-size: .8125rem;
+    font-weight: 700;
+    height: 17px;
+}
+.widget-best-rates__button {
+    margin-top: 1rem;
+    width: 100%;
+}

@@ -1,0 +1,97 @@
+h1 {
+    font-size: 2.46rem;
+    line-height: 3.321rem;
+    margin-bottom: 1.8453rem;
+}
+.content-widget {
+    background-color: #000;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+}
+.content-widget:hover {
+    cursor: pointer;
+}
+.content-widget__short-tile {
+    height: 376px;
+}
+.content-widget_dark {
+    background-color: #36293b;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+    color: #fff;
+}
+.success-stories-preview-tiles__tile {
+    color: #fff;
+}
+.success-stories-preview-tiles__tile:hover {
+    background-color: #51354f;
+}
+.content-widget__image {
+    border-radius: 20px 20px 0 0;
+    cursor: pointer;
+    height: 160px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    transition: transform 1.5s ease;
+    width: 100%;
+}
+@media screen and (min-width: 767px) {
+    .content-widget:hover .content-widget__image {
+        transform: scale(1.05);
+    }
+}
+.content-widget__body {
+    display: flex;
+    flex-direction: column;
+    height: 310px;
+    padding: 1.5rem;
+}
+.content-widget__body_s {
+    height: 220px;
+}
+.content-widget__title {
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    transition: color .2s ease;
+}
+.content-widget_dark .content-widget__title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.5625rem;
+}
+.content-widget:hover .content-widget__link, .content-widget:hover .content-widget__title {
+    color: #ff626e;
+}
+.success-stories-preview-tiles__tile--info {
+    color: #a0789c;
+    margin-bottom: 1rem;
+    transition: color .2s ease;
+}
+.content-widget__text, .content-widget__title_m {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.content-widget__text {
+    line-height: 1.25rem;
+    -webkit-line-clamp: 4;
+    color: #181919;
+    margin-bottom: .75rem;
+}
+.content-widget_dark .content-widget__text {
+    color: #fff;
+}
+.content-widget__link {
+    align-items: center;
+    display: flex;
+    margin-top: auto;
+}
+.content-widget_dark .content-widget__link {
+    color: #e35760;
+    font-size: .875rem;
+}

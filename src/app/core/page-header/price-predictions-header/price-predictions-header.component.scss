@@ -1,0 +1,58 @@
+.page-header-container {
+    margin-top: -6rem;
+    padding-top: 5rem;
+}
+.price-predictions-list__header {
+    background: url(https://swapspace.co/img/bg/pp-bg-index.webp) 100% no-repeat, linear-gradient(90deg, #21182e, #2e1423 52.08%, #1f0a14);
+    background-size: cover;
+}
+.price-predictions-list__header_wrapper {
+    padding: 2rem 0;
+}
+.breadcrumbs {
+    align-items: center;
+    -moz-column-gap: 8px;
+    column-gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.price-predictions-list__header__breadcrumbs {
+    margin-bottom: 1.5rem;
+}
+.breadcrumbs__link {
+    align-items: center;
+    color: #7a7a7a;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 8px;
+    text-wrap: nowrap;
+}
+.breadcrumbs__link_violet-light {
+    color: #a0789c;
+}
+.breadcrumbs__arrow:after {
+    color: #bdbdbd;
+    content: "❯";
+    font-size: 1rem;
+}
+.breadcrumbs__arrow_violet-light:after {
+    color: #a0789c;
+}
+.breadcrumbs__text {
+    color: #7a7a7a;
+    font-size: .875rem;
+}
+.breadcrumbs__text_violet-light {
+    color: #a0789c;
+}
+.breadcrumbs__text-bold {
+    font-weight: 700;
+}
+.breadcrumbs__text-white {
+    color: #fff;
+}
+h1 {
+    font-size: 2.46rem;
+    line-height: 3.321rem;
+    margin-bottom: 1.8453rem;
+}

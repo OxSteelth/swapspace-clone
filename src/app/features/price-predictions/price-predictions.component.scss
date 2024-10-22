@@ -1,0 +1,198 @@
+.price-predictions-list {
+    padding-top: 2rem;
+}
+.price-predictions-section__header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+h2 {
+    font-size: 1.8225rem;
+    font-weight: 400;
+    line-height: 2.46rem;
+    margin-bottom: 1.3669rem;
+}
+.price-predictions-list__title {
+    color: #181919;
+    margin-bottom: 0;
+}
+.search {
+    position: relative;
+}
+.price-predictions-section__search {
+    width: calc(33.3333% - 20px);
+}
+.search-input {
+    align-items: center;
+    display: flex;
+}
+.search-input__icon-with-dropdown {
+    position: absolute;
+    right: 7%;
+}
+.search-input__input_md+.search-input__icon-with-dropdown {
+    top: 17px;
+}
+.content-widget {
+    background-color: #000;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+}
+.content-widget:hover {
+    cursor: pointer;
+}
+.content-widget__long-tile {
+    height: 475px;
+}
+.content-widget_light {
+    background-color: #fff;
+    box-shadow: 0 4px 31px rgba(0, 0, 0, .06);
+}
+.content-widget__image {
+    border-radius: 20px 20px 0 0;
+    cursor: pointer;
+    height: 160px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    transition: transform 1.5s ease;
+    width: 100%;
+}
+@media screen and (min-width: 767px) {
+    .content-widget:hover .content-widget__image {
+        transform: scale(1.05);
+    }
+}
+.content-widget__body {
+    display: flex;
+    flex-direction: column;
+    height: 310px;
+    padding: 1.5rem;
+}
+h3 {
+    font-size: 1.35rem;
+    line-height: 1.8225rem;
+    margin-bottom: 1.0125rem;
+}
+h3, h4 {
+    font-weight: 400;
+}
+.content-widget__title {
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    transition: color .2s ease;
+}
+.content-widget_light .content-widget__title {
+    color: #181919;
+}
+.content-widget__text, .content-widget__title_m {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.content-widget__text {
+    line-height: 1.25rem;
+    -webkit-line-clamp: 4;
+    color: #181919;
+    margin-bottom: .75rem;
+}
+.content-widget__link {
+    align-items: center;
+    display: flex;
+    margin-top: auto;
+}
+.content-widget_light .content-widget__link {
+    color: #e35760;
+}
+.content-widget:hover .content-widget__link, .content-widget:hover .content-widget__title {
+    color: #ff626e;
+}
+.price-predictions-section__header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.price-predictions-list__title {
+    color: #181919;
+    margin-bottom: 0;
+}
+.paginator {
+    display: flex;
+    justify-content: center;
+}
+.paginator__wrapper {
+    position: relative;
+}
+.paginator__items, .paginator__wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.paginator__items {
+    gap: .5rem;
+}
+.paginator__item {
+    background-color: transparent;
+    border: 1px solid #a0789c;
+    border-radius: 1rem;
+    color: #a0789c;
+    font-size: .875rem;
+    height: 24px;
+    padding: 0;
+    transition-duration: .2s;
+    transition-property: background-color, border-color, color;
+    transition-timing-function: ease;
+    width: 24px;
+}
+.paginator__item:hover {
+    border-color: #e35760;
+    color: #e35760;
+    cursor: pointer;
+}
+.paginator__item_active {
+    background-color: #e35760;
+    border-color: #e35760;
+    color: #fff;
+}
+.paginator__item_active:hover {
+    color: #fff;
+    cursor: default;
+}
+.paginator__item:disabled {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+    pointer-events: none;
+    width: 16px;
+}
+.paginator__item_large {
+    padding: 3px 8px;
+    width: auto;
+}
+.arrow-common_sm {
+    width: 16px;
+}
+.paginator__arrow {
+    position: absolute;
+    fill: #a0789c;
+    max-width: 16px;
+    transition: fill .2s ease;
+}
+.paginator__arrow:hover {
+    fill: #e35760;
+    cursor: pointer;
+}
+.paginator__arrow_right {
+    right: -25px;
+}
+.arrow-common path {
+    fill: inherit;
+}

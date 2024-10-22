@@ -37,6 +37,42 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./features/about/about.module').then(m => m.AboutModule)
+  },
+  {
+    path: 'news',
+    loadChildren: () => import('./features/news/news.module').then(m => m.NewsModule)
+  },
+  {
+    path: 'press-about-us',
+    loadChildren: () => import('./features/press-about-us/press-about-us.module').then(m => m.PressAboutUsModule)
+  },
+  {
+    path: 'partners',
+    loadChildren: () => import('./features/partners/partners.module').then(m => m.PartnersModule)
+  },
+  {
+    path: 'contacts',
+    loadChildren: () => import('./features/contacts/contacts.module').then(m => m.ContactsModule)
+  },
+  {
+    path: 'reviews',
+    loadChildren: () => import('./features/reviews/reviews.module').then(m => m.ReviewsModule)
+  },
+  {
+    path: 'success-stories',
+    loadChildren: () => import('./features/success-stories/success-stories.module').then(m => m.SuccessStoriesModule)
+  },
+  {
+    path: 'blog',
+    loadChildren: () => import('./features/blog/blog.module').then(m => m.BlogModule)
+  },
+  {
+    path: 'academy',
+    loadChildren: () => import('./features/academy/academy.module').then(m => m.AcademyModule)
+  },
+  {
+    path: 'price-predictions',
+    loadChildren: () => import('./features/price-predictions/price-predictions.module').then(m => m.PricePredictionsModule)
   }
 ];
 

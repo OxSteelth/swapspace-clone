@@ -1,0 +1,204 @@
+<div class="contacts">
+  <div class="row contacts-main">
+    <div class="column col-12 col-lg-5">
+      <h1 class="contacts-main__title">Contacts</h1>
+      <p class="contacts-main__location">SWAPSPACE LLC</p>
+      <div class="contacts-main__address">
+        <div class="contacts-main__address-container">
+          <img src="https://swapspace.co/_nuxt/img/location.36ff03e.svg" alt="location" width="48" height="48" />
+          <div>
+            <p class="contacts-main__address-title">Registered address:</p>
+            <p class="contacts-main__address-text">
+              First Floor, First St Vincent Bank Ltd Building, James Street, Kingstown, St. Vincent
+              and the Grenadines.
+            </p>
+          </div>
+        </div>
+        <div class="contacts-main__address-container">
+          <img src="https://swapspace.co/_nuxt/img/location.36ff03e.svg" alt="location" width="48" height="48" />
+          <div>
+            <p class="contacts-main__address-title">Postal address:</p>
+            <p class="contacts-main__address-text">
+              P.O. Box 1574, James Street, Kingstown, VC0100, Saint Vincent and the Grenadines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column contacts-main__map-container col-12 col-lg-7">
+      <div class="mapbox-map contacts-main__mapbox">
+        <mgl-map
+          [style]="'mapbox://styles/mapbox/streets-v9'"
+          [zoom]="[9]"
+          [center]="[-74.50, 40]"
+        >
+        </mgl-map>
+      </div>
+    </div>
+  </div>
+  <div class="contacts-form">
+    <h3 class="contacts-form__title">Get in touch with us</h3>
+    <p class="contacts-form__text">Fill in the form below and our team will contact you shortly.</p>
+    <label
+      for="t1UXh4"
+      class="form-input contacts-form__input form-input_dark form-input_rounded form-input_xl"
+      ><span class="form-input__label"
+        ><span class="form-input__label_text"> E-mail </span>
+        <!----></span
+      >
+      <span class="form-input__wrapper"
+        ><input
+          id="t1UXh4"
+          spellcheck="false"
+          max="Infinity"
+          min="-Infinity"
+          maxlength="Infinity"
+          placeholder="Enter your e-mail"
+          step="any"
+          trim="true"
+          type="email"
+          name="email"
+          autocomplete="off"
+          lang="en"
+          inputmode="email"
+          class="form-input__input form-input__input_rounded"
+        />
+        <!---->
+        <!----></span
+      ></label
+    >
+    <div class="form-select contacts-form__select">
+      <!---->
+      <div class="form-select__wrapper">
+        <div class="form-select__current form-select__current_purple form-select__current_l">
+          <div class="form-select__value">Type of question</div>
+          <svg
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+            class="caret-common form-select__caret"
+          >
+            <path d="m12.2743 15.8557-5.43387-5.89181h10.86777z"></path>
+          </svg>
+        </div>
+        <!---->
+      </div>
+    </div>
+    <div class="form-textarea contacts-form__textarea">
+      <label for="8eOB-V" class="form-textarea__label-container" style="display: none"
+        ><span class="form-textarea__label"></span>
+        <!----></label
+      >
+      <div class="form-textarea__container">
+        <textarea
+          id="8eOB-V"
+          placeholder="Enter your question"
+          rows="1"
+          trim="true"
+          spellcheck="false"
+          class="form-textarea__textarea form-textarea__textarea_rounded form-textarea__textarea_xl"
+        ></textarea>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+    <button type="button" class="button button_xl button_primary button_uppercase button_">
+      send
+    </button>
+  </div>
+  <div class="contacts-social">
+    Join our social networks:
+    <div class="social-links social-links__left">
+      <a
+        href="https://twitter.com/SwapSpaceCo"
+        target="_blank"
+        rel="nofollow"
+        class="social-links__link"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 259 233"
+          fill="#7a7a7a"
+          class="social-links__link_icon_violet-light social-links__link_icon"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0 0H91.5L146 74L218.5 0H251L163 96L259 232.5H167L109.5 152.5L33.5 232.5H0L94.5 132L0 0ZM47 25H79.5L211.5 207H180L47 25Z"
+          ></path>
+        </svg>
+        <span class="image-link-text"> SwapSpace on X (Twitter) </span></a
+      ><a
+        href="https://www.linkedin.com/company/swapspace-co"
+        target="_blank"
+        rel="nofollow"
+        class="social-links__link"
+        ><svg
+          fill="#7a7a7a"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+          class="social-links__link_icon_violet-light social-links__link_icon"
+        >
+          <clipPath id="a"><path d="m0 0h24v24h-24z"></path></clipPath>
+          <g clip-path="url(#a)">
+            <path
+              d="m19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476z"
+            ></path>
+          </g>
+        </svg>
+        <span class="image-link-text"> SwapSpace on LinkedIn </span></a
+      ><a href="https://t.me/SwapSpace" target="_blank" rel="nofollow" class="social-links__link"
+        ><svg
+          fill="#7a7a7a"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+          class="social-links__link_icon_violet-light social-links__link_icon"
+        >
+          <path
+            clip-rule="evenodd"
+            d="m9.62631 14.9483-.00346-.0025 9.36455-8.45085c.411-.36475-.0897-.54262-.6353-.21178l-11.55717 7.29123-4.99206-1.5581c-1.078064-.33-1.085805-1.0709.24204-1.6034l19.45289-7.50101c.8885-.40336 1.746.2134 1.4069 1.57323l-3.3129 15.61128c-.2313 1.1094-.9016 1.3747-1.8303.8623l-5.046-3.7281-2.4264 2.3594c-.0077.0074-.0153.0148-.0229.0222-.27127.2641-.49573.4827-.9869.4827l.34365-5.1486z"
+            fill-rule="evenodd"
+          ></path>
+        </svg>
+        <span class="image-link-text"> SwapSpace on Telegram </span></a
+      ><a href="https://t.me/SwapSpaceCo" target="_blank" rel="nofollow" class="social-links__link"
+        ><svg
+          fill="#7a7a7a"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+          class="social-links__link_icon_violet-light social-links__link_icon"
+        >
+          <path
+            d="m20.8846 6.8h-3.2308v-3.2c0-.42435-.1701-.83131-.4731-1.13137-.3029-.30006-.7138-.46863-1.1422-.46863h-12.92312c-.42842 0-.8393.16857-1.14224.46863-.30295.30006-.47314.70702-.47314 1.13137v12.8c.00047.1505.0438.2978.12501.425.08121.1273.197.2292.33408.2942.13707.0649.28986.0903.44082.0731.15097-.0172.29397-.0762.41259-.1703l3.53365-2.822v3c0 .4243.1702.8313.47314 1.1314.30294.3.71382.4686 1.14225.4686h9.44896l3.777 3.022c.1429.1145.321.1773.5048.178.2142 0 .4197-.0843.5711-.2343.1515-.15.2366-.3535.2366-.5657v-12.8c0-.42435-.1702-.83131-.4731-1.13137-.303-.30006-.7139-.46863-1.1423-.46863zm-15.08869 5.778-2.68053 2.147v-11.125h12.92312v8.8h-9.73475c-.18486 0-.36411.0629-.50784.178zm15.08869 6.947-2.6805-2.147c-.1429-.1145-.321-.1773-.5048-.178h-9.73776v-3.2h8.07696c.4284 0 .8393-.1686 1.1422-.4686.303-.3001.4731-.7071.4731-1.1314v-4h3.2308z"
+          ></path>
+        </svg>
+        <span class="image-link-text"> SwapSpace on Telegram Community </span></a
+      ><a
+        href="https://discord.gg/9aKHSfMd3p"
+        target="_blank"
+        rel="nofollow"
+        class="social-links__link"
+        ><svg
+          fill="#7a7a7a"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+          class="social-links__link_icon_violet-light social-links__link_icon"
+        >
+          <path
+            d="m19.9832 4.4911c-1.4888-.69659-3.0808-1.20284-4.7451-1.4911-.2044.36954-.4432.86659-.6078 1.26198-1.7692-.26606-3.5222-.26606-5.25886 0-.16461-.39539-.40882-.89244-.61505-1.26198-1.66612.28826-3.25987.79637-4.74871 1.49479-3.00298 4.5379-3.817041 8.96311-3.41001 13.32541 1.99174 1.4874 3.92197 2.391 5.81963 2.9822.46854-.6448.88642-1.3303 1.24641-2.0528-.68561-.2605-1.34229-.582-1.96276-.9552.16461-.122.32562-.2495.48118-.3807 3.78447 1.7701 7.89637 1.7701 11.63567 0 .1574.1312.3184.2587.4812.3807-.6223.375-1.2808.6965-1.9664.9571.36.7206.7761 1.4079 1.2464 2.0527 1.8995-.5912 3.8315-1.4947 5.8232-2.984.4776-5.057-.8158-9.44159-3.419-13.3291zm-11.80391 10.6463c-1.13606 0-2.06772-1.0606-2.06772-2.3521s.91177-2.3539 2.06772-2.3539c1.15599 0 2.08761 1.0605 2.06771 2.3539.0018 1.2915-.91172 2.3521-2.06771 2.3521zm7.64131 0c-1.136 0-2.0677-1.0606-2.0677-2.3521s.9117-2.3539 2.0677-2.3539 2.0876 1.0605 2.0677 2.3539c0 1.2915-.9117 2.3521-2.0677 2.3521z"
+          ></path>
+        </svg>
+        <span class="image-link-text"> SwapSpace on Discord </span></a
+      >
+    </div>
+  </div>
+</div>

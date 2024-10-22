@@ -1,0 +1,44 @@
+h1 {
+    font-size: 2.46rem;
+    line-height: 3.321rem;
+    margin-bottom: 1.8453rem;
+}
+.partners__wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+.partners__column {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 33.3333%;
+}
+.partners__col {
+    margin-bottom: 2rem;
+}
+.partners-tile__tile {
+    background: #36293b;
+    border-radius: 20px;
+    cursor: pointer;
+    height: auto;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    width: 100%;
+}
+.partners-tile__wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+.partners-tile__logo_container {
+    height: 44px;
+    margin-bottom: 1.5rem;
+    max-width: 220px;
+}
+.partners-tile__logo {
+    height: 100%;
+    width: 100%;
+}

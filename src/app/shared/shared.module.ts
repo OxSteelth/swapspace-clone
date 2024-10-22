@@ -33,6 +33,7 @@ import {
 import { TuiTableModule } from '@taiga-ui/addon-table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxLiteYoutubeModule } from 'ngx-lite-video';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { LetDirective } from './directives/let/let.directive';
 import { CyrrencyAmountSelectorComponent } from './components/cyrrency-amount-selector/cyrrency-amount-selector.component';
 import { TabsComponent } from './components/tabs/tabs.component';
@@ -87,7 +88,8 @@ import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-
     ScrollingModule,
     FormsModule,
     RouterModule,
-    NgxLiteYoutubeModule
+    NgxLiteYoutubeModule,
+    NgxMapboxGLModule
   ],
   providers: [AsyncPipe, TuiDestroyService, SwapFormService, SwapFormQueryService],
   exports: [
@@ -122,6 +124,7 @@ import { ExchangeStatusComponent } from '@app/features/exchange/status/exchange-
     TuiCarouselModule,
     TuiPaginationModule,
     NgxLiteYoutubeModule,
+    NgxMapboxGLModule,
     AssetSelectorComponent,
     FormSwitcherComponent,
     ExchangeInfoComponent,

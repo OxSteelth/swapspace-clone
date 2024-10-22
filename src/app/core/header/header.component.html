@@ -1,7 +1,9 @@
-<header class="s-header">
+<header class="s-header" [ngClass]="classes[subpath]">
     <div class="container s-header__wrapper">
         <app-logo></app-logo>
         <app-navbar></app-navbar>
         <app-burger-menu></app-burger-menu>
     </div>
+    <app-blog class="container" *ngIf="subpath === 'blog'" [category]="category"></app-blog>
+    <app-academy class="container" *ngIf="subpath === 'academy'"></app-academy>
 </header>

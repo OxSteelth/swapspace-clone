@@ -1,0 +1,198 @@
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.contacts-main__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 3rem;
+    margin-bottom: 1.5rem;
+}
+.contacts-main__location {
+    color: #a0789c;
+    margin-bottom: 2rem;
+}
+.contacts-main__address {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.contacts-main__address-container {
+    display: flex;
+    gap: .5rem;
+}
+.contacts-main__address-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.875rem;
+    margin-bottom: .5rem;
+}
+.contacts-main__address-text {
+    color: #a0789c;
+    margin-bottom: 0;
+}
+.contacts-main__map-container {
+    display: flex;
+    height: auto;
+    justify-content: flex-end;
+}
+.contacts-main__mapbox {
+    max-width: 477px;
+    width: 100%;
+}
+mgl-map {
+    height: 100%;
+    width: 100%;
+}
+.contacts-form {
+    background-color: #36293b;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 640px;
+    padding: 1rem;
+}
+.contacts-form__title {
+    color: #fbff2d;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.875rem;
+    margin-bottom: 1rem;
+}
+.contacts-form__text {
+    line-height: 1.25rem;
+    margin-bottom: 2rem;
+}
+.contacts-form__input {
+    margin-bottom: 1.5rem;
+}
+.contacts-form__select {
+    margin-bottom: 4px;
+}
+.form-select__wrapper {
+    position: relative;
+    z-index: 0;
+}
+.form-select__current {
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    font-size: 1rem;
+    justify-content: space-between;
+    line-height: 1.25rem;
+    padding: 0 10px 0 1rem;
+    transition: all .2s ease;
+}
+.form-select__current_l {
+    height: 56px;
+}
+.form-select__current_purple {
+    background-color: #27212b;
+    color: #fff;
+    fill: #fff;
+    border: 1px solid #27212b;
+    padding-left: 1rem;
+}
+.form-select__value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all .2s ease;
+    white-space: nowrap;
+}
+.caret-common {
+    min-width: 24px;
+}
+.form-select__caret {
+    transition: transform .2s ease, fill .2s ease;
+    z-index: 1;
+}
+.caret-common path {
+    fill: inherit;
+}
+.form-textarea {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: .3rem;
+    position: relative;
+    width: 100%;
+}
+.contacts-form__textarea {
+    margin-bottom: 2rem;
+}
+.form-textarea__label-container {
+    align-items: center;
+    display: flex;
+    gap: 4px;
+    margin-bottom: .5rem;
+}
+.form-textarea__label {
+    font-size: .8125rem;
+}
+.form-textarea__container {
+    align-items: center;
+    display: flex;
+}
+.form-textarea__textarea {
+    background-color: #27212b;
+    border-color: #27212b;
+    border-radius: inherit;
+    border-style: solid;
+    color: #fff;
+    flex-grow: 1;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4rem;
+    padding: .9rem 1rem;
+    resize: vertical;
+    width: 100%;
+}
+.form-textarea__textarea_rounded {
+    border-radius: 8px;
+}
+.form-textarea__textarea_xl {
+    line-height: 1.25rem;
+    padding: 17px 1rem;
+}
+.contacts-social {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    font-weight: 700;
+    gap: 1.5rem;
+    line-height: 1.875rem;
+}
+.social-links {
+    align-items: center;
+    -moz-column-gap: 16px;
+    column-gap: 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 24px;
+    justify-content: center;
+}
+.social-links__left {
+    justify-content: flex-start;
+}
+.social-links__link {
+    height: 100%;
+}
+.social-links__link_icon-with-background, .social-links__link_icon {
+    height: 24px;
+    transition: fill .2s ease;
+    width: 24px;
+    fill: gray;
+}
+.social-links__link_icon-with-background_violet-light, .social-links__link_icon_violet-light {
+    fill: #a0789c;
+}
+.image-link-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}

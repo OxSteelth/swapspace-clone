@@ -1,7 +1,8 @@
 <tui-root>
   <div class="app">
-    <div class="app__content" [ngClass]="appContentClass">
-      <app-header></app-header>
+    <div class="app__content" [ngClass]="contentClasses[subpath]">
+      <app-header [ngClass]="headerClasses[subpath]"></app-header>
+      <app-price-predictions-header *ngIf="subpath === 'price-predictions'"></app-price-predictions-header>
       <div class="container app__container">
         <router-outlet></router-outlet>
       </div>

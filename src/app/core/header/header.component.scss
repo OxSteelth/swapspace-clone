@@ -30,3 +30,16 @@ app-navbar {
     display: none;
   }
 }
+
+.s-header_alt-bg-blog {
+  background-color: #27212b;
+  min-height: 135px;
+}
+
+.s-header_pb0 {
+  padding-bottom: 0;
+}
+
+app-blog {
+  margin-top: auto;
+}

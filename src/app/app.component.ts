@@ -15,13 +15,23 @@ import { CurrencyService } from './shared/services/currency.service';
 })
 export class AppComponent implements OnInit {
   title = 'swapspace-clone';
-  public appContentClass: string = '';
-  public classes: { [key: string]: string } = {
+
+  public subpath: string = '';
+
+  public contentClasses: { [key: string]: string } = {
     '': 'app__content_alt-bg-index app__content_alt-bg-step1',
     'exchange-listing': 'app__content_alt-bg-exchange-listing',
     'affiliate': 'app__content_alt-bg-affiliate',
     'how-it-works': 'app__content_alt-bg-hiw',
-    'about': 'app__content_alt-bg-about'
+    'about': 'app__content_alt-bg-about',
+    'press-about-us': 'app__content_alt-bg-exchange',
+    'blog': 'app__content_alt-bg-1',
+    'academy': 'app-academy__content',
+    'price-predictions': 'price-predictions-list__page'
+  };
+
+  public headerClasses: { [key: string]: string } = {
+    'academy': 'academy-layout-header'
   };
 
   constructor(
@@ -40,7 +50,7 @@ export class AppComponent implements OnInit {
     this.currencyService.fetchCurrencyList();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.appContentClass = this.classes[event.url.split('/')[1].split('?')[0]];
+        this.subpath = event.url.split('/')[1].split('?')[0];
       }
     });
   }
