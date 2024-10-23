@@ -81,7 +81,7 @@
     color: #a0789c;
 }
 .exchange-reviews-header_block {
-    background: url(https://swapspace.co/_nuxt/img/star.9c42e31.jpg) no-repeat;
+    background: url('/assets/img/star.9c42e31.jpg') no-repeat;
     background-size: cover;
     height: 800px;
     position: absolute;
@@ -599,7 +599,7 @@
     width: 100%;
 }
 .exchange-review-banner {
-    background-image: url(https://swapspace.co/_nuxt/img/banner.79d8889.webp);
+    background-image: url('/assets/img/banner.79d8889.webp');
     background-position-x: right;
     background-size: cover;
     border-radius: 22px;

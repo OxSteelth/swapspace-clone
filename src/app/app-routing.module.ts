@@ -8,15 +8,31 @@ const routes: Routes = [
   },
   {
     path: 'exchange',
-    loadChildren: () =>
-      import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
+    loadChildren: () => import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
+  },
+  {
+    path: 'buy-crypto',
+    loadChildren: () => import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
+  },
+  {
+    path: 'sell-crypto',
+    loadChildren: () => import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
+  },
+  {
+    path: 'cross-chain',
+    loadChildren: () => import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
+  },
+  {
+    path: 'crypto-loans',
+    loadChildren: () => import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
+  },
+  {
+    path: 'spend-crypto',
+    loadChildren: () => import('./features/exchange/exchange-routing.module').then(m => m.ExchangeRoutingModule)
   },
   {
     path: 'exchange-listing',
-    loadChildren: () =>
-      import('./features/exchange-listing/exchange-listing.module').then(
-        m => m.ExchangeListingModule
-      )
+    loadChildren: () => import('./features/exchange-listing/exchange-listing.module').then(m => m.ExchangeListingModule)
   },
   {
     path: 'affiliate',

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.subpath = event.url.split('/')[1].split('?')[0];
-        this.category = event.url.split('/').pop().split('?')[0];console.log(this.category)
+        this.category = event.url.split('/').pop().split('?')[0];
       }
     });
   }
