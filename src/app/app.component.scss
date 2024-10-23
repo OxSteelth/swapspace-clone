@@ -60,20 +60,20 @@
 }
 
 .app__content_alt-bg-exchange-listing {
-  background: url(assets/img/exchange-listing-bg.a446999.svg), radial-gradient(800px 800px at 50% 35%, rgba(81, 53, 79, .6) 0, rgba(81, 53, 79, 0) 70%), #231f26;
+  background: url('/assets/img/exchange-listing-bg.a446999.svg'), radial-gradient(800px 800px at 50% 35%, rgba(81, 53, 79, .6) 0, rgba(81, 53, 79, 0) 70%), #231f26;
   background-position: top 90px left calc(50vw - 70px), top;
   background-repeat: no-repeat;
 }
 
 .app__content_alt-bg-affiliate {
-  background-image: radial-gradient(50% 50% at 100% 0, #36293b 0, rgba(54, 41, 59, 0) 100%), url(assets/img/bg/planets.webp);
+  background-image: radial-gradient(50% 50% at 100% 0, #36293b 0, rgba(54, 41, 59, 0) 100%), url('/assets/img/bg/planets.webp');
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: 100%;
 }
 
 .app__content_alt-bg-hiw {
-  background: url(assets/img/bg/how-it-works-bg.svg), #231f26 no-repeat 100%;
+  background: url('/assets/img/bg/how-it-works-bg.svg'), #231f26 no-repeat 100%;
   background-size: cover;
 }
 
